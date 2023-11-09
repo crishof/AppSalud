@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,10 +24,11 @@ public class Paciente extends Usuario{
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name="uuid",strategy = "uuid2")
     private String id;
-    private String nombre;
-    private String apellido;
+   
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
-    private String email;
+    
+    @OneToMany
+    private List<Consulta> consulta;
 
 }

@@ -1,8 +1,13 @@
 package com.egg.appsalud.entidades;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -12,5 +17,18 @@ public class Consulta {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     
-    private String nombre;
+    @ManyToOne
+    private Paciente paciente;
+    @OneToOne
+    private Profesional profesional;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fechaDeConsulta;
+    
+    @ManyToOne
+    private Establecimiento establecimiento;
+    
+    private int precioConsulta;
+    
+    private int valoracion;
 }
