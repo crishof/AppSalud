@@ -2,6 +2,7 @@ package com.egg.appsalud.servicios;
 
 import com.egg.appsalud.Enumeracion.Rol;
 import com.egg.appsalud.Exception.MiException;
+import com.egg.appsalud.entidades.Especialidad;
 import com.egg.appsalud.entidades.Imagen;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
@@ -36,22 +37,28 @@ public class UsuarioServicio implements UserDetailsService{
 
     
      @Transactional
-    public void crearUsuario(MultipartFile archivo, String nombreUsuario, String password, String password2) throws MiException {
+    public void crearUsuario(MultipartFile archivo, String nombreUsuario, String password, String password2, Long DNI, String nombre, String apellido, Date fechaNacimiento, String email) throws MiException {
          
         Usuario us = new Usuario();
         
         
-        validar(nombreUsuario, password, password2);
+        validar(nombreUsuario, password, password2, DNI, nombre, apellido, fechaNacimiento, email);
 
         us.setNombreUsuario(nombreUsuario);
         us.setPassword(new BCryptPasswordEncoder().encode(password));
+        us.setDNI(DNI);
+        us.setNombre(nombre);
+        us.setApellido(apellido);
+        us.setFechaNacimiento(fechaNacimiento);
+        us.setEmail(email);
         us.setRol(Rol.USER);
         us.setFechaDeAlta(new Date());
         us.setActivo(true);
         
+        
         Imagen imagen=imagenServicio.guardar(archivo);
         us.setImagen(imagen);
-//        compararNombre(us,nombreUsuario);
+
         ur.save(us);
         
     }
@@ -93,7 +100,7 @@ public class UsuarioServicio implements UserDetailsService{
     }
         
           @Transactional
-    public void crearProfesional(String id) throws MiException{
+    public void crearProfesional(String id, Especialidad especialidad) throws MiException{
              
         Usuario u = buscarPorID(id);
         Profesional p = new Profesional();
@@ -102,10 +109,21 @@ public class UsuarioServicio implements UserDetailsService{
         p.setNombreUsuario(u.getNombreUsuario());
         p.setPassword(u.getPassword());
         p.setFechaDeAlta(u.getFechaDeAlta());
+        p.setEspecialidad(especialidad);
 
+        validarProfesional(especialidad);
+        
         ur.delete(u);
         ur.save(p);
     }
+    
+    public void validarProfesional(Especialidad especialidad)throws MiException{
+       if (especialidad == null){
+           throw new MiException("Especialidad no puede estar vacio o Nulo");
+       }
+           
+    }
+    
     
     @Transactional
     public void modificarProfesional(String id, Integer sueldoMensual, Boolean activo) throws MiException{
@@ -129,16 +147,13 @@ public class UsuarioServicio implements UserDetailsService{
     
     }    
 
-    private void validar(String nombreUsuario, String password, String password2) throws MiException {
+    private void validar(String nombreUsuario, String password, String password2, Long DNI, String nombre, String apellido, Date fechaNacimiento, String email) throws MiException {
 
         if (nombreUsuario.isEmpty() || nombreUsuario == null) {
             throw new MiException("El nombre de usuario no puede estar vacio o Nulo");
 
         }
-        
-      
-        
-      
+ 
       if (password.isEmpty() || password==null || password.length()<=5) {
             throw new MiException("Las contraseñas no pueden estar vacias y tener menos de 5 caracteres ");
       }
@@ -146,7 +161,28 @@ public class UsuarioServicio implements UserDetailsService{
       if(!password.equals(password2)){
           throw new MiException("las contraseñas deben coincidir");
       }
-            
+        
+      
+        if (DNI == null) {
+            throw new MiException("El DNI del usuario no puede estar vacio o Nulo");
+        }
+      
+        if (nombre.isEmpty() || nombre == null) {
+            throw new MiException("El nombre de usuario no puede estar vacio o Nulo");
+        }
+        
+        if (apellido.isEmpty() || apellido == null) {
+            throw new MiException("El apellido de usuario no puede estar vacio o Nulo");
+        }
+      
+        if (fechaNacimiento == null) {
+            throw new MiException("La fecha de nacimiento del usuario no puede ser menor a cero o Nulo");
+        }
+      
+        if (email.isEmpty() || email == null) {
+            throw new MiException("El email de usuario no puede estar vacio o Nulo");
+
+        }
     }
     
     

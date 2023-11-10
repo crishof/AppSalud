@@ -2,6 +2,7 @@ package com.egg.appsalud.controladores;
 
 
 import com.egg.appsalud.Exception.MiException;
+import com.egg.appsalud.entidades.Especialidad;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.servicios.UsuarioServicio;
@@ -49,10 +50,10 @@ public class AdminControlador {
     }
    
     @GetMapping("/crear/{id}")
-    public String crearProfesional(@PathVariable String id, ModelMap modelo) throws MiException{
+    public String crearProfesional(@PathVariable String id,@RequestParam Especialidad especialidad, ModelMap modelo) throws MiException{
         
         try {
-            us.crearProfesional(id);
+            us.crearProfesional(id,especialidad);
             modelo.put("exito","Profesional creado con exito");
 
         }catch(MiException ex){

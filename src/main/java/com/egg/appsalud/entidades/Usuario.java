@@ -42,7 +42,7 @@ public class Usuario {
    private Long DNI;
    private String nombre;
    private String apellido;
-   private int edad;
+   private Date fechaNacimiento;
    private String email;
    
    

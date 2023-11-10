@@ -2,6 +2,7 @@ package com.egg.appsalud.controladores;
 
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.servicios.UsuarioServicio;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,11 +29,11 @@ public class PortalControlador {
    }
    
    @PostMapping("/registrar")
-   public String crearUsuario(@RequestParam MultipartFile archivo,@RequestParam String nombreUsuario,@RequestParam String password,@RequestParam String password2,ModelMap modelo) throws MiException{
+   public String crearUsuario(@RequestParam MultipartFile archivo,@RequestParam String nombreUsuario,@RequestParam String password,@RequestParam String password2, @RequestParam Long DNI, @RequestParam String nombre, @RequestParam String apellido, @RequestParam Date fechaNacimiento, @RequestParam String email, ModelMap modelo) throws MiException{
        
         
        try {
-             us.crearUsuario(archivo,nombreUsuario, password, password2);
+             us.crearUsuario(archivo,nombreUsuario, password, password2,DNI, nombre, apellido, fechaNacimiento, email);
              modelo.put("exito","el usuario fue creado con exito");
               return "redirect:/portal/registroUsuario";
        } catch (MiException e) {
