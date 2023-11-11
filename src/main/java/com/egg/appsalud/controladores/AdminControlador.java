@@ -50,6 +50,8 @@ public class AdminControlador {
     
     return "Usuarios.html";
     }
+    
+    
    
     @GetMapping("/crear/{id}")
 
@@ -79,12 +81,12 @@ public class AdminControlador {
     }
     
     @PostMapping("/modificar/{id}")
-    public String modificarProfesional(@PathVariable String id, @RequestParam MultipartFile archivo, @RequestParam Especialidad especialidad, @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido, 
+    public String modificarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/ @RequestParam Especialidad especialidad, @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido, 
             @RequestParam Long DNI, @RequestParam Date fechaDeNacimiento, @RequestParam String email, @RequestParam String password,@RequestParam String password2,ModelMap modelo) throws MiException{
         
         try {
             
-            profesionalServicio.modificarProfesional(id, archivo, especialidad, nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true);
+            profesionalServicio.modificarProfesional(id,/* archivo,*/ especialidad, nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true);
             modelo.put("exito","Profesional modificado con exito");
 
         }catch(MiException ex){

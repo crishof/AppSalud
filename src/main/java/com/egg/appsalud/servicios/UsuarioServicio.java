@@ -37,7 +37,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     
     @Transactional
-    public void crearUsuario(MultipartFile archivo, String nombreUsuario, String nombre, String apellido,
+    public void crearUsuario(/*MultipartFile archivo, */String nombreUsuario, String nombre, String apellido,
             Long DNI, Date fechaDeNacimiento, String email, String password, String password2) throws MiException {
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
@@ -55,10 +55,10 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setRol(Rol.USER);
         usuario.setActivo(true);
 
-        Imagen imagen = imagenServicio.guardar(archivo);
+        /*Imagen imagen = imagenServicio.guardar(archivo);
 //        compararNombre(us,nombreUsuario);
 
-        usuario.setImagen(imagen);
+        usuario.setImagen(imagen);*/
 
         ur.save(usuario);
 
@@ -132,7 +132,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     
 
-    public void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI, String email) throws MiException {
+    private void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI, String email) throws MiException {
 
 
         if (nombreUsuario.isEmpty() || nombreUsuario == null) {
