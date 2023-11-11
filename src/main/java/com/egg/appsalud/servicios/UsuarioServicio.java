@@ -2,6 +2,7 @@ package com.egg.appsalud.servicios;
 
 import com.egg.appsalud.Enumeracion.Rol;
 import com.egg.appsalud.Exception.MiException;
+import com.egg.appsalud.entidades.Especialidad;
 import com.egg.appsalud.entidades.Imagen;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
@@ -34,6 +35,7 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private ImagenServicio imagenServicio;
 
+    
     @Transactional
     public void crearUsuario(MultipartFile archivo, String nombreUsuario, String nombre, String apellido,
             Long DNI, Date fechaDeNacimiento, String email, String password, String password2) throws MiException {
@@ -59,6 +61,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setImagen(imagen);
 
         ur.save(usuario);
+
 
     }
 
@@ -122,18 +125,21 @@ public class UsuarioServicio implements UserDetailsService {
         return Usuario;
     }
 
-    
 
     
 
     
 
-    private void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI, String email) throws MiException {
+    
+
+    public void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI, String email) throws MiException {
+
 
         if (nombreUsuario.isEmpty() || nombreUsuario == null) {
             throw new MiException("El nombre de usuario no puede estar vacio o Nulo");
 
         }
+
 
         if (nombre.isEmpty() || nombre == null) {
             throw new MiException("El nombre no puede estar vacío o ser nulo");
@@ -162,6 +168,7 @@ public class UsuarioServicio implements UserDetailsService {
         if (!password.equals(password2)) {
             throw new MiException("las contraseñas deben coincidir");
         }
+
 
     }
 

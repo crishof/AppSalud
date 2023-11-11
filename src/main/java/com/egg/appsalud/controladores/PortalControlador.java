@@ -29,12 +29,14 @@ public class PortalControlador {
    }
    
    @PostMapping("/registrar")
+
    public String crearUsuario(@RequestParam MultipartFile archivo,@RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido, 
             @RequestParam Long DNI, @RequestParam Date fechaDeNacimiento, @RequestParam String email, @RequestParam String password,@RequestParam String password2,ModelMap modelo) throws MiException{
        
         
        try {
              us.crearUsuario(archivo, nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2);
+
              modelo.put("exito","el usuario fue creado con exito");
               return "redirect:/portal/registroUsuario";
        } catch (MiException e) {

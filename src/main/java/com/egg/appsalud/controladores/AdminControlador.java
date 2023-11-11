@@ -52,10 +52,13 @@ public class AdminControlador {
     }
    
     @GetMapping("/crear/{id}")
+
     public String crearProfesional(@PathVariable String id, @RequestParam Especialidad especialidad, ModelMap modelo) throws MiException{
         
         try {
             profesionalServicio.crearProfesional(id, especialidad);
+
+    
             modelo.put("exito","Profesional creado con exito");
 
         }catch(MiException ex){

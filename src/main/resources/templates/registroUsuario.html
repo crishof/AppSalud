@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    lang="en"
+    >
+    <head th:replace="layout/head :: head"></head>
+
+    <body>
+        <header th:replace="layout/header :: header"></header>
+        <!--<nav th:replace="layout/navbar :: navbar"></nav>-->
+        <div class="container">
+
+
+            <div>
+                <div>
+                    <p></p>
+                    <p></p>
+                    <h2 >Registrarse</h2>
+                    <h2 sec:authorize="hasRole('ADMIN')"> Administrador</h2>
+                    <h2 sec:authorize="hasRole('PROFESIONAL')"> Profesional</h2>
+                </div>
+                <form action="/portal/registrar" method="POST" enctype="multipart/form-data" class="row g-3" >
+
+                    <div class="col-md-6">
+                        <label >Nombre</label><br>
+                            <div >
+                                <input type="name" name="nombre" class="form-control" placeholder="Ingrese su nombre">
+                            </div>
+                    </div>
+                    
+                     <div class="col-md-6">
+                        <label >Apellido</label><br>
+                            <div>
+                                <input type="name" name="apellido" class="form-control" placeholder="Ingrese su apellido">
+                            </div>
+                    </div>
+                    
+                     <div class="col-md-6">
+                        <label >Número de DNI</label><br>
+                            <div>
+                                <input type="number" name="DNI" class="form-control" placeholder="Ingrese su número de DNI">
+                            </div>
+                    </div>
+                    
+                     <div class="col-md-6">
+                        <label >Fecha de Nacimiento</label><br>
+                            <div>
+                                <input type="date" name="fechaNacimiento" class="form-control" placeholder="Ingrese su fecha de nacimiento">
+                            </div>
+                    </div>
+                    
+                     <div class="col-md-6">
+                        <label >Correo electrónico</label><br>
+                            <div>
+                                <input type="name" name="email" class="form-control" placeholder="Ingrese su e-mail">
+                            </div>
+                    </div>
+                    
+                     <div class="col-md-6">
+                        <label >Nombre de usuario</label><br>
+                            <div>
+                                <input type="name" name="nombreUsuario" class="form-control" placeholder="Ingrese su usuario">
+                            </div>
+                    </div>
+                    
+                     <div class="col-md-6">
+                        <label >Contraseña</label><br>
+                            <div>
+                                <input type="password" name="password" class="form-control" placeholder="Ingrese su contraseña">
+                            </div>
+                    </div>
+                    
+                     <div class="col-md-6">
+                        <label >Contraseña</label><br>
+                            <div>
+                                <input type="password" name="password2" class="form-control" placeholder="Ingrese nuevamente su contraseña">
+                            </div>
+                    </div>
+                </form>
+            </div>
+           
+            <!-- Acciones -->
+            
+            <div>
+                <a th:href="@{/portal/registroUsuario}" class="btn btn-primary">Registrarse</a>
+            </div>
+
+            <!-- Otras secciones de la página -->
+        </div>
+
+        <!-- Scripts de Bootstrap y otros -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- Otros scripts -->
+
+        <footer th:replace="layout/footer :: footer"></footer>
+        <script
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            ></script>
+    </body>
+</html>

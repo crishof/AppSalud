@@ -42,6 +42,7 @@ public class Usuario {
    private Long DNI;
    private String nombre;
    private String apellido;
+
    private String email;
    
    

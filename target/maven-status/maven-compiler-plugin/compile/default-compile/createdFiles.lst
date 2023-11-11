@@ -1,8 +1,10 @@
 com\egg\appsalud\entidades\Usuario.class
+com\egg\appsalud\entidades\Consulta.class
 com\egg\appsalud\entidades\Profesional.class
 com\egg\appsalud\controladores\AdminControlador.class
 com\egg\appsalud\repositorios\ImagenRepositorio.class
 com\egg\appsalud\repositorios\UsuarioRepositorio.class
+com\egg\appsalud\controladores\ErroresControlador.class
 com\egg\appsalud\Exception\MiException.class
 com\egg\appsalud\servicios\ImagenServicio.class
 com\egg\appsalud\Enumeracion\Rol.class

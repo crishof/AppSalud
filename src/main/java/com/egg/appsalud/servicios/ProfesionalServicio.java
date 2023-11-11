@@ -126,7 +126,7 @@ public class ProfesionalServicio {
         return profesional;
     }
     
-    private void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI, String email) throws MiException {
+    public void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI, String email) throws MiException {
 
         if (nombreUsuario.isEmpty() || nombreUsuario == null) {
             throw new MiException("El nombre de usuario no puede estar vacio o Nulo");
