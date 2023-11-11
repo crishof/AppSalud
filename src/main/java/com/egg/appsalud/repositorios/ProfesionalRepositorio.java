@@ -8,10 +8,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProfesionalRepositorio extends JpaRepository<Profesional,Integer>{
+public interface ProfesionalRepositorio extends JpaRepository<Profesional,String>{
     @Query("SELECT p FROM Profesional p WHERE p.nombre= :nombre")
 public Profesional buscarNombre(@Param("nombre") String titulo);
 
-@Query("SELECT p FROM Profesional p ORDER BY p.id DESC")
+@Query("SELECT p FROM Profesional p ORDER BY p.nombre DESC")
 public List<Profesional> buscarOrdenado();
 }

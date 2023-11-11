@@ -42,9 +42,11 @@ public class Usuario {
    private Long DNI;
    private String nombre;
    private String apellido;
-   private int edad;
    private String email;
    
+   
+   @Temporal(javax.persistence.TemporalType.DATE)
+   private Date fechaDeNacimiento;
    
    @Temporal(javax.persistence.TemporalType.DATE)
    private Date fechaDeAlta;
@@ -59,4 +61,8 @@ public class Usuario {
    
   
    private Boolean activo=true;
+
+    
+   
+   
 }
