@@ -31,19 +31,19 @@ public class PortalControlador {
     @GetMapping("/registroUsuario")
     public String registroUsuario() {
 
-        return "registroUsuario.html";
+        return "registroUsuario";
 
     }
 
     @PostMapping("/registrar")
 
     public String crearUsuario(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
-            @RequestParam Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo) throws MiException, ParseException {
+            @RequestParam Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo) throws MiException, ParseException {
 
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaDeNacimiento = dateFormat.parse(fechaDeNacimientoStr);
-            us.crearUsuario(/*archivo, */nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2);
+            us.crearUsuario(/*archivo, */nombreUsuario, nombre, apellido, dni, fechaDeNacimiento, email, password, password2);
 
             modelo.put("exito", "el usuario fue creado con exito");
             return "index.html";

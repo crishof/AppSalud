@@ -8,10 +8,14 @@
 <head th:replace="layout/head :: head"></head>
 
 <body>
-<header th:replace="layout/header :: header"></header>
-<!--<nav th:replace="layout/navbar :: navbar"></nav>-->
+<!--<header th:replace="layout/header :: header"></header>-->
+<nav th:replace="layout/navbar :: navbar"></nav>
  <div class="container">
-        
+
+
+     <div class="container">
+         <img src="assets/images/familiaFeliz.jpeg"/>
+     </div>
         <p>Encuentra tu atención médica ideal: citas simples, historiales completos</p>
 
         <!-- Acciones -->
@@ -21,15 +25,15 @@
             <a th:href="@{/portal/registroUsuario}" class="btn btn-secondary">Registrarse</a>-->
             
             <!-- Botón para ver la lista de médicos -->
-            <a th:href="@{/portal/registroUsuario}" class="btn btn-info">Ver Lista de Médicos</a>
+
         </div>
 
         <!-- Otras secciones de la página -->
     </div>
 
-    <!-- Scripts de Bootstrap y otros -->
-  
 
+
+    <!-- Scripts de Bootstrap y otros -->
 <footer th:replace="layout/footer :: footer"></footer>
 
     <script
