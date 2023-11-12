@@ -7,6 +7,7 @@ import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.servicios.UsuarioServicio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,22 +17,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/panelAdmin")
 public class AdminControlador {
         
-    @Autowired
-    private ProfesionalServicio cs;
-
     
     @Autowired
     private UsuarioServicio us;
     
+    @Autowired
+    private ProfesionalServicio profesionalServicio;
+    
     @GetMapping("/admin")
     public String panelAdmin(ModelMap modelo){
         
-        List<Profesional> profesional = cs.listarProfesional();
+        List<Profesional> profesional = profesionalServicio.listarProfesional();
         modelo.addAttribute("profesional", profesional);
         
     return "PanelAdmin.html";
@@ -43,17 +45,22 @@ public class AdminControlador {
         List<Usuario> usuarios = us.listarUsuario();
         modelo.addAttribute("usuarios", usuarios);
         
-         List<Usuario> profesionales = us.listarProfesional();
+         List<Profesional> profesionales = profesionalServicio.listarProfesional();
         modelo2.addAttribute("profesional", profesionales);
     
     return "Usuarios.html";
     }
+    
+    
    
     @GetMapping("/crear/{id}")
-    public String crearProfesional(@PathVariable String id,@RequestParam Especialidad especialidad, ModelMap modelo) throws MiException{
+
+    public String crearProfesional(@PathVariable String id, @RequestParam Especialidad especialidad, ModelMap modelo) throws MiException{
         
         try {
-            us.crearProfesional(id,especialidad);
+            profesionalServicio.crearProfesional(id, especialidad);
+
+    
             modelo.put("exito","Profesional creado con exito");
 
         }catch(MiException ex){
@@ -67,18 +74,19 @@ public class AdminControlador {
     @GetMapping("/profesional")
     public String profesional(ModelMap modelo){
         
-        List<Usuario> profesional = us.listarProfesional();
+        List<Profesional> profesional = profesionalServicio.listarProfesional();
         modelo.addAttribute("profesional", profesional);
         
     return "Usuarios.html";
     }
     
-    @PostMapping("/modificar")
-    public String modificarProfesional(@RequestParam String id,@RequestParam Boolean activo,@RequestParam Integer sueldoMensual, ModelMap modelo) throws MiException{
+    @PostMapping("/modificar/{id}")
+    public String modificarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/ @RequestParam Especialidad especialidad, @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido, 
+            @RequestParam Long DNI, @RequestParam Date fechaDeNacimiento, @RequestParam String email, @RequestParam String password,@RequestParam String password2,ModelMap modelo) throws MiException{
         
         try {
             
-            us.modificarProfesional(id, sueldoMensual, activo);
+            profesionalServicio.modificarProfesional(id,/* archivo,*/ especialidad, nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true);
             modelo.put("exito","Profesional modificado con exito");
 
         }catch(MiException ex){
@@ -89,7 +97,7 @@ public class AdminControlador {
         }return "redirect:/dashboard/usuarios";
     }
     
-     @GetMapping("/eliminar/{id}")
+   @GetMapping("/eliminar/{id}")
    public String eliminarUs(@PathVariable String id){
        
        us.eliminarUsuario(id);

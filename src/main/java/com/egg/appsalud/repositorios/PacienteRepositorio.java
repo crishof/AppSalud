@@ -13,6 +13,6 @@ public interface PacienteRepositorio extends JpaRepository<Paciente,String> {
     @Query("SELECT p FROM Paciente p WHERE p.nombre= :nombre")
     public Paciente buscarNombre(@Param("nombre") String titulo);
 
-    @Query("SELECT p FROM Paciente p ORDER BY p.id DESC")
+    @Query("SELECT p FROM Paciente p ORDER BY p.nombre DESC")
     public List<Paciente> buscarOrdenado();
 }

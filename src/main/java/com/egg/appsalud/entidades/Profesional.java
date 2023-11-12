@@ -31,7 +31,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Data
 @Table(name="PROFESIONAL")
-
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="rol", 
 discriminatorType = DiscriminatorType.STRING)
@@ -47,18 +46,24 @@ public class Profesional extends Usuario{
     @OneToMany
     private List<ObraSocial> ObraSocial;
     @OneToMany
-    private List<Paciente> paciente;
+    private List<Paciente> pacientes;
     @OneToOne
     private Establecimiento establecimiento;
     @OneToOne
     private Especialidad especialidad;
     
     @OneToMany
-    private List<Consulta> consulta;
+    private List<Consulta> consultas;
     
     @ManyToOne
     private FichaMedica fichaMedica;
     
     private int valoracionProfesional;
+
+    
+
+    
   
+    
+    
 }

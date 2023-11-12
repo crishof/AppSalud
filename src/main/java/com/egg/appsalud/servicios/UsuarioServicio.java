@@ -26,69 +26,97 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-
 @Service
-public class UsuarioServicio implements UserDetailsService{
-        @Autowired
+public class UsuarioServicio implements UserDetailsService {
+
+    @Autowired
     private UsuarioRepositorio ur;
-    
+
     @Autowired
     private ImagenServicio imagenServicio;
 
     
-     @Transactional
-    public void crearUsuario(MultipartFile archivo, String nombreUsuario, String password, String password2, Long DNI, String nombre, String apellido, Date fechaNacimiento, String email) throws MiException {
-         
-        Usuario us = new Usuario();
-        
-        
-        validar(nombreUsuario, password, password2, DNI, nombre, apellido, fechaNacimiento, email);
+    @Transactional
+    public void crearUsuario(/*MultipartFile archivo, */String nombreUsuario, String nombre, String apellido,
+            Long DNI, Date fechaDeNacimiento, String email, String password, String password2) throws MiException {
 
-        us.setNombreUsuario(nombreUsuario);
-        us.setPassword(new BCryptPasswordEncoder().encode(password));
-        us.setDNI(DNI);
-        us.setNombre(nombre);
-        us.setApellido(apellido);
-        us.setFechaNacimiento(fechaNacimiento);
-        us.setEmail(email);
-        us.setRol(Rol.USER);
-        us.setFechaDeAlta(new Date());
-        us.setActivo(true);
-        
-        
-        Imagen imagen=imagenServicio.guardar(archivo);
-        us.setImagen(imagen);
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
 
-        ur.save(us);
-        
+        Usuario usuario = new Usuario();
+
+        usuario.setNombreUsuario(nombreUsuario);
+        usuario.setNombre(nombre);
+        usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+        usuario.setDNI(DNI);
+        usuario.setNombre(nombre);
+        usuario.setApellido(apellido);
+        usuario.setFechaDeNacimiento(fechaDeNacimiento);
+        usuario.setEmail(email);
+        usuario.setFechaDeAlta(new Date());
+        usuario.setRol(Rol.USER);
+        usuario.setActivo(true);
+
+        /*Imagen imagen = imagenServicio.guardar(archivo);
+//        compararNombre(us,nombreUsuario);
+
+        usuario.setImagen(imagen);*/
+
+        ur.save(usuario);
+
+
     }
 
     @Transactional
-    public void modificarUsuario(Usuario us){
-        
-        ur.save(us);
-        
+    public void modificarUsuario(String id, MultipartFile archivo, String nombreUsuario, String nombre, String apellido,
+            Long DNI, Date fechaDeNacimiento, String email, String password, String password2, boolean activo) throws MiException {
+
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
+
+        Optional<Usuario> respuesta = ur.findById(id);
+        if (respuesta.isPresent()) {
+            Usuario usuario = respuesta.get();
+            usuario.setNombre(nombre);
+            usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+            usuario.setDNI(DNI);
+            usuario.setNombre(nombre);
+            usuario.setApellido(apellido);
+            usuario.setFechaDeNacimiento(fechaDeNacimiento);
+            usuario.setEmail(email);
+            usuario.setFechaDeAlta(new Date());
+            usuario.setRol(Rol.USER);
+            usuario.setActivo(activo);
+            
+            String idImagen = null;
+            
+            if(usuario.getImagen() != null){
+                idImagen = usuario.getImagen().getId();
+            }
+            
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+            
+            usuario.setImagen(imagen);
+            ur.save(usuario);
+        }
+
     }
-    
-    public void eliminarUsuario(String id){
-        
+
+    @Transactional
+    public void eliminarUsuario(String id) {
+
         ur.deleteById(id);
     }
-    
-    
-    public ArrayList<Usuario> listarUsuario(){
-        
-        ArrayList<Usuario> listaUsuarios=(ArrayList<Usuario>) ur.findAll();
-        
+
+    public List<Usuario> listarUsuario() {
+
+        List<Usuario> listaUsuarios = new ArrayList();
+        listaUsuarios = ur.findAll();
+
         return listaUsuarios;
-        
-        
+
     }
-    
-    
-    
-    public Usuario buscarPorID(String id){
-        
+
+    public Usuario buscarPorID(String id) {
+
         Optional<Usuario> oUsuario = ur.findById(id);
         Usuario Usuario = null;
         if (oUsuario.isPresent()) {
@@ -98,95 +126,53 @@ public class UsuarioServicio implements UserDetailsService{
         }
         return Usuario;
     }
-        
-          @Transactional
-    public void crearProfesional(String id, Especialidad especialidad) throws MiException{
-             
-        Usuario u = buscarPorID(id);
-        Profesional p = new Profesional();
-        
-        p.setId("");
-        p.setNombreUsuario(u.getNombreUsuario());
-        p.setPassword(u.getPassword());
-        p.setFechaDeAlta(u.getFechaDeAlta());
-        p.setEspecialidad(especialidad);
 
-        validarProfesional(especialidad);
-        
-        ur.delete(u);
-        ur.save(p);
-    }
-    
-    public void validarProfesional(Especialidad especialidad)throws MiException{
-       if (especialidad == null){
-           throw new MiException("Especialidad no puede estar vacio o Nulo");
-       }
-           
-    }
-    
-    
-    @Transactional
-    public void modificarProfesional(String id, Integer sueldoMensual, Boolean activo) throws MiException{
-             
-        Usuario u = buscarPorID(id); 
-        Profesional p = new Profesional();
-        
-        p.setId(u.getId());
-        p.setNombreUsuario(u.getNombreUsuario());
-        p.setPassword(u.getPassword());
-        p.setFechaDeAlta(u.getFechaDeAlta());
-        p.setActivo(activo);
-        ur.save(p);
-    }
-    
-    public List<Usuario> listarProfesional() {
-        List<Usuario> profesional = new ArrayList();
-        profesional = ur.buscarProfesional();
-        System.out.println(profesional.toString());
-    return profesional;
-    
-    }    
 
-    private void validar(String nombreUsuario, String password, String password2, Long DNI, String nombre, String apellido, Date fechaNacimiento, String email) throws MiException {
+    
+
+    
+
+    
+
+    private void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI, String email) throws MiException {
+
 
         if (nombreUsuario.isEmpty() || nombreUsuario == null) {
             throw new MiException("El nombre de usuario no puede estar vacio o Nulo");
 
         }
- 
-      if (password.isEmpty() || password==null || password.length()<=5) {
-            throw new MiException("Las contraseñas no pueden estar vacias y tener menos de 5 caracteres ");
-      }
-      
-      if(!password.equals(password2)){
-          throw new MiException("las contraseñas deben coincidir");
-      }
-        
-      
-        if (DNI == null) {
-            throw new MiException("El DNI del usuario no puede estar vacio o Nulo");
-        }
-      
-        if (nombre.isEmpty() || nombre == null) {
-            throw new MiException("El nombre de usuario no puede estar vacio o Nulo");
-        }
-        
-        if (apellido.isEmpty() || apellido == null) {
-            throw new MiException("El apellido de usuario no puede estar vacio o Nulo");
-        }
-      
-        if (fechaNacimiento == null) {
-            throw new MiException("La fecha de nacimiento del usuario no puede ser menor a cero o Nulo");
-        }
-      
-        if (email.isEmpty() || email == null) {
-            throw new MiException("El email de usuario no puede estar vacio o Nulo");
 
+
+        if (nombre.isEmpty() || nombre == null) {
+            throw new MiException("El nombre no puede estar vacío o ser nulo");
         }
+
+        if (apellido.isEmpty() || apellido == null) {
+            throw new MiException("El apellido no puede estar vacío o ser nulo");
+        }
+
+        if (DNI == null) {
+            throw new MiException("El DNI no puede ser nulo");
+        }
+        
+        if(fechaDeNacimiento == null){
+            throw new MiException("La fecha de nacimiento no puede ser nula");
+        }
+
+        if (email.isEmpty() || email == null) {
+            throw new MiException("El email no puede estar vacío o ser nulo");
+        }
+
+        if (password.isEmpty() || password == null || password.length() <= 5) {
+            throw new MiException("Las contraseñas no pueden estar vacias y tener menos de 5 caracteres ");
+        }
+
+        if (!password.equals(password2)) {
+            throw new MiException("las contraseñas deben coincidir");
+        }
+
+
     }
-    
-    
-    
 
     @Override
     public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
@@ -200,10 +186,10 @@ public class UsuarioServicio implements UserDetailsService{
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + u.getRol().toString());
 
             permisos.add(p);
-            
-            ServletRequestAttributes attr=(ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 
-            HttpSession session= attr.getRequest().getSession(true);
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+            HttpSession session = attr.getRequest().getSession(true);
             session.setAttribute("usuariosession", u);
             User user = new User(u.getNombreUsuario(), u.getPassword(), permisos);
 

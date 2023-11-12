@@ -21,7 +21,11 @@
                     <h2 sec:authorize="hasRole('ADMIN')"> Administrador</h2>
                     <h2 sec:authorize="hasRole('PROFESIONAL')"> Profesional</h2>
                 </div>
+<<<<<<< HEAD
                 <form action="/portal/registrar" method="POST" enctype="multipart/form-data" class="row g-3" >
+=======
+                <form th:action="@{/portal/registrar}" method="POST" enctype="multipart/form-data" class="row g-3" >
+>>>>>>> b6ef887acf69d1f7c3a71666db5ecc7750f13b36
 
                     <div class="col-md-6">
                         <label >Nombre</label><br>
@@ -47,14 +51,22 @@
                      <div class="col-md-6">
                         <label >Fecha de Nacimiento</label><br>
                             <div>
+<<<<<<< HEAD
                                 <input type="date" name="fechaNacimiento" class="form-control" placeholder="Ingrese su fecha de nacimiento">
+=======
+                                <input type="date" name="fechaDeNacimiento" class="form-control" placeholder="Ingrese su fecha de nacimiento">
+>>>>>>> b6ef887acf69d1f7c3a71666db5ecc7750f13b36
                             </div>
                     </div>
                     
                      <div class="col-md-6">
                         <label >Correo electrónico</label><br>
                             <div>
+<<<<<<< HEAD
                                 <input type="name" name="email" class="form-control" placeholder="Ingrese su e-mail">
+=======
+                                <input type="email" name="email" class="form-control" placeholder="Ingrese su e-mail">
+>>>>>>> b6ef887acf69d1f7c3a71666db5ecc7750f13b36
                             </div>
                     </div>
                     
@@ -78,14 +90,24 @@
                                 <input type="password" name="password2" class="form-control" placeholder="Ingrese nuevamente su contraseña">
                             </div>
                     </div>
+<<<<<<< HEAD
+=======
+                    <div>
+                        <button type="submit"  class="btn btn-primary">Registrarse</button>
+                    </div>
+>>>>>>> b6ef887acf69d1f7c3a71666db5ecc7750f13b36
                 </form>
             </div>
            
             <!-- Acciones -->
             
+<<<<<<< HEAD
             <div>
                 <a th:href="@{/portal/registroUsuario}" class="btn btn-primary">Registrarse</a>
             </div>
+=======
+            
+>>>>>>> b6ef887acf69d1f7c3a71666db5ecc7750f13b36
 
             <!-- Otras secciones de la página -->
         </div>
