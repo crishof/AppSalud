@@ -1,32 +1,5 @@
-<<<<<<< HEAD
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Usuario.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\PacienteRepositorio.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\ErroresControlador.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Paciente.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\ImagenServicio.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Administrador.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\ObraSocial.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Consulta.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\Enumeracion\Rol.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\SeguridadWeb.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\PacienteControlador.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Profesional.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\PortalControlador.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\FichaMedica.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Imagen.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\ImagenRepositorio.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\UsuarioServicio.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\AdminControlador.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\ProfesionalServicio.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\ProfesionalRepositorio.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Especialidad.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\UsuarioRepositorio.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\PacienteServicio.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\Exception\MiException.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\AppSaludApplication.java
-C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Establecimiento.java
-=======
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\PacienteServicio.java
+C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\EspecialidadServicio.java
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Consulta.java
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\PortalControlador.java
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\ImagenServicio.java
@@ -37,6 +10,7 @@ C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalu
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\PacienteRepositorio.java
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\Enumeracion\Rol.java
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\ProfesionalRepositorio.java
+C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\EspecialidadRepositorio.java
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\SeguridadWeb.java
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Establecimiento.java
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\AdminControlador.java
@@ -52,4 +26,3 @@ C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalu
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\AppSaludApplication.java
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Profesional.java
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\UsuarioRepositorio.java
->>>>>>> gonza
