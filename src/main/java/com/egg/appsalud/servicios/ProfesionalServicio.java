@@ -123,7 +123,8 @@ public class ProfesionalServicio {
     
     public List<Profesional> listarProfesional() {
 
-        List<Profesional> profesional = profesionalRepositorio.buscarOrdenado();
+        List<Profesional> profesional = new ArrayList();
+        profesional = profesionalRepositorio.findAll();
 
         return profesional;
     }

@@ -106,9 +106,10 @@ public class UsuarioServicio implements UserDetailsService {
         ur.deleteById(id);
     }
 
-    public ArrayList<Usuario> listarUsuario() {
+    public List<Usuario> listarUsuario() {
 
-        ArrayList<Usuario> listaUsuarios = (ArrayList<Usuario>) ur.findAll();
+        List<Usuario> listaUsuarios = new ArrayList();
+        listaUsuarios = ur.findAll();
 
         return listaUsuarios;
 
