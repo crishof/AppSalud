@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\PacienteServicio.java
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\EspecialidadServicio.java
@@ -58,3 +59,33 @@ C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud
 C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\ErroresControlador.java
 C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\PortalControlador.java
 >>>>>>> b6ef887acf69d1f7c3a71666db5ecc7750f13b36
+=======
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/entidades/Consulta.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/repositorios/PacienteRepositorio.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/servicios/EspecialidadServicio.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/servicios/ImagenServicio.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/repositorios/ImagenRepositorio.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/entidades/Paciente.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/servicios/ProfesionalServicio.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/Exception/MiException.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/SeguridadWeb.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/entidades/Especialidad.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/controladores/ErroresControlador.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/repositorios/EspecialidadRepositorio.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/entidades/Administrador.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/entidades/FichaMedica.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/servicios/PacienteServicio.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/AppSaludApplication.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/controladores/PacienteControlador.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/repositorios/UsuarioRepositorio.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/controladores/PortalControlador.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/entidades/Usuario.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/entidades/ObraSocial.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/servicios/UsuarioServicio.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/entidades/Establecimiento.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/entidades/Profesional.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/repositorios/ProfesionalRepositorio.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/controladores/AdminControlador.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/entidades/Imagen.java
+/Users/cristian/Programacion/Proyectos/AppSalud/src/main/java/com/egg/appsalud/Enumeracion/Rol.java
+>>>>>>> Stashed changes
