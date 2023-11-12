@@ -84,6 +84,7 @@ public class ProfesionalServicio {
             profesional.setEmail(email);
             profesional.setFechaDeAlta(new Date());
             profesional.setActivo(activo);
+            profesional.setNombreUsuario(nombreUsuario);
             
             /*String idImagen = null;
             

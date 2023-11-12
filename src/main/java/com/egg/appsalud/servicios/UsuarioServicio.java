@@ -44,6 +44,7 @@ public class UsuarioServicio implements UserDetailsService {
 
         Usuario usuario = new Usuario();
 
+        usuario.setNombreUsuario(nombreUsuario);
         usuario.setNombre(nombre);
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
         usuario.setDNI(DNI);
