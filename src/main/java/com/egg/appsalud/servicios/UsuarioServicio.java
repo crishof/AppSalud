@@ -108,8 +108,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     public List<Usuario> listarUsuario() {
 
-        List<Usuario> listaUsuarios = new ArrayList();
-        listaUsuarios = ur.findAll();
+        List<Usuario> listaUsuarios = ur.findAll();
 
         return listaUsuarios;
 

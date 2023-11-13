@@ -7,6 +7,7 @@ import com.egg.appsalud.servicios.ProfesionalServicio;
 import com.egg.appsalud.servicios.UsuarioServicio;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,14 +59,15 @@ public class PortalControlador {
     
     @GetMapping("/usuarios")
     public String usuarios(ModelMap modelo,ModelMap modelo2){
-        
-        List<Usuario> usuarios = us.listarUsuario();
+
+        List<Usuario> usuarios = new ArrayList<>();
+        usuarios = us.listarUsuario();
         modelo.addAttribute("usuarios", usuarios);
         
          List<Profesional> profesionales = profesionalServicio.listarProfesional();
         modelo2.addAttribute("profesional", profesionales);
     
-    return "Usuarios.html";
+    return "Usuarios";
     }
 
     @GetMapping("/login")

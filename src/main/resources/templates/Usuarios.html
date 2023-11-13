@@ -16,28 +16,25 @@
     <table class="table table-striped">
         <thead class="align-items-center">
         <tr>
-            <th scope="col">Id del Profesional</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Especialidad</th>
+            <th scope="col">Email</th>
 
         </tr>
         </thead>
-        <tbody th:each="profesional : ${profesional}">
+        <tbody th:each="usuario : ${usuarios}">
         <tr>
-            <td th:text="${p.id}"></td>
-            <td th:text="${p.nombre}"></td>
-            <!-- <td th:text="${p.especialidad}"></td> -->
+            <td th:text="${usuario.nombre}"></td>
+            <td th:text="${usuario.email}"></td>
         </tr>
 
         </tbody>
     </table>
 
 
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <a th:href="@{/ }" class="btn btn-primary my-2">Volver</a>
-                </p>
+    <section class=" text-center container">
+        <div class="row mt-3">
+            <div>
+                <a th:href="@{/}" class="btn btn-secondary my-2">Volver</a>
             </div>
         </div>
     </section>
