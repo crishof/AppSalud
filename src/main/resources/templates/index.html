@@ -9,16 +9,33 @@
 
 <body>
 <!--<header th:replace="layout/header :: header"></header>-->
+<div class="banner">
+    <nav th:replace="layout/navbar :: navbar"></nav>
 
-<nav th:replace="layout/navbar :: navbar"></nav>
-
-<div>
-    <h2>Encuentra tu atención médica ideal</h2>
-    <h3>Citas simples</h3>
-    <h3>historiales completos</h3>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos odio repellendus, et a dolores numquam. Inventore
-        dicta error dignissimos vero sint quasi, vel dolorem deleniti cum vitae culpa quod fuga?</p>
+    <h1 class="fw-bold display-2 text-center text-light banner-heading">Encuentra tu atención médica ideal</h1>
+        <h3>Citas simples</h3>
+    <p class="fw-bold text-light text-center container">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos odio repellendus, et a dolores numquam.
+            Inventore
+            dicta error dignissimos vero sint quasi, vel dolorem deleniti cum vitae culpa quod fuga?</p><div class="text-center">
+    <button class="btn btn-outline-warning text-light banner-btn">Solicitar cita</button>
 </div>
+</div>
+<section class="blog mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 blog-img">
+
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <h1 class="fw-bolder">historiales completos</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas eligendi nemo voluptatem ea tempore
+                    ullam, deleniti iure illum temporibus aliquid inventore eos assumenda ipsam ipsa adipisci
+                    voluptatibus nihil exercitationem nam.</p>
+                <button class="btn btn-outline-success">Ver mas</button>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 <footer th:replace="layout/footer :: footer"></footer>
