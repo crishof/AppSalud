@@ -1,9 +1,42 @@
-<footer class="bg-light text-center">
-    <div class="container p-4">
-        <p>Healthify&copy; 2023. Todos los derechos reservados.</p>
-        <ul class="list-inline">
-            <li class="list-inline-item"><a th:href="@{/portal/terminos}">Términos y Condiciones</a></li>
-            <li class="list-inline-item"><a th:href="@{/portal/privacidad}">Política de Privacidad</a></li>
-        </ul>
+<!--<footer class="bg-light text-center">-->
+<!--    <div class="container p-4">-->
+<!--        <p>Healthify&copy; 2023. Todos los derechos reservados.</p>-->
+<!--        <ul class="list-inline">-->
+<!--            <li class="list-inline-item"><a th:href="@{/portal/terminos}">Términos y Condiciones</a></li>-->
+<!--            <li class="list-inline-item"><a th:href="@{/portal/privacidad}">Política de Privacidad</a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</footer>-->
+
+
+<footer th:fragment="footer" class="d-flex flex-wrap justify-content-center align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+
+        <p><a href="/" class="text-muted text-decoration-none">
+            HEALTHIFY</a>
+            <span class="text-muted">© 2022 Company, Inc</span></p>
     </div>
+
+    <ul class=" column-gap-md-3">
+        <li class="list-item"><a class="text-muted text-decoration-none" th:href="@{/portal/terminos}">Términos y Condiciones</a></li>
+        <li class="list-item"><a class="text-muted text-decoration-none" th:href="@{/portal/privacidad}">Política de Privacidad</a></li>
+    </ul>
+
+    <ul class="nav col-md-4 justify-content-end d-flex">
+        <li class="ms-3"><a class="text-muted" href="https://twitter.com" target="_blank">
+            <!--<svg class="bi" width="24" height="24"> -->
+            <i class="fa-brands fa-twitter"></i>
+            <!-- </svg> -->
+        </a></li>
+        <li class="ms-3"><a class="text-muted" href="https://instagram.com" target="_blank">
+            <svg class="bi" width="24" height="24">
+                <i class="fa-brands fa-instagram"></i>
+            </svg>
+        </a></li>
+        <li class="ms-3"><a class="text-muted" href="https://facebook.com" target="_blank">
+            <svg class="bi" width="24" height="24">
+                <i class="fa-brands fa-facebook"></i>
+            </svg>
+        </a></li>
+    </ul>
 </footer>
