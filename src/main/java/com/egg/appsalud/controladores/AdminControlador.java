@@ -48,7 +48,7 @@ public class AdminControlador {
          List<Profesional> profesionales = profesionalServicio.listarProfesional();
         modelo2.addAttribute("profesional", profesionales);
     
-    return "Usuarios.html";
+    return "usuarios.html";
     }
     
     
@@ -77,7 +77,7 @@ public class AdminControlador {
         List<Profesional> profesional = profesionalServicio.listarProfesional();
         modelo.addAttribute("profesional", profesional);
         
-    return "Usuarios.html";
+    return "usuarios.html";
     }
     
     @PostMapping("/modificar/{id}")

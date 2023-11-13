@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/portal")
@@ -67,7 +66,7 @@ public class PortalControlador {
          List<Profesional> profesionales = profesionalServicio.listarProfesional();
         modelo2.addAttribute("profesional", profesionales);
     
-    return "Usuarios";
+    return "usuarios";
     }
 
     @GetMapping("/login")
@@ -78,7 +77,7 @@ public class PortalControlador {
             modelo.put("error", "El usuario o la contraseña son incorrectos");
         }
 
-        return "Login.html";
+        return "login";
 
     }
 
