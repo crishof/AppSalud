@@ -1,52 +1,53 @@
 <nav th:fragment="navbar" class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Healthify</a>
+        <a class="navbar-brand" href="/">Healthify</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Ir a inicio</a>
-                </li>
 
-                <!--                <div th:if="${usuario.usuariosession == null}">-->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
                     <a th:href="@{/portal/registroUsuario}" class="nav-link">Registrarse</a>
                 </li>
 
                 <li class="nav-item">
-                    <a th:href="@{/panelAdmin/usuarios}" class="nav-link">Ver usuarios</a>
+                    <a th:href="@{/portal/registroUsuario}" class="nav-link">Iniciar Sesion</a>
                 </li>
-                                <li class="nav-item">
-                                    <a th:href="@{/portal/registroUsuario}" class="nav-link">Iniciar Sesion</a>
-                                </li>
 
-<!--                                </div>-->
+                <!-- PANEL DE USUARIO -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Mi cuenta
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Citas</a></li>
+                        <li><a class="dropdown-item" href="#">Historia clinica</a></li>
+                        <li><a class="dropdown-item" href="#">Mis datos </a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
 
-
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Dropdown
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                                </li>
+                <!-- Ingreso PROFESIONALES -->
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Ingreso Profesionales</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </li>
 
             </ul>
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
         </div>
     </div>
 </nav>

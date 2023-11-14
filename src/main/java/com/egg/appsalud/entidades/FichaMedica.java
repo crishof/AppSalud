@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,22 +20,22 @@ import lombok.Setter;
 @NoArgsConstructor
 public class FichaMedica {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     @OneToOne
     private ObraSocial obraSocial;
-    
+
     @OneToOne
     private Paciente paciente;
-    
+
     @OneToMany
     private List<Profesional> profesionales;
-    
+
     @OneToMany
     private List<Consulta> consultas;
-    
+
     @ManyToOne
     @JoinColumn
-    private Profesional creador; 
+    private Profesional creador;
 }

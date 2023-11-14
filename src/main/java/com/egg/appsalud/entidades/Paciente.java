@@ -6,23 +6,24 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Data
-@Table(name="PACIENTE")
+@Table(name = "PACIENTE")
 
 @DiscriminatorValue("PACIENTE")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Paciente extends Usuario{
+public class Paciente extends Usuario {
 
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name="uuid",strategy = "uuid2")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
     @Temporal(TemporalType.DATE)

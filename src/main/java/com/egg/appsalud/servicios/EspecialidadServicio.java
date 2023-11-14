@@ -10,18 +10,18 @@ import org.springframework.stereotype.Service;
 public class EspecialidadServicio {
     @Autowired
     private EspecialidadRepositorio especialidadRepositorio;
-    
-    public void crearEspecialidad(String nombre) throws MiException{
+
+    public void crearEspecialidad(String nombre) throws MiException {
         validarEspecialidad(nombre);
-        Especialidad especialidad=new Especialidad();
+        Especialidad especialidad = new Especialidad();
         especialidadRepositorio.save(especialidad);
     }
-    
-    public void validarEspecialidad(String nombre) throws MiException{
-         if (nombre.isEmpty() || nombre == null) {
+
+    public void validarEspecialidad(String nombre) throws MiException {
+        if (nombre.isEmpty() || nombre == null) {
             throw new MiException("El nombre de usuario no puede estar vacio o Nulo");
 
         }
     }
-    
+
 }

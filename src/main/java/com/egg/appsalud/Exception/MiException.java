@@ -1,10 +1,10 @@
 package com.egg.appsalud.Exception;
 
 
-public class MiException extends Exception{
-        public MiException(String mensaje){
-        
-        super(mensaje);   
-    
+public class MiException extends Exception {
+    public MiException(String mensaje) {
+
+        super(mensaje);
+
     }
 }
