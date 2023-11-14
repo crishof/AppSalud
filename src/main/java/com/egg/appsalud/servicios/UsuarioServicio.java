@@ -198,4 +198,8 @@ public class UsuarioServicio implements UserDetailsService {
         }
 
     }
+
+    public Usuario buscarPorDni(Long dni){
+        return ur.buscarPorDni(dni);
+    }
 }
