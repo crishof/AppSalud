@@ -14,7 +14,9 @@
 
     <div class="card-header">
 
-        <h2>Registrarse</h2>
+        <h2>Registrate!</h2>
+
+        <a th:href="@{/profesional/registro}" class=" btn btn-primary">Registro Profesionales</a>
 
     </div>
     <div class="card-body">
@@ -77,8 +79,10 @@
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary">Registrarse</button>
+                <button type="submit" class="btn btn-primary">Enviar</button>
             </div>
+            <p class="text-muted"> Ya estás registrado? <a class="text-active" th:href="@{/portal/login}">inicia
+                Sesión</a></p>
         </form>
     </div>
 
