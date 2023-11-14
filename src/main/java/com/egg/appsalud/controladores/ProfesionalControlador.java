@@ -52,7 +52,7 @@ public class ProfesionalControlador {
         String apellido = apellidos[posLastName];
         System.out.println("apellido = " + apellido);
 
-        String nombreUsuario = nombre + apellido;
+        String nombreUsuario = (nombre + apellido.charAt(0)).toLowerCase();
         System.out.println("nombreUsuario = " + nombreUsuario);
 
         Long dni = random.nextLong(5000000, 50000000);
@@ -67,7 +67,7 @@ public class ProfesionalControlador {
         Date fechaNacimiento = calendar.getTime();
         System.out.println("fechaNacimiento = " + fechaNacimiento);
 
-        String email = nombre + apellido.substring(0, 0).toLowerCase() + "@mail.com";
+        String email = nombre.toLowerCase() + apellido.substring(0,1).toLowerCase() + "@mail.com";
         System.out.println("email = " + email);
 
 
