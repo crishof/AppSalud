@@ -26,8 +26,6 @@ public class Paciente extends Usuario {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    @Temporal(TemporalType.DATE)
-    private Date fechaNacimiento;
 
     @OneToMany
     private List<Consulta> consulta;
