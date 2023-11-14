@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -16,19 +17,19 @@ public class Consulta {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    
+
     @ManyToOne
     private Paciente paciente;
     @OneToOne
     private Profesional profesional;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaDeConsulta;
-    
+
     @ManyToOne
     private Establecimiento establecimiento;
-    
+
     private int precioConsulta;
-    
+
     private int valoracion;
 }

@@ -5,11 +5,13 @@ import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.servicios.ProfesionalServicio;
 import com.egg.appsalud.servicios.UsuarioServicio;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,7 +26,7 @@ public class PortalControlador {
 
     @Autowired
     public UsuarioServicio us;
-    
+
     @Autowired
     public ProfesionalServicio profesionalServicio;
 
@@ -38,7 +40,7 @@ public class PortalControlador {
     @PostMapping("/registrar")
 
     public String crearUsuario(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
-            @RequestParam Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo) throws MiException, ParseException {
+                                                                       @RequestParam Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo) throws MiException, ParseException {
 
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -55,18 +57,18 @@ public class PortalControlador {
         }
 
     }
-    
+
     @GetMapping("/usuarios")
-    public String usuarios(ModelMap modelo,ModelMap modelo2){
+    public String usuarios(ModelMap modelo, ModelMap modelo2) {
 
         List<Usuario> usuarios = new ArrayList<>();
         usuarios = us.listarUsuario();
         modelo.addAttribute("usuarios", usuarios);
-        
-         List<Profesional> profesionales = profesionalServicio.listarProfesional();
+
+        List<Profesional> profesionales = profesionalServicio.listarProfesional();
         modelo2.addAttribute("profesional", profesionales);
-    
-    return "usuarios";
+
+        return "usuarios";
     }
 
     @GetMapping("/login")
@@ -78,16 +80,15 @@ public class PortalControlador {
         }
 
         return "login";
-
     }
 
     @GetMapping("/terminos")
-    public String terminos(){
+    public String terminos() {
         return "terminos";
     }
 
     @GetMapping("/privacidad")
-    public String privacidad(){
+    public String privacidad() {
         return "privacidad";
     }
 

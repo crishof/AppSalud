@@ -5,5 +5,5 @@ public enum Rol {
     PROFESIONAL,
     PACIENTE,
     ADMIN,
-    GUEST;
+    GUEST
 }

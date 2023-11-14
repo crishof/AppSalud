@@ -9,35 +9,46 @@
 <!--</footer>-->
 
 
-<footer th:fragment="footer" class="d-flex flex-wrap justify-content-center align-items-center py-3 my-4 border-top">
+<footer th:fragment="footer" class="bg-body-tertiary mt-5">
+    <div class="container">
 
-    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="row">
 
-        <p><a href="/" class="text-muted text-decoration-none">
-            HEALTHIFY</a>
-            <span class="text-muted">© 2022 Company, Inc</span></p>
-    </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <h1 class="text-muted fw-bold mt-3 "><a href="/" class="text-decoration-none">
+                    HEALTHIFY</a>
+                    <span>© 2023 Egg Cooperation</span></h1>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti, eius ipsa!
+                    Iste, quibusdam incidunt cumque nemo repellendus non quos quia, porro quae debitis eveniet! Aut
+                    saepe provident nihil! Quia, id!</p>
+            </div>
 
-    <div class="col-lg-3 col-md-6 col-sm-12">
-        <ul class=" column-gap-md-3">
-            <li class="list-item"><a class="text-muted text-decoration-none" th:href="@{/portal/terminos}">Términos y
-                Condiciones</a></li>
-            <li class="list-item"><a class="text-muted text-decoration-none" th:href="@{/portal/privacidad}">Política de
-                Privacidad</a></li>
-        </ul>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-12">
-        <h3>Contactenos</h3>
-        <ul class="nav col-md-4 justify-content-center d-flex">
-            <li class="ms-3"><a class="text-muted" href="https://twitter.com" target="_blank">
-                <i class="fa-brands fa-twitter"></i>
-            </a></li>
-            <li class="ms-3"><a class="text-muted" href="https://instagram.com" target="_blank">
-                <i class="fa-brands fa-instagram"></i>
-            </a></li>
-            <li class="ms-3"><a class="text-muted" href="https://facebook.com" target="_blank">
-                <i class="fa-brands fa-facebook"></i>
-            </a></li>
-        </ul>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <h1 class="mt-3 text-muted fw-bold">Links</h1>
+                <ul style="list-style-type: none">
+                    <li class="list-item"><a class="text-muted text-decoration-none" th:href="@{/portal/terminos}">Términos
+                        y
+                        Condiciones</a></li>
+                    <li class="list-item"><a class="text-muted text-decoration-none" th:href="@{/portal/privacidad}">Política
+                        de
+                        Privacidad</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12 text-light">
+                <h1 class="mt-3 text-muted fw-bold">Seguinos</h1>
+                <ul class="list-inline" style="list-style-type: none">
+                    <li class="ms-3" style="display: inline-block"><a href="https://twitter.com" target="_blank">
+                        <i class="fa-brands fa-twitter text-secondary"></i>
+                    </a></li>
+                    <li class="ms-3" style="display: inline-block"><a href="https://instagram.com" target="_blank">
+                        <i class="fa-brands fa-instagram text-secondary"></i>
+                    </a></li>
+                    <li class="ms-3" style="display: inline-block"><a href="https://facebook.com" target="_blank">
+                        <i class="fa-brands fa-facebook text-secondary"></i>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </footer>
