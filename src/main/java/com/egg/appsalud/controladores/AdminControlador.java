@@ -7,8 +7,10 @@ import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.servicios.UsuarioServicio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
+
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,86 +24,87 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/panelAdmin")
 public class AdminControlador {
-        
-    
+
+
     @Autowired
     private UsuarioServicio us;
-    
+
     @Autowired
     private ProfesionalServicio profesionalServicio;
-    
+
     @GetMapping("/admin")
-    public String panelAdmin(ModelMap modelo){
-        
+    public String panelAdmin(ModelMap modelo) {
+
         List<Profesional> profesional = profesionalServicio.listarProfesional();
         modelo.addAttribute("profesional", profesional);
-        
-    return "PanelAdmin.html";
+
+        return "PanelAdmin.html";
     }
-    
+
     @GetMapping("/usuarios")
-    public String usuarios(ModelMap modelo,ModelMap modelo2){
-        
+    public String usuarios(ModelMap modelo, ModelMap modelo2) {
+
         List<Usuario> usuarios = us.listarUsuario();
         modelo.addAttribute("usuarios", usuarios);
-        
-         List<Profesional> profesionales = profesionalServicio.listarProfesional();
+
+        List<Profesional> profesionales = profesionalServicio.listarProfesional();
         modelo2.addAttribute("profesional", profesionales);
-    
-    return "usuarios.html";
+
+        return "usuarios.html";
     }
-    
-    
-   
+
+
     @GetMapping("/crear/{id}")
 
-    public String crearProfesional(@PathVariable String id, @RequestParam Especialidad especialidad, ModelMap modelo) throws MiException{
-        
+    public String crearProfesional(@PathVariable String id, @RequestParam Especialidad especialidad, ModelMap modelo) throws MiException {
+
         try {
             profesionalServicio.crearProfesional(id, especialidad);
 
-    
-            modelo.put("exito","Profesional creado con exito");
 
-        }catch(MiException ex){
-            
-            modelo.put("error",ex.getMessage());
+            modelo.put("exito", "Profesional creado con exito");
+
+        } catch (MiException ex) {
+
+            modelo.put("error", ex.getMessage());
             return "redirect:/dashboard/usuarios";
-            
-        }return "redirect:/dashboard/usuarios";
+
+        }
+        return "redirect:/dashboard/usuarios";
     }
-    
+
     @GetMapping("/profesional")
-    public String profesional(ModelMap modelo){
-        
+    public String profesional(ModelMap modelo) {
+
         List<Profesional> profesional = profesionalServicio.listarProfesional();
         modelo.addAttribute("profesional", profesional);
-        
-    return "usuarios.html";
-    }
-    
-    @PostMapping("/modificar/{id}")
-    public String modificarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/ @RequestParam Especialidad especialidad, @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido, 
-            @RequestParam Long DNI, @RequestParam Date fechaDeNacimiento, @RequestParam String email, @RequestParam String password,@RequestParam String password2,ModelMap modelo) throws MiException{
-        
-        try {
-            
-            profesionalServicio.modificarProfesional(id,/* archivo,*/ especialidad, nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true);
-            modelo.put("exito","Profesional modificado con exito");
 
-        }catch(MiException ex){
-            
-            modelo.put("error",ex.getMessage());
-            return "redirect:/dashboard/usuarios";
-            
-        }return "redirect:/dashboard/usuarios";
+        return "usuarios.html";
     }
-    
-   @GetMapping("/eliminar/{id}")
-   public String eliminarUs(@PathVariable String id){
-       
-       us.eliminarUsuario(id);
-       
-       return "redirect:/dashboard/usuarios";
-}  
+
+    @PostMapping("/modificar/{id}")
+    public String modificarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/ @RequestParam Especialidad especialidad, @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
+                                       @RequestParam Long DNI, @RequestParam Date fechaDeNacimiento, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo) throws MiException {
+
+        try {
+
+            profesionalServicio.modificarProfesional(id,/* archivo,*/ especialidad, nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true);
+            modelo.put("exito", "Profesional modificado con exito");
+
+        } catch (MiException ex) {
+
+            modelo.put("error", ex.getMessage());
+            return "redirect:/dashboard/usuarios";
+
+        }
+        return "redirect:/dashboard/usuarios";
+    }
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminarUs(@PathVariable String id) {
+
+        us.eliminarUsuario(id);
+
+        return "redirect:/dashboard/usuarios";
+    }
 }

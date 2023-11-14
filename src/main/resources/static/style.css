@@ -1,30 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Sofia&display=swap');
-*{
+
+* {
     margin: 0;
     padding: 0;
-    font-family:"Raleway", sans-serif;
+    font-family: "Raleway", sans-serif;
 }
-.banner{
+
+.banner {
     background-image: url(images/medicoyfamilia.jpg);
     width: 100%;
     height: 100vh;
     background-position: center center;
     background-size: cover;
 }
-.banner-heading{
+
+.banner-heading {
     margin-top: 250px;
 }
-.banner-btn{
-    background-color: rgb(28, 56, 56)!important;
-    border: none!important;
+
+.banner-btn {
+    background-color: rgb(28, 56, 56) !important;
+    border: none !important;
     transition: 0.5s;
-    box-shadow: none!important;
+    box-shadow: none !important;
 }
-.banner-btn:hover{
-    background-color: rgb(36,151,151)!important;
-    border: none!important;
+
+.banner-btn:hover {
+    background-color: rgb(36, 151, 151) !important;
+    border: none !important;
 }
-.blog .blog-img{
+
+.blog .blog-img {
     background-image: url(images/familiaFeliz.jpeg);
     width: 50%;
     height: 30vh;
@@ -32,22 +38,23 @@
     background-position: center;
 }
 
-.container a{
-    color: black!important;
+.container a {
+    color: black !important;
 }
-.container nav{
-    color: black!important;
+
+.container nav {
+    color: black !important;
 
 }
 
-.banner h1{
-    color: rgb(26, 24, 28)!important;
+.banner h1 {
+    color: rgb(26, 24, 28) !important;
 }
 
-.banner p{
-    color: rgb(7, 5, 9)!important;
+.banner p {
+    color: rgb(7, 5, 9) !important;
 }
 
-footer{
+footer {
     text-align: center;
 }
