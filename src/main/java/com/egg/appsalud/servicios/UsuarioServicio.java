@@ -2,7 +2,7 @@ package com.egg.appsalud.servicios;
 
 import com.egg.appsalud.Enumeracion.Rol;
 import com.egg.appsalud.Exception.MiException;
-import com.egg.appsalud.entidades.Especialidad;
+import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.entidades.Imagen;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;

@@ -2,6 +2,7 @@ package com.egg.appsalud.entidades;
 
 import com.egg.appsalud.Enumeracion.Rol;
 import java.util.Date;
+import com.egg.appsalud.Enumeracion.Especialidad;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -49,7 +50,8 @@ public class Profesional extends Usuario{
     private List<Paciente> pacientes;
     @OneToOne
     private Establecimiento establecimiento;
-    @OneToOne
+    
+    @Enumerated(EnumType.STRING)
     private Especialidad especialidad;
     
     @OneToMany

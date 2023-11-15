@@ -1,12 +1,16 @@
 package com.egg.appsalud.controladores;
 
 import com.egg.appsalud.Exception.MiException;
-import com.egg.appsalud.entidades.Especialidad;
+
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
-import com.egg.appsalud.servicios.EspecialidadServicio;
+import com.egg.appsalud.Enumeracion.Especialidad;
+import com.egg.appsalud.entidades.Establecimiento;
+import com.egg.appsalud.entidades.ObraSocial;
 import com.egg.appsalud.servicios.ProfesionalServicio;
 import com.egg.appsalud.servicios.UsuarioServicio;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/profesional")
@@ -26,12 +34,47 @@ public class ProfesionalControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @Autowired
-    private EspecialidadServicio especialidadServicio;
+    
 
     @GetMapping("/registro")
     public String registro() {
         return "registroProfesional";
+    }
+    
+    @PostMapping("/registro")
+    public String registrarProfesional(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre,
+            @RequestParam String apellido,@RequestParam Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
+            @RequestParam String email, @RequestParam String password, @RequestParam String password2,@RequestParam Long matricula,
+            List<ObraSocial> ObraSocial, @RequestParam Establecimiento establecimiento, @RequestParam Especialidad especialidad ,ModelMap modelo) throws MiException, ParseException {
+
+            Usuario usuario = new Usuario();
+            usuario.setNombreUsuario(nombreUsuario);
+            usuario.setPassword(password);
+            usuario.setDNI(dni);
+            usuario.setNombre(nombre);
+            usuario.setApellido(apellido);
+            usuario.setEmail(email);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date fechaDeNacimiento = dateFormat.parse(fechaDeNacimientoStr);
+            usuario.setFechaDeNacimiento(fechaDeNacimiento);
+
+            Profesional profesional = new Profesional();
+            profesional.setMatricula(matricula);
+            profesional.setEspecialidad(especialidad);
+
+            profesional.setEstablecimiento(establecimiento);
+            profesional.setObraSocial(ObraSocial);
+
+            try {
+            profesionalServicio.crearProfesional(usuario.getId(), profesional.getEspecialidad());
+            modelo.put("exito", "el profesional fue creado con exito");
+            return "index.html";
+        } catch (MiException e) {
+
+            modelo.put("error", e.getMessage());
+
+            return "redirect:/profesional/registro";
+        }
     }
 
 
@@ -86,8 +129,9 @@ public class ProfesionalControlador {
         String especialidad = especialidades[posSpecial];
         System.out.println("especialidad = " + especialidad);
 
-        especialidadServicio.crearEspecialidad(especialidad);
-        profesionalServicio.crearProfesional(usuario.getId(), especialidadServicio.buscarEspecialidadPorNombre(especialidad));
+        
+        
+        profesionalServicio.crearProfesional(usuario.getId(), Especialidad.CARDIOLOGIA);
 
         return "index";
     }
