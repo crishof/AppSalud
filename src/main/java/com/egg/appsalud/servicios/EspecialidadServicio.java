@@ -8,20 +8,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EspecialidadServicio {
+
     @Autowired
     private EspecialidadRepositorio especialidadRepositorio;
 
     public void crearEspecialidad(String nombre) throws MiException {
         validarEspecialidad(nombre);
         Especialidad especialidad = new Especialidad();
+        especialidad.setNombre(nombre);
         especialidadRepositorio.save(especialidad);
     }
 
     public void validarEspecialidad(String nombre) throws MiException {
         if (nombre.isEmpty() || nombre == null) {
-            throw new MiException("El nombre de usuario no puede estar vacio o Nulo");
+            throw new MiException("El nombre de la especialidad no puede estar vacio o Nulo");
 
         }
+    }
+
+    public Especialidad buscarEspecialidadPorNombre(String nombre) {
+
+        return especialidadRepositorio.buscarPorNombre(nombre);
     }
 
 }
