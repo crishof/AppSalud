@@ -55,6 +55,13 @@ public class AdminControlador {
 
         return "usuarios.html";
     }
+    
+    @GetMapping("/profesionalList")
+    public String profesionales(ModelMap modelo){
+        List<Profesional> profesionales = profesionalServicio.listarProfesional();
+        modelo.addAttribute("profesional", profesionales);
+        return "listaprofesional.html";
+    }
 
 
     @GetMapping("/crear/{id}")
