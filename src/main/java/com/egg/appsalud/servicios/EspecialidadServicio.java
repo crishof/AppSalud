@@ -15,7 +15,7 @@ public class EspecialidadServicio {
     public void crearEspecialidad(String nombre) throws MiException {
         validarEspecialidad(nombre);
         Especialidad especialidad = new Especialidad();
-        especialidad.setNombre(nombre);
+        //especialidad.setNombre(nombre);
         especialidadRepositorio.save(especialidad);
     }
 

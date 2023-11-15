@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,13 +43,15 @@ public class AdminControlador {
     }
 
     @GetMapping("/usuarios")
-    public String usuarios(ModelMap modelo, ModelMap modelo2) {
+    public String usuarios(@Param("palabra") String palabra, ModelMap modelo, ModelMap modelo2) {
 
-        List<Usuario> usuarios = us.listarUsuario();
+        List<Usuario> usuarios = us.listarUsuario(palabra);
         modelo.addAttribute("usuarios", usuarios);
 
         List<Profesional> profesionales = profesionalServicio.listarProfesional();
         modelo2.addAttribute("profesional", profesionales);
+        
+        modelo.addAttribute("palabra", palabra);
 
         return "usuarios.html";
     }

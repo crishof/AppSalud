@@ -106,8 +106,11 @@ public class UsuarioServicio implements UserDetailsService {
         ur.deleteById(id);
     }
 
-    public List<Usuario> listarUsuario() {
-
+    public List<Usuario> listarUsuario(String palabra) {
+        
+        if(palabra!=null){
+            return ur.buscarUsuarioPorNombre(palabra);
+        }
         List<Usuario> listaUsuarios = ur.findAll();
 
         return listaUsuarios;
