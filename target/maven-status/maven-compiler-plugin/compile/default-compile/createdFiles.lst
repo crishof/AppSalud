@@ -27,3 +27,4 @@ com\egg\appsalud\entidades\Especialidad.class
 com\egg\appsalud\AppSaludApplication.class
 com\egg\appsalud\entidades\Administrador.class
 com\egg\appsalud\entidades\FichaMedica.class
+com\egg\appsalud\Enumeracion\Especialidad.class
