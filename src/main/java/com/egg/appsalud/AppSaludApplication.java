@@ -1,5 +1,6 @@
 package com.egg.appsalud;
 
+import com.egg.appsalud.entidades.Profesional;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AppSaludApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(AppSaludApplication.class, args);
     }
-
 }
