@@ -8,10 +8,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Consulta {
     @Id
     @GeneratedValue(generator = "uuid")

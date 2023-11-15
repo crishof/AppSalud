@@ -2,7 +2,7 @@ package com.egg.appsalud.servicios;
 
 import com.egg.appsalud.Enumeracion.Rol;
 import com.egg.appsalud.Exception.MiException;
-import com.egg.appsalud.entidades.Especialidad;
+import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.entidades.Imagen;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
@@ -106,8 +106,11 @@ public class UsuarioServicio implements UserDetailsService {
         ur.deleteById(id);
     }
 
-    public List<Usuario> listarUsuario() {
-
+    public List<Usuario> listarUsuario(String palabra) {
+        
+        if(palabra!=null){
+            return ur.buscarUsuarioPorNombre(palabra);
+        }
         List<Usuario> listaUsuarios = ur.findAll();
 
         return listaUsuarios;
