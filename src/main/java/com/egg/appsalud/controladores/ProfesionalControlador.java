@@ -67,7 +67,7 @@ public class ProfesionalControlador {
         Date fechaNacimiento = calendar.getTime();
         System.out.println("fechaNacimiento = " + fechaNacimiento);
 
-        String email = nombre.toLowerCase() + apellido.substring(0,1).toLowerCase() + "@mail.com";
+        String email = nombre.toLowerCase() + apellido.substring(0, 1).toLowerCase() + "@mail.com";
         System.out.println("email = " + email);
 
 
