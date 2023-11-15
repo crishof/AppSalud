@@ -1,9 +1,10 @@
 package com.egg.appsalud.servicios;
 
+import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Enumeracion.Rol;
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Consulta;
-import com.egg.appsalud.entidades.Especialidad;
+
 import com.egg.appsalud.entidades.Establecimiento;
 import com.egg.appsalud.entidades.FichaMedica;
 import com.egg.appsalud.entidades.Imagen;
@@ -41,7 +42,7 @@ public class ProfesionalServicio {
     @Transactional
     public void crearProfesional(String id, Especialidad especialidad) throws MiException {
 
-        validarProfesional(especialidad);
+        //validarProfesional();
 
         Usuario usuario = buscarUsuarioPorID(id);
         Profesional profesional = new Profesional();
@@ -49,7 +50,7 @@ public class ProfesionalServicio {
         profesional.setNombreUsuario(usuario.getNombreUsuario());
         profesional.setPassword(usuario.getPassword());
         profesional.setFechaDeAlta(usuario.getFechaDeAlta());
-        profesional.setEspecialidad(especialidad);
+        
         profesional.setRol(Rol.PROFESIONAL);
 
         profesional.setNombre(usuario.getNombre());
@@ -59,6 +60,7 @@ public class ProfesionalServicio {
         profesional.setActivo(usuario.getActivo());
         profesional.setDNI(usuario.getDNI());
         //profesional.setImagen(usuario.getImagen());
+        profesional.setEspecialidad(especialidad);
 
 
         usuarioRepositorio.delete(usuario);
@@ -66,11 +68,11 @@ public class ProfesionalServicio {
     }
 
     @Transactional
-    public void modificarProfesional(String id, /*MultipartFile archivo, */Especialidad especialidad, String nombreUsuario, String nombre, String apellido,
+    public void modificarProfesional(String id, /*MultipartFile archivo, */ String nombreUsuario, String nombre, String apellido,
                                      Long DNI, Date fechaDeNacimiento, String email, String password, String password2, boolean activo) throws MiException {
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
-        validarProfesional(especialidad);
+        //validarProfesional(especialidad);
 
         Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
         if (respuesta.isPresent()) {
@@ -166,12 +168,12 @@ public class ProfesionalServicio {
 
     }
 
-    public void validarProfesional(Especialidad especialidad) throws MiException {
+    /*public void validarProfesional(Especialidad especialidad) throws MiException {
         if (especialidad == null) {
             throw new MiException("La especialidad no puede ser nulo");
         }
 
-    }
+    }*/
 
 
 }
