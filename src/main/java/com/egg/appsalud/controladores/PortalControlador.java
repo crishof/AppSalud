@@ -59,7 +59,7 @@ public class PortalControlador {
 
     }
 
-    @GetMapping("/usuarios")
+    /*@GetMapping("/usuarios")
     public String usuarios(ModelMap modelo, ModelMap modelo2, @Param("palabra") String palabra) {
 
         List<Usuario> usuarios = new ArrayList<>();
@@ -70,7 +70,7 @@ public class PortalControlador {
         modelo2.addAttribute("profesional", profesionales);
 
         return "usuarios";
-    }
+    }*/
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
