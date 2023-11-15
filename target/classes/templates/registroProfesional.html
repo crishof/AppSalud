@@ -9,7 +9,7 @@
     <div class="card">
         <div class="card-header">
             <h2>Registrate!</h2>
-            <a th:href="@{/profesional/registro}" class=" btn btn-primary">Registro Profesionales</a>
+            <a th:href="@{/portal/registroUsuario}" class=" btn btn-primary">Registro Usuarios</a>
         </div>
         <div class="card-body">
             <form th:action="@{/portal/registrar}" method="POST" enctype="multipart/form-data" class="row g-3">
@@ -65,13 +65,52 @@
                         <input type="text" name="especialidades" class="form-control" placeholder="Ingrese las especialidades (ej. Odontología)">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 form-check">
+                    
                     <label>Obras Sociales</label><br>
                     <div>
-                        <input type="checkbox" name="obrasociales" value="medicus"> Medicus
-                        <input type="checkbox" name="obrasociales" value="swissmedic"> Swiss Medic
-                        <input type="checkbox" name="obrasociales" value="osde"> Osde
-                        <input type="checkbox" name="obrasociales" value="pami"> PAMI
+                         <input class="form-check-input" type="checkbox" name="obrasocial" value="particular" id="checkpart" checked>
+                        <label class="form-check-label" for="checkpart">
+                            Particular
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="obrasocial" value="medicus" id="checkmedicus">
+                        <label class="form-check-label" for="checkmedicus">
+                            Medicus
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="obrasocial" value="swiss" id="checkswiss">
+                        <label class="form-check-label" for="checkswiss">
+                            Swiss Medical
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="obrasocial" value="pami" id="checkpami">
+                        <label class="form-check-label" for="checkpami">
+                            PAMI
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="obrasocial" value="osde" id="checkosde">
+                        <label class="form-check-label" for="checkosde">
+                            OSDE
+                        </label>
+                    </div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+<!--                        <input type="checkbox"class="p-3" name="obrasociales" value="medicus"> Medicus
+                        <input type="checkbox"class="p-3" name="obrasociales" value="swissmedic"> Swiss Medic
+                        <input type="checkbox"class="p-3" name="obrasociales" value="osde"> Osde
+                        <input type="checkbox"class="p-3" name="obrasociales" value="pami"> PAMI-->
                     </div>
                 </div>
                 <div>
