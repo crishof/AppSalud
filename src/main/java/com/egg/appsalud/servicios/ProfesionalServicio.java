@@ -40,30 +40,34 @@ public class ProfesionalServicio {
 
 
     @Transactional
-    public void crearProfesional(String id, Especialidad especialidad) throws MiException {
+    public void crearProfesional(String nombreUsuario, String password, String password2, String nombre, String apellido,
+            String email, Date fechaNacimiento, Long DNI, Especialidad especialidad, Long matricula, List<ObraSocial> obraSocial) throws MiException {
 
         //validarProfesional();
 
-        Usuario usuario = buscarUsuarioPorID(id);
+        //Usuario usuario = buscarUsuarioPorID(id);
         Profesional profesional = new Profesional();
 
-        profesional.setNombreUsuario(usuario.getNombreUsuario());
-        profesional.setPassword(usuario.getPassword());
-        profesional.setFechaDeAlta(usuario.getFechaDeAlta());
+        profesional.setNombreUsuario(nombreUsuario);
+        profesional.setPassword(password);
+        profesional.setFechaDeAlta(new Date());
         
         profesional.setRol(Rol.PROFESIONAL);
 
-        profesional.setNombre(usuario.getNombre());
-        profesional.setApellido(usuario.getApellido());
-        profesional.setEmail(usuario.getEmail());
-        profesional.setFechaDeNacimiento(usuario.getFechaDeNacimiento());
-        profesional.setActivo(usuario.getActivo());
-        profesional.setDNI(usuario.getDNI());
+        profesional.setNombre(nombre);
+        profesional.setApellido(apellido);
+        profesional.setEmail(email);
+        profesional.setFechaDeNacimiento(fechaNacimiento);
+        profesional.setActivo(true);
+        profesional.setDNI(DNI);
         //profesional.setImagen(usuario.getImagen());
         profesional.setEspecialidad(especialidad);
+        
+        profesional.setMatricula(matricula);
+        profesional.setObraSocial(obraSocial);
 
 
-        usuarioRepositorio.delete(usuario);
+        
         profesionalRepositorio.save(profesional);
     }
 

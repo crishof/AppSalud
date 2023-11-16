@@ -47,16 +47,16 @@ public class ProfesionalControlador {
             @RequestParam String email, @RequestParam String password, @RequestParam String password2,@RequestParam Long matricula,
             List<ObraSocial> ObraSocial, @RequestParam Establecimiento establecimiento, @RequestParam Especialidad especialidad ,ModelMap modelo) throws MiException, ParseException {
 
-            Usuario usuario = new Usuario();
+            /*Usuario usuario = new Usuario();
             usuario.setNombreUsuario(nombreUsuario);
             usuario.setPassword(password);
             usuario.setDNI(dni);
             usuario.setNombre(nombre);
             usuario.setApellido(apellido);
-            usuario.setEmail(email);
+            usuario.setEmail(email);*/
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaDeNacimiento = dateFormat.parse(fechaDeNacimientoStr);
-            usuario.setFechaDeNacimiento(fechaDeNacimiento);
+            /*usuario.setFechaDeNacimiento(fechaDeNacimiento);*/
 
             Profesional profesional = new Profesional();
             profesional.setMatricula(matricula);
@@ -66,7 +66,7 @@ public class ProfesionalControlador {
             profesional.setObraSocial(ObraSocial);
 
             try {
-            profesionalServicio.crearProfesional(usuario.getId(), profesional.getEspecialidad());
+            profesionalServicio.crearProfesional(nombreUsuario, password, password2, nombre, apellido, email, fechaDeNacimiento, dni,  profesional.getEspecialidad(), matricula, ObraSocial);
             modelo.put("exito", "el profesional fue creado con exito");
             return "index.html";
         } catch (MiException e) {
@@ -131,7 +131,7 @@ public class ProfesionalControlador {
 
         
         
-        profesionalServicio.crearProfesional(usuario.getId(), Especialidad.CARDIOLOGIA);
+        //profesionalServicio.crearProfesional(usuario.getId(), Especialidad.CARDIOLOGIA);
 
         return "index";
     }

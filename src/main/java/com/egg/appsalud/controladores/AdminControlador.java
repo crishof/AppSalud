@@ -66,7 +66,7 @@ public class AdminControlador {
 
     @GetMapping("/crear/{id}")
 
-    public String crearProfesional(@PathVariable String id, @RequestParam Especialidad especialidad,  ModelMap modelo) throws MiException {
+    /*public String crearProfesional(@PathVariable String id, @RequestParam Especialidad especialidad,  ModelMap modelo) throws MiException {
 
         try {
             profesionalServicio.crearProfesional(id, especialidad);
@@ -81,16 +81,9 @@ public class AdminControlador {
 
         }
         return "redirect:/dashboard/usuarios";
-    }
+    }*/
 
-    @GetMapping("/profesional")
-    public String profesional(ModelMap modelo) {
-
-        List<Profesional> profesional = profesionalServicio.listarProfesional();
-        modelo.addAttribute("profesional", profesional);
-
-        return "usuarios.html";
-    }
+    
 
     @PostMapping("/modificar/{id}")
     public String modificarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/  @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
