@@ -26,10 +26,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@Entity
+
+
 @Data
 @Table(name="PROFESIONAL")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

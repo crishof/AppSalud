@@ -45,7 +45,7 @@ public class ProfesionalControlador {
     public String registrarProfesional(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre,
             @RequestParam String apellido,@RequestParam Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
             @RequestParam String email, @RequestParam String password, @RequestParam String password2,@RequestParam Long matricula,
-            List<ObraSocial> ObraSocial, @RequestParam Establecimiento establecimiento, @RequestParam Especialidad especialidad ,ModelMap modelo) throws MiException, ParseException {
+            List<ObraSocial> obrasocial, @RequestParam Establecimiento establecimiento, @RequestParam Especialidad especialidad ,ModelMap modelo) throws MiException, ParseException {
 
             /*Usuario usuario = new Usuario();
             usuario.setNombreUsuario(nombreUsuario);
@@ -63,10 +63,10 @@ public class ProfesionalControlador {
             profesional.setEspecialidad(especialidad);
 
             profesional.setEstablecimiento(establecimiento);
-            profesional.setObraSocial(ObraSocial);
+            profesional.setObraSocial(obrasocial);
 
             try {
-            profesionalServicio.crearProfesional(nombreUsuario, password, password2, nombre, apellido, email, fechaDeNacimiento, dni,  profesional.getEspecialidad(), matricula, ObraSocial);
+            profesionalServicio.crearProfesional(nombreUsuario, password, password2, nombre, apellido, email, fechaDeNacimiento, dni,  profesional.getEspecialidad(), matricula, obrasocial);
             modelo.put("exito", "el profesional fue creado con exito");
             return "index.html";
         } catch (MiException e) {
