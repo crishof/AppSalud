@@ -8,13 +8,9 @@
 
 /*PALETA DE COLOR*/
 
-.color1 {
-    color: #ff3e48;
-}
+.color1 {color: #ff3e48;}
 
-.color2 {
-    color: #ff8f2a;
-}
+.color2 {color: #ff8f2a;}
 
 .color3 {
     color: #ffe247;
@@ -28,6 +24,9 @@
     color: #fffbd3;
 }
 
+.color6 {
+    color:#005eff;
+}
 
 .banner {
     background-image: url(images/medicoyfamilia.jpg);

@@ -39,7 +39,7 @@ public class AdminControlador {
         List<Profesional> profesional = profesionalServicio.listarProfesional();
         modelo.addAttribute("profesional", profesional);
 
-        return "PanelAdmin.html";
+        return "dashboard";
     }
 
     @GetMapping("/usuarios")
