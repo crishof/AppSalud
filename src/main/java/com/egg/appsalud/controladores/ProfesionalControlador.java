@@ -37,10 +37,14 @@ public class ProfesionalControlador {
     
 
     @GetMapping("/registro")
-    public String registro() {
+    public String registro(ModelMap modelo) {
+
+        Especialidad[] especialidades = Especialidad.values();
+        modelo.addAttribute("especialidades",especialidades);
         return "registroProfesional";
     }
-    
+
+
     @PostMapping("/registro")
     public String registrarProfesional(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre,
             @RequestParam String apellido,@RequestParam Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
