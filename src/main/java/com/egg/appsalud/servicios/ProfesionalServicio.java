@@ -73,7 +73,8 @@ public class ProfesionalServicio {
 
     @Transactional
     public void modificarProfesional(String id, /*MultipartFile archivo, */ String nombreUsuario, String nombre, String apellido,
-                                     Long DNI, Date fechaDeNacimiento, String email, String password, String password2, boolean activo) throws MiException {
+                                     Long DNI, Date fechaDeNacimiento, String email, String password, String password2,
+                                     boolean activo, Especialidad especialidad, Long matricula) throws MiException {
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
         //validarProfesional(especialidad);
@@ -91,6 +92,8 @@ public class ProfesionalServicio {
             profesional.setFechaDeAlta(new Date());
             profesional.setActivo(activo);
             profesional.setNombreUsuario(nombreUsuario);
+            profesional.setMatricula(matricula);
+            profesional.setEspecialidad(especialidad);
             
             /*String idImagen = null;
             
