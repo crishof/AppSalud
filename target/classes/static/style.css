@@ -8,24 +8,24 @@
 
 /*PALETA DE COLOR*/
 
-.color1 {color: #ff3e48;}
-
-.color2 {color: #ff8f2a;}
-
-.color3 {
-    color: #ffe247;
-}
-
-.color4 {
-    color: #fffb8c;
-}
-
-.color5 {
-    color: #fffbd3;
-}
-
 .color6 {
     color:#005eff;
+}
+
+h1 a{
+    color: #005eff !important;
+}
+
+.btn{
+    color: #005eff;
+    border : 1px #005eff;
+}
+.btn:hover{
+    background-color: #005eff;
+}
+
+.brand{
+    color: #005eff !important;
 }
 
 .banner {
@@ -40,19 +40,22 @@
 }
 
 .banner-heading {
+    color: #005eff !important;
     margin-top: 300px;
 }
 
 .banner-btn {
-    background-color: rgb(28, 56, 56) !important;
+    background-color: #005eff !important;
     border: none !important;
     transition: 0.5s;
     box-shadow: none !important;
 }
 
 .banner-btn:hover {
-    background-color: rgb(36, 151, 151) !important;
-    border: none !important;
+    background-color: rgb(223, 228, 246) !important;
+    color: #005eff !important;
+    border: #005eff !important;
+    /*border: none !important;*/
 }
 
 .blog .blog-img {
