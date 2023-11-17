@@ -19,15 +19,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class ProfesionalServicio {
+public class ProfesionalServicio implements UserDetailsService{
 
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
@@ -179,5 +188,30 @@ public class ProfesionalServicio {
         return profesionalRepositorio.getOne(id);
     }
 
+         @Override
+    public UserDetails loadUserByUsername(String nombreProfesional) throws UsernameNotFoundException {
+
+        Profesional profesional = profesionalRepositorio.buscarNombre(nombreProfesional);
+
+        if (profesional != null) {
+
+            List<GrantedAuthority> permisos = new ArrayList();
+
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + profesional.getRol().toString());
+
+            permisos.add(p);
+
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+            HttpSession session = attr.getRequest().getSession(true);
+            session.setAttribute("usuariosession", profesional);
+            User user = new User(profesional.getNombreUsuario(), profesional.getPassword(), permisos);
+
+            return user;
+        } else {
+            return null;
+        }
+
+    }
 
 }
