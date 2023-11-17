@@ -27,8 +27,15 @@
                 </li>
 
                 <!-- Ingreso PROFESIONALES -->
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Ingreso Profesionales</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                     Profesionales
+                 </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/profesional/registro}">Registro Profesionales</a></li>
+                        <li><a class="dropdown-item" th:href="@{/panelAdmin/profesionalList}">Lista Profesionales</a></li>
+                    </ul>
                 </li>
 
             </ul>
@@ -38,7 +45,7 @@
                     <a th:href="@{/portal/registroUsuario}" class="nav-link">Registrarse</a>
                 </li>
                 <li class="nav-item d-flex">
-                    <a th:href="@{/portal/registroUsuario}" class="nav-link">Iniciar Sesion</a>
+                    <a th:href="@{/portal/login}" class="nav-link">Iniciar Sesion</a>
                 </li>
             </ul>
 
