@@ -8,11 +8,25 @@
 
 /*PALETA DE COLOR*/
 
-.color1 {color: #ff3e48;}
-.color2 {color: #ff8f2a;}
-.color3 {color: #ffe247;}
-.color4 {color: #fffb8c;}
-.color5 {color: #fffbd3;}
+.color1 {
+    color: #ff3e48;
+}
+
+.color2 {
+    color: #ff8f2a;
+}
+
+.color3 {
+    color: #ffe247;
+}
+
+.color4 {
+    color: #fffb8c;
+}
+
+.color5 {
+    color: #fffbd3;
+}
 
 
 .banner {
@@ -23,7 +37,7 @@
     /*height: 500px;*/
 
     background-position: center top;
-    background-size:cover;
+    background-size: cover;
 }
 
 .banner-heading {
