@@ -63,47 +63,6 @@ public class AdminControlador {
         return "listaprofesional.html";
     }
 
-
-    @GetMapping("/crear/{id}")
-
-    /*public String crearProfesional(@PathVariable String id, @RequestParam Especialidad especialidad,  ModelMap modelo) throws MiException {
-
-        try {
-            profesionalServicio.crearProfesional(id, especialidad);
-
-
-            modelo.put("exito", "Profesional creado con exito");
-
-        } catch (MiException ex) {
-
-            modelo.put("error", ex.getMessage());
-            return "redirect:/dashboard/usuarios";
-
-        }
-        return "redirect:/dashboard/usuarios";
-    }*/
-
-    
-
-    @PostMapping("/modificar/{id}")
-    public String modificarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/  @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
-                                       @RequestParam Long DNI, @RequestParam Date fechaDeNacimiento, @RequestParam String email, @RequestParam String password, @RequestParam String password2,
-                                       @RequestParam Especialidad especialidad, @RequestParam Long matricula, ModelMap modelo) throws MiException {
-
-        try {
-
-            profesionalServicio.modificarProfesional(id,/* archivo,*/  nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, matricula);
-            modelo.put("exito", "Profesional modificado con exito");
-
-        } catch (MiException ex) {
-
-            modelo.put("error", ex.getMessage());
-            return "redirect:/dashboard/usuarios";
-
-        }
-        return "redirect:/dashboard/usuarios";
-    }
-
     @GetMapping("/eliminar/{id}")
     public String eliminarUs(@PathVariable String id) {
 

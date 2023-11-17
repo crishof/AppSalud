@@ -67,7 +67,7 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional
-    public void modificarUsuario(String id, MultipartFile archivo, String nombreUsuario, String nombre, String apellido,
+    public void modificarUsuario(String id, /*MultipartFile archivo,*/ String nombreUsuario, String nombre, String apellido,
             Long DNI, Date fechaDeNacimiento, String email, String password, String password2, boolean activo) throws MiException {
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
@@ -92,9 +92,9 @@ public class UsuarioServicio implements UserDetailsService {
                 idImagen = usuario.getImagen().getId();
             }
             
-            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+            /*Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
             
-            usuario.setImagen(imagen);
+            usuario.setImagen(imagen);*/
             ur.save(usuario);
         }
 
@@ -205,4 +205,9 @@ public class UsuarioServicio implements UserDetailsService {
     public Usuario buscarPorDni(Long dni){
         return ur.buscarPorDni(dni);
     }
+    
+    public Usuario getOne(String id){
+        return ur.getOne(id);
+    }
+    
 }

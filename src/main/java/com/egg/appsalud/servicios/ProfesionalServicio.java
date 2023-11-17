@@ -174,13 +174,10 @@ public class ProfesionalServicio {
         }
 
     }
-
-    /*public void validarProfesional(Especialidad especialidad) throws MiException {
-        if (especialidad == null) {
-            throw new MiException("La especialidad no puede ser nulo");
-        }
-
-    }*/
+    
+     public Profesional getOne(String id){
+        return profesionalRepositorio.getOne(id);
+    }
 
 
 }

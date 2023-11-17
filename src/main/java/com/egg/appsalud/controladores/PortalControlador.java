@@ -1,8 +1,10 @@
 package com.egg.appsalud.controladores;
 
+import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
+import com.egg.appsalud.repositorios.UsuarioRepositorio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
 import com.egg.appsalud.servicios.UsuarioServicio;
 
@@ -14,12 +16,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/portal")
@@ -30,6 +35,9 @@ public class PortalControlador {
 
     @Autowired
     public ProfesionalServicio profesionalServicio;
+    
+    @Autowired
+    public UsuarioRepositorio ur;
 
     @GetMapping("/registroUsuario")
     public String registroUsuario() {
@@ -59,18 +67,6 @@ public class PortalControlador {
 
     }
 
-    /*@GetMapping("/usuarios")
-    public String usuarios(ModelMap modelo, ModelMap modelo2, @Param("palabra") String palabra) {
-
-        List<Usuario> usuarios = new ArrayList<>();
-        usuarios = us.listarUsuario(palabra);
-        modelo.addAttribute("usuarios", usuarios);
-
-        List<Profesional> profesionales = profesionalServicio.listarProfesional();
-        modelo2.addAttribute("profesional", profesionales);
-
-        return "usuarios";
-    }*/
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
@@ -92,5 +88,40 @@ public class PortalControlador {
     public String privacidad() {
         return "privacidad";
     }
+    
+    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @GetMapping("/modificar/{id}")
+    public String modificarUsuario(@PathVariable String id, ModelMap modelo){
+        Usuario usuario = new Usuario();
+        usuario = us.getOne(id);
+        modelo.addAttribute( "usuario", usuario);
+        return null;
+    }
+    
+    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PostMapping("/modificar/{id}")
+    public String modificarUsuario(@RequestParam String id, /*MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
+            @RequestParam Long DNI, @RequestParam Date fechaDeNacimiento, @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam boolean activo, ModelMap modelo) throws MiException {
 
+        try {
+
+            us.modificarUsuario(id,/* archivo,*/  nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2,true);
+            modelo.put("exito", "Usuario modificado con exito");
+
+        } catch (MiException ex) {
+
+            modelo.put("error", ex.getMessage());
+            return null;
+
+        }
+        return null;
+    }
+    
+    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PostMapping("/eliminar/{id}")
+    public String eliminarUsuario(@PathVariable String id){
+        ur.deleteById(id);
+        return "index";  
+    }
+    
 }

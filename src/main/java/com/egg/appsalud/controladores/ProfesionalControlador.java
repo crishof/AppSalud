@@ -7,6 +7,7 @@ import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.entidades.Establecimiento;
 import com.egg.appsalud.entidades.ObraSocial;
+import com.egg.appsalud.repositorios.ProfesionalRepositorio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
 import com.egg.appsalud.servicios.UsuarioServicio;
 import java.text.ParseException;
@@ -20,7 +21,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,8 +37,10 @@ public class ProfesionalControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    
+    @Autowired
+    private ProfesionalRepositorio profesionalRepositorio;
 
+    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @GetMapping("/registro")
     public String registro(ModelMap modelo) {
 
@@ -44,7 +49,7 @@ public class ProfesionalControlador {
         return "registroProfesional";
     }
 
-
+    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/registro")
     public String registrarProfesional(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre,
             @RequestParam String apellido,@RequestParam Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
@@ -133,10 +138,42 @@ public class ProfesionalControlador {
         String especialidad = especialidades[posSpecial];
         System.out.println("especialidad = " + especialidad);
 
-        
-        
-        //profesionalServicio.crearProfesional(usuario.getId(), Especialidad.CARDIOLOGIA);
-
         return "index";
+    }
+    
+    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @GetMapping("/modificar/{id}")
+    public String modificarProfesional(@PathVariable String id, ModelMap modelo){
+        Profesional profesional = new Profesional();
+        profesional = profesionalServicio.getOne(id);
+        modelo.addAttribute( "profesional", profesional);
+        return null;
+    }
+    
+    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PostMapping("/modificar/{id}")
+    public String modificarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/  @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
+                                       @RequestParam Long DNI, @RequestParam Date fechaDeNacimiento, @RequestParam String email, @RequestParam String password, @RequestParam String password2,
+                                       @RequestParam Especialidad especialidad, @RequestParam Long matricula, ModelMap modelo) throws MiException {
+
+        try {
+
+            profesionalServicio.modificarProfesional(id,/* archivo,*/  nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, matricula);
+            modelo.put("exito", "Profesional modificado con exito");
+
+        } catch (MiException ex) {
+
+            modelo.put("error", ex.getMessage());
+            return null;
+
+        }
+        return null;
+    }
+    
+    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PostMapping("/eliminar/{id}")
+    public String eliminarProfesional(@PathVariable String id){
+        profesionalRepositorio.deleteById(id);
+        return "index";  
     }
 }
