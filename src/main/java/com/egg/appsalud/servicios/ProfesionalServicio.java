@@ -41,7 +41,7 @@ public class ProfesionalServicio {
 
     @Transactional
     public void crearProfesional(String nombreUsuario, String password, String password2, String nombre, String apellido,
-            String email, Date fechaNacimiento, Long DNI, Especialidad especialidad, Long matricula, List<ObraSocial> obraSocial) throws MiException {
+            String email, Date fechaNacimiento, Long DNI, Especialidad especialidad, Long matricula/*, List<ObraSocial> obraSocial*/) throws MiException {
 
         //validarProfesional();
 
@@ -64,7 +64,7 @@ public class ProfesionalServicio {
         profesional.setEspecialidad(especialidad);
         
         profesional.setMatricula(matricula);
-        profesional.setObraSocial(obraSocial);
+        //profesional.setObraSocial(obraSocial);
 
 
         

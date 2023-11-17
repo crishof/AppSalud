@@ -27,7 +27,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 
-
+@Entity
 @Data
 @Table(name="PROFESIONAL")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
