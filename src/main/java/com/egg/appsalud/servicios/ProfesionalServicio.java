@@ -52,13 +52,13 @@ public class ProfesionalServicio implements UserDetailsService{
     public void crearProfesional(String nombreUsuario, String password, String password2, String nombre, String apellido,
             String email, Date fechaNacimiento, Long DNI, Especialidad especialidad, Long matricula/*, List<ObraSocial> obraSocial*/) throws MiException {
 
-        //validarProfesional();
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaNacimiento, DNI, email, matricula, especialidad);
 
         //Usuario usuario = buscarUsuarioPorID(id);
         Profesional profesional = new Profesional();
 
         profesional.setNombreUsuario(nombreUsuario);
-        profesional.setPassword(password);
+        profesional.setPassword(new BCryptPasswordEncoder().encode(password));
         profesional.setFechaDeAlta(new Date());
         
         profesional.setRol(Rol.PROFESIONAL);
@@ -86,8 +86,11 @@ public class ProfesionalServicio implements UserDetailsService{
                                      boolean activo, Especialidad especialidad, Long matricula) throws MiException {
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
-        //validarProfesional(especialidad);
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
 
+        
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email, matricula, especialidad);
+        
         Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
         if (respuesta.isPresent()) {
             Profesional profesional = respuesta.get();
@@ -117,6 +120,57 @@ public class ProfesionalServicio implements UserDetailsService{
             profesionalRepositorio.save(profesional);
 
         }
+
+    }
+    
+    private void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI, 
+            String email, Long matricula, Especialidad especialidad) throws MiException {
+
+
+        if (nombreUsuario.isEmpty() || nombreUsuario == null) {
+            throw new MiException("El nombre de usuario no puede estar vacio o Nulo");
+
+        }
+
+
+        if (nombre.isEmpty() || nombre == null) {
+            throw new MiException("El nombre no puede estar vacío o ser nulo");
+        }
+
+        if (apellido.isEmpty() || apellido == null) {
+            throw new MiException("El apellido no puede estar vacío o ser nulo");
+        }
+
+        if (DNI == null) {
+            throw new MiException("El DNI no puede ser nulo");
+        }
+        
+        if(fechaDeNacimiento == null){
+            throw new MiException("La fecha de nacimiento no puede ser nula");
+        }
+
+        if (email.isEmpty() || email == null) {
+            throw new MiException("El email no puede estar vacío o ser nulo");
+        }
+        
+        if(especialidad == null){
+            throw new MiException("La especialidad no puede ser nula");
+        }
+        
+        if(matricula == null){
+            throw new MiException("La matrícula no puede ser nula");
+        }
+
+        if (password.isEmpty() || password == null || password.length() <= 5) {
+            throw new MiException("Las contraseñas no pueden estar vacias y tener menos de 5 caracteres ");
+        }
+
+        if (!password.equals(password2)) {
+            throw new MiException("las contraseñas deben coincidir");
+        }
+        
+        
+
 
     }
 

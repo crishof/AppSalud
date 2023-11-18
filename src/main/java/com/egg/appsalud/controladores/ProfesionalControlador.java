@@ -67,15 +67,15 @@ public class ProfesionalControlador {
             Date fechaDeNacimiento = dateFormat.parse(fechaDeNacimientoStr);
             /*usuario.setFechaDeNacimiento(fechaDeNacimiento);*/
 
-            Profesional profesional = new Profesional();
+            /*Profesional profesional = new Profesional();
             profesional.setMatricula(matricula);
-            profesional.setEspecialidad(especialidad);
+            profesional.setEspecialidad(especialidad);*/
 
             //profesional.setEstablecimiento(establecimiento);
             //profesional.setObraSocial(obrasocial);
 
             try {
-            profesionalServicio.crearProfesional(nombreUsuario, password, password2, nombre, apellido, email, fechaDeNacimiento, dni,  profesional.getEspecialidad(), matricula/*, obrasocial*/);
+            profesionalServicio.crearProfesional(nombreUsuario, password, password2, nombre, apellido, email, fechaDeNacimiento, dni,  especialidad, matricula/*, obrasocial*/);
             modelo.put("exito", "el profesional fue creado con exito");
             return "index.html";
         } catch (MiException e) {

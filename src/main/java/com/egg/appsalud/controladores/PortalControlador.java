@@ -49,11 +49,21 @@ public class PortalControlador {
     @PostMapping("/registrar")
 
     public String crearUsuario(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
-                                                                       @RequestParam Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo) throws MiException, ParseException {
+                                                                       @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo) throws MiException, ParseException {
 
-        try {
+        Date fechaDeNacimiento;
+        
+        try{
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date fechaDeNacimiento = dateFormat.parse(fechaDeNacimientoStr);
+            fechaDeNacimiento = dateFormat.parse(fechaDeNacimientoStr);
+        
+        }catch(ParseException p){
+            modelo.put("error", "la fecha no puede venir vacía");
+            return "redirect:/portal/registroUsuario";
+        }
+         
+        try {
+           
             us.crearUsuario(/*archivo, */nombreUsuario, nombre, apellido, dni, fechaDeNacimiento, email, password, password2);
 
             modelo.put("exito", "el usuario fue creado con exito");
