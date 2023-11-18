@@ -13,6 +13,7 @@ com\egg\appsalud\entidades\Paciente.class
 com\egg\appsalud\servicios\PacienteServicio.class
 com\egg\appsalud\controladores\PortalControlador.class
 com\egg\appsalud\entidades\ObraSocial.class
+com\egg\appsalud\controladores\ConsultaControlador.class
 com\egg\appsalud\AppSaludApplication.class
 com\egg\appsalud\servicios\ConsultaServicio.class
 com\egg\appsalud\Enumeracion\Especialidad.class
