@@ -1,14 +1,10 @@
 package com.egg.appsalud.controladores;
 
-
-import com.egg.appsalud.Enumeracion.Especialidad;
-import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.servicios.UsuarioServicio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/panelAdmin")
 public class AdminControlador {
-
 
     @Autowired
     private UsuarioServicio us;
@@ -53,9 +45,8 @@ public class AdminControlador {
 
         modelo.addAttribute("palabra", palabra);
 
-        return "usuarios.html";
+        return "usuarios";
     }
-
 
     @GetMapping("/eliminar/{id}")
     public String eliminarUs(@PathVariable String id) {

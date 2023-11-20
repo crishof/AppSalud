@@ -1,6 +1,8 @@
 package com.egg.appsalud.controladores;
 
+import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Exception.MiException;
+import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.repositorios.UsuarioRepositorio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
@@ -9,8 +11,11 @@ import com.egg.appsalud.servicios.UsuarioServicio;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,7 +79,7 @@ public class PortalControlador {
     }
 
 
-    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificarUsuario(@PathVariable String id, ModelMap modelo) {
         Usuario usuario = new Usuario();
@@ -83,7 +88,7 @@ public class PortalControlador {
         return null;
     }
 
-    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificarUsuario(@RequestParam String id, /*MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido, @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam boolean activo, ModelMap modelo) throws MiException {
 
@@ -111,11 +116,23 @@ public class PortalControlador {
         return null;
     }
 
-    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/eliminar/{id}")
     public String eliminarUsuario(@PathVariable String id) {
         ur.deleteById(id);
         return "index";
+    }
+
+    @GetMapping("/profesionalList")
+    public String profesionales(@Param("especialidad") String especialidad, ModelMap modelo) {
+        List<Profesional> profesionales = profesionalServicio.listarProfesional(especialidad);
+        modelo.addAttribute("profesional", profesionales);
+
+        Especialidad[] especialidades = Especialidad.values();
+        modelo.addAttribute("especialidades", especialidades);
+
+        modelo.addAttribute("valorSeleccionado", especialidad);
+        return "listaprofesional";
     }
 
     @GetMapping("/terminos")

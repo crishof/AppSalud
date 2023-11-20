@@ -44,7 +44,7 @@ public class ProfesionalControlador {
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
 
-    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @GetMapping("/registro")
     public String registro(ModelMap modelo) {
 
@@ -53,7 +53,7 @@ public class ProfesionalControlador {
         return "registroProfesional";
     }
 
-    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/registro")
     public String registrarProfesional(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre,
                                                                                @RequestParam String apellido, @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
@@ -88,7 +88,7 @@ public class ProfesionalControlador {
         return "usuarioModificar";
     }
 
-    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificarProfesional(@PathVariable String id, ModelMap modelo) {
         Profesional profesional = new Profesional();
@@ -97,7 +97,7 @@ public class ProfesionalControlador {
         return "usuarioModificar";
     }
 
-    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/ @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
                                        @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2,
@@ -128,25 +128,25 @@ public class ProfesionalControlador {
         return null;
     }
 
-    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/eliminar/{id}")
     public String eliminarProfesional(@PathVariable String id) {
         profesionalRepositorio.deleteById(id);
         return "index";
     }
 
-    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_PACIENTE')")
-    @GetMapping("/profesionalList")
-    public String profesionales(@Param("especialidad") String especialidad, ModelMap modelo) {
-        List<Profesional> profesionales = profesionalServicio.listarProfesional(especialidad);
-        modelo.addAttribute("profesional", profesionales);
-
-        Especialidad[] especialidades = Especialidad.values();
-        modelo.addAttribute("especialidades", especialidades);
-
-        modelo.addAttribute("valorSeleccionado", especialidad);
-        return "listaprofesional";
-    }
+//    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_PACIENTE')")
+//    @GetMapping("/profesionalList")
+//    public String profesionales(@Param("especialidad") String especialidad, ModelMap modelo) {
+//        List<Profesional> profesionales = profesionalServicio.listarProfesional(especialidad);
+//        modelo.addAttribute("profesional", profesionales);
+//
+//        Especialidad[] especialidades = Especialidad.values();
+//        modelo.addAttribute("especialidades", especialidades);
+//
+//        modelo.addAttribute("valorSeleccionado", especialidad);
+//        return "listaprofesional";
+//    }
 
     @GetMapping("/citasProfesional")
     public String listarCitas() {
@@ -199,7 +199,6 @@ public class ProfesionalControlador {
         System.out.println("especialidad = " + especialidad);
 
         profesionalServicio.crearProfesional(nombreUsuario, password, password, nombre, apellido, email, fechaNacimiento, dni, especialidad, matricula);
-
 
         return "redirect:../profesional/profesionalList";
     }

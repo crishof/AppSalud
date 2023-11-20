@@ -13,6 +13,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,7 @@ public class ConsultaControlador {
         return null;
     }
 
-    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN', 'ROLE_PACIENTE')")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN', 'ROLE_PACIENTE')")
     @PostMapping("/crear")
     public String crearConsulta(@RequestParam Paciente paciente, @RequestParam Profesional profesional, @RequestParam Establecimiento establecimiento, @RequestParam int precioConsulta, ModelMap modelo) throws MiException {
         try {
@@ -57,7 +58,7 @@ public class ConsultaControlador {
         return new ResponseEntity<>(consultas, HttpStatus.OK);
     }
 
-    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificarConsulta(@PathVariable String id, ModelMap modelo) {
         Consulta consulta = new Consulta();
@@ -66,7 +67,7 @@ public class ConsultaControlador {
         return null;
     }
 
-    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificarConsulta(@PathVariable String id, @RequestParam Paciente paciente, @RequestParam Profesional profesional,
                                     @RequestParam("fechaDeConsulta") String fechaDeConsultaStr, @RequestParam Establecimiento establecimiento,
@@ -82,7 +83,7 @@ public class ConsultaControlador {
         return null;
     }
 
-    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/eliminar/{id}")
     public String eliminarConsulta(@PathVariable String id) {
         cr.deleteById(id);
