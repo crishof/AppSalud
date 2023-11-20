@@ -11,13 +11,15 @@
 <!--<header th:replace="layout/header :: header"></header>-->
 <nav th:replace="layout/navbar :: navbar"></nav>
 
-<div class="container my-3">
+<p class="text-end m-4">Click en el botón para simular un registro <span>
+                <a th:href="@{/profesional/database}"><i class="fa fa-database"></i></a></span></p>
+
+<div class="container mt-4">
     <form class="d-inline" id="miFormulario" th:action="@{/profesional/profesionalList}">
 
-        <div class="form-group mx-sm-3 mb-2 ">
+        <div class="form-group mx-sm-3 m-2 ">
             <label for="filtro" class="me-2">Filtrar:</label>
             <select name="especialidad" id="filtro">
-
                 <option th:if="${valorSeleccionado != null and valorSeleccionado != ''}" value=""
                         th:selected="${valorSeleccionado}" th:text="${valorSeleccionado}"></option>
                 <option value="">Todos</option>
@@ -34,10 +36,10 @@
     </form>
 </div>
 
+
 <!-- <div id="login"> -->
 <div>
     <!-- <h3 style="text-align: center; color:rgb(234, 243, 250); text-shadow: 2px 2px 2px rgb(88, 70, 70);">AppSalud </h3> -->
-
     <div class="container">
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">

@@ -201,6 +201,6 @@ public class ProfesionalControlador {
         profesionalServicio.crearProfesional(nombreUsuario, password, password, nombre, apellido, email, fechaNacimiento, dni, especialidad, matricula);
 
 
-        return "index";
+        return "redirect:../profesional/profesionalList";
     }
 }
