@@ -6,7 +6,9 @@ import com.egg.appsalud.entidades.Establecimiento;
 import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,4 +81,16 @@ public class ConsultaServicio {
 
     }
 
+    
+        public List<Consulta> listarConsultas() {
+
+        List<Consulta> consultas = new ArrayList();
+        consultas = consultaRepositorio.findAll();
+
+        return consultas;
+    }
+        
+        public Consulta getOne(String id){
+        return consultaRepositorio.getOne(id);
+    }
 }
