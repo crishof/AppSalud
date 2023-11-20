@@ -56,17 +56,7 @@ public class AdminControlador {
         return "usuarios.html";
     }
     
-    @GetMapping("/profesionalList")
-    public String profesionales(@Param("especialidad") String especialidad, ModelMap modelo){
-        List<Profesional> profesionales = profesionalServicio.listarProfesional(especialidad);
-        modelo.addAttribute("profesional", profesionales);
-        
-        Especialidad[] especialidades = Especialidad.values();
-        modelo.addAttribute("especialidades", especialidades);
-        
-        modelo.addAttribute("valorSeleccionado", especialidad);
-        return "listaprofesional.html";
-    }
+    
 
     @GetMapping("/eliminar/{id}")
     public String eliminarUs(@PathVariable String id) {

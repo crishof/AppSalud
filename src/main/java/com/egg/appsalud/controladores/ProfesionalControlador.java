@@ -21,6 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -177,5 +178,18 @@ public class ProfesionalControlador {
     public String eliminarProfesional(@PathVariable String id) {
         profesionalRepositorio.deleteById(id);
         return "index";
+    }
+    
+    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_PACIENTE')")
+    @GetMapping("/profesionalList")
+    public String profesionales(@Param("especialidad") String especialidad, ModelMap modelo){
+        List<Profesional> profesionales = profesionalServicio.listarProfesional(especialidad);
+        modelo.addAttribute("profesional", profesionales);
+        
+        Especialidad[] especialidades = Especialidad.values();
+        modelo.addAttribute("especialidades", especialidades);
+        
+        modelo.addAttribute("valorSeleccionado", especialidad);
+        return "listaprofesional.html";
     }
 }
