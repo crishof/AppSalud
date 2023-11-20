@@ -17,7 +17,7 @@ h1 a{
 }
 
 .btn{
-    color: #005eff;
+    /*color: #005eff;*/
     border : 1px #005eff;
 }
 .btn:hover{

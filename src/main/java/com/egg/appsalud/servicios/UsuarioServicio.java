@@ -7,12 +7,14 @@ import com.egg.appsalud.entidades.Imagen;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.repositorios.UsuarioRepositorio;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,10 +37,10 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private ImagenServicio imagenServicio;
 
-    
+
     @Transactional
     public void crearUsuario(/*MultipartFile archivo, */String nombreUsuario, String nombre, String apellido,
-            Long DNI, Date fechaDeNacimiento, String email, String password, String password2) throws MiException {
+                                                        Long DNI, Date fechaDeNacimiento, String email, String password, String password2) throws MiException {
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
 
@@ -68,7 +70,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Transactional
     public void modificarUsuario(String id, /*MultipartFile archivo,*/ String nombreUsuario, String nombre, String apellido,
-            Long DNI, Date fechaDeNacimiento, String email, String password, String password2, boolean activo) throws MiException {
+                                 Long DNI, Date fechaDeNacimiento, String email, String password, String password2, boolean activo) throws MiException {
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
 
@@ -85,10 +87,10 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setFechaDeAlta(new Date());
             usuario.setRol(Rol.USER);
             usuario.setActivo(activo);
-            
+
             String idImagen = null;
-            
-            if(usuario.getImagen() != null){
+
+            if (usuario.getImagen() != null) {
                 idImagen = usuario.getImagen().getId();
             }
             
@@ -107,8 +109,8 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     public List<Usuario> listarUsuario(String palabra) {
-        
-        if(palabra!=null){
+
+        if (palabra != null) {
             return ur.buscarUsuarioPorNombre(palabra);
         }
         List<Usuario> listaUsuarios = ur.findAll();
@@ -130,12 +132,6 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
 
-    
-
-    
-
-    
-
     private void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI, String email) throws MiException {
 
 
@@ -156,8 +152,8 @@ public class UsuarioServicio implements UserDetailsService {
         if (DNI == null) {
             throw new MiException("El DNI no puede ser nulo");
         }
-        
-        if(fechaDeNacimiento == null){
+
+        if (fechaDeNacimiento == null) {
             throw new MiException("La fecha de nacimiento no puede ser nula");
         }
 
@@ -202,12 +198,12 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
-    public Usuario buscarPorDni(Long dni){
+    public Usuario buscarPorDni(Long dni) {
         return ur.buscarPorDni(dni);
     }
-    
-    public Usuario getOne(String id){
+
+    public Usuario getOne(String id) {
         return ur.getOne(id);
     }
-    
+
 }

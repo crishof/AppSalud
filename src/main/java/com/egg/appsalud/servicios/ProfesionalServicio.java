@@ -36,7 +36,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class ProfesionalServicio implements UserDetailsService{
+public class ProfesionalServicio implements UserDetailsService {
 
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
@@ -50,7 +50,7 @@ public class ProfesionalServicio implements UserDetailsService{
 
     @Transactional
     public void crearProfesional(String nombreUsuario, String password, String password2, String nombre, String apellido,
-            String email, Date fechaNacimiento, Long DNI, Especialidad especialidad, Long matricula/*, List<ObraSocial> obraSocial*/) throws MiException {
+                                 String email, Date fechaNacimiento, Long DNI, Especialidad especialidad, Long matricula/*, List<ObraSocial> obraSocial*/) throws MiException {
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaNacimiento, DNI, email, matricula, especialidad);
 
@@ -60,7 +60,7 @@ public class ProfesionalServicio implements UserDetailsService{
         profesional.setNombreUsuario(nombreUsuario);
         profesional.setPassword(new BCryptPasswordEncoder().encode(password));
         profesional.setFechaDeAlta(new Date());
-        
+
         profesional.setRol(Rol.PROFESIONAL);
 
         profesional.setNombre(nombre);
@@ -71,12 +71,11 @@ public class ProfesionalServicio implements UserDetailsService{
         profesional.setDNI(DNI);
         //profesional.setImagen(usuario.getImagen());
         profesional.setEspecialidad(especialidad);
-        
+
         profesional.setMatricula(matricula);
         //profesional.setObraSocial(obraSocial);
 
 
-        
         profesionalRepositorio.save(profesional);
     }
 
@@ -88,9 +87,9 @@ public class ProfesionalServicio implements UserDetailsService{
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
 
-        
+
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email, matricula, especialidad);
-        
+
         Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
         if (respuesta.isPresent()) {
             Profesional profesional = respuesta.get();
@@ -122,9 +121,9 @@ public class ProfesionalServicio implements UserDetailsService{
         }
 
     }
-    
-    private void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI, 
-            String email, Long matricula, Especialidad especialidad) throws MiException {
+
+    private void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI,
+                         String email, Long matricula, Especialidad especialidad) throws MiException {
 
 
         if (nombreUsuario.isEmpty() || nombreUsuario == null) {
@@ -144,20 +143,20 @@ public class ProfesionalServicio implements UserDetailsService{
         if (DNI == null) {
             throw new MiException("El DNI no puede ser nulo");
         }
-        
-        if(fechaDeNacimiento == null){
+
+        if (fechaDeNacimiento == null) {
             throw new MiException("La fecha de nacimiento no puede ser nula");
         }
 
         if (email.isEmpty() || email == null) {
             throw new MiException("El email no puede estar vacío o ser nulo");
         }
-        
-        if(especialidad == null){
+
+        if (especialidad == null) {
             throw new MiException("La especialidad no puede ser nula");
         }
-        
-        if(matricula == null){
+
+        if (matricula == null) {
             throw new MiException("La matrícula no puede ser nula");
         }
 
@@ -168,8 +167,6 @@ public class ProfesionalServicio implements UserDetailsService{
         if (!password.equals(password2)) {
             throw new MiException("las contraseñas deben coincidir");
         }
-        
-        
 
 
     }
@@ -195,10 +192,10 @@ public class ProfesionalServicio implements UserDetailsService{
 
     public List<Profesional> listarProfesional(String especialidad) {
 
-        if(especialidad!=null){
+        if (especialidad != null) {
             return profesionalRepositorio.buscarProfesionalPorEspecialidad(especialidad);
         }
-        
+
         List<Profesional> profesional = new ArrayList();
         profesional = profesionalRepositorio.findAll();
 
@@ -241,12 +238,12 @@ public class ProfesionalServicio implements UserDetailsService{
         }
 
     }
-    
-     public Profesional getOne(String id){
+
+    public Profesional getOne(String id) {
         return profesionalRepositorio.getOne(id);
     }
 
-         @Override
+    @Override
     public UserDetails loadUserByUsername(String nombreProfesional) throws UsernameNotFoundException {
 
         Profesional profesional = profesionalRepositorio.buscarNombre(nombreProfesional);

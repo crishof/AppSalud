@@ -10,8 +10,10 @@ import com.egg.appsalud.entidades.ObraSocial;
 import com.egg.appsalud.repositorios.ProfesionalRepositorio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
 import com.egg.appsalud.servicios.UsuarioServicio;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.ModelMap;
@@ -53,8 +56,8 @@ public class ProfesionalControlador {
     //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/registro")
     public String registrarProfesional(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre,
-            @RequestParam String apellido, @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
-            @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Long matricula,
+                                                                               @RequestParam String apellido, @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
+                                                                               @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Long matricula,
             /*List<ObraSocial> obrasocial, @RequestParam Establecimiento establecimiento,*/ @RequestParam Especialidad especialidad, ModelMap modelo) throws MiException, ParseException {
 
         Date fechaDeNacimiento;
@@ -116,11 +119,10 @@ public class ProfesionalControlador {
 
         Long matricula = random.nextLong(1000, 99999);
 
-        Especialidad especialidad= Especialidad.values()[random.nextInt(Especialidad.values().length)];
+        Especialidad especialidad = Especialidad.values()[random.nextInt(Especialidad.values().length)];
         System.out.println("especialidad = " + especialidad);
 
-        profesionalServicio.crearProfesional(nombreUsuario,password,password,nombre,apellido,email,fechaNacimiento,dni, especialidad,matricula);
-
+        profesionalServicio.crearProfesional(nombreUsuario, password, password, nombre, apellido, email, fechaNacimiento, dni, especialidad, matricula);
 
 
         return "index";
@@ -138,8 +140,8 @@ public class ProfesionalControlador {
     //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/ @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
-            @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2,
-            @RequestParam Especialidad especialidad, @RequestParam Long matricula, ModelMap modelo) throws MiException {
+                                       @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2,
+                                       @RequestParam Especialidad especialidad, @RequestParam Long matricula, ModelMap modelo) throws MiException {
 
         Date fechaDeNacimiento;
 
@@ -172,16 +174,16 @@ public class ProfesionalControlador {
         profesionalRepositorio.deleteById(id);
         return "index";
     }
-    
+
     //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_PACIENTE')")
     @GetMapping("/profesionalList")
-    public String profesionales(@Param("especialidad") String especialidad, ModelMap modelo){
+    public String profesionales(@Param("especialidad") String especialidad, ModelMap modelo) {
         List<Profesional> profesionales = profesionalServicio.listarProfesional(especialidad);
         modelo.addAttribute("profesional", profesionales);
-        
+
         Especialidad[] especialidades = Especialidad.values();
         modelo.addAttribute("especialidades", especialidades);
-        
+
         modelo.addAttribute("valorSeleccionado", especialidad);
         return "listaprofesional";
     }

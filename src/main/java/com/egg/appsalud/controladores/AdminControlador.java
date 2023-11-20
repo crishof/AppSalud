@@ -50,13 +50,12 @@ public class AdminControlador {
 
         List<Profesional> profesionales = profesionalServicio.listarProfesional(palabra);
         modelo2.addAttribute("profesional", profesionales);
-        
+
         modelo.addAttribute("palabra", palabra);
 
         return "usuarios.html";
     }
-    
-    
+
 
     @GetMapping("/eliminar/{id}")
     public String eliminarUs(@PathVariable String id) {

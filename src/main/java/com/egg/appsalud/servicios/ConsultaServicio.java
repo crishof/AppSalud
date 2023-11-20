@@ -6,11 +6,13 @@ import com.egg.appsalud.entidades.Establecimiento;
 import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,7 @@ public class ConsultaServicio {
     @Autowired
     private ConsultaRepositorio consultaRepositorio;
 
-    
+
     @Transactional
     public void crearConsulta(Paciente paciente, Profesional profesional, Establecimiento establecimiento, int precioConsulta) throws MiException {
 
@@ -54,13 +56,12 @@ public class ConsultaServicio {
         }
 
     }
-    
+
     @Transactional
-    public void eliminarConsulta(String id){
+    public void eliminarConsulta(String id) {
         consultaRepositorio.deleteById(id);
     }
-    
-    
+
 
     private void validar(Paciente paciente, Profesional profesional, Establecimiento establecimiento, int precioConsulta) throws MiException {
         if (paciente == null) {
@@ -81,16 +82,16 @@ public class ConsultaServicio {
 
     }
 
-    
-        public List<Consulta> listarConsultas() {
+
+    public List<Consulta> listarConsultas() {
 
         List<Consulta> consultas = new ArrayList();
         consultas = consultaRepositorio.findAll();
 
         return consultas;
     }
-        
-        public Consulta getOne(String id){
+
+    public Consulta getOne(String id) {
         return consultaRepositorio.getOne(id);
     }
 }

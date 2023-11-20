@@ -35,7 +35,7 @@ public class PortalControlador {
 
     @Autowired
     public ProfesionalServicio profesionalServicio;
-    
+
     @Autowired
     public UsuarioRepositorio ur;
 
@@ -52,18 +52,18 @@ public class PortalControlador {
                                                                        @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo) throws MiException, ParseException {
 
         Date fechaDeNacimiento;
-        
-        try{
+
+        try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             fechaDeNacimiento = dateFormat.parse(fechaDeNacimientoStr);
-        
-        }catch(ParseException p){
+
+        } catch (ParseException p) {
             modelo.put("error", "la fecha no puede venir vacía");
             return "redirect:/portal/registroUsuario";
         }
-         
+
         try {
-           
+
             us.crearUsuario(/*archivo, */nombreUsuario, nombre, apellido, dni, fechaDeNacimiento, email, password, password2);
 
             modelo.put("exito", "el usuario fue creado con exito");
@@ -98,35 +98,35 @@ public class PortalControlador {
     public String privacidad() {
         return "privacidad";
     }
-    
+
     //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @GetMapping("/modificar/{id}")
-    public String modificarUsuario(@PathVariable String id, ModelMap modelo){
+    public String modificarUsuario(@PathVariable String id, ModelMap modelo) {
         Usuario usuario = new Usuario();
         usuario = us.getOne(id);
-        modelo.addAttribute( "usuario", usuario);
+        modelo.addAttribute("usuario", usuario);
         return null;
     }
-    
+
     //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificarUsuario(@RequestParam String id, /*MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
-            @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam boolean activo, ModelMap modelo) throws MiException {
+                                   @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam boolean activo, ModelMap modelo) throws MiException {
 
         Date fechaDeNacimiento;
-        
-        try{
+
+        try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             fechaDeNacimiento = dateFormat.parse(fechaDeNacimientoStr);
-        
-        }catch(ParseException p){
+
+        } catch (ParseException p) {
             modelo.put("error", "la fecha no puede venir vacía");
             return "redirect:/portal/registroUsuario";
         }
-        
+
         try {
 
-            us.modificarUsuario(id,/* archivo,*/  nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2,true);
+            us.modificarUsuario(id,/* archivo,*/  nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true);
             modelo.put("exito", "Usuario modificado con exito");
 
         } catch (MiException ex) {
@@ -137,12 +137,12 @@ public class PortalControlador {
         }
         return null;
     }
-    
+
     //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/eliminar/{id}")
-    public String eliminarUsuario(@PathVariable String id){
+    public String eliminarUsuario(@PathVariable String id) {
         ur.deleteById(id);
-        return "index";  
+        return "index";
     }
-    
+
 }

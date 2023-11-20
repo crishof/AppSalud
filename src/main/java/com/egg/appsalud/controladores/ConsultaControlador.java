@@ -7,7 +7,9 @@ import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
 import com.egg.appsalud.servicios.ConsultaServicio;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,39 +24,39 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/consulta")
 public class ConsultaControlador {
-    
+
     @Autowired
     private ConsultaServicio cs;
 
     @Autowired
     private ConsultaRepositorio cr;
-    
-    
+
+
     @GetMapping("/crear")
-    public String crearConsulta(ModelMap modelo){
-        return null;  
+    public String crearConsulta(ModelMap modelo) {
+        return null;
     }
-    
+
     //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN', 'ROLE_PACIENTE')")
     @PostMapping("/crear")
-    public String crearConsulta(@RequestParam Paciente paciente,@RequestParam Profesional profesional,@RequestParam Establecimiento establecimiento,@RequestParam int precioConsulta, ModelMap modelo) throws MiException {
-        try{
+    public String crearConsulta(@RequestParam Paciente paciente, @RequestParam Profesional profesional, @RequestParam Establecimiento establecimiento, @RequestParam int precioConsulta, ModelMap modelo) throws MiException {
+        try {
             cs.crearConsulta(paciente, profesional, establecimiento, precioConsulta);
             modelo.put("exito", "La consulta fue creada con exito");
             return "index.html";
-        }catch(MiException e){
+        } catch (MiException e) {
             modelo.put("error", e.getMessage());
 
             return "redirect:/consulta/crear";
-        }  
+        }
     }
-    
-        @GetMapping
-        public ResponseEntity<List<Consulta>> listarConsultas() {
+
+    @GetMapping
+    public ResponseEntity<List<Consulta>> listarConsultas() {
         List<Consulta> consultas = cs.listarConsultas();
         return new ResponseEntity<>(consultas, HttpStatus.OK);
     }
-    
+
     //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificarConsulta(@PathVariable String id, ModelMap modelo) {
@@ -63,26 +65,26 @@ public class ConsultaControlador {
         modelo.addAttribute("consulta", consulta);
         return null;
     }
-    
+
     //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/modificar/{id}")
-    public String modificarConsulta (@PathVariable String id,@RequestParam Paciente paciente,@RequestParam Profesional profesional,
-            @RequestParam ("fechaDeConsulta") String fechaDeConsultaStr, @RequestParam Establecimiento establecimiento,
-            @RequestParam int precioConsulta, @RequestParam int valoracion, ModelMap modelo)throws MiException {
-        
+    public String modificarConsulta(@PathVariable String id, @RequestParam Paciente paciente, @RequestParam Profesional profesional,
+                                    @RequestParam("fechaDeConsulta") String fechaDeConsultaStr, @RequestParam Establecimiento establecimiento,
+                                    @RequestParam int precioConsulta, @RequestParam int valoracion, ModelMap modelo) throws MiException {
+
         try {
             cs.modificarConsulta(id, paciente, profesional, establecimiento, precioConsulta);
             modelo.put("exito", "Consulta modificada con exito");
-        } catch (MiException e){
+        } catch (MiException e) {
             modelo.put("error", e.getMessage());
             return null;
         }
         return null;
     }
-    
+
     //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/eliminar/{id}")
-    public String eliminarConsulta (@PathVariable String id){
+    public String eliminarConsulta(@PathVariable String id) {
         cr.deleteById(id);
         return null;
     }
