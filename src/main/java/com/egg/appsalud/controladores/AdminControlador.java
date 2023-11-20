@@ -36,7 +36,7 @@ public class AdminControlador {
     @GetMapping("/admin")
     public String panelAdmin(ModelMap modelo) {
 
-        List<Profesional> profesional = profesionalServicio.listarProfesional();
+        List<Profesional> profesional = profesionalServicio.listarProfesional("");
         modelo.addAttribute("profesional", profesional);
 
         return "dashboard";
@@ -48,7 +48,7 @@ public class AdminControlador {
         List<Usuario> usuarios = us.listarUsuario(palabra);
         modelo.addAttribute("usuarios", usuarios);
 
-        List<Profesional> profesionales = profesionalServicio.listarProfesional();
+        List<Profesional> profesionales = profesionalServicio.listarProfesional(palabra);
         modelo2.addAttribute("profesional", profesionales);
         
         modelo.addAttribute("palabra", palabra);
@@ -57,9 +57,14 @@ public class AdminControlador {
     }
     
     @GetMapping("/profesionalList")
-    public String profesionales(ModelMap modelo){
-        List<Profesional> profesionales = profesionalServicio.listarProfesional();
+    public String profesionales(@Param("especialidad") String especialidad, ModelMap modelo){
+        List<Profesional> profesionales = profesionalServicio.listarProfesional(especialidad);
         modelo.addAttribute("profesional", profesionales);
+        
+        Especialidad[] especialidades = Especialidad.values();
+        modelo.addAttribute("especialidades", especialidades);
+        
+        modelo.addAttribute("valorSeleccionado", especialidad);
         return "listaprofesional.html";
     }
 
