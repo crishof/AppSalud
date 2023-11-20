@@ -89,12 +89,10 @@ public class ProfesionalControlador {
 
         Random random = new Random();
 
-        int posName = random.nextInt(nombres.length);
-        String nombre = nombres[posName];
+        String nombre = nombres[random.nextInt(nombres.length)];
         System.out.println("nombre = " + nombre);
 
-        int posLastName = random.nextInt(apellidos.length);
-        String apellido = apellidos[posLastName];
+        String apellido = apellidos[random.nextInt(apellidos.length)];
         System.out.println("apellido = " + apellido);
 
         String nombreUsuario = (nombre + apellido.charAt(0)).toLowerCase();
@@ -104,11 +102,9 @@ public class ProfesionalControlador {
         System.out.println("dni = " + dni);
 
         Calendar calendar = Calendar.getInstance();
-
         calendar.set(Calendar.YEAR, random.nextInt(2024 - 2000) + 2000);
         calendar.set(Calendar.MONTH, random.nextInt(12));
         calendar.set(Calendar.DAY_OF_MONTH, random.nextInt(31));
-
         Date fechaNacimiento = calendar.getTime();
         System.out.println("fechaNacimiento = " + fechaNacimiento);
 
@@ -118,17 +114,14 @@ public class ProfesionalControlador {
         String password = "123123";
         System.out.println("password = " + password);
 
-        try {
-            usuarioServicio.crearUsuario(nombreUsuario, nombre, apellido, dni, fechaNacimiento, email, password, password);
-        } catch (MiException e) {
-            throw new RuntimeException(e);
-        }
+        Long matricula = random.nextLong(1000, 99999);
 
-        var usuario = usuarioServicio.buscarPorDni(dni);
-
-        int posSpecial = random.nextInt(especialidades.length);
-        String especialidad = especialidades[posSpecial];
+        Especialidad especialidad= Especialidad.values()[random.nextInt(Especialidad.values().length)];
         System.out.println("especialidad = " + especialidad);
+
+        profesionalServicio.crearProfesional(nombreUsuario,password,password,nombre,apellido,email,fechaNacimiento,dni, especialidad,matricula);
+
+
 
         return "index";
     }
@@ -190,6 +183,6 @@ public class ProfesionalControlador {
         modelo.addAttribute("especialidades", especialidades);
         
         modelo.addAttribute("valorSeleccionado", especialidad);
-        return "listaprofesional.html";
+        return "listaprofesional";
     }
 }
