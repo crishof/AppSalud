@@ -193,8 +193,12 @@ public class ProfesionalServicio implements UserDetailsService{
         return Usuario;
     }
 
-    public List<Profesional> listarProfesional() {
+    public List<Profesional> listarProfesional(String especialidad) {
 
+        if(especialidad!=null){
+            return profesionalRepositorio.buscarProfesionalPorEspecialidad(especialidad);
+        }
+        
         List<Profesional> profesional = new ArrayList();
         profesional = profesionalRepositorio.findAll();
 
