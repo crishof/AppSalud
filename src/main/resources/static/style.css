@@ -66,6 +66,7 @@ h1 a{
     background-position: center;
 }
 
+
 .container a {
     color: black !important;
 }
@@ -85,4 +86,12 @@ h1 a{
 
 footer {
     text-align: center;
+}
+
+.card-error {
+    background-image: url(images/medicoDetener.webp);
+    width: 80%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
 }
