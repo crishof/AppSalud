@@ -3,7 +3,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: "Raleway", sans-serif;
+    /*font-family: "Raleway", sans-serif;*/
 }
 
 /*PALETA DE COLOR*/
@@ -19,9 +19,12 @@ h1 a{
 .btn{
     /*color: #005eff;*/
     border : 1px #005eff;
+    color:whitesmoke;
+
 }
 .btn:hover{
     background-color: #005eff;
+    color:whitesmoke;
 }
 
 .brand{
@@ -49,6 +52,10 @@ h1 a{
     border: none !important;
     transition: 0.5s;
     box-shadow: none !important;
+}
+
+a.btn{
+    color:whitesmoke!important;
 }
 
 .banner-btn:hover {
@@ -90,8 +97,9 @@ footer {
 
 .card-error {
     background-image: url(images/medicoDetener.webp);
-    width: 80%;
-    height: 100vh;
+    width: 50%;
+    height: 30vh;
+    margin-top: 100px;
     background-size: cover;
     background-position: center;
 }
