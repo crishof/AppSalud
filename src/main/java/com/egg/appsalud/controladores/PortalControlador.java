@@ -68,6 +68,43 @@ public class PortalControlador {
         }
     }
 
+    @GetMapping("/registro")
+    public String registro(ModelMap modelo) {
+
+        Especialidad[] especialidades = Especialidad.values();
+        modelo.addAttribute("especialidades", especialidades);
+        return "registroProfesional";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @PostMapping("/registro")
+    public String registrarProfesional(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre,
+                                                                               @RequestParam String apellido, @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
+                                                                               @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Long matricula,
+            /*List<ObraSocial> obrasocial, @RequestParam Establecimiento establecimiento,*/ @RequestParam Especialidad especialidad, ModelMap modelo) throws MiException, ParseException {
+
+        Date fechaDeNacimiento;
+
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            fechaDeNacimiento = dateFormat.parse(fechaDeNacimientoStr);
+
+        } catch (ParseException p) {
+            modelo.put("error", "la fecha no puede venir vacía");
+            return "redirect:/profesional/registro";
+        }
+
+        try {
+            profesionalServicio.crearProfesional(nombreUsuario, password, password2, nombre, apellido, email, fechaDeNacimiento, dni, especialidad, matricula/*, obrasocial*/);
+            modelo.put("exito", "el profesional fue creado con exito");
+            return "index";
+        } catch (MiException e) {
+
+            modelo.put("error", e.getMessage());
+
+            return "redirect:/profesional/registro";
+        }
+    }
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
