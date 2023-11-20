@@ -8,15 +8,15 @@
 <head th:replace="layout/head :: head"></head>
 
 <body>
-<header th:replace="layout/header :: header"></header>
+<!--<header th:replace="layout/header :: header"></header>-->
 <nav th:replace="layout/navbar :: navbar"></nav>
 
 <div class="container my-3">
     <form class="d-inline" id="miFormulario" th:action="@{/profesional/profesionalList}">
 
         <div class="form-group mx-sm-3 mb-2 ">
-            <label for="especialidad" class="me-2">Filtrar:</label>
-            <select id="especialidad" name="especialidad" id="filtro">
+            <label for="filtro" class="me-2">Filtrar:</label>
+            <select name="especialidad" id="filtro">
 
                 <option th:if="${valorSeleccionado != null and valorSeleccionado != ''}" value=""
                         th:selected="${valorSeleccionado}" th:text="${valorSeleccionado}"></option>

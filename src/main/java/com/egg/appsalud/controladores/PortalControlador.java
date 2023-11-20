@@ -1,8 +1,6 @@
 package com.egg.appsalud.controladores;
 
-import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Exception.MiException;
-import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.repositorios.UsuarioRepositorio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
@@ -10,13 +8,9 @@ import com.egg.appsalud.servicios.UsuarioServicio;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/portal")
@@ -41,18 +34,12 @@ public class PortalControlador {
 
     @GetMapping("/registroUsuario")
     public String registroUsuario() {
-
         return "registroUsuario";
-
     }
 
     @PostMapping("/registrar")
-
-    public String crearUsuario(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
-                                                                       @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo) throws MiException, ParseException {
-
+    public String crearUsuario(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido, @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo) throws MiException, ParseException {
         Date fechaDeNacimiento;
-
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             fechaDeNacimiento = dateFormat.parse(fechaDeNacimientoStr);
@@ -67,14 +54,13 @@ public class PortalControlador {
             us.crearUsuario(/*archivo, */nombreUsuario, nombre, apellido, dni, fechaDeNacimiento, email, password, password2);
 
             modelo.put("exito", "el usuario fue creado con exito");
-            return "index.html";
+            return "index";
         } catch (MiException e) {
 
             modelo.put("error", e.getMessage());
 
             return "redirect:/portal/registroUsuario";
         }
-
     }
 
 
@@ -82,22 +68,11 @@ public class PortalControlador {
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
 
         if (error != null) {
-
             modelo.put("error", "El usuario o la contraseña son incorrectos");
         }
-
         return "login";
     }
 
-    @GetMapping("/terminos")
-    public String terminos() {
-        return "terminos";
-    }
-
-    @GetMapping("/privacidad")
-    public String privacidad() {
-        return "privacidad";
-    }
 
     //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @GetMapping("/modificar/{id}")
@@ -110,11 +85,9 @@ public class PortalControlador {
 
     //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/modificar/{id}")
-    public String modificarUsuario(@RequestParam String id, /*MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
-                                   @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam boolean activo, ModelMap modelo) throws MiException {
+    public String modificarUsuario(@RequestParam String id, /*MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido, @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam boolean activo, ModelMap modelo) throws MiException {
 
         Date fechaDeNacimiento;
-
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             fechaDeNacimiento = dateFormat.parse(fechaDeNacimientoStr);
@@ -145,4 +118,13 @@ public class PortalControlador {
         return "index";
     }
 
+    @GetMapping("/terminos")
+    public String terminos() {
+        return "terminos";
+    }
+
+    @GetMapping("/privacidad")
+    public String privacidad() {
+        return "privacidad";
+    }
 }

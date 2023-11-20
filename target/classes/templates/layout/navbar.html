@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="brand">
             <i class="fa fa-heart-circle-check fa-2xl" style="color: #005eff"></i>
-        <a class="navbar-brand" href="/">Healthify</a>
+            <a class="navbar-brand" href="/">Healthify</a>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,32 +12,50 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                <!-- PANEL DE USUARIO -->
+                <!-- INGRESO PACIENTE -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         Mi cuenta
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Mis Citas</a></li>
-                        <li><a class="dropdown-item" href="#">Historia clinica</a></li>
-                        <li><a class="dropdown-item" href="#">Mis datos </a></li>
+                        <li><a class="dropdown-item" th:href="@{/paciente/citas}">Mis Citas</a></li>
+                        <li><a class="dropdown-item" th:href="@{/paciente/historia}">Historia clinica</a></li>
+                        <li><a class="dropdown-item" th:href="@{/paciente/modificar}">Mis datos </a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                        <li class="nav-item">
+                            <form method="POST" th:action="@{/portal/logout}">
+                                <a href="#" onclick="this.parentNode.submit();" class="nav-link">
+                                    Cerrar Sesión
+                                </a>
+                            </form>
+                        </li>
+
                     </ul>
                 </li>
 
-                <!-- Ingreso PROFESIONALES -->
+                <!-- INGRESO PROFESIONALES -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                     Profesionales
-                 </a>
+                       aria-expanded="false">
+                        Profesionales
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/profesional/registro}">Registro Profesionales</a></li>
-                        <li><a class="dropdown-item" th:href="@{/profesional/profesionalList}">Lista Profesionales</a></li>
+                        <li><a class="dropdown-item" th:href="@{/profesional/citasProfesional}">Citas</a></li>
+                        <li><a class="dropdown-item" th:href="@{/profesional/listaPacientes}">Pacientes</a></li>
+                        <li><a class="dropdown-item" th:href="@{/profesional/modificar}">Mis datos</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="nav-item">
+                            <form method="POST" th:action="@{/portal/logout}">
+                                <a href="#" onclick="this.parentNode.submit();" class="nav-link">
+                                    Cerrar Sesión
+                                </a>
+                            </form>
+                        </li>
                     </ul>
                 </li>
 

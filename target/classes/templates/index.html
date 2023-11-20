@@ -19,7 +19,8 @@
         Inventore
         dicta error dignissimos vero sint quasi, vel dolorem deleniti cum vitae culpa quod fuga?</p>
     <div class="text-center">
-        <a class="btn btn-outline-warning text-light banner-btn" th:href="@{/profesional/profesionalList}">Solicitar Cita</a>
+        <a class="btn btn-outline-warning text-light banner-btn" th:href="@{/profesional/profesionalList}">Solicitar
+            Cita</a>
     </div>
 </div>
 
@@ -33,7 +34,34 @@
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas eligendi nemo voluptatem ea tempore
                     ullam, deleniti iure illum temporibus aliquid inventore eos assumenda ipsam ipsa adipisci
                     voluptatibus nihil exercitationem nam.</p>
-                <button class="btn btn-outline-success">Ver mas</button>
+
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Ver mas
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Historias Clinicas</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Con Healthify tendrás acceso a todos los datos de tu historial.
+                                    Podrás consultar las fechas de tus visitas, medicamentos recetados, observaciones
+                                    clínicas y mucho más</p>
+                            </div>
+                            <div class="modal-footer">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
