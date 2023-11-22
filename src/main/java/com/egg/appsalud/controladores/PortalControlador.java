@@ -2,7 +2,6 @@ package com.egg.appsalud.controladores;
 
 import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Exception.MiException;
-import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.repositorios.UsuarioRepositorio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
@@ -11,10 +10,8 @@ import com.egg.appsalud.servicios.UsuarioServicio;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,10 +34,7 @@ public class PortalControlador {
     @Autowired
     public UsuarioRepositorio ur;
 
-    @GetMapping("/registroUsuario")
-    public String registroUsuario() {
-        return "registroUsuario";
-    }
+
 
     @PostMapping("/registrar")
     public String crearUsuario(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido, @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo) throws MiException, ParseException {
@@ -68,13 +62,7 @@ public class PortalControlador {
         }
     }
 
-    @GetMapping("/registro")
-    public String registro(ModelMap modelo) {
 
-        Especialidad[] especialidades = Especialidad.values();
-        modelo.addAttribute("especialidades", especialidades);
-        return "registroProfesional";
-    }
 
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/registro")
