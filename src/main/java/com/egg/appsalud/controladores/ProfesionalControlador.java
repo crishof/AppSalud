@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -44,25 +45,20 @@ public class ProfesionalControlador {
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
 
-    @GetMapping("/modificar")
-    public String modificarProfesional() {
-        return "usuarioModificar";
-    }
-
-    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificarProfesional(@PathVariable String id, ModelMap modelo) {
-        Profesional profesional = new Profesional();
-        profesional = profesionalServicio.getOne(id);
-        modelo.addAttribute("profesional", profesional);
-        return "usuarioModificar";
-    }
 
-    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+        Especialidad[] especialidades = Especialidad.values();
+        modelo.addAttribute("especialidades",especialidades);
+        Profesional profesional = profesionalServicio.getOne(id);
+        modelo.addAttribute(profesional);
+
+        return "profesional_modificar";
+    }
     @PostMapping("/modificar/{id}")
     public String modificarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/ @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
                                        @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2,
-                                       @RequestParam Especialidad especialidad, @RequestParam Long matricula, ModelMap modelo) throws MiException {
+                                       @RequestParam Especialidad especialidad, @RequestParam Long matricula, ModelMap modelo) {
 
         Date fechaDeNacimiento;
 
@@ -72,7 +68,7 @@ public class ProfesionalControlador {
 
         } catch (ParseException p) {
             modelo.put("error", "la fecha no puede venir vacía");
-            return "redirect:/profesional/registro";
+            return "redirect:/profesional/modificar/{id}";
         }
 
         try {
@@ -83,10 +79,10 @@ public class ProfesionalControlador {
         } catch (MiException ex) {
 
             modelo.put("error", ex.getMessage());
-            return null;
+            return "redirect:/profesional/modificar/{id}";
 
         }
-        return null;
+        return "redirect:../../listaProfesionales";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
