@@ -28,7 +28,7 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/panelAdmin/*").hasRole("ADMIN")
+                .antMatchers("/panelAdmin/*").hasAnyRole("ADMIN", "PROFESIONAL")
                 .antMatchers("/paciente/*").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/profesional/*").hasAnyRole("ADMIN", "PROFESIONAL")
                 .antMatchers("/css/*", "/js/*", "/img/*", "/**", "/portal/*").permitAll()

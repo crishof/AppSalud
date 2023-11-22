@@ -87,9 +87,9 @@ public class ProfesionalServicio implements UserDetailsService {
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
 
-
+        
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email, matricula, especialidad);
-
+        
         Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
         if (respuesta.isPresent()) {
             Profesional profesional = respuesta.get();
@@ -172,8 +172,8 @@ public class ProfesionalServicio implements UserDetailsService {
     }
 
 
-    @Transactional
-    public void eliminarProfesional(String id) {
+     @Transactional
+    public void eliminarProfesional(String id, String nombreUsuario, String nombre, String apellido, Long DNI, Date fechaDeNacimiento, String email, String password, String password2, boolean par, Especialidad especialidad, Long matricula) {
         profesionalRepositorio.deleteById(id);
     }
 
@@ -268,5 +268,26 @@ public class ProfesionalServicio implements UserDetailsService {
         }
 
     }
+
+//    public List<Profesional> listarProfesional() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+    
+    public List<Profesional> listarProfesional() {
+
+        List<Profesional> profesional = new ArrayList();
+        profesional = profesionalRepositorio.findAll();
+
+        return profesional;
+    }
+
+    public List<Profesional> listarProfesionalesPorEspecialidad(String especialidad) {
+    if (especialidad != null && !especialidad.isEmpty()) {
+        return profesionalRepositorio.buscarProfesionalPorEspecialidad(especialidad);
+    } else {
+        // Puedes manejar el caso de especialidad vacía o nula si es necesario
+        return new ArrayList<>(); // O retornar un mensaje de error o la lista completa, según tu lógica de negocio
+    }
+}
 
 }

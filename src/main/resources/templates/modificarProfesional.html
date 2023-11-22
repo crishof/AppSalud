@@ -12,14 +12,26 @@
 <nav th:replace="layout/navbar :: navbar"></nav>
 
 <h1>
-    Modificar usuario
+    Modificar profesional
 </h1>
 
+<div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
+    <div class="card-body">
+        <h5 class="card-title">Error!</h5>
+        <p class="card-text" th:text="${error}"></p>
+    </div>
+</div>
+<div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+    <div class="card-body">
+        <h5 class="card-title">Exito!</h5>
+        <p class="card-text" th:text="${exito}"></p>
+    </div>
+</div>
 
 <div class="card">
     
         <div class="card-body">
-            <form th:action="@{/paciente/modificar/__${profesional.id}__}" method="POST" enctype="multipart/form-data" class="row g-3">
+            <form th:action="@{/profesional/modificar/__${profesional.id}__}" method="POST" enctype="multipart/form-data" class="row g-3">
                 <input hidden th:value="${profesional.id}" name="id">
                 <div class="col-md-6">
                     <label for="nombre">Nombre</label>
@@ -60,7 +72,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label>Contraseña</label><br>
+                    <label>Reingresar contraseña</label><br>
                     <div>
                         <input type="password" name="password2" class="form-control"
                                placeholder="Ingrese nuevamente su contraseña">

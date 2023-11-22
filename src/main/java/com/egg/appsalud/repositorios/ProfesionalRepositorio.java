@@ -19,5 +19,8 @@ public interface ProfesionalRepositorio extends JpaRepository<Profesional, Strin
 
     @Query("SELECT p FROM Profesional p WHERE p.especialidad LIKE ?1%")
     List<Profesional> buscarProfesionalPorEspecialidad(String especialidad);
+    
+    @Query("SELECT DISTINCT p.especialidad FROM Profesional p")
+    List<String> obtenerEspecialidades();
 }
 

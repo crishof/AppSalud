@@ -43,6 +43,46 @@ public class ProfesionalControlador {
 
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
+    
+//    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+//    @GetMapping("/registro")
+//    public String registro(ModelMap modelo) {
+//
+//        Especialidad[] especialidades = Especialidad.values();
+//        modelo.addAttribute("especialidades", especialidades);
+//        return "registroProfesional.html    ";
+//    }
+//
+//    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+//    @PostMapping("/registro")
+//    public String registrarProfesional(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre,
+//            @RequestParam String apellido, @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
+//            @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Long matricula,
+//            /*List<ObraSocial> obrasocial, @RequestParam Establecimiento establecimiento,*/ @RequestParam Especialidad especialidad, ModelMap modelo) throws MiException, ParseException {
+//
+//        Date fechaDeNacimiento;
+//
+//        try {
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//            fechaDeNacimiento = dateFormat.parse(fechaDeNacimientoStr);
+//
+//        } catch (ParseException p) {
+//            modelo.put("error", "la fecha no puede venir vacía");
+//            return "registroProfesional.html";
+//        }
+//
+//        try {
+//            profesionalServicio.crearProfesional(nombreUsuario, password, password2, nombre, apellido, email, fechaDeNacimiento, dni, especialidad, matricula/*, obrasocial*/);
+//            modelo.put("exito", "el profesional fue creado con exito");
+//            return "registroProfesional.html";
+//        } catch (MiException e) {
+//
+//            modelo.put("error", e.getMessage());
+//
+//            //return "redirect:/profesional/registro";
+//            return "registroProfesional.html";
+//        }
+//    }
 
     @GetMapping("/modificar")
     public String modificarProfesional() {
@@ -52,17 +92,21 @@ public class ProfesionalControlador {
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificarProfesional(@PathVariable String id, ModelMap modelo) {
-        Profesional profesional = new Profesional();
-        profesional = profesionalServicio.getOne(id);
+        Especialidad[] especialidades = Especialidad.values();
+        modelo.addAttribute("especialidades", especialidades);
+        
+        Profesional profesional = profesionalServicio.getOne(id);
+
         modelo.addAttribute("profesional", profesional);
-        return "usuarioModificar";
+
+        return "modificarProfesional.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/ @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
-                                       @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2,
-                                       @RequestParam Especialidad especialidad, @RequestParam Long matricula, ModelMap modelo) throws MiException {
+            @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2,
+            @RequestParam Especialidad especialidad, @RequestParam Long matricula, ModelMap modelo) throws MiException {
 
         Date fechaDeNacimiento;
 
@@ -78,23 +122,54 @@ public class ProfesionalControlador {
         try {
 
             profesionalServicio.modificarProfesional(id,/* archivo,*/ nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, matricula);
-            modelo.put("exito", "Profesional modificado con exito");
+            modelo.put("exito", "el profesional fue modificado con exito");
+//            return "redirect:/panelAdmin/profesionalList";
+            return "redirect:/panelAdmin/profesionalList";
 
         } catch (MiException ex) {
 
             modelo.put("error", ex.getMessage());
-            return null;
+            return "modificarProfesional.html";
 
         }
-        return null;
+        
+    }
+
+
+    
+ @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    @GetMapping("/eliminar/{id}")
+    public String eliminarProfesional(@PathVariable String id, ModelMap modelo) {
+        Especialidad[] especialidades = Especialidad.values();
+        modelo.addAttribute("especialidades", especialidades);
+        
+        Profesional profesional = profesionalServicio.getOne(id);
+
+        modelo.addAttribute("profesional", profesional);
+
+        return "eliminarProfesional.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/eliminar/{id}")
-    public String eliminarProfesional(@PathVariable String id) {
-        profesionalRepositorio.deleteById(id);
-        return "index";
-    }
+    public String eliminarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/ @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
+            @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2,
+            @RequestParam Especialidad especialidad, @RequestParam Long matricula, ModelMap modelo) throws MiException {
+
+        Date fechaDeNacimiento;
+
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            fechaDeNacimiento = dateFormat.parse(fechaDeNacimientoStr);
+
+        } catch (ParseException p) {
+            modelo.put("error", "la fecha no puede venir vacía");
+            return "redirect:/profesional/registro";
+        }
+
+        profesionalServicio.eliminarProfesional(id,/* archivo,*/ nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, matricula);
+        return "redirect:/panelAdmin/profesionalList";   
+}
 
 //    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_PACIENTE')")
 //    @GetMapping("/profesionalList")

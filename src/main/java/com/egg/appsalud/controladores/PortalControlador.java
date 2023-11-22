@@ -68,19 +68,20 @@ public class PortalControlador {
         }
     }
 
+    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @GetMapping("/registro")
     public String registro(ModelMap modelo) {
 
         Especialidad[] especialidades = Especialidad.values();
         modelo.addAttribute("especialidades", especialidades);
-        return "registroProfesional";
+        return "registroProfesional.html    ";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
+    //@PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/registro")
     public String registrarProfesional(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre,
-                                                                               @RequestParam String apellido, @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
-                                                                               @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Long matricula,
+            @RequestParam String apellido, @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
+            @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Long matricula,
             /*List<ObraSocial> obrasocial, @RequestParam Establecimiento establecimiento,*/ @RequestParam Especialidad especialidad, ModelMap modelo) throws MiException, ParseException {
 
         Date fechaDeNacimiento;
@@ -91,18 +92,19 @@ public class PortalControlador {
 
         } catch (ParseException p) {
             modelo.put("error", "la fecha no puede venir vacía");
-            return "redirect:/profesional/registro";
+            return "registroProfesional.html";
         }
 
         try {
             profesionalServicio.crearProfesional(nombreUsuario, password, password2, nombre, apellido, email, fechaDeNacimiento, dni, especialidad, matricula/*, obrasocial*/);
             modelo.put("exito", "el profesional fue creado con exito");
-            return "index";
+            return "/login";
         } catch (MiException e) {
 
             modelo.put("error", e.getMessage());
 
-            return "redirect:/profesional/registro";
+            //return "redirect:/profesional/registro";
+            return "registroProfesional.html";
         }
     }
 
