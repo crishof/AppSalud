@@ -29,15 +29,5 @@ public class ProfesionalController {
 //    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
 
 
-    @GetMapping("/lista")
-    public String listarProfesionales(@Param("especialidad") String especialidad, ModelMap modelo) {
-        List<Profesional> profesionales = profesionalServicio.listarProfesional(especialidad);
-        modelo.addAttribute("profesional", profesionales);
 
-        Especialidad[] especialidades = Especialidad.values();
-        modelo.addAttribute("especialidades", especialidades);
-
-        modelo.addAttribute("valorSeleccionado", especialidad);
-        return "listaprofesional";
-    }
 }

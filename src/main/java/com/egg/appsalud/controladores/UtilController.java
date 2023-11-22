@@ -60,6 +60,6 @@ public class UtilController {
 
         profesionalServicio.crearProfesional(nombreUsuario, password, password, nombre, apellido, email, fechaNacimiento, dni, especialidad, matricula);
 
-        return "redirect:../profesional/lista";
+        return "redirect:../listaProfesionales";
     }
 }
