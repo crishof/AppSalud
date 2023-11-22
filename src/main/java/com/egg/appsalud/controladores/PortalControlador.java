@@ -1,6 +1,5 @@
 package com.egg.appsalud.controladores;
 
-import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.repositorios.UsuarioRepositorio;
@@ -35,13 +34,6 @@ public class PortalControlador {
     public UsuarioRepositorio ur;
 
 
-
-
-
-
-
-
-
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
 
@@ -50,7 +42,6 @@ public class PortalControlador {
         }
         return "login";
     }
-
 
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @GetMapping("/modificar/{id}")

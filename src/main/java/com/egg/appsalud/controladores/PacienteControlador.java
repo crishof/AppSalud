@@ -21,12 +21,12 @@ public class PacienteControlador {
     }
 
     @GetMapping("/citas")
-    public String listarCitas(){
+    public String listarCitas() {
         return "citasPaciente";
     }
 
     @GetMapping("/historia")
-    public String historiaClinica(){
+    public String historiaClinica() {
         return "historiaClinica";
     }
 

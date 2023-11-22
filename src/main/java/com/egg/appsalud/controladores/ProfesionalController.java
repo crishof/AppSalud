@@ -23,11 +23,4 @@ import java.util.List;
 @RequestMapping("/profesional")
 public class ProfesionalController {
 
-    @Autowired
-    ProfesionalServicio profesionalServicio;
-
-//    @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
-
-
-
 }
