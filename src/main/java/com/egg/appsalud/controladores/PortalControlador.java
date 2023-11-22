@@ -160,18 +160,6 @@ public class PortalControlador {
         return "index";
     }
 
-    @GetMapping("/profesionalList")
-    public String profesionales(@Param("especialidad") String especialidad, ModelMap modelo) {
-        List<Profesional> profesionales = profesionalServicio.listarProfesional(especialidad);
-        modelo.addAttribute("profesional", profesionales);
-
-        Especialidad[] especialidades = Especialidad.values();
-        modelo.addAttribute("especialidades", especialidades);
-
-        modelo.addAttribute("valorSeleccionado", especialidad);
-        return "listaprofesional";
-    }
-
     @GetMapping("/terminos")
     public String terminos() {
         return "terminos";
