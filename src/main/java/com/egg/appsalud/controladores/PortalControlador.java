@@ -160,13 +160,4 @@ public class PortalControlador {
         return "index";
     }
 
-    @GetMapping("/terminos")
-    public String terminos() {
-        return "terminos";
-    }
-
-    @GetMapping("/privacidad")
-    public String privacidad() {
-        return "privacidad";
-    }
 }
