@@ -32,7 +32,6 @@ public class ConsultaControlador {
     @Autowired
     private ConsultaRepositorio cr;
 
-
     @GetMapping("/crear")
     public String crearConsulta(ModelMap modelo) {
         return null;

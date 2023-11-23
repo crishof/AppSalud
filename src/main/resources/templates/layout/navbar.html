@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<body>
 <nav th:fragment="navbar" class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <div class="brand">
@@ -13,7 +18,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <!-- INGRESO PACIENTE -->
-                <li class="nav-item dropdown" th:if="${session.usuariosession != null}">
+                <li sec:authorize="hasAnyRole('USER','ADMIN')" class="nav-item dropdown" th:if="${session.usuariosession != null}">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         Mi cuenta
@@ -36,10 +41,12 @@
                 </li>
 
                 <!-- INGRESO PROFESIONALES -->
-                <li class="nav-item dropdown" th:if="${session.usuariosession != null}">
+
+                <li sec:authorize="hasAnyRole('PROFESIONAL','ADMIN')" class="nav-item dropdown"
+                    th:if="${session.usuariosession != null}">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        Profesionales
+                        Mi cuenta
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" th:href="@{/profesional/citasProfesional}">Citas</a></li>
@@ -62,7 +69,10 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex" th:if="${session.usuariosession == null}">
                 <li class="nav-item d-flex">
-                    <a th:href="@{/portal/registroUsuario}" class="nav-link">Registrarse</a>
+                    <a th:href="@{/registroPaciente}" class="nav-link">Registro Paciente</a>
+                </li>
+                <li class="nav-item d-flex">
+                    <a th:href="@{/registroProfesional}" class="nav-link">Registro Profesional</a>
                 </li>
                 <li class="nav-item d-flex">
                     <a th:href="@{/portal/login}" class="nav-link">Iniciar Sesion</a>
@@ -76,4 +86,6 @@
         </div>
     </div>
 </nav>
+</body>
+</html>
 
