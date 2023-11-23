@@ -105,7 +105,6 @@ public class InicioController {
 
         Especialidad[] especialidades = Especialidad.values();
         modelo.addAttribute("especialidades", especialidades);
-
         modelo.addAttribute("valorSeleccionado", especialidad);
         return "profesional_lista";
     }
