@@ -20,6 +20,11 @@ public class PacienteControlador {
         return "citaSolicitud";
     }
 
+    @GetMapping("/editar")
+    public String editarPaciente(){
+        return "paciente_edit";
+    }
+
     @GetMapping("/citas")
     public String listarCitas() {
         return "citasPaciente";

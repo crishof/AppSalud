@@ -22,54 +22,54 @@
             <form th:action="@{/registrarProfesional}" method="POST" enctype="multipart/form-data" class="row g-3">
                 <div class="col-md-6">
                     <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingrese su nombre">
+                    <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingrese su nombre" required>
                 </div>
                 <div class="col-md-6">
                     <label for="apellido">Apellido</label><br>
                     <input type="text" id="apellido" name="apellido" class="form-control"
-                           placeholder="Ingrese su apellido">
+                           placeholder="Ingrese su apellido" required>
                 </div>
                 <div class="col-md-6">
                     <label for="dni">Número de DNI</label><br>
                     <input type="number" id="dni" name="dni" class="form-control"
-                           placeholder="Ingrese su número de DNI">
+                           placeholder="Ingrese su número de DNI" required>
                 </div>
                 <div class="col-md-6">
                     <label>Fecha de Nacimiento</label><br>
                     <div>
                         <input type="date" name="fechaDeNacimiento" class="form-control"
-                               placeholder="Ingrese su fecha de nacimiento">
+                               placeholder="Ingrese su fecha de nacimiento" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <label>Correo electrónico</label><br>
                     <div>
-                        <input type="email" name="email" class="form-control" placeholder="Ingrese su e-mail">
+                        <input type="email" name="email" class="form-control" placeholder="Ingrese su e-mail" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <label>Nombre de usuario</label><br>
                     <div>
-                        <input type="text" name="nombreUsuario" class="form-control" placeholder="Ingrese su usuario">
+                        <input type="text" name="nombreUsuario" class="form-control" placeholder="Ingrese su usuario" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <label>Contraseña</label><br>
                     <div>
-                        <input type="password" name="password" class="form-control" placeholder="Ingrese su contraseña">
+                        <input type="password" name="password" class="form-control" placeholder="Ingrese su contraseña" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <label>Contraseña</label><br>
                     <div>
                         <input type="password" name="password2" class="form-control"
-                               placeholder="Ingrese nuevamente su contraseña">
+                               placeholder="Ingrese nuevamente su contraseña" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <label for="matricula">Matrícula</label><br>
                     <input type="text" id="matricula" name="matricula" class="form-control"
-                           placeholder="Ingrese su número de matrícula">
+                           placeholder="Ingrese su número de matrícula" required>
                 </div>
                 <div class="col-md-6">
 

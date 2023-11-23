@@ -101,7 +101,6 @@ public class ProfesionalServicio implements UserDetailsService {
             profesional.setNombre(nombre);
             profesional.setPassword(new BCryptPasswordEncoder().encode(password));
             profesional.setDNI(DNI);
-            profesional.setNombre(nombre);
             profesional.setApellido(apellido);
             profesional.setFechaDeNacimiento(fechaDeNacimiento);
             profesional.setEmail(email);
@@ -217,10 +216,7 @@ public class ProfesionalServicio implements UserDetailsService {
             return profesionalRepositorio.buscarProfesionalPorEspecialidad(especialidad);
         }
 
-        List<Profesional> profesional = new ArrayList();
-        profesional = profesionalRepositorio.findAll();
-
-        return profesional;
+        return profesionalRepositorio.listarOrdenadoPorApellido();
     }
 
     public void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI, String email) throws MiException {
