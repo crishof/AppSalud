@@ -5,6 +5,7 @@ import com.egg.appsalud.Enumeracion.Rol;
 import java.util.Date;
 
 import com.egg.appsalud.Enumeracion.Especialidad;
+import com.egg.appsalud.Enumeracion.Provincias;
 
 import java.util.List;
 import javax.persistence.Column;
@@ -50,11 +51,17 @@ public class Profesional extends Usuario {
     private List<ObraSocial> ObraSocial;
     @OneToMany
     private List<Paciente> pacientes;
-    @OneToOne
-    private Establecimiento establecimiento;
+    //@OneToOne
+    //private Establecimiento establecimiento;
 
     @Enumerated(EnumType.STRING)
     private Especialidad especialidad;
+    
+    @Enumerated(EnumType.STRING)
+    private Provincias provincias;
+    
+    private String localidad;
+    private String direccion;
 
     @OneToMany
     private List<Consulta> consultas;

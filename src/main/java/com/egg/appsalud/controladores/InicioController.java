@@ -1,6 +1,7 @@
 package com.egg.appsalud.controladores;
 
 import com.egg.appsalud.Enumeracion.Especialidad;
+import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.servicios.ProfesionalServicio;
@@ -72,7 +73,7 @@ public class InicioController {
     public String registrarProfesional(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre,
                                                                                @RequestParam String apellido, @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
                                                                                @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Long matricula,
-            /*List<ObraSocial> obrasocial, @RequestParam Establecimiento establecimiento,*/ @RequestParam Especialidad especialidad, ModelMap modelo) throws MiException, ParseException {
+            /*List<ObraSocial> obrasocial,*/ @RequestParam Especialidad especialidad, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion, ModelMap modelo) throws MiException, ParseException {
 
         System.out.println("EJECUTANDO POST REGISTRAR");
         Date fechaDeNacimiento;
@@ -87,7 +88,7 @@ public class InicioController {
         }
 
         try {
-            profesionalServicio.crearProfesional(nombreUsuario, password, password2, nombre, apellido, email, fechaDeNacimiento, dni, especialidad, matricula/*, obrasocial*/);
+            profesionalServicio.crearProfesional(nombreUsuario, password, password2, nombre, apellido, email, fechaDeNacimiento, dni, especialidad, provincias, localidad, direccion, matricula/*, obrasocial*/);
             modelo.put("exito", "el profesional fue creado con exito");
             return "index";
         } catch (MiException e) {

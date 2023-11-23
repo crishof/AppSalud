@@ -1,11 +1,11 @@
 package com.egg.appsalud.servicios;
 
 import com.egg.appsalud.Enumeracion.Especialidad;
+import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.Enumeracion.Rol;
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Consulta;
 
-import com.egg.appsalud.entidades.Establecimiento;
 import com.egg.appsalud.entidades.FichaMedica;
 import com.egg.appsalud.entidades.Imagen;
 import com.egg.appsalud.entidades.ObraSocial;
@@ -50,9 +50,10 @@ public class ProfesionalServicio implements UserDetailsService {
 
     @Transactional
     public void crearProfesional(String nombreUsuario, String password, String password2, String nombre, String apellido,
-                                 String email, Date fechaNacimiento, Long DNI, Especialidad especialidad, Long matricula/*, List<ObraSocial> obraSocial*/) throws MiException {
+                                 String email, Date fechaNacimiento, Long DNI, Especialidad especialidad, Provincias provincias, String localidad, String direccion,
+                                 Long matricula/*, List<ObraSocial> obraSocial*/) throws MiException {
 
-        validar(nombreUsuario, password, password2, nombre, apellido, fechaNacimiento, DNI, email, matricula, especialidad);
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaNacimiento, DNI, email, matricula, especialidad, provincias, localidad, direccion);
 
         //Usuario usuario = buscarUsuarioPorID(id);
         Profesional profesional = new Profesional();
@@ -71,6 +72,9 @@ public class ProfesionalServicio implements UserDetailsService {
         profesional.setDNI(DNI);
         //profesional.setImagen(usuario.getImagen());
         profesional.setEspecialidad(especialidad);
+        profesional.setProvincias(provincias);
+        profesional.setLocalidad(localidad);
+        profesional.setDireccion(direccion);
 
         profesional.setMatricula(matricula);
         //profesional.setObraSocial(obraSocial);
@@ -82,13 +86,14 @@ public class ProfesionalServicio implements UserDetailsService {
     @Transactional
     public void modificarProfesional(String id, /*MultipartFile archivo, */ String nombreUsuario, String nombre, String apellido,
                                      Long DNI, Date fechaDeNacimiento, String email, String password, String password2,
-                                     boolean activo, Especialidad especialidad, Long matricula) throws MiException {
+                                     boolean activo, Especialidad especialidad, Provincias provincias, String localidad, String direccion,
+                                     Long matricula) throws MiException {
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
 
 
-        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email, matricula, especialidad);
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email, matricula, especialidad, provincias, localidad, direccion);
 
         Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
         if (respuesta.isPresent()) {
@@ -105,6 +110,10 @@ public class ProfesionalServicio implements UserDetailsService {
             profesional.setNombreUsuario(nombreUsuario);
             profesional.setMatricula(matricula);
             profesional.setEspecialidad(especialidad);
+            
+            profesional.setProvincias(provincias);
+            profesional.setLocalidad(localidad);
+            profesional.setDireccion(direccion);
             
             /*String idImagen = null;
             
@@ -123,7 +132,7 @@ public class ProfesionalServicio implements UserDetailsService {
     }
 
     private void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI,
-                         String email, Long matricula, Especialidad especialidad) throws MiException {
+                         String email, Long matricula, Especialidad especialidad, Provincias provincias, String localidad, String direccion) throws MiException {
 
 
         if (nombreUsuario.isEmpty() || nombreUsuario == null) {
@@ -153,6 +162,18 @@ public class ProfesionalServicio implements UserDetailsService {
         }
 
         if (especialidad == null) {
+            throw new MiException("La especialidad no puede ser nula");
+        }
+        
+         if (provincias == null) {
+            throw new MiException("La provincia no puede ser nula");
+        }
+         
+        if (localidad == null) {
+            throw new MiException("La Localidad no puede ser nula");
+        }
+        
+        if (direccion == null) {
             throw new MiException("La especialidad no puede ser nula");
         }
 

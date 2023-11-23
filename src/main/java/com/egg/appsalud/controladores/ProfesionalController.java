@@ -1,6 +1,7 @@
 package com.egg.appsalud.controladores;
 
 import com.egg.appsalud.Enumeracion.Especialidad;
+import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.repositorios.ProfesionalRepositorio;
@@ -45,7 +46,7 @@ public class ProfesionalController {
     @PostMapping("/editar/{id}")
     public String editarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/ @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
                                     @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password,
-                                    @RequestParam String password2, @RequestParam Especialidad especialidad, @RequestParam Long matricula, ModelMap modelo, HttpSession session) {
+                                    @RequestParam String password2, @RequestParam Especialidad especialidad, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion, @RequestParam Long matricula, ModelMap modelo, HttpSession session) {
 
         Date fechaDeNacimiento;
         try {
@@ -59,7 +60,7 @@ public class ProfesionalController {
 
         try {
 
-            profesionalServicio.modificarProfesional(id,/* archivo,*/ nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, matricula);
+            profesionalServicio.modificarProfesional(id,/* archivo,*/ nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, provincias, localidad, direccion, matricula);
             modelo.put("exito", "Profesional modificado con exito");
 
             Profesional profesionalActualizado = profesionalServicio.getOne(id);
