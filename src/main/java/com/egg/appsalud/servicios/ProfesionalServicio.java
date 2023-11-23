@@ -195,10 +195,7 @@ public class ProfesionalServicio implements UserDetailsService {
             return profesionalRepositorio.buscarProfesionalPorEspecialidad(especialidad);
         }
 
-        List<Profesional> profesional = new ArrayList();
-        profesional = profesionalRepositorio.findAll();
-
-        return profesional;
+        return profesionalRepositorio.listarOrdenadoPorApellido();
     }
 
     public void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI, String email) throws MiException {
