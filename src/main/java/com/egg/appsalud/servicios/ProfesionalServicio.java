@@ -84,8 +84,8 @@ public class ProfesionalServicio implements UserDetailsService {
                                      Long DNI, Date fechaDeNacimiento, String email, String password, String password2,
                                      boolean activo, Especialidad especialidad, Long matricula) throws MiException {
 
-        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
-        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
+        /*validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);*/
 
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email, matricula, especialidad);

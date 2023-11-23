@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -45,20 +46,27 @@ public class ProfesionalControlador {
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
 
-    @GetMapping("/modificar/{id}")
-    public String modificarProfesional(@PathVariable String id, ModelMap modelo) {
+    @GetMapping("/modificar")
+    public String modificarProfesional(ModelMap modelo, HttpSession session) {
 
         Especialidad[] especialidades = Especialidad.values();
         modelo.addAttribute("especialidades",especialidades);
-        Profesional profesional = profesionalServicio.getOne(id);
-        modelo.addAttribute(profesional);
+        
+        Profesional profesionalActualizado = (Profesional) session.getAttribute("profesionalActualizado");
+
+        session.removeAttribute("profesionalActualizado");
+
+        modelo.addAttribute("profesional", profesionalActualizado);
+
 
         return "profesional_modificar";
     }
+    
+    
     @PostMapping("/modificar/{id}")
     public String modificarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/ @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
                                        @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2,
-                                       @RequestParam Especialidad especialidad, @RequestParam Long matricula, ModelMap modelo) {
+                                       @RequestParam Especialidad especialidad, @RequestParam Long matricula, ModelMap modelo, HttpSession session) {
 
         Date fechaDeNacimiento;
 
@@ -68,18 +76,22 @@ public class ProfesionalControlador {
 
         } catch (ParseException p) {
             modelo.put("error", "la fecha no puede venir vacía");
-            return "redirect:/profesional/modificar/{id}";
+            return "redirect:/profesional/modificar";
         }
 
         try {
 
             profesionalServicio.modificarProfesional(id,/* archivo,*/ nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, matricula);
             modelo.put("exito", "Profesional modificado con exito");
+            
+            Profesional profesionalActualizado = profesionalServicio.getOne(id);
+            session.setAttribute("profesionalActualizado", profesionalActualizado);
+
 
         } catch (MiException ex) {
 
             modelo.put("error", ex.getMessage());
-            return "redirect:/profesional/modificar/{id}";
+            return "redirect:/profesional/modificar";
 
         }
         return "redirect:../../listaProfesionales";
