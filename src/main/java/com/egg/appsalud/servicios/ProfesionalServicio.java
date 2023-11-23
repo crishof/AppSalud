@@ -96,7 +96,6 @@ public class ProfesionalServicio implements UserDetailsService {
             profesional.setNombre(nombre);
             profesional.setPassword(new BCryptPasswordEncoder().encode(password));
             profesional.setDNI(DNI);
-            profesional.setNombre(nombre);
             profesional.setApellido(apellido);
             profesional.setFechaDeNacimiento(fechaDeNacimiento);
             profesional.setEmail(email);
