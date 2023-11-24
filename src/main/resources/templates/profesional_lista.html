@@ -36,12 +36,15 @@
     <div class="col-md-12">
         <div class="container m-2">
             <table class="table table-hover">
-                <thead class="text-center">
+                <thead class="text-lg-start">
                 <tr>
                     <th scope="col">Especialidad</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">Nombre</th>
-                    <!--                    <th scope="col">Mat. N°</th>-->
+                    <th scope="col">Precio Consulta</th>
+                    <th scope="col">Valoracion</th>
+                    <th scope="col">Provincia</th>
+                    <th scope="col">Localidad</th>
                     <th scope="col">Solicitar Cita</th>
                 </tr>
                 </thead>
@@ -50,7 +53,11 @@
                     <td th:text="${profesional.especialidad}"></td>
                     <td th:text="${profesional.apellido}"></td>
                     <td th:text="${profesional.nombre}"></td>
-                    <!--                    <td th:text="${profesional.matricula}"></td>-->
+                    <td th:text="${profesional.precioConsulta}"></td>
+                    <td th:text="${profesional.valoracionProfesional}"></td>
+                    <td th:text="${profesional.provincias}"></td>
+                    <td th:text="${profesional.localidad}"></td>
+
                     <td class="text-center"><a th:href="@{/paciente/solicitar}"><i
                             class="fa fa-calendar-check" style="color: #1a5dd1"></i></a>
                     </td>
