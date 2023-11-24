@@ -33,11 +33,7 @@ public class PacienteServicio {
     @Transactional(readOnly = true)
     public List<Paciente> listarPacientes() {
 
-        List<Paciente> pacientes = new ArrayList();
-
-        pacientes = pacienteRepositorio.findAll();
-
-        return pacientes;
+        return pacienteRepositorio.findAll();
     }
 
     @Transactional
