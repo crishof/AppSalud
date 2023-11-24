@@ -109,7 +109,7 @@ public class ProfesionalServicio implements UserDetailsService {
             profesional.setNombreUsuario(nombreUsuario);
             profesional.setMatricula(matricula);
             profesional.setEspecialidad(especialidad);
-            
+
             profesional.setProvincias(provincias);
             profesional.setLocalidad(localidad);
             profesional.setDireccion(direccion);
@@ -163,15 +163,15 @@ public class ProfesionalServicio implements UserDetailsService {
         if (especialidad == null) {
             throw new MiException("La especialidad no puede ser nula");
         }
-        
-         if (provincias == null) {
+
+        if (provincias == null) {
             throw new MiException("La provincia no puede ser nula");
         }
-         
+
         if (localidad == null) {
             throw new MiException("La Localidad no puede ser nula");
         }
-        
+
         if (direccion == null) {
             throw new MiException("La especialidad no puede ser nula");
         }

@@ -18,7 +18,8 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <!-- INGRESO PACIENTE -->
-                <li sec:authorize="hasAnyRole('USER','ADMIN','PACIENTE')" class="nav-item dropdown" th:if="${session.usuariosession != null}">
+                <li sec:authorize="hasAnyRole('USER','PACIENTE')" class="nav-item dropdown"
+                    th:if="${session.usuariosession != null}">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         Mi cuenta
@@ -42,7 +43,7 @@
 
                 <!-- INGRESO PROFESIONALES -->
 
-                <li sec:authorize="hasAnyRole('PROFESIONAL','ADMIN')" class="nav-item dropdown"
+                <li sec:authorize="hasRole('PROFESIONAL')" class="nav-item dropdown"
                     th:if="${session.usuariosession != null}">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
@@ -52,6 +53,29 @@
                         <li><a class="dropdown-item" th:href="@{/profesional/citasProfesional}">Citas</a></li>
                         <li><a class="dropdown-item" th:href="@{/profesional/listaPacientes}">Pacientes</a></li>
                         <li><a class="dropdown-item" th:href="@{/profesional/editar}">Mis datos</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="nav-item">
+                            <form method="POST" th:action="@{/portal/logout}">
+                                <a href="#" onclick="this.parentNode.submit();" class="nav-link">
+                                    Cerrar Sesión
+                                </a>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- INGRESO ADMINISTRADOR -->
+
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item dropdown"
+                    th:if="${session.usuariosession != null}">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Ingreso Admin
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/panelAdmin/dashboard}">Dashboard</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>

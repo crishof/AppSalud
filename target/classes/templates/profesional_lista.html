@@ -14,16 +14,8 @@
 <p class="text-end m-4">Click en el botón para simular un registro <span>
                 <a th:href="@{/util/database}"><i class="fa fa-database"></i></a></span></p>
 
-<div th:if="${exito} != null" class="card text-white bg-success m-3 ">
-    <h5 class="card-title">Exito!</h5>
-    <div class="card-body">
-        <p class="card-text" th:text="${exito}"></p>
-    </div>
-</div>
-
 <div class="container mt-4">
     <form class="d-inline" id="miFormulario" th:action="@{/listaProfesionales}">
-
         <div class="form-group mx-sm-3 m-2 ">
             <label for="filtro" class="me-2">Filtrar:</label>
             <select name="especialidad" id="filtro">
@@ -36,7 +28,6 @@
                 </option>
             </select>
         </div>
-
     </form>
 </div>
 
@@ -47,29 +38,21 @@
             <table class="table table-hover">
                 <thead class="text-center">
                 <tr>
-                    <th scope="col">Mat.N°</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
                     <th scope="col">Especialidad</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Nombre</th>
+<!--                    <th scope="col">Mat. N°</th>-->
                     <th scope="col">Solicitar Cita</th>
-                    <th sec:authorize="hasRole('ADMIN')" scope="col" colspan="2" >Admin</th>
                 </tr>
                 </thead>
                 <tbody th:each="profesional : ${profesional}">
                 <tr>
-                    <td th:text="${profesional.matricula}"></td>
-                    <td th:text="${profesional.nombre}"></td>
-                    <td th:text="${profesional.apellido}"></td>
                     <td th:text="${profesional.especialidad}"></td>
+                    <td th:text="${profesional.apellido}"></td>
+                    <td th:text="${profesional.nombre}"></td>
+<!--                    <td th:text="${profesional.matricula}"></td>-->
                     <td class="text-center"><a th:href="@{/paciente/solicitar}"><i
-                            class="fa fa-calendar-check" style="color: #1a5dd1"></i></a></td>
-                    <td sec:authorize="hasRole('ADMIN')">
-                        <a th:href="@{/profesional/modificar/__${profesional.id}__}"><i class="fa fa-user-pen" style="color: #226cec;"></i></a>
-                    </td>
-                    <td sec:authorize="hasRole('ADMIN')">
-                        <a th:href="@{/profesional/cambiarEstado/__${profesional.id}__}"><i class="fa-solid fa-eye" style="color: #226cec;"></i></a>
-                        <a th:href="@{/profesional/cambiarEstado/__${profesional.id}__}"><i class="fa-solid fa-eye-slash" style="color: #226cec;"></i></a>
-
+                            class="fa fa-calendar-check" style="color: #1a5dd1"></i></a>
                     </td>
                 </tr>
                 </tbody>
@@ -83,16 +66,6 @@
 </div>
 
 </body>
-
-<div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
-    <div class="card-body">
-        <div>
-            <h5 class="card-title" style="text-align:center;"> Error</h5>
-        </div>
-        <p class="card-text" th:text="${error}"></p>
-    </div>
-</div>
-
 
 <footer th:replace="layout/footer :: footer"></footer>
 <script
@@ -113,6 +86,4 @@
         });
     });
 </script>
-
-
 </html>
