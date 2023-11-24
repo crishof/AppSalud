@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/")
@@ -73,7 +74,8 @@ public class InicioController {
     public String registrarProfesional(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre,
                                                                                @RequestParam String apellido, @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
                                                                                @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Long matricula,
-            /*List<ObraSocial> obrasocial,*/ @RequestParam Especialidad especialidad, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion, ModelMap modelo) throws MiException, ParseException {
+            /*List<ObraSocial> obrasocial,*/ @RequestParam Especialidad especialidad, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion, @RequestParam Set<String> horariosAtencion,
+            @RequestParam int precioConsulta, ModelMap modelo) throws MiException, ParseException {
 
         System.out.println("EJECUTANDO POST REGISTRAR");
         Date fechaDeNacimiento;
@@ -88,7 +90,7 @@ public class InicioController {
         }
 
         try {
-            profesionalServicio.crearProfesional(nombreUsuario, password, password2, nombre, apellido, email, fechaDeNacimiento, dni, especialidad, provincias, localidad, direccion, matricula/*, obrasocial*/);
+            profesionalServicio.crearProfesional(nombreUsuario, password, password2, nombre, apellido, email, fechaDeNacimiento, dni, especialidad, provincias, localidad, direccion, matricula, horariosAtencion, precioConsulta/*, obrasocial*/);
             modelo.put("exito", "el profesional fue creado con exito");
             return "index";
         } catch (MiException e) {

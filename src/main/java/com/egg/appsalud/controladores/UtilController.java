@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/util")
@@ -70,8 +72,19 @@ public class UtilController {
         
         String direccion = direcciones[random.nextInt(direcciones.length)];
         System.out.println("direccion = " + direccion);
+        
+        Set<String> horariosAtencion = new HashSet<>();
 
-        profesionalServicio.crearProfesional(nombreUsuario, password, password, nombre, apellido, email, fechaNacimiento, dni, especialidad, provincias, localidad, direccion, matricula);
+        horariosAtencion.add("Lunes 9:00 AM - 5:00 PM");
+        horariosAtencion.add("Martes 9:00 AM - 5:00 PM");
+        horariosAtencion.add("Miércoles 9:00 AM - 5:00 PM");
+        
+        System.out.println("Horarios de Atencion = " + horariosAtencion);
+        
+        int precioConsulta = 7000;
+        System.out.println("Precio de Consulta = " + precioConsulta);
+
+        profesionalServicio.crearProfesional(nombreUsuario, password, password, nombre, apellido, email, fechaNacimiento, dni, especialidad, provincias, localidad, direccion, matricula, horariosAtencion, precioConsulta);
 
         return "redirect:../listaProfesionales";
     }

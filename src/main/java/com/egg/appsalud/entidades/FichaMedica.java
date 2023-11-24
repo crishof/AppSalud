@@ -1,5 +1,6 @@
 package com.egg.appsalud.entidades;
 
+import com.egg.appsalud.Exception.MiException;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,8 +35,18 @@ public class FichaMedica {
 
     @OneToMany
     private List<Consulta> consultas;
+    
+    private String observaciones;
 
     @ManyToOne
     @JoinColumn
     private Profesional creador;
+    
+        public void agregarObservaciones(Profesional profesional, String observaciones) throws MiException {
+        if (profesionales.contains(profesional)) {
+            this.observaciones = observaciones;
+        } else {
+            throw new MiException("Acceso NO Autorizado");
+        }
+    }
 }
