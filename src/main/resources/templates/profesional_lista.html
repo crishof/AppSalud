@@ -39,6 +39,7 @@
                 <thead class="text-lg-start">
                 <tr>
                     <th scope="col">Especialidad</th>
+                    <th scope="col">Foto Perfil</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Precio Consulta</th>
@@ -51,6 +52,15 @@
                 <tbody th:each="profesional : ${profesional}">
                 <tr>
                     <td th:text="${profesional.especialidad}"></td>
+                    <td>
+                        <img th:if="${profesional.imagen != null}"
+                                style="height: 100px; border-radius: 10px"
+                                class="logo"
+                                th:src="@{/imagen/perfil/__${profesional.id}__}"
+                        />
+                        <img th:if="${profesional.imagen == null}" style="max-height: 100px; border-radius: 10px"
+                             class="logo" th:src="@{/images/noImage.webp}">
+                    </td>
                     <td th:text="${profesional.apellido}"></td>
                     <td th:text="${profesional.nombre}"></td>
                     <td th:text="${profesional.precioConsulta}"></td>
