@@ -18,7 +18,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <!-- INGRESO PACIENTE -->
-                <li sec:authorize="hasAnyRole('USER','ADMIN')" class="nav-item dropdown" th:if="${session.usuariosession != null}">
+                <li sec:authorize="hasAnyRole('USER','ADMIN','PACIENTE')" class="nav-item dropdown" th:if="${session.usuariosession != null}">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         Mi cuenta

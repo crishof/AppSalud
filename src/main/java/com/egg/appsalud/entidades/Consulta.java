@@ -1,7 +1,10 @@
 package com.egg.appsalud.entidades;
 
+import com.egg.appsalud.Enumeracion.Provincias;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -33,8 +36,11 @@ public class Consulta {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaDeConsulta;
 
-    @ManyToOne
-    private Establecimiento establecimiento;
+    @Enumerated(EnumType.STRING)
+    private Provincias provincias;
+    
+    private String localidad;
+    private String direccion;
 
     private int precioConsulta;
 

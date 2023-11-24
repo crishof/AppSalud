@@ -1,8 +1,8 @@
 package com.egg.appsalud.controladores;
 
+import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Consulta;
-import com.egg.appsalud.entidades.Establecimiento;
 import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
@@ -39,9 +39,9 @@ public class ConsultaControlador {
 
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN', 'ROLE_PACIENTE')")
     @PostMapping("/crear")
-    public String crearConsulta(@RequestParam Paciente paciente, @RequestParam Profesional profesional, @RequestParam Establecimiento establecimiento, @RequestParam int precioConsulta, ModelMap modelo) throws MiException {
+    public String crearConsulta(@RequestParam Paciente paciente, @RequestParam Profesional profesional, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion, @RequestParam int precioConsulta, ModelMap modelo) throws MiException {
         try {
-            cs.crearConsulta(paciente, profesional, establecimiento, precioConsulta);
+            cs.crearConsulta(paciente, profesional, provincias, localidad, direccion, precioConsulta);
             modelo.put("exito", "La consulta fue creada con exito");
             return "index.html";
         } catch (MiException e) {
@@ -69,11 +69,11 @@ public class ConsultaControlador {
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificarConsulta(@PathVariable String id, @RequestParam Paciente paciente, @RequestParam Profesional profesional,
-                                    @RequestParam("fechaDeConsulta") String fechaDeConsultaStr, @RequestParam Establecimiento establecimiento,
+                                    @RequestParam("fechaDeConsulta") String fechaDeConsultaStr, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion,
                                     @RequestParam int precioConsulta, @RequestParam int valoracion, ModelMap modelo) throws MiException {
 
         try {
-            cs.modificarConsulta(id, paciente, profesional, establecimiento, precioConsulta);
+            cs.modificarConsulta(id, paciente, profesional, provincias, localidad, direccion, precioConsulta);
             modelo.put("exito", "Consulta modificada con exito");
         } catch (MiException e) {
             modelo.put("error", e.getMessage());

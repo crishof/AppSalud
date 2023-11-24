@@ -52,7 +52,7 @@
                     <th scope="col">Apellido</th>
                     <th scope="col">Especialidad</th>
                     <th scope="col">Solicitar Cita</th>
-                    <th sec:authorize="hasRole('ADMIN')" scope="col">Admin</th>
+                    <th sec:authorize="hasRole('ADMIN')" scope="col" colspan="2" >Admin</th>
                 </tr>
                 </thead>
                 <tbody th:each="profesional : ${profesional}">
@@ -64,7 +64,12 @@
                     <td class="text-center"><a th:href="@{/paciente/solicitar}"><i
                             class="fa fa-calendar-check" style="color: #1a5dd1"></i></a></td>
                     <td sec:authorize="hasRole('ADMIN')">
-                        <a th:href="@{/profesional/modificar/__${profesional.id}__}">Editar</a>
+                        <a th:href="@{/profesional/modificar/__${profesional.id}__}"><i class="fa fa-user-pen" style="color: #226cec;"></i></a>
+                    </td>
+                    <td sec:authorize="hasRole('ADMIN')">
+                        <a th:href="@{/profesional/cambiarEstado/__${profesional.id}__}"><i class="fa-solid fa-eye" style="color: #226cec;"></i></a>
+                        <a th:href="@{/profesional/cambiarEstado/__${profesional.id}__}"><i class="fa-solid fa-eye-slash" style="color: #226cec;"></i></a>
+
                     </td>
                 </tr>
                 </tbody>
