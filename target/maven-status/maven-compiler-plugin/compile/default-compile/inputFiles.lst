@@ -6,6 +6,7 @@ C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud
 C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Administrador.java
 C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Paciente.java
 C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\ImagenRepositorio.java
+C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\Enumeracion\Provincias.java
 C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\Enumeracion\Rol.java
 C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Imagen.java
 C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\SeguridadWeb.java
@@ -14,7 +15,6 @@ C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud
 C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\PacienteServicio.java
 C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\ProfesionalServicio.java
 C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\PacienteRepositorio.java
-C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Establecimiento.java
 C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Consulta.java
 C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\Exception\MiException.java
 C:\Users\Asus\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\FichaMedica.java
