@@ -13,12 +13,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
-<<<<<<< HEAD
-import java.util.Set;
-=======
-import java.util.regex.Pattern;
 
->>>>>>> fa95dd06047d1fc0198d98f7e972b1334a697ae5
+import java.util.Set;
 
 @Controller
 @RequestMapping("/util")

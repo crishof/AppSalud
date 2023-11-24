@@ -66,6 +66,8 @@ public class InicioController {
     public String registroProfesional(ModelMap modelo) {
 
         Especialidad[] especialidades = Especialidad.values();
+        Provincias[] provincias = Provincias.values();
+        modelo.addAttribute("provincias",provincias);
         modelo.addAttribute("especialidades", especialidades);
         return "profesional_registro";
     }
