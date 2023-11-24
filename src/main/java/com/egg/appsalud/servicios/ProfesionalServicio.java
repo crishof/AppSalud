@@ -54,7 +54,7 @@ public class ProfesionalServicio implements UserDetailsService {
 
 
     @Transactional
-    public void crearProfesional(String nombreUsuario, String password, String password2, String nombre, String apellido,
+    public void crearProfesional(MultipartFile archivo, String nombreUsuario, String password, String password2, String nombre, String apellido,
                                  String email, Date fechaNacimiento, Long DNI, Especialidad especialidad, Provincias provincias, String localidad, String direccion,
                                  Long matricula, Set<String> horariosAtencion, int precioConsulta/*, List<ObraSocial> obraSocial*/) throws MiException {
 
@@ -69,18 +69,19 @@ public class ProfesionalServicio implements UserDetailsService {
 
         profesional.setRol(Rol.PROFESIONAL);
 
+        Imagen imagen = imagenServicio.guardar(archivo);
+
         profesional.setNombre(nombre);
         profesional.setApellido(apellido);
         profesional.setEmail(email);
         profesional.setFechaDeNacimiento(fechaNacimiento);
         profesional.setActivo(true);
         profesional.setDNI(DNI);
-        //profesional.setImagen(usuario.getImagen());
         profesional.setEspecialidad(especialidad);
         profesional.setProvincias(provincias);
         profesional.setLocalidad(localidad);
         profesional.setDireccion(direccion);
-
+        profesional.setImagen(imagen);
         profesional.setMatricula(matricula);
         profesional.setHorariosAtencion(horariosAtencion);
         profesional.setPrecioConsulta(precioConsulta);

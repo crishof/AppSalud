@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -73,11 +74,11 @@ public class InicioController {
     }
 
     @PostMapping("/registrarProfesional")
-    public String registrarProfesional(/*@RequestParam MultipartFile archivo,*/@RequestParam String nombreUsuario, @RequestParam String nombre,
-                                                                               @RequestParam String apellido, @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
-                                                                               @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Long matricula,
+    public String registrarProfesional(MultipartFile archivo, @RequestParam String nombreUsuario, @RequestParam String nombre,
+                                       @RequestParam String apellido, @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
+                                       @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Long matricula,
             /*List<ObraSocial> obrasocial,*/ @RequestParam Especialidad especialidad, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion, @RequestParam Set<String> horariosAtencion,
-            @RequestParam int precioConsulta, ModelMap modelo) throws MiException, ParseException {
+                                       @RequestParam int precioConsulta, ModelMap modelo) throws MiException, ParseException {
 
         System.out.println("EJECUTANDO POST REGISTRAR");
         Date fechaDeNacimiento;
@@ -92,7 +93,8 @@ public class InicioController {
         }
 
         try {
-            profesionalServicio.crearProfesional(nombreUsuario, password, password2, nombre, apellido, email, fechaDeNacimiento, dni, especialidad, provincias, localidad, direccion, matricula, horariosAtencion, precioConsulta/*, obrasocial*/);
+            profesionalServicio.crearProfesional( archivo, nombreUsuario, password, password2, nombre, apellido, email,
+                    fechaDeNacimiento, dni, especialidad, provincias, localidad, direccion, matricula, horariosAtencion, precioConsulta/*, obrasocial*/);
             modelo.put("exito", "el profesional fue creado con exito");
             return "index";
         } catch (MiException e) {

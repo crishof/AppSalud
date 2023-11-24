@@ -112,13 +112,18 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label for="especialidad">Especialidad médica:</label><br>
+                    <label for="especialidad">Especialidad médica:</label>
                     <select name="especialidad" id="especialidad" required>
                         <option th:each="especialidad : ${especialidades}"
                                 th:value="${especialidad}"
                                 th:text="${especialidad}">
                         </option>
                     </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="imagen">Foto de Perfil: </label>
+                    <input type="file" id="imagen" name="archivo" class="form-control">
                 </div>
 
 <!--                <div class="col-md-6 form-check">-->
