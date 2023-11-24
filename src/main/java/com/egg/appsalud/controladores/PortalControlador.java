@@ -75,7 +75,6 @@ public class PortalControlador {
 
             modelo.put("error", ex.getMessage());
             return null;
-
         }
         return null;
     }

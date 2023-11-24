@@ -113,10 +113,11 @@ public class UsuarioServicio implements UserDetailsService {
         if (palabra != null) {
             return ur.buscarUsuarioPorNombre(palabra);
         }
-        List<Usuario> listaUsuarios = ur.findAll();
+        return ur.findAll();
+    }
 
-        return listaUsuarios;
-
+    public List<Usuario> listarTodos(){
+        return ur.findAll();
     }
 
     public Usuario buscarPorID(String id) {

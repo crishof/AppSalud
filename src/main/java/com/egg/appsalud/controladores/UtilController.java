@@ -13,7 +13,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
+<<<<<<< HEAD
 import java.util.Set;
+=======
+import java.util.regex.Pattern;
+
+>>>>>>> fa95dd06047d1fc0198d98f7e972b1334a697ae5
 
 @Controller
 @RequestMapping("/util")
@@ -41,7 +46,13 @@ public class UtilController {
         System.out.println("apellido = " + apellido);
 
         String nombreUsuario = (nombre + apellido.charAt(0)).toLowerCase();
-        System.out.println("nombreUsuario = " + nombreUsuario);
+
+        nombreUsuario = nombreUsuario.replace("á","a");
+        nombreUsuario = nombreUsuario.replace("ú","u");
+        nombreUsuario = nombreUsuario.replace("é","e");
+        nombreUsuario = nombreUsuario.replace("í","i");
+        nombreUsuario = nombreUsuario.replace("ó","o");
+        nombreUsuario = nombreUsuario.replace("ñ","n");
 
         Long dni = random.nextLong(5000000, 50000000);
         System.out.println("dni = " + dni);
