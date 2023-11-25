@@ -43,6 +43,7 @@ public class Consulta {
     private String direccion;
 
     private int precioConsulta;
+    
+    private int puntuacion;
 
-    private int valoracion;
 }

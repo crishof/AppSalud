@@ -11,10 +11,76 @@
 <!--<header th:replace="layout/header :: header"></header>-->
 <nav th:replace="layout/navbar :: navbar"></nav>
 
+<p class="text-end m-4">Click en el botón para simular un registro <span>
+                <a th:href="@{/util/database}"><i class="fa fa-database"></i></a></span></p>
+
+<!--<div class="container mt-4">-->
+<!--    <form class="d-inline" id="miFormulario" th:action="@{/listaProfesionales}">-->
+<!--        <div class="form-group mx-sm-3 m-2 ">-->
+<!--            <label for="filtro" class="me-2">Filtrar:</label>-->
+<!--            <select name="especialidad" id="filtro">-->
+<!--                <option th:if="${valorSeleccionado != null and valorSeleccionado != ''}" value=""-->
+<!--                        th:selected="${valorSeleccionado}" th:text="${valorSeleccionado}"></option>-->
+<!--                <option value="">Todos</option>-->
+<!--                <option th:each="especialidad : ${especialidades}"-->
+<!--                        th:value="${especialidad}"-->
+<!--                        th:text="${especialidad}">-->
+<!--                </option>-->
+<!--            </select>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="container m-2">
+            <table class="table table-hover">
+                <thead class="text-lg-start">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col"> Editar</th>
+                    <th scope="col">Activo</th>
+
+<!--                    <th scope="col">Solicitar Cita</th>-->
+<!--                    <th sec:authorize="hasRole('ADMIN')" scope="col" colspan="2">Admin</th>-->
+                </tr>
+                </thead>
+
+                <tbody th:each="usuarios : ${usuarios}">
+                <tr>
+                    <td th:text="${usuarios.id}"></td>
+                    <td th:text="${usuarios.rol}"></td>
+                    <td th:text="${usuarios.nombre}"></td>
+                    <td th:text="${usuarios.apellido}"></td>
 
 
-<a th:href="@{/panelAdmin/usuarios}" class="nav-link">Ingreso Administrador</a>
+                    <td>
+                        <a th:href="@{/profesional/modificar/__${usuarios.id}__}"><i class="fa fa-user-pen"
+                                                                                        style="color: #226cec;"></i></a>
+                    </td>
+                    <td>
+                        <a th:if="${usuarios.activo}" ><i class="fa-solid fa-eye"
+                                                                                            style="color: #226cec;"></i></a>
+                        <a th:if="${!usuarios.activo}"><i
+                                class="fa-solid fa-eye-slash" style="color: #226cec;"></i></a>
 
+<!--                        th:href="@{/usuario/cambiarEstado/__${profesional.id}__}-->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="text-center">
+                <a class="btn btn-outline-warning text-light banner-btn" href="/">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
 
 <footer th:replace="layout/footer :: footer"></footer>
 <script
@@ -22,5 +88,17 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"
 ></script>
-</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+
+        let select = document.getElementById("filtro");
+
+
+        select.addEventListener("change", function () {
+
+            document.getElementById("miFormulario").submit();
+        });
+    });
+</script>
 </html>

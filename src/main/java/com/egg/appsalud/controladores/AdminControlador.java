@@ -2,9 +2,11 @@ package com.egg.appsalud.controladores;
 
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
+import com.egg.appsalud.servicios.PacienteServicio;
 import com.egg.appsalud.servicios.UsuarioServicio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +25,20 @@ public class AdminControlador {
     private UsuarioServicio us;
 
     @Autowired
+    private PacienteServicio pacienteServicio;
+
+    @Autowired
     private ProfesionalServicio profesionalServicio;
 
-    @GetMapping("/admin")
+    @Autowired
+    private UsuarioServicio usuarioServicio;
+
+    @GetMapping("/dashboard")
     public String panelAdmin(ModelMap modelo) {
 
-        List<Profesional> profesional = profesionalServicio.listarProfesional("");
-        modelo.addAttribute("profesional", profesional);
+        var usuarios = usuarioServicio.listarTodos();
+
+        modelo.addAttribute("usuarios",usuarios);
 
         return "dashboard";
     }

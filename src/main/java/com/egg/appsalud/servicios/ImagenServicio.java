@@ -20,9 +20,11 @@ public class ImagenServicio {
     @Transactional
     public Imagen guardar(MultipartFile img) throws MiException {
 
+        System.out.println("EJECUTANDO GUARDAR");
         if (img != null) {
             try {
 
+                System.out.println("EJECUTANDO GUARDAR VALIDADO");
                 Imagen imagen = new Imagen();
                 imagen.setMime(img.getContentType());
                 imagen.setNombre(img.getName());
