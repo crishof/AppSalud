@@ -51,7 +51,7 @@
                 </thead>
                 <tbody th:each="profesional : ${profesional}">
                 <tr>
-                    <td th:text="${profesional.especialidad}"></td>
+                    <td th:text="${profesional.especialidad}" style="vertical-align:middle"></td>
                     <td>
                         <img th:if="${profesional.imagen != null}"
                                 style="height: 100px; border-radius: 10px"
@@ -61,15 +61,15 @@
                         <img th:if="${profesional.imagen == null}" style="max-height: 100px; border-radius: 10px"
                              class="logo" th:src="@{/images/noImage.webp}">
                     </td>
-                    <td th:text="${profesional.apellido}"></td>
-                    <td th:text="${profesional.nombre}"></td>
-                    <td th:text="${profesional.precioConsulta}"></td>
-                    <td th:text="${profesional.valoracionProfesional}"></td>
-                    <td th:text="${profesional.provincias}"></td>
-                    <td th:text="${profesional.localidad}"></td>
+                    <td th:text="${profesional.apellido}" style="vertical-align:middle"></td>
+                    <td th:text="${profesional.nombre}" style="vertical-align:middle"></td>
+                    <td th:text="${profesional.precioConsulta}" style="vertical-align:middle"></td>
+                    <td th:text="${profesional.valoracionProfesional}" style="vertical-align:middle"></td>
+                    <td th:text="${profesional.provincias}" style="vertical-align:middle"></td>
+                    <td th:text="${profesional.localidad}" style="vertical-align:middle"></td>
 
                     <td class="text-center"><a th:href="@{/paciente/solicitar}"><i
-                            class="fa fa-calendar-check" style="color: #1a5dd1"></i></a>
+                            class="fa fa-calendar-check fa-2x" style="color: #1a5dd1"></i></a>
                     </td>
                 </tr>
                 </tbody>
