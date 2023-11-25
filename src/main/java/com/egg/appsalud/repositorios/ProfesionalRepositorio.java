@@ -20,6 +20,8 @@ public interface ProfesionalRepositorio extends JpaRepository<Profesional, Strin
     @Query("SELECT p FROM Profesional p ORDER BY p.apellido ASC")
     List<Profesional> listarOrdenadoPorApellido();
 
+    @Query("SELECT p FROM Profesional p ORDER BY p.especialidad ASC")
+    List<Profesional> listarOrdenadoPorEspecialidad();
     @Query("SELECT p FROM Profesional p WHERE p.especialidad LIKE ?1% ORDER BY p.apellido ASC")
     List<Profesional> buscarProfesionalPorEspecialidad(String especialidad);
 }

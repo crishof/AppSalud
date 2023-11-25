@@ -242,7 +242,7 @@ public class ProfesionalServicio implements UserDetailsService {
             return profesionalRepositorio.buscarProfesionalPorEspecialidad(especialidad);
         }
 
-        return profesionalRepositorio.listarOrdenadoPorApellido();
+        return profesionalRepositorio.listarOrdenadoPorEspecialidad();
     }
 
     public void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI, String email) throws MiException {
