@@ -17,11 +17,11 @@
 <div class="container mt-4">
     <form class="d-inline" id="miFormulario" th:action="@{/listaProfesionales}">
         <div class="form-group mx-sm-3 m-2 ">
-            <label for="filtro" class="me-2">Filtrar:</label>
+            <label for="filtro" class="me-2">Especialidad:</label>
             <select name="especialidad" id="filtro">
                 <option th:if="${valorSeleccionado != null and valorSeleccionado != ''}" value=""
                         th:selected="${valorSeleccionado}" th:text="${valorSeleccionado}"></option>
-                <option value="">Todos</option>
+                <option value="">Ver todas</option>
                 <option th:each="especialidad : ${especialidades}"
                         th:value="${especialidad}"
                         th:text="${especialidad}">
