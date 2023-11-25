@@ -68,7 +68,7 @@
                     <td th:text="${profesional.provincias}" style="vertical-align:middle"></td>
                     <td th:text="${profesional.localidad}" style="vertical-align:middle"></td>
 
-                    <td class="text-center" style="vertical-align:middle"><a th:href="@{/paciente/solicitar}"><i
+                    <td class="text-center" style="vertical-align:middle"><a th:href="@{/paciente/solicitar/__${profesional.id}__}"><i
                             class="fa fa-calendar-check fa-2x" style="color: #1a5dd1"></i></a>
                     </td>
                 </tr>
