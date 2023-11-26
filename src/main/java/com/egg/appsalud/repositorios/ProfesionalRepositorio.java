@@ -34,7 +34,9 @@ public interface ProfesionalRepositorio extends JpaRepository<Profesional, Strin
            "WHERE (:especialidad IS NULL OR p.especialidad LIKE %:especialidad%) " +
            "ORDER BY CASE WHEN :columna = 'nombre' THEN p.nombre END, " +
                      "CASE WHEN :columna = 'apellido' THEN p.apellido END, " +
-                     "CASE WHEN :columna = 'especialidad' THEN p.especialidad END")
+                     "CASE WHEN :columna = 'especialidad' THEN p.especialidad END, " +
+                     "CASE WHEN :columna = 'PrecioConsulta' THEN p.PrecioConsulta END, " +
+                     "CASE WHEN :columna = 'valoracionProfesional' THEN p.valoracionProfesional END DESC")
     List<Profesional> findByEspecialidadAndSort(
             @Param("especialidad") String especialidad,
             @Param("columna") String columna,
