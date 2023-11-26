@@ -1,3 +1,4 @@
+package com.egg.appsalud.repositorios;
 
 import com.egg.appsalud.entidades.Profesional;
 
