@@ -12,6 +12,11 @@
     color:#005eff;
 }
 
+.star{
+    border:  1px #1a5dd1;
+
+}
+
 h1 a{
     color: #005eff !important;
 }

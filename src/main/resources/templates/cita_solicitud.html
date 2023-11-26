@@ -11,35 +11,68 @@
 <!--<header th:replace="layout/header :: header"></header>-->
 <nav th:replace="layout/navbar :: navbar"></nav>
 
-<h1>Solicitar cita con profesional</h1>
+<div class="container">
 
-<div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-        <div class="col-md-4">
-            <img th:if="${profesional.imagen != null}"
-                 style="height: 100px;width: 100px; border-radius: 10px; object-fit:cover"
-                 class="img-fluid rounded-start"
-                 th:src="@{/imagen/perfil/__${profesional.id}__}"/>
-            <img th:if="${profesional.imagen == null}" style="max-height: 100px; border-radius: 10px"
-                 class="img-fluid rounded-start" th:src="@{/images/noImage.webp}">
-            <h3>Valoracion: <span th:text="${profesional.valoracionProfesional}"></span></h3>
-        </div>
-        <div class="col-md-8">
-            <div class="card-header">
-                <h5 th:text="${profesional.nombre} +' '+ ${profesional.apellido}"></h5>
-                <p th:text="${profesional.especialidad}"></p>
+
+    <h1 class="text-primary m-3">Solicitud de cita</h1>
+    <div class="card m-3 shadow" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4 card-header text-center vertical-separator">
+                <img th:if="${profesional.imagen != null}"
+                     style="height: 100px;width: 100px; border-radius: 10px; object-fit:cover"
+                     class="img-fluid rounded-start"
+                     th:src="@{/imagen/perfil/__${profesional.id}__}"/>
+                <img th:if="${profesional.imagen == null}" style="max-height: 100px; border-radius: 10px"
+                     class="img-fluid rounded-start" th:src="@{/images/noImage.webp}">
+                <div>
+                <p class="mt-4">Valoracion: <span th:text="${profesional.valoracionProfesional}"></span></p>
+                    <i class="fa-solid fa-star star" style="color: #006cfa;"></i>
+                    <i class="fa-solid fa-star" style="color: #f6fa00;"></i>
+                    <i class="fa-solid fa-star" style="color: #f6fa00;"></i>
+                    <i class="fa-solid fa-star" style="color: #f6fa00;"></i>
+                    <i class="fa-solid fa-star" style="color: #f6fa00;"></i>
+                </div>
             </div>
-            <div class="card-body">
-                <h5 th:text="${profesional.provincias}" class="card-title"></h5>
-                <p th:text="${profesional.localidad}" class="card-text"></p>
-                <p th:text="${profesional.direccion}" class="card-text"></p>
-                <p class="card-text"> Activo desde <span th:text="${profesional.fechaDeAlta}"></span><small class="text-body-secondary"></small></p>
+            <div class="col-md-8">
+                <div class="card-header text-center">
+                    <h5 th:text="${profesional.nombre} +' '+ ${profesional.apellido}"></h5>
+                    <p th:text="${profesional.especialidad}"></p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"> Provincia: <span th:text="${profesional.provincias}"></span></h5>
+                    <p th:text="${profesional.localidad}" class="card-text"></p>
+                    <p th:text="${profesional.direccion}" class="card-text"></p>
+                    <p class="card-text"> Activo desde <span th:text="${profesional.fechaDeAlta}"></span><small
+                            class="text-body-secondary"></small></p>
+                </div>
             </div>
         </div>
     </div>
+
+
+    <div class="container mt-4">
+        <form class="d-inline" id="cita" th:action="@{/paciente/solicitar/__${id}__}" method="POST">
+            <input hidden th:value="${profesional.id}" name="idProfesional">
+<!--            <input hidden th:value="${session.usuariosession.id}" name="id">-->
+            <div class="form-group mx-sm-3 m-2 ">
+                <label for="horario" class="me-2">Horarios disponibles: </label>
+                <select name="horario" id="horario">
+                    <option value="">Seleccionar</option>
+                    <option th:each=" horario : ${profesional.horariosAtencion}"
+                            th:value="${horario}"
+                            th:text="${horario}">
+                    </option>
+                </select>
+            </div>
+<div class="text-center m-3">
+    <input class="btn btn-primary" type="submit" value="Reservar cita">
+    <a class="btn btn-secondary" th:href="@{/listaProfesionales}">Volver</a>
+</div>
+        </form>
+    </div>
+
 </div>
 
-<p th:text="${profesional.nombre}"></p>
 
 <footer th:replace="layout/footer :: footer"></footer>
 <script
