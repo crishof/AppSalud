@@ -1,9 +1,7 @@
-package com.egg.appsalud.repositorios;
 
 import com.egg.appsalud.entidades.Profesional;
 
 import java.util.List;
-import org.springframework.data.domain.Sort;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProfesionalRepositorio extends JpaRepository<Profesional, String> {
-
     @Query("SELECT p FROM Profesional p WHERE p.nombre= :nombre")
     Profesional buscarNombre(@Param("nombre") String nombre);
 
@@ -22,25 +19,8 @@ public interface ProfesionalRepositorio extends JpaRepository<Profesional, Strin
     @Query("SELECT p FROM Profesional p ORDER BY p.apellido ASC")
     List<Profesional> listarOrdenadoPorApellido();
 
-    @Query("SELECT p FROM Profesional p WHERE p.especialidad LIKE ?1%")
+    @Query("SELECT p FROM Profesional p ORDER BY p.especialidad ASC")
+    List<Profesional> listarOrdenadoPorEspecialidad();
+    @Query("SELECT p FROM Profesional p WHERE p.especialidad LIKE ?1% ORDER BY p.apellido ASC")
     List<Profesional> buscarProfesionalPorEspecialidad(String especialidad);
-
-    /*@Query("SELECT p FROM Profesional p ORDER BY "
-            + "CASE WHEN :columna = 'nombre' THEN p.nombre END ASC, "
-            + "CASE WHEN :columna = 'apellido' THEN p.apellido END ASC, "
-            + "CASE WHEN :columna = 'especialidad' THEN p.especialidad END ASC")
-    List<Profesional> listarProfesionalOrdenado(@Param("columna") String columna);*/
-    
-    //List<Profesional> findAll(Sort sort);
-    
-    @Query("SELECT p FROM Profesional p " +
-           "WHERE (:especialidad IS NULL OR p.especialidad LIKE %:especialidad%) " +
-           "ORDER BY CASE WHEN :columna = 'nombre' THEN p.nombre END, " +
-                     "CASE WHEN :columna = 'apellido' THEN p.apellido END, " +
-                     "CASE WHEN :columna = 'especialidad' THEN p.especialidad END")
-    List<Profesional> findByEspecialidadAndSort(
-            @Param("especialidad") String especialidad,
-            @Param("columna") String columna,
-            Sort sort
-    );
 }
