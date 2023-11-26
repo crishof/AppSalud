@@ -106,8 +106,9 @@ public class InicioController {
     }
 
     @GetMapping("/listaProfesionales")
-    public String listarProfesionales(@Param("especialidad") String especialidad, ModelMap modelo) {
-        List<Profesional> profesionales = profesionalServicio.listarProfesional(especialidad);
+    public String listarProfesionales(@Param("especialidad") String especialidad, 
+            @Param("columna") String columna, ModelMap modelo) {
+        List<Profesional> profesionales = profesionalServicio.listarProfesional(especialidad, columna);
         modelo.addAttribute("profesional", profesionales);
 
         Especialidad[] especialidades = Especialidad.values();
@@ -115,6 +116,8 @@ public class InicioController {
         modelo.addAttribute("valorSeleccionado", especialidad);
         return "profesional_lista";
     }
+    
+    
 
     @GetMapping("/terminos")
     public String terminos() {

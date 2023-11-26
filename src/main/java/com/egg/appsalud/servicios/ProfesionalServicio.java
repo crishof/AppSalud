@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -236,13 +237,19 @@ public class ProfesionalServicio implements UserDetailsService {
         return Usuario;
     }
 
-    public List<Profesional> listarProfesional(String especialidad) {
+    public List<Profesional> listarProfesional(String especialidad, String columna) {
 
-        if (especialidad != null) {
-            return profesionalRepositorio.buscarProfesionalPorEspecialidad(especialidad);
+        
+        Sort sort;
+        if (columna == null || columna.isEmpty()) {
+            sort = Sort.by("apellido"); 
+        } else {
+            sort = Sort.by(columna);
         }
 
-        return profesionalRepositorio.listarOrdenadoPorEspecialidad();
+       
+        return profesionalRepositorio.findByEspecialidadAndSort(especialidad, columna, sort);
+
     }
 
     public void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI, String email) throws MiException {

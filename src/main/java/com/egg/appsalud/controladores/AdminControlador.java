@@ -49,8 +49,8 @@ public class AdminControlador {
         List<Usuario> usuarios = us.listarUsuario(palabra);
         modelo.addAttribute("usuarios", usuarios);
 
-        List<Profesional> profesionales = profesionalServicio.listarProfesional(palabra);
-        modelo2.addAttribute("profesional", profesionales);
+        /*List<Profesional> profesionales = profesionalServicio.listarProfesional(palabra);
+        modelo2.addAttribute("profesional", profesionales);*/
 
         modelo.addAttribute("palabra", palabra);
 
