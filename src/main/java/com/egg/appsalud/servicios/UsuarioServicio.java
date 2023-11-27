@@ -39,15 +39,15 @@ public class UsuarioServicio implements UserDetailsService {
 
 
     @Transactional
-    public void crearUsuario(/*MultipartFile archivo, */String nombreUsuario, String nombre, String apellido,
-                                                        Long DNI, Date fechaDeNacimiento, String email, String password, String password2) throws MiException {
+    public void crearUsuario(MultipartFile archivo, String nombreUsuario, String nombre, String apellido,
+                             Long DNI, Date fechaDeNacimiento, String email, String password, String password2) throws MiException {
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
 
+        System.out.println("EJECUTANDO  servicio crearUsuario REGISTRAR");
         Usuario usuario = new Usuario();
 
         usuario.setNombreUsuario(nombreUsuario);
-        usuario.setNombre(nombre);
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
         usuario.setDNI(DNI);
         usuario.setNombre(nombre);
@@ -58,10 +58,10 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setRol(Rol.USER);
         usuario.setActivo(true);
 
-        /*Imagen imagen = imagenServicio.guardar(archivo);
+        Imagen imagen = imagenServicio.guardar(archivo);
 //        compararNombre(us,nombreUsuario);
 
-        usuario.setImagen(imagen);*/
+        usuario.setImagen(imagen);
 
         ur.save(usuario);
 
@@ -116,7 +116,7 @@ public class UsuarioServicio implements UserDetailsService {
         return ur.findAll();
     }
 
-    public List<Usuario> listarTodos(){
+    public List<Usuario> listarTodos() {
         return ur.findAll();
     }
 

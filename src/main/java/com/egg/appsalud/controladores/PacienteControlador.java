@@ -36,6 +36,7 @@ public class PacienteControlador {
         model.addAttribute("profesional",profesionalServicio.getOne(idProfesional));
 
 
+
         return "redirect:../citas";
     }
 

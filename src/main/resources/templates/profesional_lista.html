@@ -54,9 +54,9 @@
                     <td th:text="${profesional.especialidad}" style="vertical-align:middle"></td>
                     <td>
                         <img th:if="${profesional.imagen != null}"
-                                style="height: 100px;width: 100px; border-radius: 10px; object-fit:cover"
-                                class="logo"
-                                th:src="@{/imagen/perfil/__${profesional.id}__}"
+                             style="height: 100px;width: 100px; border-radius: 10px; object-fit:cover"
+                             class="logo"
+                             th:src="@{/imagen/perfil/__${profesional.id}__}"
                         />
                         <img th:if="${profesional.imagen == null}" style="max-height: 100px; border-radius: 10px"
                              class="logo" th:src="@{/images/noImage.webp}">
@@ -68,7 +68,8 @@
                     <td th:text="${profesional.provincias}" style="vertical-align:middle"></td>
                     <td th:text="${profesional.localidad}" style="vertical-align:middle"></td>
 
-                    <td class="text-center" style="vertical-align:middle"><a th:href="@{/paciente/solicitar/__${profesional.id}__}"><i
+                    <td class="text-center" style="vertical-align:middle"><a
+                            th:href="@{/paciente/solicitar/__${profesional.id}__}"><i
                             class="fa fa-calendar-check fa-2x" style="color: #1a5dd1"></i></a>
                     </td>
                 </tr>

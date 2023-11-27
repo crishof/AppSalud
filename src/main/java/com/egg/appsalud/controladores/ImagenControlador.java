@@ -1,7 +1,8 @@
 package com.egg.appsalud.controladores;
 
-import com.egg.appsalud.entidades.Profesional;
+import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.servicios.ProfesionalServicio;
+import com.egg.appsalud.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,11 +20,14 @@ public class ImagenControlador {
     @Autowired
     ProfesionalServicio profesionalServicio;
 
+    @Autowired
+    UsuarioServicio usuarioServicio;
+
     @GetMapping("/perfil/{id}")
     public ResponseEntity<byte[]> imagenUsuario(@PathVariable String id) {
-        Profesional profesional = profesionalServicio.getOne(id);
 
-        byte[] imagen = profesional.getImagen().getContenido();
+        Usuario usuario = usuarioServicio.getOne(id);
+        byte[] imagen = usuario.getImagen().getContenido();
 
         HttpHeaders headers = new HttpHeaders();
 
