@@ -13,7 +13,7 @@
 
 
 <h1>
-    Modificar datos del Profesional
+    Modificar mis Datos
 </h1>
 
 
@@ -51,20 +51,16 @@
             </div>
             <div class="col-md-6">
                 <label>Fecha de Nacimiento</label><br>
-                <div>
-                    <!-- <input type="date" name="fechaDeNacimiento" class="form-control"
-                           placeholder="Ingrese su fecha de nacimiento"> -->
                     <input  type="date" class="form-control" name="fechaDeNacimiento" th:value="${profesional != null ? #dates.format(profesional.fechaDeNacimiento, 'yyyy-MM-dd') : #dates.format(session.usuariosession.fechaDeNacimiento, 'yyyy-MM-dd')}">
-                </div>
             </div>
             <div class="col-md-6">
-                <label>Correo electrónico</label><br>
+                <label>Correo electrónico</label>
                 <div>
                     <input  type="email" class="form-control" name="email" th:value="${profesional != null ? profesional.email : session.usuariosession.email}">
                 </div>
             </div>
             <div class="col-md-6">
-                <label>Nombre de usuario</label><br>
+                <label>Nombre de usuario</label>
                 <div>
                     <input  type="text" class="form-control" name="nombreUsuario" th:value="${profesional != null ? profesional.nombreUsuario : session.usuariosession.nombreUsuario}">
                 </div>
@@ -87,6 +83,62 @@
                 <input  type="text" id="matricula" class="form-control" name="matricula" th:value="${profesional != null ? profesional.matricula : session.usuariosession.matricula}">
             </div>
 
+
+            <div class="col-md-6">
+                <label for="provincias">Provincia: </label>
+                <select name="provincias" id="provincias" required>
+                    <option
+                            th:selected="${profesional != null ? profesional.provincias : session.usuariosession.provincias}"
+                            th:text="${profesional != null ? profesional.provincias : session.usuariosession.provincias}"
+                            th:value="${profesional != null ? profesional.provincias : session.usuariosession.provincias}">
+                    </option>
+                    <option
+                            th:each="provincia : ${provincias}"
+                            th:value="${provincia}"
+                            th:text="${provincia}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="localidad">Localidad: </label><br>
+                <input th:value="${profesional != null ? profesional.localidad : session.usuariosession.localidad}"
+                       type="text" id="localidad" name="localidad" class="form-control"
+                       placeholder="Ingrese localidad" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="direccion">Dirección: </label>
+                <input th:value="${profesional != null ? profesional.direccion : session.usuariosession.direccion}" type="text" id="direccion" name="direccion" class="form-control"
+                       placeholder="Ej: Calle Necochea 1232 3-A" required>
+            </div>
+
+
+            <div class="form-group mx-sm-3 m-2 ">
+                <label for="horario" class="me-2">Horarios disponibles: </label>
+                <select name="horario" id="horario">
+                    <option th:text="${session.usuariosession.horariosAtencion}">Seleccionar</option>
+                    <option th:each=" horario : ${session.usuariosession.horariosAtencion}"
+                            th:value="${horario}">
+                    </option>
+                </select>
+            </div>
+
+
+
+
+            <div class="col-md-6">
+                <label for="precioConsulta">Precio de la consulta: </label>
+                <input th:value="${profesional != null ? profesional.precioConsulta : session.usuariosession.precioConsulta}"type="number" id="precioConsulta" name="precioConsulta" class="form-control"
+                       placeholder="Ingrese el valor de la consulta" required>
+            </div>
+
+
+
+
+
+
+
             <div class="col-md-6">
 
                 <label for="especialidad">Especialidad médica:</label><br>
@@ -100,7 +152,6 @@
                             th:text="${especialidad}">
                     </option>
                 </select>
-
 
             </div>
 
@@ -140,6 +191,7 @@
                 </div>
 
             </div>
+
             <div>
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </div>

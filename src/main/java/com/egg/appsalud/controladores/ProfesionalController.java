@@ -39,6 +39,7 @@ public class ProfesionalController {
 
         Profesional profesionalActualizado = (Profesional) session.getAttribute("profesionalActualizado");
         session.removeAttribute("profesionalActualizado");
+        modelo.addAttribute("provincias",Provincias.values());
         modelo.addAttribute("profesional", profesionalActualizado);
 
         return "profesional_edit";
