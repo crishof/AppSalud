@@ -37,10 +37,8 @@ public class UtilController {
         Random random = new Random();
 
         String nombre = nombres[random.nextInt(nombres.length)];
-        System.out.println("nombre = " + nombre);
 
         String apellido = apellidos[random.nextInt(apellidos.length)];
-        System.out.println("apellido = " + apellido);
 
         String nombreUsuario = (nombre + apellido.charAt(0)).toLowerCase();
 
@@ -52,25 +50,20 @@ public class UtilController {
         nombreUsuario = nombreUsuario.replace("ñ", "n");
 
         Long dni = random.nextLong(5000000, 50000000);
-        System.out.println("dni = " + dni);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, random.nextInt(2024 - 2000) + 2000);
         calendar.set(Calendar.MONTH, random.nextInt(12));
         calendar.set(Calendar.DAY_OF_MONTH, random.nextInt(31));
         Date fechaNacimiento = calendar.getTime();
-        System.out.println("fechaNacimiento = " + fechaNacimiento);
 
         String email = nombre.toLowerCase() + apellido.substring(0, 1).toLowerCase() + "@mail.com";
-        System.out.println("email = " + email);
 
         String password = "123123";
-        System.out.println("password = " + password);
 
         Long matricula = random.nextLong(1000, 99999);
 
         Especialidad especialidad = Especialidad.values()[random.nextInt(Especialidad.values().length)];
-        System.out.println("especialidad = " + especialidad);
 
         Provincias provincias = Provincias.values()[random.nextInt(Provincias.values().length)];
         System.out.println("provincias = " + provincias);
@@ -87,10 +80,7 @@ public class UtilController {
         horariosAtencion.add("Martes 9:00 AM - 5:00 PM");
         horariosAtencion.add("Miércoles 9:00 AM - 5:00 PM");
 
-        System.out.println("Horarios de Atencion = " + horariosAtencion);
-
         int precioConsulta = 7000;
-        System.out.println("Precio de Consulta = " + precioConsulta);
 
         profesionalServicio.crearProfesional(null, nombreUsuario, password, password, nombre, apellido, email, fechaNacimiento, dni, especialidad, provincias, localidad, direccion, matricula, horariosAtencion, precioConsulta);
 
