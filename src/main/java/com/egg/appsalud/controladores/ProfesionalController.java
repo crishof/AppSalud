@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -46,7 +47,7 @@ public class ProfesionalController {
     public String editarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/ @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
                                     @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password,
                                     @RequestParam String password2, @RequestParam Especialidad especialidad, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion,
-            /*@RequestParam Set<String> horariosAtencion,*/ @RequestParam int precioConsulta, @RequestParam Long matricula, ModelMap modelo, HttpSession session) {
+            @RequestParam List<LocalTime> horariosAtencion, @RequestParam int precioConsulta, @RequestParam Long matricula, ModelMap modelo, HttpSession session) {
 
         Date fechaDeNacimiento;
         try {
@@ -60,7 +61,7 @@ public class ProfesionalController {
 
         try {
 
-            profesionalServicio.modificarProfesional(id,/* archivo,*/ nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, provincias, localidad, direccion, matricula, /*horariosAtencion,*/ precioConsulta);
+            profesionalServicio.modificarProfesional(id,/* archivo,*/ nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, provincias, localidad, direccion, matricula, horariosAtencion, precioConsulta);
             modelo.put("exito", "Profesional modificado con exito");
 
             Profesional profesionalActualizado = profesionalServicio.getOne(id);

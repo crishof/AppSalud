@@ -4,6 +4,8 @@ import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.servicios.ProfesionalServicio;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 
 import java.util.Set;
@@ -81,13 +84,16 @@ public class UtilController {
         String direccion = direcciones[random.nextInt(direcciones.length)];
         System.out.println("direccion = " + direccion);
 
-        Set<String> horariosAtencion = new HashSet<>();
+        List<LocalTime> horariosAtencion = new ArrayList<>();
 
-        horariosAtencion.add("Lunes 9:00 AM - 5:00 PM");
-        horariosAtencion.add("Martes 9:00 AM - 5:00 PM");
-        horariosAtencion.add("Miércoles 9:00 AM - 5:00 PM");
+        // Agrega los horarios según tus necesidades
+        horariosAtencion.add(LocalTime.of(9, 0));   // 09:00
+        horariosAtencion.add(LocalTime.of(12, 30)); // 12:30
+        horariosAtencion.add(LocalTime.of(15, 45)); // 15:45
+        horariosAtencion.add(LocalTime.of(18, 0));  // 18:00
 
         System.out.println("Horarios de Atencion = " + horariosAtencion);
+    
 
         int precioConsulta = 7000;
         System.out.println("Precio de Consulta = " + precioConsulta);

@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -77,7 +78,7 @@ public class InicioController {
     public String registrarProfesional(MultipartFile archivo, @RequestParam String nombreUsuario, @RequestParam String nombre,
                                        @RequestParam String apellido, @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
                                        @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Long matricula,
-            /*List<ObraSocial> obrasocial,*/ @RequestParam Especialidad especialidad, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion, @RequestParam Set<String> horariosAtencion,
+            /*List<ObraSocial> obrasocial,*/ @RequestParam Especialidad especialidad, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion, @RequestParam List<LocalTime> horariosAtencion,
                                        @RequestParam int precioConsulta, ModelMap modelo) throws MiException, ParseException {
 
         System.out.println("EJECUTANDO POST REGISTRAR");

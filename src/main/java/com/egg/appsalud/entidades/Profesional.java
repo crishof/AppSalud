@@ -6,6 +6,9 @@ import java.util.Date;
 
 import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Enumeracion.Provincias;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import java.util.List;
 import java.util.Set;
@@ -28,6 +31,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Data;
 import lombok.Getter;
@@ -70,7 +74,8 @@ public class Profesional extends Usuario {
     @ElementCollection
     @CollectionTable(name = "HORARIOS_ATENCION", joinColumns = @JoinColumn(name = "profesional_id"))
     @Column(name = "horario_atencion")
-    private Set<String> horariosAtencion;
+    private List<LocalTime> horariosAtencion;
+        //LOS ORARIOS DE ATENCION SE DARIAN DE LUNES A VIERNES EN UN HORARIO FIJO CON TURNOS DE 30 MIN//
 
     private int PrecioConsulta;
     
@@ -115,6 +120,45 @@ public class Profesional extends Usuario {
                 valoracionProfesional = 0;
             }
         }
+    }
+    
+    public void programarConsulta(Consulta consulta, LocalTime horario) {
+        if (horariosAtencion.contains(horario) && !horarioOcupado(horario)
+                && horarioValido(consulta.getDuracionConsulta(), horario)) {
+            consulta.setHoraInicio(horario);
+            consultas.add(consulta);
+        } else {
+            throw new IllegalArgumentException("El horario no está disponible, ya está ocupado o no es válido para la duración de la consulta");
+        }
+    }
+
+    private boolean horarioOcupado(LocalTime horario) {
+        for (Consulta consulta : consultas) {
+            if (consulta.getHoraInicio() != null && consulta.getHoraInicio().equals(horario)) {
+                return true; // Horario ocupado
+            }
+        }
+        return false; // Horario disponible
+    }
+
+    private boolean horarioValido(int duracionConsulta, LocalTime horario) {
+        LocalTime horaFinConsulta = horario.plusMinutes(duracionConsulta);
+
+        // Verificar si hay suficiente espacio para la duración de la consulta
+        if (horaFinConsulta.isAfter(LocalTime.of(24, 0))) {
+            return false; // La consulta no puede finalizar después de medianoche
+        }
+
+        // Verificar si el horario se superpone con otras consultas
+        for (Consulta consulta : consultas) {
+            if (consulta.getHoraInicio() != null) {
+                LocalTime horaFinConsultaExistente = consulta.getHoraInicio().plusMinutes(consulta.getDuracionConsulta());
+                if (horario.isBefore(horaFinConsultaExistente) && horaFinConsulta.isAfter(consulta.getHoraInicio())) {
+                    return false; // Hay superposición de horarios
+                }
+            }
+        }
+        return true; // Horario válido
     }
 
     
