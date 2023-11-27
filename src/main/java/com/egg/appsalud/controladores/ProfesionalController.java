@@ -27,7 +27,7 @@ public class ProfesionalController {
     @Autowired
     ProfesionalServicio profesionalServicio;
 
-//    MODIFICAR DATOS COMO PROFESIONAL
+    //    MODIFICAR DATOS COMO PROFESIONAL
     @GetMapping("/editar")
     public String editarProfesional(ModelMap modelo, HttpSession session) {
 
@@ -36,7 +36,7 @@ public class ProfesionalController {
 
         Profesional profesionalActualizado = (Profesional) session.getAttribute("profesionalActualizado");
         session.removeAttribute("profesionalActualizado");
-        modelo.addAttribute("provincias",Provincias.values());
+        modelo.addAttribute("provincias", Provincias.values());
         modelo.addAttribute("profesional", profesionalActualizado);
 
         return "profesional_edit";
@@ -46,7 +46,7 @@ public class ProfesionalController {
     public String editarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/ @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
                                     @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password,
                                     @RequestParam String password2, @RequestParam Especialidad especialidad, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion,
-                                    /*@RequestParam Set<String> horariosAtencion,*/ @RequestParam int precioConsulta, @RequestParam Long matricula, ModelMap modelo, HttpSession session) {
+            /*@RequestParam Set<String> horariosAtencion,*/ @RequestParam int precioConsulta, @RequestParam Long matricula, ModelMap modelo, HttpSession session) {
 
         Date fechaDeNacimiento;
         try {

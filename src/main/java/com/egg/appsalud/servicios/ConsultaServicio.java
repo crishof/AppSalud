@@ -7,7 +7,6 @@ import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -96,10 +95,7 @@ public class ConsultaServicio {
 
     public List<Consulta> listarConsultas() {
 
-        List<Consulta> consultas = new ArrayList();
-        consultas = consultaRepositorio.findAll();
-
-        return consultas;
+        return consultaRepositorio.findAll();
     }
 
     public Consulta getOne(String id) {

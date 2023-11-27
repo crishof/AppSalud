@@ -29,7 +29,7 @@ public class PacienteController {
 
         Paciente pacienteActualizado = (Paciente) session.getAttribute("pacienteActualizado");
         session.removeAttribute("pacienteActualizado");
-        modelo.addAttribute("paciente",pacienteActualizado);
+        modelo.addAttribute("paciente", pacienteActualizado);
 
         return "paciente_edit";
     }

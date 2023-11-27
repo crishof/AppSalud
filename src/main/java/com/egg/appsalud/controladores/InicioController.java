@@ -51,7 +51,6 @@ public class InicioController {
 
         try {
 
-            System.out.println("EJECUTANDO TRY POST REGISTRAR");
             usuarioServicio.crearUsuario(archivo, nombreUsuario, nombre, apellido, dni, fechaDeNacimiento, email, password, password2);
 
             modelo.put("exito", "el usuario fue creado con exito");

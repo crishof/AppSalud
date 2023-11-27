@@ -55,7 +55,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setFechaDeNacimiento(fechaDeNacimiento);
         usuario.setEmail(email);
         usuario.setFechaDeAlta(new Date());
-        usuario.setRol(Rol.USER);
+        usuario.setRol(Rol.PACIENTE);
         usuario.setActivo(true);
 
         Imagen imagen = imagenServicio.guardar(archivo);

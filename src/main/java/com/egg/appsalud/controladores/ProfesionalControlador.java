@@ -42,7 +42,7 @@ public class ProfesionalControlador {
         modelo.addAttribute("especialidades", especialidades);
         Profesional profesional = profesionalServicio.getOne(id);
         Provincias[] provincias = Provincias.values();
-        modelo.addAttribute("provincias",provincias);
+        modelo.addAttribute("provincias", provincias);
         modelo.addAttribute(profesional);
 
         return "profesional_modificar";

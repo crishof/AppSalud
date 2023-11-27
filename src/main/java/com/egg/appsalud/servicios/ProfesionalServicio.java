@@ -49,7 +49,7 @@ public class ProfesionalServicio implements UserDetailsService {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
-    
+
     @Autowired
     private ConsultaRepositorio consultaRepositorio;
 
@@ -122,7 +122,7 @@ public class ProfesionalServicio implements UserDetailsService {
             profesional.setProvincias(provincias);
             profesional.setLocalidad(localidad);
             profesional.setDireccion(direccion);
-            
+
 //            profesional.setHorariosAtencion(horariosAtencion);
             profesional.setPrecioConsulta(precioConsulta);
             
@@ -192,8 +192,8 @@ public class ProfesionalServicio implements UserDetailsService {
 //        if (horariosAtencion.isEmpty() || horariosAtencion == null){
 //            throw new MiException ("Los Horarios de Atencion no pueden estar vacios o nulo");
 //        }
-        if (precioConsulta == 0){
-            throw new MiException ("El precio de Consulta no pueden estar vacios o cero");
+        if (precioConsulta == 0) {
+            throw new MiException("El precio de Consulta no pueden estar vacios o cero");
         }
 
         if (password.isEmpty() || password == null || password.length() <= 5) {
@@ -206,6 +206,7 @@ public class ProfesionalServicio implements UserDetailsService {
 
 
     }
+
     @Transactional
     public void recibirPuntuacion(String idConsulta, int puntuacion) {
         Optional<Consulta> consultaOptional = consultaRepositorio.findById(idConsulta);
@@ -239,15 +240,15 @@ public class ProfesionalServicio implements UserDetailsService {
 
     public List<Profesional> listarProfesional(String especialidad, String columna) {
 
-        
+
         Sort sort;
         if (columna == null || columna.isEmpty()) {
-            sort = Sort.by("apellido"); 
+            sort = Sort.by("apellido");
         } else {
             sort = Sort.by(columna);
         }
 
-       
+
         return profesionalRepositorio.findByEspecialidadAndSort(especialidad, columna, sort);
 
     }

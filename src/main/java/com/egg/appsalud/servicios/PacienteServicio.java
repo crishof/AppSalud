@@ -40,7 +40,7 @@ public class PacienteServicio {
 
     @Transactional
     public void modificarPacientes(String id, String nombreUsuario, String nombre, String apellido,
-                                   Long DNI, Date fechaNacimiento,String email, String password, String password2) throws MiException {
+                                   Long DNI, Date fechaNacimiento, String email, String password, String password2) throws MiException {
 
         validar(nombre);
 

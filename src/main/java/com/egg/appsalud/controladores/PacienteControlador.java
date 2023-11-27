@@ -42,7 +42,7 @@ public class PacienteControlador {
     }
 
 //    MODIFICAR DATOS COMO ADMIN
-    @GetMapping("/modificar")
+    @GetMapping("/modificar/{id}")
     public String modificarPaciente() {
         return "usuarioModificar";
     }
