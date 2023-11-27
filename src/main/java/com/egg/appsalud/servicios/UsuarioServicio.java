@@ -85,7 +85,7 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setFechaDeNacimiento(fechaDeNacimiento);
             usuario.setEmail(email);
             usuario.setFechaDeAlta(new Date());
-            usuario.setRol(Rol.USER);
+            usuario.setRol(Rol.PACIENTE);
             usuario.setActivo(activo);
 
             String idImagen = null;
