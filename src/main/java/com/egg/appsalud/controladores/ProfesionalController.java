@@ -25,12 +25,9 @@ import java.util.Set;
 public class ProfesionalController {
 
     @Autowired
-    private ProfesionalRepositorio profesionalRepositorio;
-
-    @Autowired
     ProfesionalServicio profesionalServicio;
 
-
+//    MODIFICAR DATOS COMO PROFESIONAL
     @GetMapping("/editar")
     public String editarProfesional(ModelMap modelo, HttpSession session) {
 

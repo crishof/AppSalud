@@ -5,10 +5,12 @@ import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.repositorios.PacienteRepositorio;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +39,8 @@ public class PacienteServicio {
     }
 
     @Transactional
-    public void modificarPacientes(String nombre, String id) throws MiException {
+    public void modificarPacientes(String id, String nombreUsuario, String nombre, String apellido,
+                                   Long DNI, Date fechaNacimiento,String email, String password, String password2) throws MiException {
 
         validar(nombre);
 
@@ -47,6 +50,11 @@ public class PacienteServicio {
             Paciente paciente = respuesta.get();
 
             paciente.setNombre(nombre);
+            paciente.setApellido(apellido);
+            new BCryptPasswordEncoder().encode(password);
+            paciente.setEmail(email);
+            paciente.setFechaDeNacimiento(fechaNacimiento);
+            paciente.setNombreUsuario(nombreUsuario);
 
             pacienteRepositorio.save(paciente);
 

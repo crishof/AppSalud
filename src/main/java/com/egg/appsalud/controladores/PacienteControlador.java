@@ -23,9 +23,7 @@ public class PacienteControlador {
     public String solicitarCita(@PathVariable String id, ModelMap modelo) {
 
         var profesional = profesionalServicio.getOne(id);
-
         modelo.addAttribute("profesional",profesional);
-
         return "cita_solicitud";
     }
 
@@ -35,20 +33,7 @@ public class PacienteControlador {
         model.addAttribute("paciente",pacienteServicio.getOne(id));
         model.addAttribute("profesional",profesionalServicio.getOne(idProfesional));
 
-
-
         return "redirect:../citas";
-    }
-
-
-    @GetMapping("/editar")
-    public String editarPaciente(){
-        return "paciente_edit";
-    }
-
-    @GetMapping("/citas")
-    public String listarCitas() {
-        return "paciente_citas";
     }
 
     @GetMapping("/historia")
@@ -56,6 +41,7 @@ public class PacienteControlador {
         return "historiaClinica";
     }
 
+//    MODIFICAR DATOS COMO ADMIN
     @GetMapping("/modificar")
     public String modificarPaciente() {
         return "usuarioModificar";
