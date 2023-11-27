@@ -15,7 +15,6 @@ public class ErroresControlador implements ErrorController {
     public ModelAndView renderErrorPage(HttpServletRequest httpRequest) {
 
         ModelAndView errorPage = new ModelAndView("error");
-
         String errorMsg = "";
 
         int httpErrorCode = getErrorCode(httpRequest);
@@ -51,7 +50,6 @@ public class ErroresControlador implements ErrorController {
     private int getErrorCode(HttpServletRequest httpRequest) {
         return (Integer) httpRequest.getAttribute("javax.servlet.error.status_code");
     }
-
 
     public String getErrorPath() {
         return "/error.html";
