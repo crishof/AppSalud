@@ -64,7 +64,7 @@ public class ProfesionalControlador {
 
         try {
 
-            profesionalServicio.modificarProfesional(id,/* archivo,*/ nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, provincias, localidad, direccion, matricula, horariosAtencion, precioConsulta);
+            profesionalServicio.modificarProfesional(id,/* archivo,*/ nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, provincias, localidad, direccion, matricula, /*horariosAtencion,*/ precioConsulta);
             modelo.put("exito", "Profesional modificado con exito");
 
         } catch (MiException ex) {

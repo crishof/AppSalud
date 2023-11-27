@@ -59,7 +59,7 @@ public class ProfesionalServicio implements UserDetailsService {
                                  String email, Date fechaNacimiento, Long DNI, Especialidad especialidad, Provincias provincias, String localidad, String direccion,
                                  Long matricula, Set<String> horariosAtencion, int precioConsulta/*, List<ObraSocial> obraSocial*/) throws MiException {
 
-        validar(nombreUsuario, password, password2, nombre, apellido, fechaNacimiento, DNI, email, matricula, especialidad, provincias, localidad, direccion, horariosAtencion, precioConsulta);
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaNacimiento, DNI, email, matricula, especialidad, provincias, localidad, direccion, /*horariosAtencion,*/ precioConsulta);
 
         //Usuario usuario = buscarUsuarioPorID(id);
         Profesional profesional = new Profesional();
@@ -96,13 +96,13 @@ public class ProfesionalServicio implements UserDetailsService {
     public void modificarProfesional(String id, /*MultipartFile archivo, */ String nombreUsuario, String nombre, String apellido,
                                      Long DNI, Date fechaDeNacimiento, String email, String password, String password2,
                                      boolean activo, Especialidad especialidad, Provincias provincias, String localidad, String direccion,
-                                     Long matricula, Set<String> horariosAtencion, int precioConsulta) throws MiException {
+                                     Long matricula, /*Set<String> horariosAtencion, */int precioConsulta) throws MiException {
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
 
 
-        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email, matricula, especialidad, provincias, localidad, direccion, horariosAtencion, precioConsulta);
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email, matricula, especialidad, provincias, localidad, direccion, /*horariosAtencion,*/ precioConsulta);
 
         Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
         if (respuesta.isPresent()) {
@@ -123,7 +123,7 @@ public class ProfesionalServicio implements UserDetailsService {
             profesional.setLocalidad(localidad);
             profesional.setDireccion(direccion);
             
-            profesional.setHorariosAtencion(horariosAtencion);
+//            profesional.setHorariosAtencion(horariosAtencion);
             profesional.setPrecioConsulta(precioConsulta);
             
             /*String idImagen = null;
@@ -141,7 +141,7 @@ public class ProfesionalServicio implements UserDetailsService {
     }
 
     private void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI,
-                         String email, Long matricula, Especialidad especialidad, Provincias provincias, String localidad, String direccion, Set<String> horariosAtencion, int precioConsulta) throws MiException {
+                         String email, Long matricula, Especialidad especialidad, Provincias provincias, String localidad, String direccion, /*Set<String> horariosAtencion, */int precioConsulta) throws MiException {
 
 
         if (nombreUsuario.isEmpty() || nombreUsuario == null) {
@@ -189,9 +189,9 @@ public class ProfesionalServicio implements UserDetailsService {
         if (matricula == null) {
             throw new MiException("La matrícula no puede ser nula");
         }
-        if (horariosAtencion.isEmpty() || horariosAtencion == null){
-            throw new MiException ("Los Horarios de Atencion no pueden estar vacios o nulo");
-        }
+//        if (horariosAtencion.isEmpty() || horariosAtencion == null){
+//            throw new MiException ("Los Horarios de Atencion no pueden estar vacios o nulo");
+//        }
         if (precioConsulta == 0){
             throw new MiException ("El precio de Consulta no pueden estar vacios o cero");
         }
