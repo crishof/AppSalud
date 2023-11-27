@@ -41,6 +41,8 @@ public class ProfesionalControlador {
         Especialidad[] especialidades = Especialidad.values();
         modelo.addAttribute("especialidades", especialidades);
         Profesional profesional = profesionalServicio.getOne(id);
+        Provincias[] provincias = Provincias.values();
+        modelo.addAttribute("provincias",provincias);
         modelo.addAttribute(profesional);
 
         return "profesional_modificar";
@@ -49,7 +51,7 @@ public class ProfesionalControlador {
     @PostMapping("/modificar/{id}")
     public String modificarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/ @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
                                        @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2,
-                                       @RequestParam Especialidad especialidad, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion, @RequestParam Set<String> horariosAtencion, @RequestParam int precioConsulta, @RequestParam Long matricula, ModelMap modelo) {
+                                       @RequestParam Especialidad especialidad, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion, /*@RequestParam Set<String> horariosAtencion, */@RequestParam int precioConsulta, @RequestParam Long matricula, ModelMap modelo) {
 
         Date fechaDeNacimiento;
 
