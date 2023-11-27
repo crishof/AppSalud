@@ -85,5 +85,4 @@ public class PortalControlador {
         ur.deleteById(id);
         return "index";
     }
-
 }

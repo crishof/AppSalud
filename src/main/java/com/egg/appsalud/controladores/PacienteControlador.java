@@ -38,7 +38,7 @@ public class PacienteControlador {
 
     @GetMapping("/historia")
     public String historiaClinica() {
-        return "historiaClinica";
+        return "historia_clinica";
     }
 
 //    MODIFICAR DATOS COMO ADMIN

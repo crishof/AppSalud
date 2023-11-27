@@ -10,6 +10,7 @@ import com.egg.appsalud.servicios.ConsultaServicio;
 
 import java.util.List;
 
+import com.egg.appsalud.servicios.PacienteServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,8 @@ public class ConsultaControlador {
 
     @GetMapping("/crear")
     public String crearConsulta(ModelMap modelo) {
-        return null;
+
+        return "profesional_consulta";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN', 'ROLE_PACIENTE')")
@@ -43,7 +45,7 @@ public class ConsultaControlador {
         try {
             cs.crearConsulta(paciente, profesional, provincias, localidad, direccion, precioConsulta);
             modelo.put("exito", "La consulta fue creada con exito");
-            return "index.html";
+            return "index";
         } catch (MiException e) {
             modelo.put("error", e.getMessage());
 

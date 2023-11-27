@@ -64,19 +64,20 @@
                     <td th:text="${usuario.nombre}"></td>
                     <td th:text="${usuario.apellido}"></td>
                     <td>
-                        <a th:href="@{/profesional/modificar/__${usuario.id}__}"><i class="fa fa-user-pen" style="color: #226cec;"></i></a>
+                        <a th:href="@{/profesional/modificar/__${usuario.id}__}"><i class="fa fa-user-pen"
+                                                                                    style="color: #226cec;"></i></a>
                     </td>
-<!--                    <td>-->
-<!--                        <a th:href="@{/paciente/modificar/__${usuario.id}__}"><i class="fa fa-user-pen" style="color: #226cec;"></i></a>-->
-<!--                    </td>-->
+                    <!--                    <td>-->
+                    <!--                        <a th:href="@{/paciente/modificar/__${usuario.id}__}"><i class="fa fa-user-pen" style="color: #226cec;"></i></a>-->
+                    <!--                    </td>-->
 
                     <td>
-                        <a th:if="${usuario.activo}" ><i class="fa-solid fa-eye"
-                                                          style="color: #226cec;"></i></a>
+                        <a th:if="${usuario.activo}"><i class="fa-solid fa-eye"
+                                                        style="color: #226cec;"></i></a>
                         <a th:if="${!usuario.activo}"><i class="fa-solid fa-eye-slash"
-                                                          style="color: #226cec;"></i></a>
+                                                         style="color: #226cec;"></i></a>
 
-<!--                        th:href="@{/usuario/cambiarEstado/__${profesional.id}__}-->
+                        <!--                        th:href="@{/usuario/cambiarEstado/__${profesional.id}__}-->
                     </td>
                 </tr>
                 </tbody>
