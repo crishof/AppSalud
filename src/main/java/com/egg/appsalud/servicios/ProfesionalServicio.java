@@ -93,19 +93,20 @@ public class ProfesionalServicio implements UserDetailsService {
     }
 
     @Transactional
-    public void modificarProfesional(String id, /*MultipartFile archivo, */ String nombreUsuario, String nombre, String apellido,
+    public void modificarProfesional(String id, MultipartFile archivo,  String nombreUsuario, String nombre, String apellido,
                                      Long DNI, Date fechaDeNacimiento, String email, String password, String password2,
                                      boolean activo, Especialidad especialidad, Provincias provincias, String localidad, String direccion,
                                      Long matricula, /*Set<String> horariosAtencion, */int precioConsulta) throws MiException {
 
-        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
-        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
+        //validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
+        //validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
 
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email, matricula, especialidad, provincias, localidad, direccion, /*horariosAtencion,*/ precioConsulta);
 
         Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
         if (respuesta.isPresent()) {
+            
             Profesional profesional = respuesta.get();
             profesional.setNombre(nombre);
             profesional.setPassword(new BCryptPasswordEncoder().encode(password));
@@ -126,13 +127,13 @@ public class ProfesionalServicio implements UserDetailsService {
 //            profesional.setHorariosAtencion(horariosAtencion);
             profesional.setPrecioConsulta(precioConsulta);
             
-            /*String idImagen = null;
+            String idImagen = null;
             
             if(profesional.getImagen() != null){
                 idImagen = profesional.getImagen().getId();
             }
             
-            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);*/
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
 
             profesionalRepositorio.save(profesional);
 

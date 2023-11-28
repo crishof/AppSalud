@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/paciente")
@@ -35,7 +36,7 @@ public class PacienteController {
     }
 
     @PostMapping("/editar/{id}")
-    public String editarPaciente(@PathVariable String id, @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
+    public String editarPaciente(@PathVariable String id, @RequestParam MultipartFile archivo, @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
                                  @RequestParam Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password,
                                  @RequestParam String password2, ModelMap modelo, HttpSession session) {
 
@@ -50,7 +51,7 @@ public class PacienteController {
         }
 
         try {
-            pacienteServicio.modificarPacientes(id, nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2);
+            pacienteServicio.modificarPacientes(id, archivo, nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2);
             modelo.put("exito", "cambios realizados con éxito");
 
             Paciente pacienteActualizado = pacienteServicio.getOne(id);

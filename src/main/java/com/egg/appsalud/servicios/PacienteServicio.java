@@ -1,7 +1,10 @@
 package com.egg.appsalud.servicios;
 
+import com.egg.appsalud.Enumeracion.Rol;
 import com.egg.appsalud.Exception.MiException;
+import com.egg.appsalud.entidades.Imagen;
 import com.egg.appsalud.entidades.Paciente;
+import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.repositorios.PacienteRepositorio;
 
 import java.util.ArrayList;
@@ -13,22 +16,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class PacienteServicio {
+    
+    @Autowired
+    private ImagenServicio imagenServicio;
+    
     @Autowired
     PacienteRepositorio pacienteRepositorio;
 
     @Transactional
-    public void crearPaciente(String nombre) throws MiException {
+        public void crearPaciente(MultipartFile archivo, String nombreUsuario, String nombre, String apellido,
+                             Long DNI, Date fechaDeNacimiento, String email, String password, String password2) throws MiException {
 
-        validar(nombre);
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
 
+        System.out.println("EJECUTANDO  servicio crearUsuario REGISTRAR");
         Paciente paciente = new Paciente();
 
+        Imagen imagen = imagenServicio.guardar(archivo);
+        
+        paciente.setNombreUsuario(nombreUsuario);
+        paciente.setPassword(new BCryptPasswordEncoder().encode(password));
+        paciente.setDNI(DNI);
         paciente.setNombre(nombre);
+        paciente.setApellido(apellido);
+        paciente.setFechaDeNacimiento(fechaDeNacimiento);
+        paciente.setEmail(email);
+        paciente.setFechaDeAlta(new Date());
+        paciente.setRol(Rol.PACIENTE);
+        paciente.setActivo(true);
+        paciente.setImagen(imagen);
+
+        
 
         pacienteRepositorio.save(paciente);
+
 
     }
 
@@ -39,10 +64,10 @@ public class PacienteServicio {
     }
 
     @Transactional
-    public void modificarPacientes(String id, String nombreUsuario, String nombre, String apellido,
+    public void modificarPacientes(String id, MultipartFile archivo, String nombreUsuario, String nombre, String apellido,
                                    Long DNI, Date fechaNacimiento,String email, String password, String password2) throws MiException {
 
-        validar(nombre);
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaNacimiento, DNI, email);
 
         Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
 
@@ -56,6 +81,13 @@ public class PacienteServicio {
             paciente.setFechaDeNacimiento(fechaNacimiento);
             paciente.setNombreUsuario(nombreUsuario);
 
+            String idImagen = null;
+            
+            if(paciente.getImagen() != null){
+                idImagen = paciente.getImagen().getId();
+            }
+            
+            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
             pacienteRepositorio.save(paciente);
 
         }
@@ -76,10 +108,43 @@ public class PacienteServicio {
 
     }
 
-    private void validar(String nombre) throws MiException {
+    private void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI, String email) throws MiException {
+
+
+        if (nombreUsuario.isEmpty() || nombreUsuario == null) {
+            throw new MiException("El nombre de usuario no puede estar vacio o Nulo");
+
+        }
+
 
         if (nombre.isEmpty() || nombre == null) {
-            throw new MiException("el nombre no puede ser nulo o estar vacio");
+            throw new MiException("El nombre no puede estar vacío o ser nulo");
         }
+
+        if (apellido.isEmpty() || apellido == null) {
+            throw new MiException("El apellido no puede estar vacío o ser nulo");
+        }
+
+        if (DNI == null) {
+            throw new MiException("El DNI no puede ser nulo");
+        }
+
+        if (fechaDeNacimiento == null) {
+            throw new MiException("La fecha de nacimiento no puede ser nula");
+        }
+
+        if (email.isEmpty() || email == null) {
+            throw new MiException("El email no puede estar vacío o ser nulo");
+        }
+
+        if (password.isEmpty() || password == null || password.length() <= 5) {
+            throw new MiException("Las contraseñas no pueden estar vacias y tener menos de 5 caracteres ");
+        }
+
+        if (!password.equals(password2)) {
+            throw new MiException("las contraseñas deben coincidir");
+        }
+
+
     }
 }
