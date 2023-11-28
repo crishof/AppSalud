@@ -7,6 +7,7 @@ import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -23,18 +24,15 @@ public class ConsultaServicio {
 
 
     @Transactional
-    public void crearConsulta(Paciente paciente, Profesional profesional, Provincias provincias, String localidad, String direccion, int precioConsulta) throws MiException {
+    public void crearConsulta(Paciente paciente, Profesional profesional, Date fecha, LocalTime horario) throws MiException {
 
-        validar(paciente, profesional, provincias, localidad, direccion, precioConsulta);
+        validar(paciente, profesional);
+
 
         Consulta consulta = new Consulta();
 
         consulta.setPaciente(paciente);
         consulta.setProfesional(profesional);
-        consulta.setProvincias(provincias);
-        consulta.setLocalidad(localidad);
-        consulta.setDireccion(direccion);
-        consulta.setPrecioConsulta(precioConsulta);
         consulta.setFechaDeConsulta(new Date());
         consultaRepositorio.save(consulta);
 
@@ -42,7 +40,7 @@ public class ConsultaServicio {
 
     @Transactional
     public void modificarConsulta(String id, Paciente paciente, Profesional profesional, Provincias provincias, String localidad, String direccion, int precioConsulta) throws MiException {
-        validar(paciente, profesional, provincias, localidad, direccion, precioConsulta);
+        validar(paciente, profesional);
 
         Optional<Consulta> respuesta = consultaRepositorio.findById(id);
 
@@ -53,7 +51,7 @@ public class ConsultaServicio {
             consulta.setProvincias(provincias);
             consulta.setLocalidad(localidad);
             consulta.setDireccion(direccion);
-            
+
             consulta.setPrecioConsulta(precioConsulta);
             consulta.setFechaDeConsulta(new Date());
             consultaRepositorio.save(consulta);
@@ -67,7 +65,7 @@ public class ConsultaServicio {
     }
 
 
-    private void validar(Paciente paciente, Profesional profesional, Provincias provincias, String localidad, String direccion, int precioConsulta) throws MiException {
+    private void validar(Paciente paciente, Profesional profesional) throws MiException {
         if (paciente == null) {
             throw new MiException("El paciente  no puede ser Nulo");
         }
@@ -75,21 +73,6 @@ public class ConsultaServicio {
         if (profesional == null) {
             throw new MiException("El profesional no puede ser nulo");
         }
-
-        if (provincias == null) {
-            throw new MiException("La provincia no puede ser nulo");
-        }
-        if (localidad == null) {
-            throw new MiException("La localidad no puede ser nulo");
-        }
-        if (direccion == null) {
-            throw new MiException("La direccion no puede ser nulo");
-        }
-
-        if (precioConsulta <= 0) {
-            throw new MiException("El precio de la consulta no puede ser 0");
-        }
-
     }
 
 

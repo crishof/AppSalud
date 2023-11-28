@@ -8,6 +8,8 @@ import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
 import com.egg.appsalud.servicios.ConsultaServicio;
 
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 import com.egg.appsalud.servicios.PacienteServicio;
@@ -41,14 +43,15 @@ public class ConsultaControlador {
 
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN', 'ROLE_PACIENTE')")
     @PostMapping("/crear")
-    public String crearConsulta(@RequestParam Paciente paciente, @RequestParam Profesional profesional, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion, @RequestParam int precioConsulta, ModelMap modelo) throws MiException {
+    public String crearConsulta(@RequestParam Paciente paciente, @RequestParam Profesional profesional, @RequestParam Date fecha, @RequestParam LocalTime horario, ModelMap modelo) throws MiException {
+
+
         try {
-            cs.crearConsulta(paciente, profesional, provincias, localidad, direccion, precioConsulta);
+            cs.crearConsulta(paciente, profesional, fecha, horario);
             modelo.put("exito", "La consulta fue creada con exito");
             return "index";
         } catch (MiException e) {
             modelo.put("error", e.getMessage());
-
             return "redirect:/consulta/crear";
         }
     }

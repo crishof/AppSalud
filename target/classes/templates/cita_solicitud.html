@@ -25,7 +25,7 @@
                 <img th:if="${profesional.imagen == null}" style="max-height: 100px; border-radius: 10px"
                      class="img-fluid rounded-start" th:src="@{/images/noImage.webp}">
                 <div>
-                <p class="mt-4">Valoracion: <span th:text="${profesional.valoracionProfesional}"></span></p>
+                    <p class="mt-4">Valoracion: <span th:text="${profesional.valoracionProfesional}"></span></p>
                     <i class="fa-solid fa-star star" style="color: #006cfa;"></i>
                     <i class="fa-solid fa-star" style="color: #f6fa00;"></i>
                     <i class="fa-solid fa-star" style="color: #f6fa00;"></i>
@@ -53,21 +53,26 @@
     <div class="container mt-4">
         <form class="d-inline" id="cita" th:action="@{/paciente/solicitar/__${id}__}" method="POST">
             <input hidden th:value="${profesional.id}" name="idProfesional">
-<!--            <input hidden th:value="${session.usuariosession.id}" name="id">-->
+
             <div class="form-group mx-sm-3 m-2 ">
-                <label for="horario" class="me-2">Horarios disponibles: </label>
+
+                <label for="fecha">Seleccionar Día:</label>
+                <input type="date" id="fecha" name="fecha" th:value="${fecha}"/>
+
+                <label for="horario" class="me-2">Citas disponibles: </label>
                 <select name="horario" id="horario">
-<!--                    <option value="">Seleccionar</option>-->
-<!--                    <option th:each=" horario : ${profesional.horariosAtencion}"-->
-<!--                            th:value="${horario}"-->
-<!--                            th:text="${horario}">-->
-<!--                    </option>-->
+
+                    <option th:each="hora : ${profesional.horariosAtencion}"
+                            th:value="${hora}"
+                            type="time" name="hora" th:text="${#temporals.format(hora,'HH:mm')}"/>
                 </select>
+
+                <div class="text-center m-3">
+                    <input class="btn btn-primary" type="submit" value="Reservar">
+                    <a class="btn btn-secondary" th:href="@{/listaProfesionales}">Volver</a>
+                </div>
+
             </div>
-<div class="text-center m-3">
-    <input class="btn btn-primary" type="submit" value="Reservar cita">
-    <a class="btn btn-secondary" th:href="@{/listaProfesionales}">Volver</a>
-</div>
         </form>
     </div>
 
