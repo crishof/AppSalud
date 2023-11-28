@@ -40,17 +40,17 @@
             <input hidden th:value="${session.usuariosession.id}" name="id">
             <div class="col-md-6">
                 <label for="nombre">Nombre</label>
-                <input th:value="${paciente != null ? paciente.nombre : session.usuariosession.nombre}" type="text"
-                       id="nombre" class="form-control" name="nombre">
+                <input readonly th:value="${paciente != null ? paciente.nombre : session.usuariosession.nombre}" type="text"
+                       id="nombre" class="form-control read-only" name="nombre">
             </div>
             <div class="col-md-6">
                 <label for="apellido">Apellido</label><br>
-                <input th:value="${paciente != null ? paciente.apellido : session.usuariosession.apellido}" type="text"
-                       id="apellido" class="form-control" name="apellido">
+                <input readonly th:value="${paciente != null ? paciente.apellido : session.usuariosession.apellido}" type="text"
+                       id="apellido" class="form-control read-only" name="apellido">
             </div>
             <div class="col-md-6">
                 <label for="dni">Número de DNI</label><br>
-                <input type="text" class="form-control" id="dni" name="DNI"
+                <input readonly type="text" class="form-control read-only"id="dni" name="DNI"
                        th:value="${paciente != null ? paciente.DNI : session.usuariosession.DNI}">
             </div>
             <div class="col-md-6">
@@ -58,20 +58,20 @@
                 <div>
                     <!-- <input type="date" name="fechaDeNacimiento" class="form-control"
                            placeholder="Ingrese su fecha de nacimiento"> -->
-                    <input type="date" class="form-control" name="fechaDeNacimiento"
+                    <input readonly type="date" class="form-control read-only" name="fechaDeNacimiento" 
                            th:value="${paciente != null ? #dates.format(paciente.fechaDeNacimiento, 'yyyy-MM-dd') : #dates.format(session.usuariosession.fechaDeNacimiento, 'yyyy-MM-dd')}">
                 </div>
             </div>
             <div class="col-md-6">
                 <label>Correo electrónico</label><br>
                 <div>
-                    <input type="email" class="form-control" name="email"
+                    <input type="email" class="form-control read-only" name="email"
                            th:value="${paciente != null ? paciente.email : session.usuariosession.email}">
                 </div>
             </div>
             <div class="col-md-6">
                 <label>Nombre de usuario</label>
-                    <input type="text" class="form-control" name="nombreUsuario"
+                    <input type="text" class=class="form-control" name="nombreUsuario"
                            th:value="${paciente != null ? paciente.nombreUsuario : session.usuariosession.nombreUsuario}">
             </div>
             <div class="col-md-6">
@@ -83,7 +83,13 @@
                 <input type="password" name="password2" class="form-control"
                        placeholder="Ingrese nuevamente su contraseña">
             </div>
+                  <div class="col-md-6">
+                <label for="imagen">Carnet Digital (Opcional)</label>
 
+                <input type="file" id="imagen" name="archivo" class="form-control">
+
+            </div>
+                
                 <button type="submit" class="btn btn-primary">Actualizar</button>
         </form>
     </div>

@@ -6,6 +6,27 @@
     /*font-family: "Raleway", sans-serif;*/
 }
 
+/*Estilos para hover y navegacion cursor en vistas modificables (NO MODIFICABLES)*/
+
+.read-only {
+    color: black !important; 
+    background-color: lightgray !important;
+    pointer-events: auto; 
+}
+
+.read-only:hover {
+    cursor: not-allowed; 
+}
+
+.read-only:hover::before {
+    content: "\1F6AB"; 
+    display: inline-block;
+    font-size: 1.2em;
+    margin-right: 5px;
+}
+input[type="date"].read-only:hover {
+    cursor: not-allowed;
+}
 /*PALETA DE COLOR*/
 
 .color6 {
