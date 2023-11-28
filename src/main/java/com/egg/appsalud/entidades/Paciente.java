@@ -10,15 +10,10 @@ import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 @Entity
-@Data
 @Table(name = "PACIENTE")
-
 @DiscriminatorValue("PACIENTE")
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class Paciente extends Usuario {
 
     @Id

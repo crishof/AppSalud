@@ -190,14 +190,14 @@ public class ProfesionalServicio implements UserDetailsService {
         if (matricula == null) {
             throw new MiException("La matrícula no puede ser nula");
         }
-        if (horariosAtencion.isEmpty() || horariosAtencion == null){
+        if (horariosAtencion.isEmpty()){
             throw new MiException ("Los Horarios de Atencion no pueden estar vacios o nulo");
         }
         if (precioConsulta == 0) {
             throw new MiException("El precio de Consulta no pueden estar vacios o cero");
         }
 
-        if (password.isEmpty() || password == null || password.length() <= 5) {
+        if (password.length() <= 5) {
             throw new MiException("Las contraseñas no pueden estar vacias y tener menos de 5 caracteres ");
         }
 

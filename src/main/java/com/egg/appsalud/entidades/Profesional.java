@@ -75,7 +75,7 @@ public class Profesional extends Usuario {
     @CollectionTable(name = "HORARIOS_ATENCION", joinColumns = @JoinColumn(name = "profesional_id"))
     @Column(name = "horario_atencion")
     private List<LocalTime> horariosAtencion;
-        //LOS ORARIOS DE ATENCION SE DARIAN DE LUNES A VIERNES EN UN HORARIO FIJO CON TURNOS DE 30 MIN//
+        //LOS HORARIOS DE ATENCION SE DARIAN DE LUNES A VIERNES EN UN HORARIO FIJO CON TURNOS DE 30 MIN//
 
     private int PrecioConsulta;
     
