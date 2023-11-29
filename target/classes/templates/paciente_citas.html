@@ -19,16 +19,16 @@
                     <table class="table table-hover">
                         <thead class="text-lg-start">
                             <tr>
-                                <th scope="col">Especialidad</th>
-                                <th scope="col">Foto Perfil</th>
-                                <th scope="col">Apellido</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Precio Consulta</th>
-                                <th scope="col">Valoracion</th>
-                                <th scope="col">Provincia</th>
+                                <th scope="col">Direccion</th>
+                                <th scope="col">Fecha de Consulta</th>
+                                 <th scope="col">Horario de Consulta</th>
                                 <th scope="col">Localidad</th>
-                                <th scope="col">Fecha</th>
-                                 <th scope="col">Horario</th>
+                                <th scope="col">Precio Consulta</th>
+                                <th scope="col">Provincia</th>
+                                <th scope="col">Puntuacion</th>
+                                <th scope="col">Nombre</th>
+                                 <th scope="col">Apellido</th>
+                                  <th scope="col">Especialidad</th>
                             </tr>
                         </thead>
                         <tbody th:each="profesional : ${profesional}">
@@ -43,12 +43,16 @@
                                     <img th:if="${profesional.imagen == null}" style="max-height: 100px; border-radius: 10px"
                                          class="logo" th:src="@{/images/noImage.webp}">
                                 </td>
-                                <td th:text="${profesional.apellido}" style="vertical-align:middle"></td>
-                                <td th:text="${profesional.nombre}" style="vertical-align:middle"></td>
+                                <td th:text="${profesional.direccion}" style="vertical-align:middle"></td>
+                                <td th:text="${profesional.fechaConsulta}" style="vertical-align:middle"></td>
+                                <td th:text="${profesional.horarioConsulta}" style="vertical-align:middle"></td>
+                                <td th:text="${profesional.Localidad}" style="vertical-align:middle"></td>
                                 <td th:text="${profesional.precioConsulta}" style="vertical-align:middle"></td>
-                                <td th:text="${profesional.valoracionProfesional}" style="vertical-align:middle"></td>
                                 <td th:text="${profesional.provincias}" style="vertical-align:middle"></td>
-                                <td th:text="${profesional.localidad}" style="vertical-align:middle"></td>
+                                <td th:text="${profesional.puntuacion}" style="vertical-align:middle"></td>
+                                <td th:text="${profesional.nombre}" style="vertical-align:middle"></td>
+                                <td th:text="${profesional.apellido}" style="vertical-align:middle"></td>
+                                <td th:text="${profesional.especialidad}" style="vertical-align:middle"></td>
 
                                 <td class="text-center" style="vertical-align:middle"><a th:href="@{/paciente/solicitar/__${profesional.id}__}"><i
                                             class="fa fa-calendar-check fa-2x" style="color: #1a5dd1"></i></a>
