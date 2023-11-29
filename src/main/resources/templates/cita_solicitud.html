@@ -51,7 +51,7 @@
 
 
     <div class="container mt-4">
-        <form class="d-inline" id="cita" th:action="@{/paciente/solicitar/__${id}__}" method="POST">
+        <form class="d-inline" id="cita" th:action="@{/paciente/turno/agendar-turno}" method="POST">
             <input hidden th:value="${profesional.id}" name="idProfesional">
 
             <div class="form-group mx-sm-3 m-2 ">

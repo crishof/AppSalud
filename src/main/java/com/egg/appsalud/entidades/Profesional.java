@@ -1,26 +1,11 @@
 package com.egg.appsalud.entidades;
 
+import com.egg.appsalud.Enumeracion.DiaSemana;
 import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Enumeracion.Provincias;
 import java.time.LocalTime;
 import java.util.List;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -76,6 +61,20 @@ public class Profesional extends Usuario {
     private FichaMedica fichaMedica;
 
     private int valoracionProfesional = 10;
+
+    @ElementCollection
+    @CollectionTable(name = "Profesional_DiasDisponibles")
+    @Enumerated(EnumType.STRING)
+    protected List<DiaSemana> diasDisponibles;
+    protected LocalTime horarioEntrada;
+    protected LocalTime horarioSalida;
+    protected String observaciones;
+
+    @OneToMany(mappedBy = "profesional", fetch = FetchType.LAZY)
+    private List<Turno> turnosCreados;
+
+    @OneToMany
+    private List<FichaMedica> historialConsultas;
 
 
     public void recibirPuntuacion(Consulta consulta, int puntuacion) {
