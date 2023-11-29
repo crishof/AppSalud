@@ -38,11 +38,11 @@
                 <thead class="text-lg-start">
                 <tr>
                     <th scope="col">Foto</th>
-                    <th scope="col">Id</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col"> Editar</th>
+                    <th scope="col" style="text-align: center;">Id</th>
+                    <th scope="col" style="text-align: center;">Tipo</th>
+                    <th scope="col" style="text-align: center;">Nombre</th>
+                    <th scope="col" style="text-align: center;">Apellido</th>
+                    <th scope="col">Editar</th>
                     <th scope="col">Activo</th>
 
                 </tr>
@@ -59,14 +59,29 @@
                         <img th:if="${usuarios.imagen == null}" style="max-height: 100px; border-radius: 10px"
                              class="logo" th:src="@{/images/noImage.webp}">
                     </td>
-                    <td th:text="${usuarios.id}"></td>
-                    <td th:text="${usuarios.rol}"></td>
-                    <td th:text="${usuarios.nombre}"></td>
-                    <td th:text="${usuarios.apellido}"></td>
-                    <td>
+                    <td style="text-align: center;" th:text="${usuarios.id}"></td>
+                    <td style="text-align: center;" th:text="${usuarios.rol}"></td>
+                    <td style="text-align: center;" th:text="${usuarios.nombre}"></td>
+                    <td style="text-align: center;" th:text="${usuarios.apellido}"></td>
+                    <!-- <td>
                         <a th:href="@{/profesional/modificar/__${usuarios.id}__}"><i class="fa fa-user-pen"
                                                                                         style="color: #226cec;"></i></a>
+                        <a th:href="@{/paciente/modificar/__${usuarios.id}__}"><i class="fa fa-user-pen"
+                                                                                            style="color: #226cec;"></i></a>
+                    </td> -->
+                    <td>
+                        <a th:if="${#strings.length(usuarios.rol) == 8}" th:href="@{/paciente/modificar/__${usuarios.id}__}">
+                            <i class="fa fa-user-pen" style="color: #226cec;"></i>
+                        </a>
+                        <a th:if="${#strings.length(usuarios.rol) == 11}" th:href="@{/profesional/modificar/__${usuarios.id}__}">
+                            <i class="fa fa-user-pen" style="color: #226cec;"></i>
+                        </a>
                     </td>
+                    
+                    
+                    
+                    
+                    
                     <td>
                         <a th:if="${usuarios.activo}" ><i class="fa-solid fa-eye"
                                                           style="color: #226cec;"></i></a>

@@ -49,7 +49,7 @@ public class PacienteServicio {
         paciente.setRol(Rol.PACIENTE);
         paciente.setActivo(true);
         paciente.setImagen(imagen);
-
+        
         
 
         pacienteRepositorio.save(paciente);

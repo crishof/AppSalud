@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        lang="en"
+>
+<head th:replace="layout/head :: head"></head>
+
+<body>
+<!--<header th:replace="layout/header :: header"></header>-->
+<nav th:replace="layout/navbar :: navbar"></nav>
+
+<div class="container mt-5">
+    <form class="card shadow p-5" th:action="@{/}" method="POST">
+        <div class="header text-center mb-4">
+            <h3>Ingrese correo electrónico</h3>
+        </div>
+
+        <div class="mb-3">
+            <label for="username" class="form-label">Correo electronico</label>
+            <input type="text" class="form-control" name="username" id="username"
+                   placeholder="Ingresa tu mail">
+        </div>
+
+        
+
+        <button type="button" class="btn btn-secondary"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Enviar
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- <h1 class="modal-title fs-5" id="staticBackdropLabel">Historias Clinicas</h1> -->
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Correo electrónico enviado exitosamente</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Espera a que se cargue el DOM y obtiene el modal
+                var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+        
+                // Añade un evento cuando el modal se oculta
+                myModal._element.addEventListener('hidden.bs.modal', function () {
+                    // Redirecciona a la página deseada (en este caso, la raíz '/')
+                    window.location.href = '/';
+                });
+            });
+        </script>
+
+        <p class="text-muted"> No estás registrado? <a class="text-active" th:href="@{/registroPaciente}">Registrate
+            aquí</a></p>
+    </form>
+</div>
+
+<section class=" text-center container">
+    <div class="row mt-3">
+        <div class="divVolver">
+            <a th:href="@{/}" class="btn btn-primary my-2">Volver</a>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="layout/footer :: footer"></footer>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"
+></script>
+</body>
+</html>

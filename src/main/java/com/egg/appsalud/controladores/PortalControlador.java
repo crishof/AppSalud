@@ -43,6 +43,15 @@ public class PortalControlador {
         return "login";
     }
 
+    @GetMapping("/restablecerContrasena")
+    public String restablecer(@RequestParam(required = false) String error, ModelMap modelo) {
+
+        if (error != null) {
+            modelo.put("error", "El usuario o la contraseña son incorrectos");
+        }
+        return "restablecer_contrasena";
+    }
+    
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificarUsuario(@PathVariable String id, ModelMap modelo) {
