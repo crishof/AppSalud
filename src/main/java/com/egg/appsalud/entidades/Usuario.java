@@ -57,7 +57,6 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     @Column(name = "rol", insertable = false, updatable = false)
     private Rol rol;
-
     @OneToOne
     private Imagen imagen;
 

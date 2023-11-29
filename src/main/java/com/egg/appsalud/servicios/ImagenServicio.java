@@ -16,15 +16,11 @@ public class ImagenServicio {
     @Autowired
     private ImagenRepositorio imagenRepo;
 
-
     @Transactional
-    public Imagen guardar(MultipartFile img) throws MiException {
+    public Imagen guardar(MultipartFile img) {
 
-        System.out.println("EJECUTANDO GUARDAR");
         if (img != null) {
             try {
-
-                System.out.println("EJECUTANDO GUARDAR VALIDADO");
                 Imagen imagen = new Imagen();
                 imagen.setMime(img.getContentType());
                 imagen.setNombre(img.getName());
@@ -32,42 +28,29 @@ public class ImagenServicio {
 
                 return imagenRepo.save(imagen);
 
-
             } catch (Exception e) {
                 System.err.println(e.getMessage());
             }
-
         }
-
         return null;
-
     }
 
     @Transactional
     public Imagen actualizar(MultipartFile archivo, String idImagen) throws MiException {
 
         try {
-
             Imagen imagen = new Imagen();
             if (idImagen != null) {
                 Optional<Imagen> respuesta = imagenRepo.findById(idImagen);
-                if (respuesta.isPresent()) {
-                    imagen = respuesta.get();
-                }
-
+                if (respuesta.isPresent()) imagen = respuesta.get();
             }
-
             imagen.setMime(archivo.getContentType());
             imagen.setNombre(archivo.getName());
             imagen.setContenido(archivo.getBytes());
-
             return imagenRepo.save(imagen);
-
-
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
         return null;
-
     }
 }

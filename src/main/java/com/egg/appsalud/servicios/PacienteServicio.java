@@ -1,7 +1,10 @@
 package com.egg.appsalud.servicios;
 
+import com.egg.appsalud.Enumeracion.Rol;
 import com.egg.appsalud.Exception.MiException;
+import com.egg.appsalud.entidades.Imagen;
 import com.egg.appsalud.entidades.Paciente;
+import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.repositorios.PacienteRepositorio;
 
 import java.util.ArrayList;
@@ -13,20 +16,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class PacienteServicio {
     @Autowired
     PacienteRepositorio pacienteRepositorio;
 
-    @Transactional
-    public void crearPaciente(String nombre) throws MiException {
+    @Autowired
+    ImagenServicio imagenServicio;
 
-        validar(nombre);
+    @Autowired
+    UtilServicio utilServicio;
+
+    @Transactional
+    public void crearPaciente(MultipartFile archivo, String nombreUsuario, String nombre, String apellido,
+                              Long DNI, Date fechaDeNacimiento, String email, String password, String password2) throws MiException {
+
+        utilServicio.validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
 
         Paciente paciente = new Paciente();
 
+        paciente.setNombreUsuario(nombreUsuario);
+        paciente.setPassword(new BCryptPasswordEncoder().encode(password));
+        paciente.setDNI(DNI);
         paciente.setNombre(nombre);
+        paciente.setApellido(apellido);
+        paciente.setFechaDeNacimiento(fechaDeNacimiento);
+        paciente.setEmail(email);
+        paciente.setFechaDeAlta(new Date());
+        paciente.setRol(Rol.PACIENTE);
+        paciente.setActivo(true);
+
+        Imagen imagen = imagenServicio.guardar(archivo);
+
+        paciente.setImagen(imagen);
 
         pacienteRepositorio.save(paciente);
 
@@ -42,7 +66,7 @@ public class PacienteServicio {
     public void modificarPacientes(String id, String nombreUsuario, String nombre, String apellido,
                                    Long DNI, Date fechaNacimiento, String email, String password, String password2) throws MiException {
 
-        validar(nombre);
+        utilServicio.validar(nombreUsuario, password, password2, nombre, apellido, fechaNacimiento, DNI, email);
 
         Optional<Paciente> respuesta = pacienteRepositorio.findById(id);
 
@@ -74,12 +98,5 @@ public class PacienteServicio {
 
         pacienteRepositorio.delete(paciente);
 
-    }
-
-    private void validar(String nombre) throws MiException {
-
-        if (nombre.isEmpty() || nombre == null) {
-            throw new MiException("el nombre no puede ser nulo o estar vacio");
-        }
     }
 }

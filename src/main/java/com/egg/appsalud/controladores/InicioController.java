@@ -4,6 +4,7 @@ import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Profesional;
+import com.egg.appsalud.servicios.PacienteServicio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
 import com.egg.appsalud.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class InicioController {
     UsuarioServicio usuarioServicio;
 
     @Autowired
+    PacienteServicio pacienteServicio;
+
+    @Autowired
     ProfesionalServicio profesionalServicio;
 
     @GetMapping("/registroPaciente")
@@ -53,7 +57,7 @@ public class InicioController {
 
         try {
 
-            usuarioServicio.crearUsuario(archivo, nombreUsuario, nombre, apellido, dni, fechaDeNacimiento, email, password, password2);
+            pacienteServicio.crearPaciente(archivo, nombreUsuario, nombre, apellido, dni, fechaDeNacimiento, email, password, password2);
 
             modelo.addAttribute("exito",null);
             modelo.put("exito", "el usuario fue creado con exito");
