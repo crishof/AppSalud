@@ -26,6 +26,8 @@ public class ConsultaServicio {
     @Transactional
     public void crearConsulta(Paciente paciente, Profesional profesional, Date fecha, LocalTime horario) throws MiException {
 
+        System.out.println("EJECUTANDO CREAR CONSULTA");
+
         validar(paciente, profesional);
 
 

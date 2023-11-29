@@ -6,22 +6,20 @@ import com.egg.appsalud.Enumeracion.Rol;
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Consulta;
 
-import com.egg.appsalud.entidades.FichaMedica;
+
 import com.egg.appsalud.entidades.Imagen;
-import com.egg.appsalud.entidades.ObraSocial;
-import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
 import com.egg.appsalud.repositorios.ProfesionalRepositorio;
 import com.egg.appsalud.repositorios.UsuarioRepositorio;
+
 import java.time.LocalTime;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -58,19 +56,16 @@ public class ProfesionalServicio implements UserDetailsService {
     @Transactional
     public void crearProfesional(MultipartFile archivo, String nombreUsuario, String password, String password2, String nombre, String apellido,
                                  String email, Date fechaNacimiento, Long DNI, Especialidad especialidad, Provincias provincias, String localidad, String direccion,
-                                 Long matricula, List<LocalTime> horariosAtencion, int precioConsulta/*, List<ObraSocial> obraSocial*/) throws MiException {
+                                 Long matricula/*, int precioConsulta*/) throws MiException {
 
-        validar(nombreUsuario, password, password2, nombre, apellido, fechaNacimiento, DNI, email, matricula, especialidad, provincias, localidad, direccion, horariosAtencion, precioConsulta);
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaNacimiento, DNI, email, matricula, especialidad, provincias, localidad, direccion);
 
-        //Usuario usuario = buscarUsuarioPorID(id);
         Profesional profesional = new Profesional();
 
         profesional.setNombreUsuario(nombreUsuario);
         profesional.setPassword(new BCryptPasswordEncoder().encode(password));
         profesional.setFechaDeAlta(new Date());
-
         profesional.setRol(Rol.PROFESIONAL);
-
         Imagen imagen = imagenServicio.guardar(archivo);
 
         profesional.setNombre(nombre);
@@ -85,8 +80,6 @@ public class ProfesionalServicio implements UserDetailsService {
         profesional.setDireccion(direccion);
         profesional.setImagen(imagen);
         profesional.setMatricula(matricula);
-        profesional.setHorariosAtencion(horariosAtencion);
-        profesional.setPrecioConsulta(precioConsulta);
         //profesional.setObraSocial(obraSocial);
 
 
@@ -97,13 +90,13 @@ public class ProfesionalServicio implements UserDetailsService {
     public void modificarProfesional(String id, /*MultipartFile archivo, */ String nombreUsuario, String nombre, String apellido,
                                      Long DNI, Date fechaDeNacimiento, String email, String password, String password2,
                                      boolean activo, Especialidad especialidad, Provincias provincias, String localidad, String direccion,
-                                     Long matricula, List<LocalTime> horariosAtencion,int precioConsulta) throws MiException {
+                                     Long matricula, List<LocalTime> horariosAtencion, int precioConsulta) throws MiException {
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
 
 
-        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email, matricula, especialidad, provincias, localidad, direccion, horariosAtencion, precioConsulta);
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email, matricula, especialidad, provincias, localidad, direccion);
 
         Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
         if (respuesta.isPresent()) {
@@ -142,7 +135,7 @@ public class ProfesionalServicio implements UserDetailsService {
     }
 
     private void validar(String nombreUsuario, String password, String password2, String nombre, String apellido, Date fechaDeNacimiento, Long DNI,
-                         String email, Long matricula, Especialidad especialidad, Provincias provincias, String localidad, String direccion, List<LocalTime> horariosAtencion, int precioConsulta) throws MiException {
+                         String email, Long matricula, Especialidad especialidad, Provincias provincias, String localidad, String direccion) throws MiException {
 
 
         if (nombreUsuario.isEmpty() || nombreUsuario == null) {
@@ -189,12 +182,6 @@ public class ProfesionalServicio implements UserDetailsService {
 
         if (matricula == null) {
             throw new MiException("La matrícula no puede ser nula");
-        }
-        if (horariosAtencion.isEmpty()){
-            throw new MiException ("Los Horarios de Atencion no pueden estar vacios o nulo");
-        }
-        if (precioConsulta == 0) {
-            throw new MiException("El precio de Consulta no pueden estar vacios o cero");
         }
 
         if (password.length() <= 5) {

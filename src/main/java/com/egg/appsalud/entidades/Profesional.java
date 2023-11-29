@@ -1,17 +1,9 @@
 package com.egg.appsalud.entidades;
 
-import com.egg.appsalud.Enumeracion.Rol;
-
-import java.util.Date;
-
 import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Enumeracion.Provincias;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Calendar;
-
 import java.util.List;
-import java.util.Set;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -28,20 +20,17 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "PROFESIONAL")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "rol",
@@ -70,7 +59,7 @@ public class Profesional extends Usuario {
     private String localidad;
     private String direccion;
 
-    
+
     @ElementCollection
     @CollectionTable(name = "HORARIOS_ATENCION", joinColumns = @JoinColumn(name = "profesional_id"))
     @Column(name = "horario_atencion")
@@ -78,8 +67,8 @@ public class Profesional extends Usuario {
         //LOS HORARIOS DE ATENCION SE DARIAN DE LUNES A VIERNES EN UN HORARIO FIJO CON TURNOS DE 30 MIN//
 
     private int PrecioConsulta;
-    
-    
+
+
     @OneToMany
     private List<Consulta> consultas;
 
@@ -87,9 +76,9 @@ public class Profesional extends Usuario {
     private FichaMedica fichaMedica;
 
     private int valoracionProfesional = 10;
-    
-    
-        public void recibirPuntuacion(Consulta consulta, int puntuacion) {
+
+
+    public void recibirPuntuacion(Consulta consulta, int puntuacion) {
         if (consultas.contains(consulta)) {
             if (puntuacion >= 1 && puntuacion <= 10) {
                 consulta.setPuntuacion(puntuacion);
@@ -121,7 +110,7 @@ public class Profesional extends Usuario {
             }
         }
     }
-    
+
     public void programarConsulta(Consulta consulta, LocalTime horario) {
         if (horariosAtencion.contains(horario) && !horarioOcupado(horario)
                 && horarioValido(consulta.getDuracionConsulta(), horario)) {
@@ -161,5 +150,4 @@ public class Profesional extends Usuario {
         return true; // Horario válido
     }
 
-    
 }

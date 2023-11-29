@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
@@ -38,15 +41,21 @@ public class PacienteControlador {
     }
 
     @PostMapping("/solicitar/{id}")
-    public String  reservarCita(@PathVariable String id, @RequestParam String idProfesional, @RequestParam Date fecha, @RequestParam LocalTime horario, ModelMap model) throws MiException {
+    public String  reservarCita(@PathVariable String id, @RequestParam String idProfesional,
+                                @RequestParam Date fecha, @RequestParam LocalTime horario,
+                                HttpServletRequest request, ModelMap model) throws MiException, ParseException {
 
+        System.out.println("EJECUTANDO POST");
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date fechaDate = dateFormat.parse(request.getParameter("fecha"));
 
         var Paciente = pacienteServicio.getOne(id);
         var Profesional = profesionalServicio.getOne(idProfesional);
 
-        consultaServicio.crearConsulta(Paciente,Profesional,fecha, horario);
+        consultaServicio.crearConsulta(Paciente,Profesional,fechaDate, horario);
 
-        return "redirect:/citas";
+        return "redirect:/paciente/citas";
     }
 
     @GetMapping("/historia")

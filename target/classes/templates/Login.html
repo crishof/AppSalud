@@ -11,6 +11,12 @@
 <!--<header th:replace="layout/header :: header"></header>-->
 <nav th:replace="layout/navbar :: navbar"></nav>
 
+<div th:if="${exito != null}" class=" card text-white bg-danger mb-3 mensajeError">
+    <div class="card-body">
+        <h5 class="card-title">Exito!</h5>
+        <p class="card-text" th:text="${exito}"></p>
+    </div>
+</div>
 <div class="container mt-5">
     <form class="card shadow p-5" th:action="@{/logincheck}" method="POST">
         <div class="header text-center mb-4">

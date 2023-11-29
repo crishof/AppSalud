@@ -9,6 +9,7 @@ import com.egg.appsalud.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,8 +55,9 @@ public class InicioController {
 
             usuarioServicio.crearUsuario(archivo, nombreUsuario, nombre, apellido, dni, fechaDeNacimiento, email, password, password2);
 
+            modelo.addAttribute("exito",null);
             modelo.put("exito", "el usuario fue creado con exito");
-            return "index";
+            return "redirect:/portal/login";
         } catch (MiException e) {
 
             modelo.put("error", e.getMessage());
@@ -76,12 +78,15 @@ public class InicioController {
 
     @PostMapping("/registrarProfesional")
     public String registrarProfesional(MultipartFile archivo, @RequestParam String nombreUsuario, @RequestParam String nombre,
-                                       @RequestParam String apellido, @RequestParam(required = false) Long dni, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
-                                       @RequestParam String email, @RequestParam String password, @RequestParam String password2, @RequestParam(required = false) Long matricula,
-            /*List<ObraSocial> obrasocial,*/ @RequestParam Especialidad especialidad, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion, @RequestParam List<LocalTime> horariosAtencion,
-                                       @RequestParam int precioConsulta, ModelMap modelo) throws MiException, ParseException {
+                                       @RequestParam String apellido, @RequestParam(required = false) Long dni,
+                                       @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
+                                       @RequestParam String email, @RequestParam String password, @RequestParam String password2,
+                                       @RequestParam(required = false) Long matricula,/*List<ObraSocial> obrasocial,*/
+                                       @RequestParam Especialidad especialidad, @RequestParam Provincias provincias,
+                                       @RequestParam String localidad, @RequestParam String direccion,
+                                       /*@RequestParam List<LocalTime> horariosAtencion,*//* @RequestParam int precioConsulta,*/
+                                       Model modelo) throws MiException, ParseException {
 
-        System.out.println("EJECUTANDO POST REGISTRAR");
         Date fechaDeNacimiento;
 
         try {
@@ -89,20 +94,19 @@ public class InicioController {
             fechaDeNacimiento = dateFormat.parse(fechaDeNacimientoStr);
 
         } catch (ParseException p) {
-            modelo.put("error", "la fecha no puede venir vacía");
-            return "redirect:/profesional/registrar";
+            modelo.addAttribute("error", "la fecha no puede venir vacía");
+            return "redirect:/registroProfesional";
         }
 
         try {
             profesionalServicio.crearProfesional(archivo, nombreUsuario, password, password2, nombre, apellido, email,
-                    fechaDeNacimiento, dni, especialidad, provincias, localidad, direccion, matricula, horariosAtencion, precioConsulta/*, obrasocial*/);
-            modelo.put("exito", "el profesional fue creado con exito");
-            return "index";
+                    fechaDeNacimiento, dni, especialidad, provincias, localidad, direccion, matricula/*, horariosAtencion,*//* precioConsulta*//*, obrasocial*/);
+            modelo.addAttribute("exito", "Su cuenta fue creada con exito");
+            return "redirect:/portal/login";
         } catch (MiException e) {
 
-            modelo.put("error", e.getMessage());
-
-            return "redirect:/profesional/registrar";
+            modelo.addAttribute("error", e.getMessage());
+            return "redirect:/registroProfesional";
         }
     }
 
@@ -115,12 +119,9 @@ public class InicioController {
         Especialidad[] especialidades = Especialidad.values();
         modelo.addAttribute("especialidades", especialidades);
         modelo.addAttribute("valorSeleccionado", especialidad);
-        
         modelo.addAttribute("ordenSeleccionado", columna);
         return "profesional_lista";
     }
-    
-    
 
     @GetMapping("/terminos")
     public String terminos() {
