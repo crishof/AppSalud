@@ -3,6 +3,7 @@ package com.egg.appsalud.controladores;
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.servicios.PacienteServicio;
+import com.egg.appsalud.servicios.TurnoServicio;
 import com.egg.appsalud.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -22,6 +23,9 @@ public class PacienteController {
 
     @Autowired
     PacienteServicio pacienteServicio;
+
+    @Autowired
+    TurnoServicio turnoServicio;
 
     //    MODIFICAR DATOS COMO PACIENTE
     @GetMapping("/editar")
@@ -64,7 +68,15 @@ public class PacienteController {
     }
 
     @GetMapping("/citas")
-    public String listarCitas() {
+    public String listarCitas(ModelMap modelMap, HttpSession session) {
+
+        Paciente paciente = (Paciente) session.getAttribute("usuariosession");
+        if (paciente == null){
+            return "redirect:/portal/login";
+        }
+
+        var misTurnos = turnoServicio.obtenerTurnosDelPaciente(paciente);
+        modelMap.addAttribute("misTurnos",misTurnos);
         return "paciente_citas";
     }
 
