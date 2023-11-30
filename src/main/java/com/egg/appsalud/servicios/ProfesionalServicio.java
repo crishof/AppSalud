@@ -1,5 +1,6 @@
 package com.egg.appsalud.servicios;
 
+import com.egg.appsalud.Enumeracion.DiaSemana;
 import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.Enumeracion.Rol;
@@ -56,11 +57,17 @@ public class ProfesionalServicio implements UserDetailsService {
     @Transactional
     public void crearProfesional(MultipartFile archivo, String nombreUsuario, String password, String password2, String nombre, String apellido,
                                  String email, Date fechaNacimiento, Long DNI, Especialidad especialidad, Provincias provincias, String localidad, String direccion,
-                                 Long matricula/*, int precioConsulta*/) throws MiException {
+                                 Long matricula, List<DiaSemana> diasDisponibles, LocalTime horarioEntrada, LocalTime horarioSalida, Integer precioConsulta) throws MiException {
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaNacimiento, DNI, email, matricula, especialidad, provincias, localidad, direccion);
 
         Profesional profesional = new Profesional();
+
+        profesional.setNombre(nombre);
+        profesional.setApellido(apellido);
+        profesional.setFechaDeNacimiento(fechaNacimiento);
+        profesional.setDNI(DNI);
+        profesional.setEmail(email);
 
         profesional.setNombreUsuario(nombreUsuario);
         profesional.setPassword(new BCryptPasswordEncoder().encode(password));
@@ -68,19 +75,18 @@ public class ProfesionalServicio implements UserDetailsService {
         profesional.setRol(Rol.PROFESIONAL);
         Imagen imagen = imagenServicio.guardar(archivo);
 
-        profesional.setNombre(nombre);
-        profesional.setApellido(apellido);
-        profesional.setEmail(email);
-        profesional.setFechaDeNacimiento(fechaNacimiento);
-        profesional.setActivo(true);
-        profesional.setDNI(DNI);
+        profesional.setMatricula(matricula);
         profesional.setEspecialidad(especialidad);
+        profesional.setDiasDisponibles(diasDisponibles);
+        profesional.setHorarioEntrada(horarioEntrada);
+        profesional.setHorarioSalida(horarioSalida);
+        profesional.setPrecioConsulta(precioConsulta);
+
+        profesional.setActivo(true);
         profesional.setProvincias(provincias);
         profesional.setLocalidad(localidad);
         profesional.setDireccion(direccion);
         profesional.setImagen(imagen);
-        profesional.setMatricula(matricula);
-        //profesional.setObraSocial(obraSocial);
 
 
         profesionalRepositorio.save(profesional);

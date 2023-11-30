@@ -1,14 +1,18 @@
 package com.egg.appsalud.controladores;
 
+import com.egg.appsalud.Enumeracion.DiaSemana;
 import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Profesional;
+import com.egg.appsalud.repositorios.ProfesionalRepositorio;
 import com.egg.appsalud.servicios.PacienteServicio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
+import com.egg.appsalud.servicios.TurnoServicio;
 import com.egg.appsalud.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -38,6 +42,12 @@ public class InicioController {
     @Autowired
     ProfesionalServicio profesionalServicio;
 
+    @Autowired
+    ProfesionalRepositorio profesionalRepositorio;
+
+    @Autowired
+    TurnoServicio turnoServicio;
+
     @GetMapping("/registroPaciente")
     public String registroPaciente() {
         return "paciente_registro";
@@ -59,7 +69,7 @@ public class InicioController {
 
             pacienteServicio.crearPaciente(archivo, nombreUsuario, nombre, apellido, dni, fechaDeNacimiento, email, password, password2);
 
-            modelo.addAttribute("exito",null);
+            modelo.addAttribute("exito", null);
             modelo.put("exito", "el usuario fue creado con exito");
             return "redirect:/portal/login";
         } catch (MiException e) {
@@ -81,15 +91,27 @@ public class InicioController {
     }
 
     @PostMapping("/registrarProfesional")
-    public String registrarProfesional(MultipartFile archivo, @RequestParam String nombreUsuario, @RequestParam String nombre,
-                                       @RequestParam String apellido, @RequestParam(required = false) Long dni,
-                                       @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
-                                       @RequestParam String email, @RequestParam String password, @RequestParam String password2,
-                                       @RequestParam(required = false) Long matricula,/*List<ObraSocial> obrasocial,*/
-                                       @RequestParam Especialidad especialidad, @RequestParam Provincias provincias,
-                                       @RequestParam String localidad, @RequestParam String direccion,
-                                       /*@RequestParam List<LocalTime> horariosAtencion,*//* @RequestParam int precioConsulta,*/
-                                       Model modelo) throws MiException, ParseException {
+    public String registrarProfesional(
+            @RequestParam String nombre,
+            @RequestParam String apellido,
+            @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr,
+            @RequestParam(required = false) Long dni,
+
+            @RequestParam String email,
+            @RequestParam(required = false) Long matricula,
+            @RequestParam Especialidad especialidad,
+            @RequestParam List<DiaSemana> diasDisponibles,
+            @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime horarioEntrada,
+            @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime horarioSalida,
+            @RequestParam Integer precioConsulta,
+            @RequestParam String password,
+            @RequestParam String password2,
+            MultipartFile archivo,
+            @RequestParam String nombreUsuario,
+            @RequestParam Provincias provincias,
+            @RequestParam String localidad,
+            @RequestParam String direccion,
+            ModelMap modelo) {
 
         Date fechaDeNacimiento;
 
@@ -104,19 +126,25 @@ public class InicioController {
 
         try {
             profesionalServicio.crearProfesional(archivo, nombreUsuario, password, password2, nombre, apellido, email,
-                    fechaDeNacimiento, dni, especialidad, provincias, localidad, direccion, matricula/*, horariosAtencion,*//* precioConsulta*//*, obrasocial*/);
-            modelo.addAttribute("exito", "Su cuenta fue creada con exito");
-            return "redirect:/portal/login";
+                    fechaDeNacimiento, dni, especialidad, provincias, localidad, direccion, matricula,
+                    diasDisponibles, horarioEntrada, horarioSalida, precioConsulta);
+
+            var registrado = profesionalRepositorio.buscarPorEmail(email);
+
+            turnoServicio.generarTurnos(registrado);
+            modelo.put("exito", "Su cuenta fue creada con exito");
+
         } catch (MiException e) {
 
-            modelo.addAttribute("error", e.getMessage());
+            modelo.put("error", e.getMessage());
             return "redirect:/registroProfesional";
         }
+        return "redirect:/portal/login";
     }
 
     @GetMapping("/listaProfesionales")
-    public String listarProfesionales(@Param("especialidad") String especialidad, 
-            @Param("columna") String columna, ModelMap modelo) {
+    public String listarProfesionales(@Param("especialidad") String especialidad,
+                                      @Param("columna") String columna, ModelMap modelo) {
         List<Profesional> profesionales = profesionalServicio.listarProfesional(especialidad, columna);
         modelo.addAttribute("profesional", profesionales);
 

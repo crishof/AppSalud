@@ -24,7 +24,7 @@ public class TurnoController {
     @Autowired
     private TurnoServicio turnoServicio;
 
-    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROFESIONAL','ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('PACIENTE','ROLE_PROFESIONAL','ROLE_ADMIN')")
     @GetMapping("/listar")
     public String obtenerTodosLosTurnos(ModelMap model, HttpSession session) {
         // Verifica si el usuario está autenticado utilizando la sesión

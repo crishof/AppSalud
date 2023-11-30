@@ -78,7 +78,7 @@ public class UtilController {
 
         int precioConsulta = 7000;
 
-        profesionalServicio.crearProfesional(null, nombreUsuario, password, password, nombre, apellido, email, fechaNacimiento, dni, especialidad, provincias, localidad, direccion, matricula);
+//        profesionalServicio.crearProfesional(null, nombreUsuario, password, password, nombre, apellido, email, fechaNacimiento, dni, especialidad, provincias, localidad, direccion, matricula, diasDisponibles, horarioEntrada, horarioSalida, precioConsulta);
 
         return "redirect:../listaProfesionales";
     }

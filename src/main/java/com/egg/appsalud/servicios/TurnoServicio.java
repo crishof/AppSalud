@@ -21,8 +21,6 @@ import java.util.Optional;
 public class TurnoServicio {
 
     @Autowired
-    private ProfesionalServicio profesionalServicio;
-    @Autowired
     private TurnoRepositorio turnoRepositorio;
 
     @Transactional
