@@ -6,11 +6,15 @@ import com.egg.appsalud.entidades.Consulta;
 import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
+import com.egg.appsalud.repositorios.PacienteRepositorio;
 import com.egg.appsalud.servicios.ConsultaServicio;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import com.egg.appsalud.servicios.PacienteServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +29,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/consulta")
 public class ConsultaControlador {
@@ -35,24 +41,47 @@ public class ConsultaControlador {
     @Autowired
     private ConsultaRepositorio cr;
 
-    @GetMapping("/crear")
-    public String crearConsulta(ModelMap modelo) {
+    @Autowired
+    PacienteRepositorio pacienteRepositorio;
+
+    @Autowired
+    PacienteServicio pacienteServicio;
+
+    @GetMapping("/crear/{id}")
+    public String crearConsulta(@PathVariable String id, ModelMap modelo) {
+
+        Paciente paciente = pacienteServicio.getOne(id);
+
+        modelo.put("paciente",paciente);
+
 
         return "profesional_consulta";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN', 'ROLE_PACIENTE')")
-    @PostMapping("/crear")
-    public String crearConsulta(@RequestParam Paciente paciente, @RequestParam Profesional profesional, @RequestParam Date fecha, @RequestParam LocalTime horario, ModelMap modelo) throws MiException {
+    @PostMapping("/crear/{id}")
+    public String crearConsulta(@RequestParam String idPaciente, HttpSession session,
+                                String obraSocial, Long afiliado,
+                                @RequestParam String antecedentes, @RequestParam String grupoSanguineo,
+                                @RequestParam Double altura, @RequestParam Double peso,
+                                String observaciones, @RequestParam String diagnostico,
+                                @RequestParam String tratamiento, ModelMap modelo) throws MiException {
 
+        Paciente paciente = pacienteServicio.getOne(idPaciente);
+        Profesional profesional = (Profesional) session.getAttribute("session");
+
+        Date fecha = new Date();
+        LocalTime horario = LocalTime.now();
 
         try {
-            cs.crearConsulta(paciente, profesional, fecha, horario);
+            cs.crearConsulta(paciente, profesional, obraSocial, afiliado, antecedentes, grupoSanguineo, altura, peso,
+                    observaciones, diagnostico,tratamiento,fecha, horario);
             modelo.put("exito", "La consulta fue creada con exito");
-            return "index";
+            return "redirect:/";
         } catch (MiException e) {
             modelo.put("error", e.getMessage());
-            return "redirect:/consulta/crear";
+            modelo.put("paciente",pacienteServicio.getOne(idPaciente));
+            return "redirect:/consulta/crear/{id}";
         }
     }
 

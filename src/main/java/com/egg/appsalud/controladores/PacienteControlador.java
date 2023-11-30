@@ -73,7 +73,7 @@ public class PacienteControlador {
         var Paciente = pacienteServicio.getOne(id);
         var Profesional = profesionalServicio.getOne(idProfesional);
 
-        consultaServicio.crearConsulta(Paciente, Profesional, fechaDate, horario);
+//        consultaServicio.crearConsulta(Paciente, Profesional, fechaDate, horario);
 
         return "redirect:/paciente/citas";
     }

@@ -52,8 +52,6 @@
     </div>
 
 
-
-
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -71,11 +69,10 @@
             <td>
                 <form th:action="@{/turno/agendar-turno}" method="post">
                     <!-- Agregar un campo oculto para enviar el ID del turno -->
-                    <input type="hidden" name="turnoId" th:value="${turno.id}" />
+                    <input type="hidden" name="turnoId" th:value="${turno.id}"/>
 
                     <button type="submit" class="btn btn-primary btn-agendar">Agendar Cita</button>
                 </form>
-
             </td>
         </tr>
         </tbody>
@@ -83,35 +80,35 @@
 
 
 
-<!--    <div class="container mt-4">-->
-<!--        <form class="d-inline" id="cita" th:action="@{/turno/agendar-turno}" method="POST">-->
-<!--            <input hidden th:value="${profesional.id}" name="idProfesional">-->
 
-<!--            <div class="form-group mx-sm-3 m-2 ">-->
+    <!--    <div class="container mt-4">-->
+    <!--        <form class="d-inline" id="cita" th:action="@{/turno/agendar-turno}" method="POST">-->
+    <!--            <input hidden th:value="${profesional.id}" name="idProfesional">-->
 
-<!--                <label for="fecha">Seleccionar Día:</label>-->
-<!--                <select name="fecha" id="fecha">-->
-<!--                    <option th:each="turno : ${turnos}"-->
-<!--                            th:value="${turno.fecha}"-->
-<!--                            type="text" name="dia" th:text="${turno.fecha}"></option>-->
-<!--                </select>-->
+    <!--            <div class="form-group mx-sm-3 m-2 ">-->
 
-<!--                <label for="hora">Seleccionar Hora:</label>-->
-<!--                <select name="hora" id="hora">-->
-<!--                    <option th:each="turno : ${turnos}"-->
-<!--                            th:value="${turno.hora}"-->
-<!--                            type="text" name="dia" th:text="${turno.hora}"></option>-->
-<!--                </select>-->
-<!--                <div class="text-center m-3">-->
-<!--                    <input class="btn btn-primary" type="submit" value="Reservar">-->
-<!--                    <a class="btn btn-secondary" th:href="@{/listaProfesionales}">Volver</a>-->
-<!--                </div>-->
+    <!--                <label for="fecha">Seleccionar Día:</label>-->
+    <!--                <select name="fecha" id="fecha">-->
+    <!--                    <option th:each="turno : ${turnos}"-->
+    <!--                            th:value="${turno.fecha}"-->
+    <!--                            type="text" name="dia" th:text="${turno.fecha}"></option>-->
+    <!--                </select>-->
+
+    <!--                <label for="hora">Seleccionar Hora:</label>-->
+    <!--                <select name="hora" id="hora">-->
+    <!--                    <option th:each="turno : ${turnos}"-->
+    <!--                            th:value="${turno.hora}"-->
+    <!--                            type="text" name="dia" th:text="${turno.hora}"></option>-->
+    <!--                </select>-->
+    <!--                <div class="text-center m-3">-->
+    <!--                    <input class="btn btn-primary" type="submit" value="Reservar">-->
+    <!--                    <a class="btn btn-secondary" th:href="@{/listaProfesionales}">Volver</a>-->
+    <!--                </div>-->
 
 
-<!--            </div>-->
-<!--        </form>-->
-<!--    </div>-->
-
+    <!--            </div>-->
+    <!--        </form>-->
+    <!--    </div>-->
 
 
 </div>

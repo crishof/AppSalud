@@ -3,6 +3,7 @@ package com.egg.appsalud.servicios;
 import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Consulta;
+import com.egg.appsalud.entidades.FichaMedica;
 import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
@@ -22,9 +23,13 @@ public class ConsultaServicio {
     @Autowired
     private ConsultaRepositorio consultaRepositorio;
 
+    @Autowired
+    private FichaMedicaServicio fichaMedicaServicio;
+
 
     @Transactional
-    public void crearConsulta(Paciente paciente, Profesional profesional, Date fecha, LocalTime horario) throws MiException {
+    public void crearConsulta(Paciente paciente, Profesional profesional, String obraSocial, Long afiliado, String antecedentes, String grupoSanguineo, Double altura,
+                              Double peso, String observaciones, String diagnostico, String tratamiento, Date fecha, LocalTime horario) throws MiException {
 
         System.out.println("EJECUTANDO CREAR CONSULTA");
 
@@ -35,7 +40,14 @@ public class ConsultaServicio {
 
         consulta.setPaciente(paciente);
         consulta.setProfesional(profesional);
-        consulta.setFechaDeConsulta(new Date());
+        consulta.setFechaDeConsulta(fecha);
+        consulta.setHoraInicio(horario);
+        consulta.setDiagnostico(diagnostico);
+        consulta.setTratamiento(tratamiento);
+
+
+        FichaMedica fichaMedica = new FichaMedica(paciente, antecedentes ,obraSocial, afiliado, grupoSanguineo, altura, peso);
+
         consultaRepositorio.save(consulta);
 
     }

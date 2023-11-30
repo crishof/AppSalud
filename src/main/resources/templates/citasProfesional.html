@@ -26,17 +26,19 @@
             <th>Especialidad</th>
             <th>Estado</th>
             <th>Paciente</th>
+            <th>Atender Consulta</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="turno : ${misTurnosProfesional}">
-            <td th:text="${turno.fecha}"></td>
-            <td th:text="${turno.hora}"></td>
-            <td th:text="${turno.profesional.nombre} + ' ' + ${turno.profesional.apellido}"></td>
-            <td th:text="${turno.profesional.especialidad}"></td>
-            <td th:text="${turno.isDisponibilidad()}"></td>
+            <td th:if="${pacientes.contains(turno.paciente)}" th:text="${turno.fecha}"></td>
+            <td th:if="${pacientes.contains(turno.paciente)}" th:text="${turno.hora}"></td>
+            <td th:if="${pacientes.contains(turno.paciente)}" th:text="${turno.profesional.nombre} + ' ' + ${turno.profesional.apellido}"></td>
+            <td th:if="${pacientes.contains(turno.paciente)}" th:text="${turno.profesional.especialidad}"></td>
+            <td th:if="${pacientes.contains(turno.paciente)}" th:text="${turno.isDisponibilidad()}"></td>
 <!--            <td th:text="${turno.paciente.nombre} + ' ' + ${turno.paciente.apellido}"></td>-->
-<!--            <td th:text="${turno.paciente.nombre}"></td>-->
+            <td th:if="${pacientes.contains(turno.paciente)}" th:text="${turno.paciente.nombre}"></td>
+            <td th:if="${pacientes.contains(turno.paciente)}"> <a th:href="@{/consulta/crear/__${turno.paciente.id}__}">Ir</a></td>
         </tr>
         </tbody>
     </table>

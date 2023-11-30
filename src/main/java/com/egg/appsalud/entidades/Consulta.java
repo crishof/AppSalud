@@ -47,6 +47,9 @@ public class Consulta {
     private LocalTime horaInicio;
     private int duracionConsulta; // Duración en minutos
 
+    private String diagnostico;
+    private String tratamiento;
+
     //el horario y la duración
     public Consulta(LocalTime horaInicio, int duracionConsulta) {
         this.horaInicio = horaInicio;

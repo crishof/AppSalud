@@ -25,4 +25,7 @@ public class Paciente extends Usuario {
     @OneToMany
     private List<Consulta> consulta;
 
+
+
+
 }

@@ -6,6 +6,7 @@ import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.entidades.Turno;
+import com.egg.appsalud.repositorios.PacienteRepositorio;
 import com.egg.appsalud.repositorios.ProfesionalRepositorio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
 
@@ -43,6 +44,9 @@ public class ProfesionalControlador {
 
     @Autowired
     TurnoServicio turnoServicio;
+
+    @Autowired
+    PacienteRepositorio pacienteRepositorio;
 
     @GetMapping("/modificar/{id}")
     public String modificarProfesional(@PathVariable String id, ModelMap modelo) {
@@ -117,6 +121,8 @@ public class ProfesionalControlador {
 
         List<Turno> misTurnosProfesional = turnoServicio.obtenerTurnosDeProfesional(profesional);
         modelo.addAttribute("misTurnosProfesional",misTurnosProfesional);
+        var pacientes = pacienteRepositorio.findAll();
+        modelo.addAttribute("pacientes",pacientes);
         
         return "citasProfesional";
         
