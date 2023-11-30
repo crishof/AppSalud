@@ -11,8 +11,10 @@
         <!--<header th:replace="layout/header :: header"></header>-->
         <nav th:replace="layout/navbar :: navbar"></nav>
 
-        <p class="text-end m-4">Click en el botón para simular un registro <span>
-                <a th:href="@{/util/database}"><i class="fa fa-database"></i></a></span></p>
+        <p class="text-end m-4">Click para simular profesional <span>
+                <a th:href="@{/util/profesionalRandom}"><i class="fa fa-database"></i></a></span></p>
+        <p class="text-end m-4">Click para simular paciente <span>
+                <a th:href="@{/util/pacienteRandom}"><i class="fa fa-database"></i></a></span></p>
 
         <div class="container mt-4">
             <form class="d-inline" id="miFormulario" th:action="@{/listaProfesionales}">
@@ -78,7 +80,7 @@
                                 </td>
                                 <td th:text="${profesional.apellido}" style="vertical-align:middle"></td>
                                 <td th:text="${profesional.nombre}" style="vertical-align:middle"></td>
-                                <td th:text="${profesional.precioConsulta}" style="vertical-align:middle"></td>
+                                <td th:text="'$ ' + ${profesional.precioConsulta}" style="vertical-align:middle"></td>
                                 <td th:text="${profesional.valoracionProfesional}" style="vertical-align:middle"></td>
                                 <td th:text="${profesional.provincias}" style="vertical-align:middle"></td>
                                 <td th:text="${profesional.localidad}" style="vertical-align:middle"></td>
