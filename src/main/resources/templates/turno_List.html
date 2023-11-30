@@ -9,7 +9,7 @@
     <body>
         <div class="container">
             <h1 class="my-4 text-center">Consulta de Turnos</h1>
-            <div th:replace="/fragments/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>
+            <div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>
             <label for="filtro">Filtra lo que quieras:</label>
             <input type="text" id="filtro" placeholder="Buscar turnos...">
             <table class="table">

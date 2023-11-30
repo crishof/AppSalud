@@ -76,7 +76,7 @@ public class TurnoController {
             turnoServicio.asignarTurnoAPaciente(turnoId, paciente);
             modelo.addAttribute("exito", "Turno agendado correctamente.");
             // Si no hay URL original, redirige al usuario a la página de lista de turnos
-            return "turno_List";
+            return "redirect:/paciente/citas";
         } catch (Exception ex) {
             modelo.addAttribute("error", "Error al agendar el turno: " + ex.getMessage());
             return "turno_List"; // Otra página de error o manejo de errores según tus necesidades

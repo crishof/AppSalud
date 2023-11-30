@@ -1,10 +1,12 @@
 package com.egg.appsalud.controladores;
 
 import com.egg.appsalud.Exception.MiException;
+import com.egg.appsalud.entidades.Turno;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
 import com.egg.appsalud.servicios.ConsultaServicio;
 import com.egg.appsalud.servicios.PacienteServicio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
+import com.egg.appsalud.servicios.TurnoServicio;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,11 +14,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -32,18 +36,34 @@ public class PacienteControlador {
     @Autowired
     ConsultaServicio consultaServicio;
 
-    @GetMapping("/solicitar/{id}")
-    public String solicitarCita(@PathVariable String id, ModelMap modelo) {
+    @Autowired
+    TurnoServicio turnoServicio;
 
-        var profesional = profesionalServicio.getOne(id);
-        modelo.addAttribute("profesional",profesional);
-        return "cita_solicitud";
+    @GetMapping("/solicitar/{id}")
+    public String solicitarCita(@PathVariable String id, ModelMap modelo, HttpSession session) {
+
+        if (session.getAttribute("usuariosession") == null) {
+            return "login";
+        } else {
+
+            var profesional = profesionalServicio.getOne(id);
+            if (profesional != null) {
+
+                List<Turno> turnos = turnoServicio.obtenerTurnosDeProfesionalOrdenados(profesional);
+                modelo.addAttribute("turnos", turnos);
+                modelo.addAttribute("profesional", profesional);
+
+                return "cita_solicitud";
+            } else {
+                return "error";
+            }
+        }
     }
 
     @PostMapping("/solicitar/{id}")
-    public String  reservarCita(@PathVariable String id, @RequestParam String idProfesional,
-                                @RequestParam Date fecha, @RequestParam LocalTime horario,
-                                HttpServletRequest request, ModelMap model) throws MiException, ParseException {
+    public String reservarCita(@PathVariable String id, @RequestParam String idProfesional,
+                               @RequestParam Date fecha, @RequestParam LocalTime horario,
+                               HttpServletRequest request, ModelMap model) throws MiException, ParseException {
 
         System.out.println("EJECUTANDO POST");
 
@@ -53,7 +73,7 @@ public class PacienteControlador {
         var Paciente = pacienteServicio.getOne(id);
         var Profesional = profesionalServicio.getOne(idProfesional);
 
-        consultaServicio.crearConsulta(Paciente,Profesional,fechaDate, horario);
+        consultaServicio.crearConsulta(Paciente, Profesional, fechaDate, horario);
 
         return "redirect:/paciente/citas";
     }
@@ -63,7 +83,7 @@ public class PacienteControlador {
         return "historia_clinica";
     }
 
-//    MODIFICAR DATOS COMO ADMIN
+    //    MODIFICAR DATOS COMO ADMIN
     @GetMapping("/modificar/{id}")
     public String modificarPaciente() {
         return "usuarioModificar";
