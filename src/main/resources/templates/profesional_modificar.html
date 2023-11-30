@@ -12,27 +12,29 @@
 <nav th:replace="layout/navbar :: navbar"></nav>
 
 
-<h1>
-    Modificar datos del Profesional
-</h1>
-
-<div th:if="${error != null}" class="card text-white bg-danger m-3">
-    <h5 class="card-title">Error!</h5>
-    <div class="card-body">
-        <p class="card-text" th:text="${error}"></p>
-    </div>
-</div>
-<div th:if="${exito} != null" class="card text-white bg-success m-3 ">
-    <h5 class="card-title">Exito!</h5>
-    <div class="card-body">
-        <p class="card-text" th:text="${exito}"></p>
-    </div>
-</div>
-
-
 <div class="card">
+    <div class="card-title m-3">
+        <h1>
+            Modificar datos del Profesional
+        </h1>
+
+    </div>
 
     <div class="card-body">
+
+        <div class="form-floating">
+            <p th:if="${profesional.activo}">ACTIVO</p>
+            <p style="text-align: center; vertical-align: middle;">
+                <form th:action="@{/usuario/bajaUsuario/{id}(id=${profesional.id})}" method="get" th:if="${profesional.activo}">
+                    <button  class="btn btn-danger " type="submit" value="Baja" >Baja</button>
+                </form>
+                <form th:action="@{/usuario/altaUsuario/{id}(id=${profesional.id})}" method="get" th:if="${not profesional.activo}">
+                    <button class="btn btn-primary" type="submit" value="Alta" >Alta</button>
+                </form>
+            </p>
+        </div>
+
+
         <form th:action="@{/profesional/modificar/__${profesional.id}__}" method="POST" enctype="multipart/form-data"
               class="row g-3">
 
@@ -95,25 +97,28 @@
 
             <div class="col-md-6">
                 <label for="localidad">Localidad: </label><br>
-                <input th:value="${profesional.localidad}" type="text" id="localidad" name="localidad" class="form-control"
+                <input th:value="${profesional.localidad}" type="text" id="localidad" name="localidad"
+                       class="form-control"
                        placeholder="Ingrese localidad" required>
             </div>
 
             <div class="col-md-6">
                 <label for="direccion">Dirección: </label>
-                <input th:value="${profesional.direccion}" type="text" id="direccion" name="direccion" class="form-control"
+                <input th:value="${profesional.direccion}" type="text" id="direccion" name="direccion"
+                       class="form-control"
                        placeholder="Ej: Calle Necochea 1232 3-A" required>
             </div>
 
-<!--            <div class="col-md-6">-->
-<!--                <label for="horariosAtencion">Horario de Atencion: </label>-->
-<!--                <input th:value="${profesional.horariosAtencion}" type="text" id="horariosAtencion" name="horariosAtencion" class="form-control"-->
-<!--                       placeholder="Ej: 9 a 12 - 15 a 18" required>-->
-<!--            </div>-->
+            <!--            <div class="col-md-6">-->
+            <!--                <label for="horariosAtencion">Horario de Atencion: </label>-->
+            <!--                <input th:value="${profesional.horariosAtencion}" type="text" id="horariosAtencion" name="horariosAtencion" class="form-control"-->
+            <!--                       placeholder="Ej: 9 a 12 - 15 a 18" required>-->
+            <!--            </div>-->
 
             <div class="col-md-6">
                 <label for="precioConsulta">Precio de la consulta: </label>
-                <input th:value="${profesional.precioConsulta}" type="number" id="precioConsulta" name="precioConsulta" class="form-control"
+                <input th:value="${profesional.precioConsulta}" type="number" id="precioConsulta" name="precioConsulta"
+                       class="form-control"
                        placeholder="Ingrese el valor de la consulta" required>
             </div>
 
@@ -127,42 +132,6 @@
                 </select>
             </div>
 
-            <div class="col-md-6 form-check">
-
-                <label>Obras Sociales</label><br>
-                <div>
-                    <input class="form-check-input" type="checkbox" name="obrasocial" value="particular" id="checkpart"
-                           checked>
-                    <label class="form-check-label" for="checkpart">
-                        Particular
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="obrasocial" value="medicus" id="checkmedicus">
-                    <label class="form-check-label" for="checkmedicus">
-                        Medicus
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="obrasocial" value="swiss" id="checkswiss">
-                    <label class="form-check-label" for="checkswiss">
-                        Swiss Medical
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="obrasocial" value="pami" id="checkpami">
-                    <label class="form-check-label" for="checkpami">
-                        PAMI
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="obrasocial" value="osde" id="checkosde">
-                    <label class="form-check-label" for="checkosde">
-                        OSDE
-                    </label>
-                </div>
-
-            </div>
             <div>
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </div>

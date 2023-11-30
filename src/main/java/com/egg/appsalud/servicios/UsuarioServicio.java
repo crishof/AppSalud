@@ -38,6 +38,9 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private ImagenServicio imagenServicio;
 
+    @Autowired
+    UsuarioRepositorio usuarioRepositorio;
+
     @Transactional
     public void crearUsuario(MultipartFile archivo, String nombreUsuario, String nombre, String apellido,
                              Long DNI, Date fechaDeNacimiento, String email, String password, String password2) throws MiException {
@@ -128,6 +131,33 @@ public class UsuarioServicio implements UserDetailsService {
         }
         return Usuario;
     }
+
+    @org.springframework.transaction.annotation.Transactional
+    public void bajaUsuario(String id) throws MiException {
+        if (id == null || id.isEmpty()) {
+            throw new MiException("El id ingresado no puede ser nulo o estar vacio");
+        }
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            Usuario user = (Usuario) respuesta.get();
+            user.setActivo(false); // Establece el estado del profesional como inactivo
+            usuarioRepositorio.save(user);
+        }
+    }
+
+    @org.springframework.transaction.annotation.Transactional
+    public void altaUsuario(String id) throws MiException {
+        if (id == null || id.isEmpty()) {
+            throw new MiException("El id ingresado no puede ser nulo o estar vacio");
+        }
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            Usuario user = (Usuario) respuesta.get();
+            user.setActivo(true); // Establece el estado del profesional como activo
+            usuarioRepositorio.save(user);
+        }
+    }
+    
 
     @Override
     public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {
