@@ -5,6 +5,7 @@ import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Enumeracion.Provincias;
+import com.egg.appsalud.entidades.Turno;
 import com.egg.appsalud.repositorios.ProfesionalRepositorio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
 
@@ -12,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 
+import com.egg.appsalud.servicios.TurnoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/profesional")
 public class ProfesionalControlador {
@@ -36,6 +40,9 @@ public class ProfesionalControlador {
 
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
+
+    @Autowired
+    TurnoServicio turnoServicio;
 
     @GetMapping("/modificar/{id}")
     public String modificarProfesional(@PathVariable String id, ModelMap modelo) {
@@ -101,8 +108,18 @@ public class ProfesionalControlador {
 //    }
 
     @GetMapping("/citasProfesional")
-    public String listarCitas() {
+    public String listarCitas(ModelMap modelo, HttpSession session) {
+
+        Profesional profesional = (Profesional) session.getAttribute("usuariosession");
+        if ( profesional == null){
+            return "redirect:/portal/login";
+        }
+
+        List<Turno> misTurnosProfesional = turnoServicio.obtenerTurnosDeProfesional(profesional);
+        modelo.addAttribute("misTurnosProfesional",misTurnosProfesional);
+        
         return "citasProfesional";
+        
     }
 
     @GetMapping("/listaPacientes")
