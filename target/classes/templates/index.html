@@ -12,6 +12,8 @@
 <div class="banner">
     <nav th:replace="layout/navbar :: navbar"></nav>
 
+    <div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>
+
     <h1 class="fw-bold display-2 text-center text-light banner-heading">Encuentra tu atención médica ideal</h1>
     <h3 class="fw-bold display-2 text-center mt-5">Citas simples</h3>
     <p class="fw-bold text-light text-center container">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos

@@ -25,6 +25,8 @@
     </div>
     <nav th:replace="/fragments/navbar :: nav"></nav>
 
+    <div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>
+
 </header>
 <nav th:replace="layout/navbar :: navbar"></nav>
 
