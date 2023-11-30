@@ -108,9 +108,15 @@
                 <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
 
+            <div  class=" text-muted mt-3 text-center" th:if="${session.usuariosession != null}">
+                <p th:text="${session.usuariosession.nombre}"></p>
+            </div>
 
 
-        </div>
+
+
+
+    </div>
     </div>
 </nav>
 </body>

@@ -1,17 +1,19 @@
 package com.egg.appsalud.controladores;
 
+import com.egg.appsalud.Enumeracion.DiaSemana;
 import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.Exception.MiException;
+import com.egg.appsalud.repositorios.ProfesionalRepositorio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
+import com.egg.appsalud.servicios.TurnoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Random;
+import java.time.LocalTime;
+import java.util.*;
 
 @Controller
 @RequestMapping("/util")
@@ -19,6 +21,12 @@ public class UtilController {
 
     @Autowired
     ProfesionalServicio profesionalServicio;
+
+    @Autowired
+    TurnoServicio turnoServicio;
+
+    @Autowired
+    ProfesionalRepositorio profesionalRepositorio;
 
     @GetMapping("/database")
     public String cargarDataBase() throws MiException {
@@ -68,17 +76,42 @@ public class UtilController {
         String direccion = direcciones[random.nextInt(direcciones.length)];
         System.out.println("direccion = " + direccion);
 
-//        List<LocalTime> horariosAtencion = new ArrayList<>();
+        List<DiaSemana> diasDisponibles = new ArrayList<>();
+        DiaSemana[] diasSemana = DiaSemana.values();
+        for (int i = 0; i < 3; i++) {
+            DiaSemana diaAleatorio = diasSemana[random.nextInt(diasSemana.length)];
+            diasDisponibles.add(diaAleatorio);
+        }
 
-        // Agrega los horarios según tus necesidades
-//        horariosAtencion.add(LocalTime.of(9, 0));   // 09:00
-//        horariosAtencion.add(LocalTime.of(12, 30)); // 12:30
-//        horariosAtencion.add(LocalTime.of(15, 45)); // 15:45
-//        horariosAtencion.add(LocalTime.of(18, 0));  // 18:00
 
-        int precioConsulta = 7000;
 
-//        profesionalServicio.crearProfesional(null, nombreUsuario, password, password, nombre, apellido, email, fechaNacimiento, dni, especialidad, provincias, localidad, direccion, matricula, diasDisponibles, horarioEntrada, horarioSalida, precioConsulta);
+
+        // Array de LocalTime para los horarios de entrada (de 8:00 a 16:00 cada media hora)
+        LocalTime[] horariosEntrada = new LocalTime[17];
+        for (int i = 0; i < 17; i++) {
+            horariosEntrada[i] = LocalTime.of(8 + i / 2, (i % 2) * 30);
+        }
+
+        // Array de LocalTime para los horarios de salida (de 12:00 a 20:00 cada media hora)
+        LocalTime[] horariosSalida = new LocalTime[17];
+        for (int i = 0; i < 17; i++) {
+            horariosSalida[i] = LocalTime.of(12 + i / 2, (i % 2) * 30);
+        }
+
+
+        LocalTime horarioEntrada = horariosEntrada[random.nextInt(horariosEntrada.length)];
+        LocalTime horarioSalida = horariosSalida[random.nextInt(horariosSalida.length)];
+
+
+        int valorAleatorio = random.nextInt(36) + 15;
+        int precioConsulta = Math.round(valorAleatorio * 100.0f / 100) * 100;
+
+
+        profesionalServicio.crearProfesional(null, nombreUsuario, password, password, nombre, apellido, email, fechaNacimiento, dni, especialidad, provincias, localidad, direccion, matricula, diasDisponibles, horarioEntrada, horarioSalida, precioConsulta);
+
+        var registrado = profesionalRepositorio.buscarPorEmail(email);
+
+        turnoServicio.generarTurnos(registrado);
 
         return "redirect:../listaProfesionales";
     }
