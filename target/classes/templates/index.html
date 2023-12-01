@@ -9,11 +9,15 @@
 
 <body>
 <!--<header th:replace="layout/header :: header"></header>-->
-<div class="banner">
+<div>
     <nav th:replace="layout/navbar :: navbar"></nav>
 
     <div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>
+    
+    <!--Carrousel-->
+        <section th:replace="/layout/carrousel :: section"></section>
 
+       <!--
     <h1 class="fw-bold display-2 text-center text-light banner-heading">Encuentra tu atención médica ideal</h1>
     <h3 class="fw-bold display-2 text-center mt-5">Citas simples</h3>
     <p class="fw-bold text-light text-center container">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
@@ -23,6 +27,7 @@
     <div class="text-center">
         <a class="btn btn-outline-warning text-light banner-btn" th:href="@{/listaProfesionales}">Ver Cartilla</a>
     </div>
+-->
 </div>
 
 <section class="blog mt-5">
@@ -35,10 +40,14 @@
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas eligendi nemo voluptatem ea tempore
                     ullam, deleniti iure illum temporibus aliquid inventore eos assumenda ipsam ipsa adipisci
                     voluptatibus nihil exercitationem nam.</p>
+                
+                <a class="btn btn-outline-warning text-white banner-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Ver más</a>
 
+
+                <!--
                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Ver mas
-                </button>
+                </button>-->
 
                 <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -57,7 +66,7 @@
                             </div>
                             <div class="modal-footer">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Volver</button>
                             </div>
                         </div>
                     </div>
