@@ -1,8 +1,10 @@
 package com.egg.appsalud.controladores;
 
+import com.egg.appsalud.entidades.FichaMedica;
 import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Turno;
+import com.egg.appsalud.servicios.FichaMedicaServicio;
 import com.egg.appsalud.servicios.ProfesionalServicio;
 import com.egg.appsalud.servicios.TurnoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class TurnoController {
 
     @Autowired
     private TurnoServicio turnoServicio;
+
+    @Autowired
+    private FichaMedicaServicio fichaMedicaServicio;
 
     @PreAuthorize("hasAnyRole('PACIENTE','ROLE_PROFESIONAL','ROLE_ADMIN')")
     @GetMapping("/listar")
@@ -72,27 +77,25 @@ public class TurnoController {
                 modelo.addAttribute("error", "Debes estar logueado para agendar un turno.");
                 return "login";
             }
-            // Llama al servicio para asignar el turno al paciente
+
             turnoServicio.asignarTurnoAPaciente(turnoId, paciente);
             modelo.addAttribute("exito", "Turno agendado correctamente.");
-            // Si no hay URL original, redirige al usuario a la página de lista de turnos
+            fichaMedicaServicio.crearFichaMedica(paciente);
             return "redirect:/paciente/citas";
         } catch (Exception ex) {
             modelo.addAttribute("error", "Error al agendar el turno: " + ex.getMessage());
-            return "turno_List"; // Otra página de error o manejo de errores según tus necesidades
+            return "redirect:/listaProfesionales";
         }
     }
 
     @GetMapping("/mis_turnos")
     public String obtenerMisTurnos(ModelMap model, HttpSession session) {
-        // Verifica si el usuario está autenticado como paciente
+
         Paciente paciente = (Paciente) session.getAttribute("usuariosession");
         if (paciente == null) {
-            // Si no está autenticado, redirige al usuario a la página de inicio de sesión
             return "login";
         }
 
-        // Recupera los turnos del paciente desde la base de datos
         List<Turno> misTurnos = turnoServicio.obtenerTurnosDelPaciente(paciente);
         model.addAttribute("misTurnos", misTurnos);
 

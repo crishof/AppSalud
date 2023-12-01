@@ -2,9 +2,11 @@ package com.egg.appsalud.servicios;
 
 import com.egg.appsalud.Enumeracion.Rol;
 import com.egg.appsalud.Exception.MiException;
+import com.egg.appsalud.entidades.FichaMedica;
 import com.egg.appsalud.entidades.Imagen;
 import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Usuario;
+import com.egg.appsalud.repositorios.FichaMedicaRepositorio;
 import com.egg.appsalud.repositorios.PacienteRepositorio;
 
 import java.util.ArrayList;
@@ -28,6 +30,9 @@ public class PacienteServicio {
 
     @Autowired
     UtilServicio utilServicio;
+
+    @Autowired
+    FichaMedicaRepositorio fichaMedicaRepositorio;
 
     @Transactional
     public void crearPaciente(MultipartFile archivo, String nombreUsuario, String nombre, String apellido,
@@ -99,4 +104,6 @@ public class PacienteServicio {
         pacienteRepositorio.delete(paciente);
 
     }
+
 }
+

@@ -16,10 +16,32 @@ public class FichaMedicaServicio {
         this.fichaMedicaRepositorio = fichaMedicaRepositorio;
     }
 
-    public void crearFichaMedica(Paciente paciente, String antecedentes, String obraSocial, Long afiliado,
+    public void crearFichaMedica(Paciente paciente){
+
+        FichaMedica fichaMedica = new FichaMedica();
+        fichaMedica.setPaciente(paciente);
+
+        fichaMedicaRepositorio.save(fichaMedica);
+    }
+    public void modificarFichaMedica(Paciente paciente, String antecedentes, String obraSocial, Long afiliado,
                                  String grupoSanguineo, double altura, double peso) {
-        System.out.println("EJECUTANDO CREAR FICHA MEDICA");
-        FichaMedica ficha = new FichaMedica(paciente, antecedentes, obraSocial, afiliado, grupoSanguineo, altura, peso);
+
+        FichaMedica ficha = buscarPorIdPaciente(paciente.getId());
+        ficha.setAntecedentes(antecedentes);
+        ficha.setObraSocial(obraSocial);
+        ficha.setNumeroAfiliado(afiliado);
+        ficha.setGrupoSanguineo(grupoSanguineo);
+        ficha.setAltura(altura);
+        ficha.setPeso(peso);
         fichaMedicaRepositorio.save(ficha);
+    }
+
+    public FichaMedica buscarPorIdPaciente(String id){
+
+        FichaMedica fichaMedica= fichaMedicaRepositorio.buscarIdPaciente(id);
+
+        System.out.println("FICHA: " + fichaMedica.getPaciente().getNombre());
+
+        return fichaMedica;
     }
 }

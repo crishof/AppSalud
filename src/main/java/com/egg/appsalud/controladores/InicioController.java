@@ -147,7 +147,6 @@ public class InicioController {
                                       @Param("columna") String columna, ModelMap modelo) {
         List<Profesional> profesionales = profesionalServicio.listarProfesional(especialidad, columna);
         modelo.addAttribute("profesional", profesionales);
-
         Especialidad[] especialidades = Especialidad.values();
         modelo.addAttribute("especialidades", especialidades);
         modelo.addAttribute("valorSeleccionado", especialidad);

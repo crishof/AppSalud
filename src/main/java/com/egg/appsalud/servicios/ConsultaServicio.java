@@ -26,12 +26,13 @@ public class ConsultaServicio {
     @Autowired
     private FichaMedicaServicio fichaMedicaServicio;
 
+    @Autowired
+    private PacienteServicio pacienteServicio;
+
 
     @Transactional
-    public Consulta crearConsulta(Paciente paciente, Profesional profesional, String obraSocial, Long afiliado, String antecedentes, String grupoSanguineo, Double altura,
+    public void crearConsulta(Paciente paciente, Profesional profesional, String obraSocial, Long afiliado, String antecedentes, String grupoSanguineo, Double altura,
                               Double peso, String observaciones, String diagnostico, String tratamiento, Date fecha, LocalTime horario) throws MiException {
-
-        System.out.println("EJECUTANDO CREAR CONSULTA");
 
 //        validar(paciente, profesional);
 
@@ -46,12 +47,9 @@ public class ConsultaServicio {
         consulta.setTratamiento(tratamiento);
         consulta.setObservaciones(observaciones);
 
-
-        fichaMedicaServicio.crearFichaMedica(paciente, antecedentes, obraSocial, afiliado, grupoSanguineo, altura, peso);
-
+        fichaMedicaServicio.modificarFichaMedica(paciente, antecedentes, obraSocial, afiliado, grupoSanguineo, altura, peso);
         consultaRepositorio.save(consulta);
 
-        return consulta;
     }
 
     @Transactional

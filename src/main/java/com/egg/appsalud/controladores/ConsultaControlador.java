@@ -3,9 +3,11 @@ package com.egg.appsalud.controladores;
 import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Consulta;
+import com.egg.appsalud.entidades.FichaMedica;
 import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
+import com.egg.appsalud.repositorios.FichaMedicaRepositorio;
 import com.egg.appsalud.repositorios.PacienteRepositorio;
 import com.egg.appsalud.servicios.ConsultaServicio;
 
@@ -48,7 +50,9 @@ public class ConsultaControlador {
     public String crearConsulta(@PathVariable String id, ModelMap modelo) {
 
         Paciente paciente = pacienteServicio.getOne(id);
+        FichaMedica fichaMedica = fichaMedicaServicio.buscarPorIdPaciente(id);
 
+        modelo.put("fichaMedica",fichaMedica);
 
         modelo.put("paciente", paciente);
 

@@ -40,12 +40,12 @@
                 <div class="obra-social">
                     <h3>Obra Social</h3>
                     <div class="col-md-6">
-                        <label for="obrasocial">Nombre: </label>
-                        <input class="form-control" type="text" id="obrasocial" name="obrasocial" required>
+                        <label for="obraSocial">Nombre: </label>
+                        <input th:value="${fichaMedica.obraSocial}" class="form-control" type="text" id="obraSocial" name="obraSocial" required>
                     </div>
                     <div class="col-md-6">
                         <label for="afiliado">Numero de afiliado: </label>
-                        <input class="form-control" type="text" id="afiliado" name="afiliado" required>
+                        <input th:value="${fichaMedica.numeroAfiliado}" class="form-control" type="text" id="afiliado" name="afiliado" required>
                     </div>
                 </div>
 
