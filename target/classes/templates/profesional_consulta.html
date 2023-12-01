@@ -14,79 +14,80 @@
 
 <div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>
 
-
-<h1>Ficha Médica</h1>
-<form th:action="@{/consulta/crear/__${paciente.id}__}" method="POST">
-  <div class="datos-paciente">
-    <h2>Paciente</h2>
-    <div class="campo">
-      <label for="nombre">Nombre:</label>
-      <input th:value="${paciente.nombre}" type="text" id="nombre" name="nombre" required>
-    </div>
-    <div class="campo">
-      <label for="apellido">Apellido:</label>
-      <input th:value="${paciente.apellido}" type="text" id="apellido" name="apellido" required>
-    </div>
-    <div class="campo">
-      <label for="dni">DNI:</label>
-      <input th:value="${paciente.DNI}" type="text" id="dni" name="dni" required>
-    </div>
-    <div class="campo">
-      <label for="fecha-nacimiento">Fecha de nacimiento:</label>
-      <input th:value="${paciente.fechaDeNacimiento}" type="date" id="fecha-nacimiento" name="fecha-nacimiento" required>
-    </div>
-  </div>
-  <div class="obra-social">
-    <h2>Obra Social</h2>
-    <div class="campo">
-      <label for="obrasocial">Nombre: </label>
-      <input type="text" id="obrasocial" name="obrasocial" required>
-    </div>
-    <div class="campo">
-      <label for="afiliado">Numero de afiliado: </label>
-      <input type="text" id="afiliado" name="afiliado" required>
-    </div>
-  </div>
+<div class="container mt-5">
+    <div class="card shadow p-5">
 
 
+        <div class="card-header">
+            <h2 class="brand">Ficha Médica</h2>
+        </div>
 
-  <div class="datos-consulta">
-    <h2>Consulta</h2>
-    <div class="campo">
-      <label for="motivo">Motivo de la consulta:</label>
-      <input type="text" id="motivo" name="motivo">
-    </div>
-    <div class="campo">
-      <label for="antecedentes">Antecedentes médicos:</label>
-      <textarea id="antecedentes" name="antecedentes" required></textarea>
-    </div>
-      <label for="gruposanguineo">Grupo Sanguíneo: </label>
-      <input type="text" id="gruposanguineo" name="gruposanguineo" required>
-  </div>
-  <div class="campo">
-      <label for="altura">Altura:  </label>
-      <input type="text" id="altura" name="altura" required>
-  </div>
-  <div class="campo">
-      <label for="peso">Peso:  </label>
-      <input type="text" id="peso" name="peso" required>
-    <div class="campo">
-      <label for="observaciones">Observaciones:</label>
-      <textarea id="observaciones" name="observaciones" required></textarea>
-    </div>
-    <div class="campo">
-      <label for="diagnostico">Diagnóstico:</label>
-      <input type="text" id="diagnostico" name="diagnostico" required>
-    </div>
-    <div class="campo">
-      <label for="tratamiento">Tratamiento:</label>
-      <textarea id="tratamiento" name="tratamiento" required></textarea>
-    </div>
-  </div>
-  <button type="submit">Crear ficha médica</button>
-</form>
+        <div class="card-body">
+
+            <form th:action="@{/consulta/crear/__${paciente.id}__}" method="POST">
+                <label>
+                    <input hidden th:value="${paciente.id}" name="id">
+                </label>
+                <div>
+                    <h3>Paciente</h3>
+                    <div class="form-label">
+                        <p>Nombre: <span th:text="${paciente.nombre}"></span></p>
+                        <p>Apellido: <span th:text="${paciente.apellido}"></span></p>
+                        <p>Dni: <span th:text="${paciente.DNI}"></span></p>
+                        <p>Fecha de nacimiento: <span th:text="${paciente.fechaDeNacimiento}"></span></p>
+                    </div>
+                </div>
+                <div class="obra-social">
+                    <h3>Obra Social</h3>
+                    <div class="col-md-6">
+                        <label for="obrasocial">Nombre: </label>
+                        <input class="form-control" type="text" id="obrasocial" name="obrasocial" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="afiliado">Numero de afiliado: </label>
+                        <input class="form-control" type="text" id="afiliado" name="afiliado" required>
+                    </div>
+                </div>
 
 
+                <div class="datos-consulta">
+                    <h2>Consulta</h2>
+                    <div class="campo">
+                        <label for="motivo">Motivo de la consulta:</label>
+                        <input class="form-control" type="text" id="motivo" name="motivo">
+                    </div>
+                    <div class="campo">
+                        <label for="antecedentes">Antecedentes médicos:</label>
+                        <textarea class="form-control" id="antecedentes" name="antecedentes" required></textarea>
+                    </div>
+                    <label for="gruposanguineo">Grupo Sanguíneo: </label>
+                    <input class="form-control" type="text" id="grupoSanguineo" name="grupoSanguineo" required>
+                </div>
+                <div class="campo">
+                    <label for="altura">Altura: </label>
+                    <input class="form-control" type="text" id="altura" name="altura" required>
+                </div>
+                <div class="campo">
+                    <label for="peso">Peso: </label>
+                    <input class="form-control" type="text" id="peso" name="peso" required>
+                    <div class="campo">
+                        <label for="observaciones">Observaciones:</label>
+                        <textarea class="form-control" id="observaciones" name="observaciones" required></textarea>
+                    </div>
+                    <div class="campo">
+                        <label for="diagnostico">Diagnóstico:</label>
+                        <input class="form-control" type="text" id="diagnostico" name="diagnostico" required>
+                    </div>
+                    <div class="campo">
+                        <label for="tratamiento">Tratamiento:</label>
+                        <textarea class="form-control" id="tratamiento" name="tratamiento" required></textarea>
+                    </div>
+                </div>
+                <button class="btn btn-primary m-3" type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 <footer th:replace="layout/footer :: footer"></footer>

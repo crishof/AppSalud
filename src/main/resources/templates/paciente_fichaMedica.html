@@ -14,11 +14,13 @@
 <div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>
 
 
-<div class="card">
+<div class="container mt-5">
+    <div class="card shadow p-5">
+        <div class="card-header">
+            <h2> Ficha Medica </h2>
+            <p> Paciente id: <span class="text-muted small" th:text="${session.usuariosession.id}"></span></p>
 
-    <div class="card-header">
-        <h2> Ficha Medica </h2>
-        <p> Paciente id: <span class="text-muted small" th:text="${session.usuariosession.id}"></span></p>
+        </div>
     </div>
 
     <div class="card-body">
@@ -43,10 +45,6 @@
     </div>
 
 </div>
-
-
-</body>
-</html>
 
 <footer th:replace="layout/footer :: footer"></footer>
 <script

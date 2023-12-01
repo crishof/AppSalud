@@ -21,9 +21,13 @@ public class Paciente extends Usuario {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-
     @OneToMany
     private List<Consulta> consulta;
+
+    @OneToOne
+    FichaMedica fichaMedica;
+
+
 
 
 

@@ -50,6 +50,10 @@ public class Consulta {
     private String diagnostico;
     private String tratamiento;
 
+    private String observaciones;
+
+    private boolean atendido = false;
+
     //el horario y la duración
     public Consulta(LocalTime horaInicio, int duracionConsulta) {
         this.horaInicio = horaInicio;

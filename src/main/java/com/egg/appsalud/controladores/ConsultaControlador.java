@@ -9,13 +9,11 @@ import com.egg.appsalud.repositorios.ConsultaRepositorio;
 import com.egg.appsalud.repositorios.PacienteRepositorio;
 import com.egg.appsalud.servicios.ConsultaServicio;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
+import com.egg.appsalud.servicios.FichaMedicaServicio;
 import com.egg.appsalud.servicios.PacienteServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,23 +34,23 @@ import javax.servlet.http.HttpSession;
 public class ConsultaControlador {
 
     @Autowired
-    private ConsultaServicio cs;
-
-    @Autowired
-    private ConsultaRepositorio cr;
-
-    @Autowired
     PacienteRepositorio pacienteRepositorio;
-
     @Autowired
     PacienteServicio pacienteServicio;
+    @Autowired
+    FichaMedicaServicio fichaMedicaServicio;
+    @Autowired
+    private ConsultaServicio cs;
+    @Autowired
+    private ConsultaRepositorio cr;
 
     @GetMapping("/crear/{id}")
     public String crearConsulta(@PathVariable String id, ModelMap modelo) {
 
         Paciente paciente = pacienteServicio.getOne(id);
 
-        modelo.put("paciente",paciente);
+
+        modelo.put("paciente", paciente);
 
 
         return "profesional_consulta";
@@ -60,14 +58,14 @@ public class ConsultaControlador {
 
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN', 'ROLE_PACIENTE')")
     @PostMapping("/crear/{id}")
-    public String crearConsulta(@RequestParam String idPaciente, HttpSession session,
+    public String crearConsulta(@PathVariable String id, HttpSession session,
                                 String obraSocial, Long afiliado,
                                 @RequestParam String antecedentes, @RequestParam String grupoSanguineo,
                                 @RequestParam Double altura, @RequestParam Double peso,
                                 String observaciones, @RequestParam String diagnostico,
-                                @RequestParam String tratamiento, ModelMap modelo) throws MiException {
+                                @RequestParam String tratamiento, ModelMap modelo) {
 
-        Paciente paciente = pacienteServicio.getOne(idPaciente);
+        Paciente paciente = pacienteServicio.getOne(id);
         Profesional profesional = (Profesional) session.getAttribute("session");
 
         Date fecha = new Date();
@@ -75,12 +73,12 @@ public class ConsultaControlador {
 
         try {
             cs.crearConsulta(paciente, profesional, obraSocial, afiliado, antecedentes, grupoSanguineo, altura, peso,
-                    observaciones, diagnostico,tratamiento,fecha, horario);
+                    observaciones, diagnostico, tratamiento, fecha, horario);
             modelo.put("exito", "La consulta fue creada con exito");
-            return "redirect:/";
+            return "redirect:/profesional/citasProfesional";
         } catch (MiException e) {
             modelo.put("error", e.getMessage());
-            modelo.put("paciente",pacienteServicio.getOne(idPaciente));
+            modelo.put("paciente", pacienteServicio.getOne(id));
             return "redirect:/consulta/crear/{id}";
         }
     }
@@ -94,8 +92,9 @@ public class ConsultaControlador {
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificarConsulta(@PathVariable String id, ModelMap modelo) {
-        Consulta consulta = new Consulta();
-        consulta = cs.getOne(id);
+        new Consulta();
+
+        Consulta consulta = cs.getOne(id);
         modelo.addAttribute("consulta", consulta);
         return null;
     }
@@ -104,7 +103,7 @@ public class ConsultaControlador {
     @PostMapping("/modificar/{id}")
     public String modificarConsulta(@PathVariable String id, @RequestParam Paciente paciente, @RequestParam Profesional profesional,
                                     @RequestParam("fechaDeConsulta") String fechaDeConsultaStr, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion,
-                                    @RequestParam int precioConsulta, @RequestParam int valoracion, ModelMap modelo) throws MiException {
+                                    @RequestParam int precioConsulta, @RequestParam int valoracion, ModelMap modelo) {
 
         try {
             cs.modificarConsulta(id, paciente, profesional, provincias, localidad, direccion, precioConsulta);

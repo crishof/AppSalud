@@ -28,12 +28,12 @@ public class ConsultaServicio {
 
 
     @Transactional
-    public void crearConsulta(Paciente paciente, Profesional profesional, String obraSocial, Long afiliado, String antecedentes, String grupoSanguineo, Double altura,
+    public Consulta crearConsulta(Paciente paciente, Profesional profesional, String obraSocial, Long afiliado, String antecedentes, String grupoSanguineo, Double altura,
                               Double peso, String observaciones, String diagnostico, String tratamiento, Date fecha, LocalTime horario) throws MiException {
 
         System.out.println("EJECUTANDO CREAR CONSULTA");
 
-        validar(paciente, profesional);
+//        validar(paciente, profesional);
 
 
         Consulta consulta = new Consulta();
@@ -44,12 +44,14 @@ public class ConsultaServicio {
         consulta.setHoraInicio(horario);
         consulta.setDiagnostico(diagnostico);
         consulta.setTratamiento(tratamiento);
+        consulta.setObservaciones(observaciones);
 
 
-        FichaMedica fichaMedica = new FichaMedica(paciente, antecedentes ,obraSocial, afiliado, grupoSanguineo, altura, peso);
+        fichaMedicaServicio.crearFichaMedica(paciente, antecedentes, obraSocial, afiliado, grupoSanguineo, altura, peso);
 
         consultaRepositorio.save(consulta);
 
+        return consulta;
     }
 
     @Transactional
