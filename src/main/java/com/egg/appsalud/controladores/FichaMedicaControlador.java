@@ -28,10 +28,6 @@ public class FichaMedicaControlador {
         model.addAttribute("paciente", pacienteActualizado);
 
 
-
-
-
-
         return "paciente_fichaMedica";
 
     }

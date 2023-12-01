@@ -41,14 +41,25 @@
                     <h3>Obra Social</h3>
                     <div class="col-md-6">
                         <label for="obraSocial">Nombre: </label>
-                        <input th:value="${fichaMedica.obraSocial}" class="form-control" type="text" id="obraSocial" name="obraSocial" required>
+                        <input th:value="${paciente.fechaDeNacimiento}" class="form-control" type="text" id="obraSocial" name="obraSocial" required>
                     </div>
                     <div class="col-md-6">
                         <label for="afiliado">Numero de afiliado: </label>
-                        <input th:value="${fichaMedica.numeroAfiliado}" class="form-control" type="text" id="afiliado" name="afiliado" required>
+                        <input class="form-control" type="text" id="afiliado" name="afiliado" required>
                     </div>
                 </div>
 
+                <div class="datos-clinicos">
+                    <h2>Datos clinicos</h2>
+                <div class="campo">
+                    <label for="gruposanguineo">Grupo Sanguíneo: </label>
+                    <input class="form-control" type="text" id="grupoSanguineo" name="grupoSanguineo" required>
+                    <label for="altura">Altura: </label>
+                    <input class="form-control" type="text" id="altura" name="altura" required>
+                    <label for="peso">Peso: </label>
+                    <input class="form-control" type="text" id="peso" name="peso" required>
+                </div>
+                </div>
 
                 <div class="datos-consulta">
                     <h2>Consulta</h2>
@@ -60,16 +71,8 @@
                         <label for="antecedentes">Antecedentes médicos:</label>
                         <textarea class="form-control" id="antecedentes" name="antecedentes" required></textarea>
                     </div>
-                    <label for="gruposanguineo">Grupo Sanguíneo: </label>
-                    <input class="form-control" type="text" id="grupoSanguineo" name="grupoSanguineo" required>
                 </div>
                 <div class="campo">
-                    <label for="altura">Altura: </label>
-                    <input class="form-control" type="text" id="altura" name="altura" required>
-                </div>
-                <div class="campo">
-                    <label for="peso">Peso: </label>
-                    <input class="form-control" type="text" id="peso" name="peso" required>
                     <div class="campo">
                         <label for="observaciones">Observaciones:</label>
                         <textarea class="form-control" id="observaciones" name="observaciones" required></textarea>
