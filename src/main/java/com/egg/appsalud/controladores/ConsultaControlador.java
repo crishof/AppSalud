@@ -46,6 +46,10 @@ public class ConsultaControlador {
     @Autowired
     private ConsultaRepositorio cr;
 
+    @Autowired
+    ConsultaServicio consultaServicio;
+
+
     @GetMapping("/crear/{id}")
     public String crearConsulta(@PathVariable String id, ModelMap modelo) {
 
@@ -67,7 +71,7 @@ public class ConsultaControlador {
                                 @RequestParam String antecedentes, @RequestParam String grupoSanguineo,
                                 @RequestParam Double altura, @RequestParam Double peso,
                                 String observaciones, @RequestParam String diagnostico,
-                                @RequestParam String tratamiento, ModelMap modelo) {
+                                @RequestParam String tratamiento, @RequestParam String motivoConsulta, ModelMap modelo) {
 
         Paciente paciente = pacienteServicio.getOne(id);
         Profesional profesional = (Profesional) session.getAttribute("session");
@@ -76,7 +80,7 @@ public class ConsultaControlador {
         LocalTime horario = LocalTime.now();
 
         try {
-            cs.crearConsulta(paciente, profesional, obraSocial, afiliado, antecedentes, grupoSanguineo, altura, peso,
+            cs.crearConsulta(motivoConsulta,paciente, profesional, obraSocial, afiliado, antecedentes, grupoSanguineo, altura, peso,
                     observaciones, diagnostico, tratamiento, fecha, horario);
             modelo.put("exito", "La consulta fue creada con exito");
             return "redirect:/profesional/citasProfesional";
@@ -101,6 +105,16 @@ public class ConsultaControlador {
         Consulta consulta = cs.getOne(id);
         modelo.addAttribute("consulta", consulta);
         return null;
+    }
+
+    @PostMapping("/motivo")
+    public String crearMotivo(@RequestParam String motivoConsulta, HttpSession session,ModelMap modelMap){
+
+        consultaServicio.crearConsulta(motivoConsulta,session.getId());
+
+        modelMap.addAttribute("consulta",cr.findByPacienteId(session.getId()));
+
+        return "redirect:/listaProfesionales";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_PROFESIONAL', 'ROLE_ADMIN')")

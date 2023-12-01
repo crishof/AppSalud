@@ -41,11 +41,11 @@
                     <h3>Obra Social</h3>
                     <div class="col-md-6">
                         <label for="obraSocial">Nombre: </label>
-                        <input class="form-control" type="text" id="obraSocial" name="obraSocial" required>
+                        <input th:value="${paciente.fichaMedica.obraSocial}" class="form-control" type="text" id="obraSocial" name="obraSocial" required>
                     </div>
                     <div class="col-md-6">
                         <label for="afiliado">Numero de afiliado: </label>
-                        <input class="form-control" type="text" id="afiliado" name="afiliado" required>
+                        <input th:value="${paciente.fichaMedica.numeroAfiliado}" class="form-control" type="text" id="afiliado" name="afiliado" required>
                     </div>
                 </div>
 
@@ -53,7 +53,7 @@
                     <h2>Datos clinicos</h2>
                 <div class="campo">
                     <label for="gruposanguineo">Grupo Sanguíneo: </label>
-                    <input class="form-control" type="text" id="grupoSanguineo" name="grupoSanguineo" required>
+                    <input th:value="${paciente.fichaMedica.grupoSanguineo}" class="form-control" type="text" id="grupoSanguineo" name="grupoSanguineo" required>
                     <label for="altura">Altura: </label>
                     <input class="form-control" type="text" id="altura" name="altura" required>
                     <label for="peso">Peso: </label>
@@ -65,11 +65,11 @@
                     <h2>Consulta</h2>
                     <div class="campo">
                         <label for="motivo">Motivo de la consulta:</label>
-                        <input class="form-control" type="text" id="motivo" name="motivo">
+                        <input class="form-control" type="text" id="motivo" name="motivoConsulta">
                     </div>
                     <div class="campo">
                         <label for="antecedentes">Antecedentes médicos:</label>
-                        <textarea class="form-control" id="antecedentes" name="antecedentes" required></textarea>
+                        <textarea th:value="${paciente.fichaMedica.antecedentes}" class="form-control" id="antecedentes" name="antecedentes" required></textarea>
                     </div>
                 </div>
                 <div class="campo">

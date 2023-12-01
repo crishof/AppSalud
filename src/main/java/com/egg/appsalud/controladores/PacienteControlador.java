@@ -1,6 +1,7 @@
 package com.egg.appsalud.controladores;
 
 import com.egg.appsalud.Exception.MiException;
+import com.egg.appsalud.entidades.Consulta;
 import com.egg.appsalud.entidades.Turno;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
 import com.egg.appsalud.servicios.ConsultaServicio;
@@ -45,6 +46,10 @@ public class PacienteControlador {
         if (session.getAttribute("usuariosession") == null) {
             return "login";
         } else {
+
+//            Consulta consulta = consultaServicio.buscarPorIdPaciente(session.getId());
+
+//            modelo.addAttribute("consulta",consulta);
 
             var profesional = profesionalServicio.getOne(id);
             if (profesional != null) {

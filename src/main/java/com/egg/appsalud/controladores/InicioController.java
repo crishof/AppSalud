@@ -4,12 +4,11 @@ import com.egg.appsalud.Enumeracion.DiaSemana;
 import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.Exception.MiException;
+import com.egg.appsalud.entidades.Consulta;
+import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.repositorios.ProfesionalRepositorio;
-import com.egg.appsalud.servicios.PacienteServicio;
-import com.egg.appsalud.servicios.ProfesionalServicio;
-import com.egg.appsalud.servicios.TurnoServicio;
-import com.egg.appsalud.servicios.UsuarioServicio;
+import com.egg.appsalud.servicios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -47,6 +47,9 @@ public class InicioController {
 
     @Autowired
     TurnoServicio turnoServicio;
+
+    @Autowired
+    ConsultaServicio consultaServicio;
 
     @GetMapping("/registroPaciente")
     public String registroPaciente() {
@@ -144,7 +147,9 @@ public class InicioController {
 
     @GetMapping("/listaProfesionales")
     public String listarProfesionales(@Param("especialidad") String especialidad,
-                                      @Param("columna") String columna, ModelMap modelo) {
+                                      @Param("columna") String columna, ModelMap modelo, HttpSession session) {
+
+
         List<Profesional> profesionales = profesionalServicio.listarProfesional(especialidad, columna);
         modelo.addAttribute("profesional", profesionales);
         Especialidad[] especialidades = Especialidad.values();

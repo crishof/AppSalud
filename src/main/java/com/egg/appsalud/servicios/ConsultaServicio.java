@@ -31,15 +31,15 @@ public class ConsultaServicio {
 
 
     @Transactional
-    public void crearConsulta(Paciente paciente, Profesional profesional, String obraSocial, Long afiliado, String antecedentes, String grupoSanguineo, Double altura,
+    public void crearConsulta(String motivoConsulta, Paciente paciente, Profesional profesional, String obraSocial, Long afiliado, String antecedentes, String grupoSanguineo, Double altura,
                               Double peso, String observaciones, String diagnostico, String tratamiento, Date fecha, LocalTime horario) throws MiException {
 
 //        validar(paciente, profesional);
 
-
         Consulta consulta = new Consulta();
 
         consulta.setPaciente(paciente);
+        consulta.setMotivoConsulta(motivoConsulta);
         consulta.setProfesional(profesional);
         consulta.setFechaDeConsulta(fecha);
         consulta.setHoraInicio(horario);
@@ -50,6 +50,17 @@ public class ConsultaServicio {
         fichaMedicaServicio.modificarFichaMedica(paciente, antecedentes, obraSocial, afiliado, grupoSanguineo, altura, peso);
         consultaRepositorio.save(consulta);
 
+    }
+
+    public void crearConsulta(String motivoConsulta, String id) {
+
+        Paciente paciente = pacienteServicio.getOne(id);
+
+        Consulta consulta = new Consulta();
+        consulta.setPaciente(paciente);
+        consulta.setMotivoConsulta(motivoConsulta);
+
+        consultaRepositorio.save(consulta);
     }
 
     @Transactional
@@ -97,5 +108,12 @@ public class ConsultaServicio {
 
     public Consulta getOne(String id) {
         return consultaRepositorio.getOne(id);
+    }
+
+
+    public Consulta buscarPorIdPaciente(String id) {
+
+        return (Consulta) consultaRepositorio.findByPacienteId(id);
+
     }
 }
