@@ -89,6 +89,49 @@
                             </ul>
                         </li>
 
+
+                       
+
+                        <!-- BIENVENIDA -->
+
+                        <ul>
+
+                            <li sec:authorize="hasAnyRole('USER','PACIENTE')" class="nav-item dropdown"
+                                th:if="${session.usuariosession != null}">
+
+                                <div class="col-md-12">
+                                    <p>
+                                        <h4 th:text="'Hola ' + ${profesional != null ? profesional.nombre : session.usuariosession.nombre}"></h4>
+                                    </p>
+                                </div>
+                            </li>
+
+                            <li sec:authorize="hasRole('PROFESIONAL')" class="nav-item dropdown"
+                                th:if="${session.usuariosession != null}">
+
+                                <div class="col-md-12">
+                                    <p>
+                                        <h4 th:text="'Hola ' + ${usuarios != null ? usuarios.nombre : session.usuariosession.nombre}"></h4>
+                                    </p>
+                                </div>
+                            </li>
+
+                            <li sec:authorize="hasRole('ADMIN')" class="nav-item dropdown"
+                                th:if="${session.usuariosession != null}">
+
+                                <div class="col-md-12">
+                                    <p>
+                                        <h4 th:text="'Hola ' + ${paciente != null ? paciente.nombre : session.usuariosession.nombre}"></h4>
+                                    </p>
+                                </div>
+
+
+                            </li>
+                        </ul>
+
+
+
+
                     </ul>
 
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex" th:if="${session.usuariosession == null}">
