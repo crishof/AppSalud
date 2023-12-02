@@ -14,57 +14,53 @@
 <div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>
 
 
-<h1>
-    Modificar mis Datos
-</h1>
-
-<!--            <div th:if="${error != null}" class="card text-white bg-danger m-3">-->
-<!--                <h5 class="card-title">Error!</h5>-->
-<!--                <div class="card-body">-->
-<!--                    <p class="card-text" th:text="${error}"></p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div th:if="${exito} != null" class="card text-white bg-success m-3 ">-->
-<!--                <h5 class="card-title">Exito!</h5>-->
-<!--                <div class="card-body">-->
-<!--                    <p class="card-text" th:text="${exito}"></p>-->
-<!--                </div>-->
-<!--            </div>-->
-
+<div class="card-header">
+    <h1>
+        Datos personales
+    </h1>
+    <p>Recuerda mantener tus datos actualizados!</p>
+</div>
 
 <div class="card">
 
     <div class="card-body">
-        <form th:action="@{/profesional/editar/__${session.usuariosession.id}__}" method="POST" enctype="multipart/form-data" class="row g-3">
+        <form th:action="@{/profesional/editar/__${session.usuariosession.id}__}" method="POST"
+              enctype="multipart/form-data" class="row g-3">
 
 
             <input hidden th:value="${session.usuariosession.id}" name="id">
             <div class="col-md-6">
                 <label for="nombre">Nombre</label>
-                <input th:value="${profesional != null ? profesional.nombre : session.usuariosession.nombre}" type="text" id="nombre" class="form-control" name="nombre">
+                <input th:value="${profesional != null ? profesional.nombre : session.usuariosession.nombre}"
+                       type="text" id="nombre" class="form-control" name="nombre">
             </div>
             <div class="col-md-6">
                 <label for="apellido">Apellido</label><br>
-                <input th:value="${profesional != null ? profesional.apellido : session.usuariosession.apellido}" type="text" id="apellido" class="form-control" name="apellido">
+                <input th:value="${profesional != null ? profesional.apellido : session.usuariosession.apellido}"
+                       type="text" id="apellido" class="form-control" name="apellido">
             </div>
             <div class="col-md-6">
                 <label for="dni">Número de DNI</label><br>
-                <input  type="text" class="form-control" id="dni" name="DNI" th:value="${profesional != null ? profesional.DNI : session.usuariosession.DNI}">
+                <input type="text" class="form-control" id="dni" name="DNI"
+                       th:value="${profesional != null ? profesional.DNI : session.usuariosession.DNI}">
             </div>
             <div class="col-md-6">
                 <label>Fecha de Nacimiento</label><br>
-                    <input  type="date" class="form-control" name="fechaDeNacimiento" th:value="${profesional != null ? #dates.format(profesional.fechaDeNacimiento, 'yyyy-MM-dd') : #dates.format(session.usuariosession.fechaDeNacimiento, 'yyyy-MM-dd')}">
+                <input type="date" class="form-control" name="fechaDeNacimiento"
+                       th:value="${profesional != null ? #dates.format(profesional.fechaDeNacimiento, 'yyyy-MM-dd') : #dates.format(session.usuariosession.fechaDeNacimiento, 'yyyy-MM-dd')}">
             </div>
             <div class="col-md-6">
                 <label>Correo electrónico</label>
                 <div>
-                    <input  type="email" class="form-control" name="email" th:value="${profesional != null ? profesional.email : session.usuariosession.email}">
+                    <input type="email" class="form-control" name="email"
+                           th:value="${profesional != null ? profesional.email : session.usuariosession.email}">
                 </div>
             </div>
             <div class="col-md-6">
                 <label>Nombre de usuario</label>
                 <div>
-                    <input  type="text" class="form-control" name="nombreUsuario" th:value="${profesional != null ? profesional.nombreUsuario : session.usuariosession.nombreUsuario}">
+                    <input type="text" class="form-control" name="nombreUsuario"
+                           th:value="${profesional != null ? profesional.nombreUsuario : session.usuariosession.nombreUsuario}">
                 </div>
             </div>
             <div class="col-md-6">
@@ -82,7 +78,8 @@
             </div>
             <div class="col-md-6">
                 <label for="matricula">Matrícula</label><br>
-                <input  type="text" id="matricula" class="form-control" name="matricula" th:value="${profesional != null ? profesional.matricula : session.usuariosession.matricula}">
+                <input type="text" id="matricula" class="form-control" name="matricula"
+                       th:value="${profesional != null ? profesional.matricula : session.usuariosession.matricula}">
             </div>
 
 
@@ -111,35 +108,17 @@
 
             <div class="col-md-6">
                 <label for="direccion">Dirección: </label>
-                <input th:value="${profesional != null ? profesional.direccion : session.usuariosession.direccion}" type="text" id="direccion" name="direccion" class="form-control"
+                <input th:value="${profesional != null ? profesional.direccion : session.usuariosession.direccion}"
+                       type="text" id="direccion" name="direccion" class="form-control"
                        placeholder="Ej: Calle Necochea 1232 3-A" required>
             </div>
 
-
-<!--            <div class="form-group mx-sm-3 m-2 ">-->
-<!--                <label for="horario" class="me-2">Horarios disponibles: </label>-->
-<!--                <select name="horario" id="horario">-->
-<!--                    <option th:text="${session.usuariosession.horariosAtencion}">Seleccionar</option>-->
-<!--                    <option th:each=" horario : ${session.usuariosession.horariosAtencion}"-->
-<!--                            th:value="${horario}">-->
-<!--                    </option>-->
-<!--                </select>-->
-<!--            </div>-->
-
-
-
-
             <div class="col-md-6">
                 <label for="precioConsulta">Precio de la consulta: </label>
-                <input th:value="${profesional != null ? profesional.precioConsulta : session.usuariosession.precioConsulta}"type="number" id="precioConsulta" name="precioConsulta" class="form-control"
+                <input th:value="${profesional != null ? profesional.precioConsulta : session.usuariosession.precioConsulta}"
+                       type="number" id="precioConsulta" name="precioConsulta" class="form-control"
                        placeholder="Ingrese el valor de la consulta" required>
             </div>
-
-
-
-
-
-
 
             <div class="col-md-6">
 
@@ -157,40 +136,19 @@
 
             </div>
 
-            <div class="col-md-6 form-check">
+            <div class="col-md-6">
 
-                <label>Obras Sociales</label><br>
-                <div>
-                    <input class="form-check-input" type="checkbox" name="obrasocial" value="particular" id="checkpart"
-                           checked>
-                    <label class="form-check-label" for="checkpart">
-                        Particular
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="obrasocial" value="medicus" id="checkmedicus">
-                    <label class="form-check-label" for="checkmedicus">
-                        Medicus
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="obrasocial" value="swiss" id="checkswiss">
-                    <label class="form-check-label" for="checkswiss">
-                        Swiss Medical
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="obrasocial" value="pami" id="checkpami">
-                    <label class="form-check-label" for="checkpami">
-                        PAMI
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="obrasocial" value="osde" id="checkosde">
-                    <label class="form-check-label" for="checkosde">
-                        OSDE
-                    </label>
-                </div>
+                <img th:if="${session.usuariosession.imagen != null}"
+                     style="height: 100px;width: 100px; border-radius: 10px; object-fit:cover"
+                     class="logo"
+                     th:src="@{/imagen/perfil/__${session.usuariosession.id}__}"
+                />
+                <img th:if="${session.usuariosession.imagen == null}" style="max-height: 100px; border-radius: 10px"
+                     class="logo" th:src="@{/images/noImage.webp}">
+
+                <label for="imagen">Foto de perfil</label>
+
+                <input type="file" id="imagen" name="archivo" class="form-control">
 
             </div>
 
@@ -200,7 +158,6 @@
         </form>
     </div>
 </div>
-
 
 
 <footer th:replace="layout/footer :: footer"></footer>

@@ -93,10 +93,10 @@ public class ProfesionalServicio implements UserDetailsService {
     }
 
     @Transactional
-    public void modificarProfesional(String id, /*MultipartFile archivo, */ String nombreUsuario, String nombre, String apellido,
+    public void modificarProfesional(String id, MultipartFile archivo, String nombreUsuario, String nombre, String apellido,
                                      Long DNI, Date fechaDeNacimiento, String email, String password, String password2,
                                      boolean activo, Especialidad especialidad, Provincias provincias, String localidad, String direccion,
-                                     Long matricula, List<LocalTime> horariosAtencion, int precioConsulta) throws MiException {
+                                     Long matricula, int precioConsulta) throws MiException {
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
@@ -123,16 +123,11 @@ public class ProfesionalServicio implements UserDetailsService {
             profesional.setLocalidad(localidad);
             profesional.setDireccion(direccion);
 
-            profesional.setHorariosAtencion(horariosAtencion);
             profesional.setPrecioConsulta(precioConsulta);
-            
-            /*String idImagen = null;
-            
-            if(profesional.getImagen() != null){
-                idImagen = profesional.getImagen().getId();
-            }
-            
-            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);*/
+
+            Imagen imagen = imagenServicio.guardar(archivo);
+
+            profesional.setImagen(imagen);
 
             profesionalRepositorio.save(profesional);
 

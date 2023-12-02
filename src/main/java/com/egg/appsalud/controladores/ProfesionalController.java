@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
@@ -44,10 +45,10 @@ public class ProfesionalController {
     }
 
     @PostMapping("/editar/{id}")
-    public String editarProfesional(@PathVariable String id, /*@RequestParam MultipartFile archivo,*/ @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
+    public String editarProfesional(@PathVariable String id, MultipartFile archivo, @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
                                     @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password,
                                     @RequestParam String password2, @RequestParam Especialidad especialidad, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion,
-            @RequestParam List<LocalTime> horariosAtencion, @RequestParam int precioConsulta, @RequestParam Long matricula, ModelMap modelo, HttpSession session) {
+                                    @RequestParam int precioConsulta, @RequestParam Long matricula, ModelMap modelo, HttpSession session) {
 
         Date fechaDeNacimiento;
         try {
@@ -61,18 +62,15 @@ public class ProfesionalController {
 
         try {
 
-            profesionalServicio.modificarProfesional(id,/* archivo,*/ nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, provincias, localidad, direccion, matricula, horariosAtencion, precioConsulta);
+            profesionalServicio.modificarProfesional(id, archivo, nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, provincias, localidad, direccion, matricula, precioConsulta);
             modelo.put("exito", "Profesional modificado con exito");
 
             Profesional profesionalActualizado = profesionalServicio.getOne(id);
             session.setAttribute("profesionalActualizado", profesionalActualizado);
 
-
         } catch (MiException ex) {
-
             modelo.put("error", ex.getMessage());
             return "redirect:/profesional/editar";
-
         }
         return "redirect:/";
     }

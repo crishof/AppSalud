@@ -113,7 +113,7 @@
                 <img th:if="${session.usuariosession.imagen != null}"
                      style="height: 40px;width: 40px; border-radius: 30px; object-fit:cover" class="logo"
                      th:src="@{/imagen/perfil/__${session.usuariosession.id}__}"/>
-                <img th:if="${session.usuariosession.imagen == null}" style="max-height: 100px; border-radius: 10px"
+                <img th:if="${session.usuariosession.imagen == null}" style="height: 40px;width: 40px; border-radius: 30px; object-fit:cover"
                      class="logo" th:src="@{/images/noImage.webp}">
             </div>
 
