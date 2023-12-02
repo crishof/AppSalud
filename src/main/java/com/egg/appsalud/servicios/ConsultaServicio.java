@@ -116,4 +116,9 @@ public class ConsultaServicio {
         return (Consulta) consultaRepositorio.findByPacienteId(id);
 
     }
+
+    public List<Consulta> listarConsultasPorIdPaciente(String id) {
+
+        return consultaRepositorio.listarPorIdPaciente(id);
+    }
 }

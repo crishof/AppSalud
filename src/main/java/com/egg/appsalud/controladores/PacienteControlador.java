@@ -84,7 +84,12 @@ public class PacienteControlador {
     }
 
     @GetMapping("/historia")
-    public String historiaClinica() {
+    public String historiaClinica(HttpSession session, ModelMap modelMap) {
+
+        List<Consulta> consultas = consultaServicio.listarConsultasPorIdPaciente(session.getId());
+
+
+        modelMap.addAttribute("consultas",consultas);
         return "historia_clinica";
     }
 

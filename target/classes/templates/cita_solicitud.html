@@ -63,14 +63,14 @@
         </thead>
         <tbody>
         <tr th:each="turno, iterStat : ${turnos}" id="fila-${iterStat.index}">
-            <td th:text="${turno.fecha}"></td>
-            <td th:text="${turno.hora}"></td>
-            <td th:text="${turno.disponibilidad} ? 'Disponible' : 'No disponible'"></td>
-            <td>
+            <td th:if="${turno.disponibilidad}" th:text="${turno.fecha}"></td>
+            <td th:if="${turno.disponibilidad}" th:text="${turno.hora}"></td>
+            <td th:if="${turno.disponibilidad}" th:text="${turno.disponibilidad} ? 'Disponible' : 'No disponible'"></td>
+            <td th:if="${turno.disponibilidad}">
                 <form th:action="@{/turno/agendar-turno}" method="post">
                     <input type="hidden" name="turnoId" th:value="${turno.id}"/>
-                    <label for="motivo"> Motivo de Consulta: </label>
-                    <input type="text" name="motivoConsulta" id="motivo" required>
+<!--                    <label for="motivo"> Motivo de Consulta: </label>-->
+<!--                    <input type="text" name="motivoConsulta" id="motivo" required>-->
                     <button data-bs-toggle="modal" data-bs-target="#motivoConsultaModal" type="submit"
                             class="btn btn-primary btn-agendar">Agendar Cita
                     </button>

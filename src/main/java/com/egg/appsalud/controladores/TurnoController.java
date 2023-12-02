@@ -69,7 +69,7 @@ public class TurnoController {
     }
 
     @PostMapping("/agendar-turno")
-    public String agendarTurno(@RequestParam String turnoId, @RequestParam String motivoConsulta, HttpSession session, ModelMap modelo) {
+    public String agendarTurno(@RequestParam String turnoId, HttpSession session, ModelMap modelo) {
         try {
             // Verifica si el usuario está autenticado utilizando la sesión
             Paciente paciente = (Paciente) session.getAttribute("usuariosession");
