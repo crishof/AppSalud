@@ -8,7 +8,7 @@
 <head th:replace="layout/head :: head"></head>
 
 <body>
-<!--<header th:replace="layout/header :: header"></header>-->
+
 <nav th:replace="layout/navbar :: navbar"></nav>
 
 <div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>
@@ -18,9 +18,8 @@
         <h1>Historia Clinica</h1>
     </div>
         <a class="btn btn-primary" th:href="@{/historia_clinica/ficha_medica}">Mi ficha medica</a>
+
     <div class="card-body">
-
-
 
         <table class="table">
             <thead class="thead-dark">

@@ -108,16 +108,14 @@
                 </li>
             </ul>
 
-            <!--            <form class="d-flex" role="search">-->
-            <!--                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">-->
-            <!--                <button class="btn btn-outline-success" type="submit">Buscar</button>-->
-            <!--            </form>-->
-
             <div class="nav-item nav p-5-link text-center text-muted" th:if="${session.usuariosession != null}">
-                <p th:text="'Hola ' + ${session.usuariosession.nombre}"></p>
-                <img th:src="${session.usuariosession.imagen}" alt="">
+                <p class="navbar-brand" th:text="'Hola ' + ${session.usuariosession.nombre}"></p>
+                <img th:if="${session.usuariosession.imagen != null}"
+                     style="height: 40px;width: 40px; border-radius: 30px; object-fit:cover" class="logo"
+                     th:src="@{/imagen/perfil/__${session.usuariosession.id}__}"/>
+                <img th:if="${session.usuariosession.imagen == null}" style="max-height: 100px; border-radius: 10px"
+                     class="logo" th:src="@{/images/noImage.webp}">
             </div>
-
 
         </div>
     </div>

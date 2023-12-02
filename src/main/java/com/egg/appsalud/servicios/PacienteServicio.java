@@ -68,7 +68,7 @@ public class PacienteServicio {
     }
 
     @Transactional
-    public void modificarPacientes(String id, String nombreUsuario, String nombre, String apellido,
+    public void modificarPacientes(MultipartFile archivo, String id, String nombreUsuario, String nombre, String apellido,
                                    Long DNI, Date fechaNacimiento, String email, String password, String password2) throws MiException {
 
         utilServicio.validar(nombreUsuario, password, password2, nombre, apellido, fechaNacimiento, DNI, email);
@@ -84,6 +84,10 @@ public class PacienteServicio {
             paciente.setEmail(email);
             paciente.setFechaDeNacimiento(fechaNacimiento);
             paciente.setNombreUsuario(nombreUsuario);
+
+            Imagen imagen = imagenServicio.guardar(archivo);
+
+            paciente.setImagen(imagen);
 
             pacienteRepositorio.save(paciente);
 

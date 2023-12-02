@@ -10,6 +10,7 @@ import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
@@ -41,7 +42,8 @@ public class PacienteController {
     @PostMapping("/editar/{id}")
     public String editarPaciente(@PathVariable String id, @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
                                  @RequestParam Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password,
-                                 @RequestParam String password2, ModelMap modelo, HttpSession session) {
+                                 @RequestParam String password2,
+                                 MultipartFile archivo, ModelMap modelo, HttpSession session) {
 
         Date fechaDeNacimiento;
         try {
@@ -49,13 +51,13 @@ public class PacienteController {
             fechaDeNacimiento = dateFormat.parse(fechaDeNacimientoStr);
 
         } catch (ParseException p) {
-            modelo.put("error", "La fecha no puede venir vacía");
+            modelo.addAttribute("error", "La fecha no puede venir vacía");
             return "redirect:/paciente/editar";
         }
 
         try {
-            pacienteServicio.modificarPacientes(id, nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2);
-            modelo.put("exito", "cambios realizados con éxito");
+            pacienteServicio.modificarPacientes(archivo, id, nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2);
+            modelo.addAttribute("exito", "cambios realizados con éxito");
 
             Paciente pacienteActualizado = pacienteServicio.getOne(id);
             session.setAttribute("pacienteActualizado", pacienteActualizado);
@@ -71,12 +73,12 @@ public class PacienteController {
     public String listarCitas(ModelMap modelMap, HttpSession session) {
 
         Paciente paciente = (Paciente) session.getAttribute("usuariosession");
-        if (paciente == null){
+        if (paciente == null) {
             return "redirect:/portal/login";
         }
 
         var misTurnos = turnoServicio.obtenerTurnosDelPaciente(paciente);
-        modelMap.addAttribute("misTurnos",misTurnos);
+        modelMap.addAttribute("misTurnos", misTurnos);
         return "paciente_citas";
     }
 

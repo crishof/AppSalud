@@ -8,7 +8,7 @@
 <head th:replace="layout/head :: head"></head>
 
 <body>
-<!--<header th:replace="layout/header :: header"></header>-->
+
 <nav th:replace="layout/navbar :: navbar"></nav>
 
 <div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>
@@ -19,7 +19,11 @@
         <div class="card-header">
             <h2> Ficha Medica </h2>
             <p> Paciente id: <span class="text-muted small" th:text="${session.usuariosession.id}"></span></p>
-
+            <img th:if="${session.usuariosession.imagen != null}"
+                 style="height: 100px;width: 100px; border-radius: 10px; object-fit:cover" class="logo"
+                 th:src="@{/imagen/perfil/__${session.usuariosession.id}__}"/>
+            <img th:if="${session.usuariosession.imagen == null}" style="max-height: 100px; border-radius: 10px"
+                 class="logo" th:src="@{/images/noImage.webp}">
         </div>
 
         <div class="card-body text-center">

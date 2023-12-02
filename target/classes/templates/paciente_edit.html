@@ -13,26 +13,14 @@
 
 <div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>
 
-
-<h1>
-    Modificar datos del Paciente
-</h1>
-
-<!--            <div th:if="${error != null}" class="card text-white bg-danger m-3">-->
-<!--                <h5 class="card-title">Error!</h5>-->
-<!--                <div class="card-body">-->
-<!--                    <p class="card-text" th:text="${error}"></p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div th:if="${exito} != null" class="card text-white bg-success m-3 ">-->
-<!--                <h5 class="card-title">Exito!</h5>-->
-<!--                <div class="card-body">-->
-<!--                    <p class="card-text" th:text="${exito}"></p>-->
-<!--                </div>-->
-<!--            </div>-->
-
-
 <div class="card">
+
+    <div class="card-header">
+        <h1>
+            Datos personales
+        </h1>
+        <p>Recuerda mantener tus datos actualizados!</p>
+    </div>
 
     <div class="card-body">
         <form th:action="@{/paciente/editar/__${session.usuariosession.id}__}" method="POST"
@@ -73,8 +61,8 @@
             </div>
             <div class="col-md-6">
                 <label>Nombre de usuario</label>
-                    <input type="text" class="form-control" name="nombreUsuario"
-                           th:value="${paciente != null ? paciente.nombreUsuario : session.usuariosession.nombreUsuario}">
+                <input type="text" class="form-control" name="nombreUsuario"
+                       th:value="${paciente != null ? paciente.nombreUsuario : session.usuariosession.nombreUsuario}">
             </div>
             <div class="col-md-6">
                 <label>Contraseña</label>
@@ -86,7 +74,22 @@
                        placeholder="Ingrese nuevamente su contraseña">
             </div>
 
-                <button type="submit" class="btn btn-primary">Actualizar</button>
+            <div class="col-md-6">
+
+                <img th:if="${session.usuariosession.imagen != null}"
+                     style="height: 100px;width: 100px; border-radius: 10px; object-fit:cover"
+                     class="logo"
+                     th:src="@{/imagen/perfil/__${session.usuariosession.id}__}"
+                />
+                <img th:if="${session.usuariosession.imagen == null}" style="max-height: 100px; border-radius: 10px"
+                     class="logo" th:src="@{/images/noImage.webp}">
+
+                <label for="imagen">Foto de perfil</label>
+
+                <input type="file" id="imagen" name="archivo" class="form-control">
+
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
         </form>
     </div>
 </div>
