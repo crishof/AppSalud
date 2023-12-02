@@ -13,36 +13,42 @@
 
 <div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>
 
-<h1>
-    Historia Clinica
+<div class="card">
+    <div class="card-header">
+        <h1>Historia Clinica</h1>
+    </div>
+        <a class="btn btn-primary" th:href="@{/historia_clinica/ficha_medica}">Mi ficha medica</a>
+    <div class="card-body">
 
 
-</h1>
 
-<a th:href="@{/historia_clinica/ficha_medica}">Mi ficha medica</a>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Profesional</th>
+                <th>Especialidad</th>
+                <th>Motivo</th>
+                <th>Diagnostico</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="consulta : ${consultas}">
+                <td th:text="${consulta.fechaDeConsulta}"></td>
+                <td th:text="${consulta.horaInicio}"></td>
+                <td>profesional sin dato</td>
+                <td>profesional sin dato</td>
+                <!--        <td th:text="${consulta.profesional.nombre + ' ' + consulta.profesional.apellido}"></td>-->
+                <!--        <td th:text="${consulta.profesional.especialidad}"></td>-->
+                <td th:text="${consulta.motivoConsulta}"></td>
+                <td th:text="${consulta.diagnostico}"></td>
+            </tr>
+            </tbody>
+        </table>
 
-<table class="table">
-    <thead class="thead-dark">
-    <tr>
-        <th>Fecha</th>
-        <th>Hora</th>
-        <th>Profesional</th>
-        <th>Especialidad</th>
-
-        <th>Paciente</th>
-        <th>Atender Consulta</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="consulta : ${consultas}">
-        <td th:text="${consulta.fechaDeConsulta}"></td>
-        <td th:text="${consulta.profesional}"></td>
-        <td th:text="${consulta.profesional.especialidad}"></td>
-        <td th:text="${consulta.motivoConsulta}"></td>
-        <td th:text="${consulta.diagnostico}"></td>
-    </tr>
-    </tbody>
-</table>
+    </div>
+</div>
 
 <footer th:replace="layout/footer :: footer"></footer>
 <script

@@ -2,10 +2,7 @@ package com.egg.appsalud.servicios;
 
 import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.Exception.MiException;
-import com.egg.appsalud.entidades.Consulta;
-import com.egg.appsalud.entidades.FichaMedica;
-import com.egg.appsalud.entidades.Paciente;
-import com.egg.appsalud.entidades.Profesional;
+import com.egg.appsalud.entidades.*;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
 
 import java.time.LocalTime;
@@ -100,6 +97,9 @@ public class ConsultaServicio {
         }
     }
 
+    public List<Consulta> obtenerConsultasDelPaciente(Paciente paciente) {
+        return consultaRepositorio.findByPaciente(paciente);
+    }
 
     public List<Consulta> listarConsultas() {
 

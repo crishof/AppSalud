@@ -21,25 +21,22 @@
             <p> Paciente id: <span class="text-muted small" th:text="${session.usuariosession.id}"></span></p>
 
         </div>
-    </div>
 
-    <div class="card-body">
-        <div class="col-md-6">
-            <h2>Paciente</h2>
-            <p>Nombre: <span th:text="${session.usuariosession.nombre}"></span></p>
-            <p>Apellido: <span th:text="${session.usuariosession.apellido}"></span></p>
-            <p>Dni: <span th:text="${session.usuariosession.DNI}"></span></p>
+        <div class="card-body text-center">
+            <div class="card shadow col-md-6">
+                <h2>Paciente</h2>
+                <p>Nombre: <span th:text="${session.usuariosession.nombre}"></span></p>
+                <p>Apellido: <span th:text="${session.usuariosession.apellido}"></span></p>
+                <p>Dni: <span th:text="${session.usuariosession.DNI}"></span></p>
+            </div>
+
+            <div class="card shadow col-md-6">
+                <h2>Datos Medicos</h2>
+                <p>Grupo Sanguineo: <span th:text="${session.usuariosession.fichaMedica.grupoSanguineo}"></span></p>
+                <p>Altura <span th:text="${session.usuariosession.fichaMedica.altura}"></span></p>
+                <p>Peso <span th:text="${session.usuariosession.fichaMedica.peso}"></span></p>
+            </div>
         </div>
-
-        <div class="col-md-6">
-            <h2>Datos Medicos</h2>
-            <p>Grupo Sanguineo: <span th:text="${session.usuariosession.fichaMedica.grupoSanguineo}"></span></p>
-            <p>Altura <span th:text="${session.usuariosession.fichaMedica.altura}"></span></p>
-            <p>Peso <span th:text="${session.usuariosession.fichaMedica.peso}"></span></p>
-        </div>
-    </div>
-
-    <div class="divVolver">
         <a th:href="@{/paciente/historia}" class="btn btn-primary my-2">Volver</a>
     </div>
 

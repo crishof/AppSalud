@@ -2,6 +2,7 @@ package com.egg.appsalud.controladores;
 
 import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Consulta;
+import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Turno;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
 import com.egg.appsalud.servicios.ConsultaServicio;
@@ -70,8 +71,6 @@ public class PacienteControlador {
                                @RequestParam Date fecha, @RequestParam LocalTime horario,
                                HttpServletRequest request, ModelMap model) throws MiException, ParseException {
 
-        System.out.println("EJECUTANDO POST");
-
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date fechaDate = dateFormat.parse(request.getParameter("fecha"));
 
@@ -86,12 +85,14 @@ public class PacienteControlador {
     @GetMapping("/historia")
     public String historiaClinica(HttpSession session, ModelMap modelMap) {
 
-        List<Consulta> consultas = consultaServicio.listarConsultasPorIdPaciente(session.getId());
+        Paciente paciente = (Paciente) session.getAttribute("usuariosession");
 
+        var consultas = consultaServicio.obtenerConsultasDelPaciente(paciente);
 
-        modelMap.addAttribute("consultas",consultas);
+        modelMap.addAttribute("consultas", consultas);
         return "historia_clinica";
     }
+
 
     //    MODIFICAR DATOS COMO ADMIN
     @GetMapping("/modificar/{id}")

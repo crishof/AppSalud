@@ -5,9 +5,7 @@ public enum DiaSemana {
     MARTES("Martes"),
     MIERCOLES("Miércoles"),
     JUEVES("Jueves"),
-    VIERNES("Viernes"),
-    SABADO("Sábado"),
-    DOMINGO("Domingo");
+    VIERNES("Viernes");
 
     private final String nombreEnCastellano;
 
