@@ -4,24 +4,25 @@
     margin: 0;
     padding: 0;
     /*font-family: "Raleway", sans-serif;*/
+
 }
 
 /*PALETA DE COLOR*/
 
 .color6 {
-    color:#005eff;
+    color: #005eff;
 }
 
-.star{
-    border:  1px #1a5dd1;
+.star {
+    border: 1px #1a5dd1;
 
 }
 
-h1 a{
+h1 a {
     color: #005eff !important;
 }
 
-.brand{
+.brand {
     color: #005eff !important;
 }
 
@@ -85,6 +86,15 @@ h1 a{
 
 footer {
     text-align: center;
+    background: #2980B9; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #FFFFFF, #6DD5FA, #005eff); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #FFFFFF, #6DD5FA, #005eff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+nav {
+    background: #2980B9; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #005eff, #6DD5FA, #FFFFFF); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #005eff, #6DD5FA, #FFFFFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .card-error {
