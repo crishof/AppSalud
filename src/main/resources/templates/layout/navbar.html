@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <body>
-<nav th:fragment="navbar" class="navbar navbar-expand-lg bg-body-tertiary">
+<nav th:fragment="navbar" class="navbar navbar-expand-lg bg-body-tertiary"> <!-- fixed-top se coloca despues de tertiary para que quede fijo el navbar-->
     <div class="container-fluid">
         <div class="brand">
             <i class="fa fa-heart-circle-check fa-2xl" style="color: #005eff"></i>
@@ -25,7 +25,7 @@
                         Mi cuenta
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/paciente/citas}">Mis Citas</a></li>
+                        <li><a class="dropdown-item" th:href="@{/paciente/citas}">Mis Turnos</a></li>
                         <li><a class="dropdown-item" th:href="@{/paciente/historia}">Historia clinica</a></li>
                         <li><a class="dropdown-item" th:href="@{/paciente/editar}">Mis datos </a></li>
                         <li>
@@ -50,7 +50,7 @@
                         Mi cuenta
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/profesional/citasProfesional}">Citas</a></li>
+                        <li><a class="dropdown-item" th:href="@{/profesional/citasProfesional}">Turnos</a></li>
                         <li><a class="dropdown-item" th:href="@{/profesional/listaPacientes}">Pacientes</a></li>
                         <li><a class="dropdown-item" th:href="@{/profesional/editar}">Mis datos</a></li>
                         <li>
@@ -114,11 +114,13 @@
                 <p th:text="'Hola ' + ${session.usuariosession.nombre}"></p>
                 <!--                <img th:src="${session.usuariosession.imagen}" alt="">-->
             </div>
+            
 
 
         </div>
     </div>
 </nav>
+ 
 </body>
 </html>
 
