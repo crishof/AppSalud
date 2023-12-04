@@ -20,25 +20,27 @@
     <table class="table">
         <thead class="thead-dark">
         <tr>
-            <th>Fecha</th>
+            <th>Dia</th>
             <th>Hora</th>
             <th>Profesional</th>
-            <th>Especialidad</th>
-
             <th>Paciente</th>
-            <th>Atender Consulta</th>
+            <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="turno : ${misTurnosProfesional}">
-            <td th:if="${pacientes.contains(turno.paciente)}" th:text="${turno.fecha}"></td>
-            <td th:if="${pacientes.contains(turno.paciente)}" th:text="${turno.hora}"></td>
-            <td th:if="${pacientes.contains(turno.paciente)}" th:text="${turno.profesional.nombre} + ' ' + ${turno.profesional.apellido}"></td>
-            <td th:if="${pacientes.contains(turno.paciente)}" th:text="${turno.profesional.especialidad}"></td>
+            <td th:if="${pacientes.contains(turno.paciente) and !turno.atendido}" th:text="${turno.fecha}"></td>
+            <td th:if="${pacientes.contains(turno.paciente) and !turno.atendido}" th:text="${turno.hora}"></td>
+            <td th:if="${pacientes.contains(turno.paciente)and !turno.atendido }" th:text="${turno.profesional.nombre} + ' ' + ${turno.profesional.apellido}"></td>
+            <td th:if="${pacientes.contains(turno.paciente) and !turno.atendido}" th:text="${turno.paciente.nombre}"></td>
 
-<!--            <td th:text="${turno.paciente.nombre} + ' ' + ${turno.paciente.apellido}"></td>-->
-            <td th:if="${pacientes.contains(turno.paciente)}" th:text="${turno.paciente.nombre}"></td>
-            <td th:if="${pacientes.contains(turno.paciente)}"> <a th:href="@{/consulta/crear/__${turno.paciente.id}__}">Ir</a></td>
+            <td th:if="${pacientes.contains(turno.paciente) and !turno.atendido}">
+                <form th:action="@{/consulta/crear/__${turno.paciente.id}__}" method="GET">
+                    <input hidden th:value="${turno.paciente.id}" name="id">
+                    <input hidden th:value="${turno.id}" name="idTurno">
+                    <button type="submit" class="btn btn-primary">Atender paciente</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

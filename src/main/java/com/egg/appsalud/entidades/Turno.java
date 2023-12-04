@@ -29,6 +29,7 @@ public class Turno {
     private String hora;
     private String consulta;
     private boolean disponibilidad;
+    private boolean atendido;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paciente")

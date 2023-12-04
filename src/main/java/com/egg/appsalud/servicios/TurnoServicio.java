@@ -224,4 +224,9 @@ public class TurnoServicio {
 
     }
 
+    public void atenderTurno(Turno turno) {
+
+        turno.setAtendido(true);
+        turnoRepositorio.save(turno);
+    }
 }

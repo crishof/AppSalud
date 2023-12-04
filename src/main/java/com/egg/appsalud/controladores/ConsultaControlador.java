@@ -2,10 +2,7 @@ package com.egg.appsalud.controladores;
 
 import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.Exception.MiException;
-import com.egg.appsalud.entidades.Consulta;
-import com.egg.appsalud.entidades.FichaMedica;
-import com.egg.appsalud.entidades.Paciente;
-import com.egg.appsalud.entidades.Profesional;
+import com.egg.appsalud.entidades.*;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
 import com.egg.appsalud.repositorios.FichaMedicaRepositorio;
 import com.egg.appsalud.repositorios.PacienteRepositorio;
@@ -17,6 +14,7 @@ import java.util.List;
 
 import com.egg.appsalud.servicios.FichaMedicaServicio;
 import com.egg.appsalud.servicios.PacienteServicio;
+import com.egg.appsalud.servicios.TurnoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,12 +47,18 @@ public class ConsultaControlador {
     @Autowired
     ConsultaServicio consultaServicio;
 
+    @Autowired
+    TurnoServicio turnoServicio;
+
 
     @GetMapping("/crear/{id}")
-    public String crearConsulta(@PathVariable String id, ModelMap modelo) {
+    public String crearConsulta(@PathVariable String id, String idTurno, ModelMap modelo) throws MiException {
 
+        Turno turno = turnoServicio.obtenerTurnoPorId(idTurno);
         Paciente paciente = pacienteServicio.getOne(id);
         FichaMedica fichaMedica = fichaMedicaServicio.buscarPorIdPaciente(id);
+
+        modelo.put("turno",turno);
 
         modelo.put("fichaMedica",fichaMedica);
 
@@ -68,13 +72,16 @@ public class ConsultaControlador {
     @PostMapping("/crear/{id}")
     public String crearConsulta(@PathVariable String id, HttpSession session,
                                 String obraSocial, Long afiliado,
+                                @RequestParam String idTurno,
                                 @RequestParam String antecedentes, @RequestParam String grupoSanguineo,
                                 @RequestParam Double altura, @RequestParam Double peso,
                                 String observaciones, @RequestParam String diagnostico,
-                                @RequestParam String tratamiento, @RequestParam String motivoConsulta, ModelMap modelo) {
+                                @RequestParam String tratamiento, @RequestParam String motivoConsulta, ModelMap modelo) throws MiException {
 
         Paciente paciente = pacienteServicio.getOne(id);
         Profesional profesional = (Profesional) session.getAttribute("session");
+        Turno turno = turnoServicio.obtenerTurnoPorId(idTurno);
+
 
         Date fecha = new Date();
         LocalTime horario = LocalTime.now();
@@ -82,6 +89,7 @@ public class ConsultaControlador {
         try {
             cs.crearConsulta(motivoConsulta,paciente, profesional, obraSocial, afiliado, antecedentes, grupoSanguineo, altura, peso,
                     observaciones, diagnostico, tratamiento, fecha, horario);
+            turnoServicio.atenderTurno(turno);
             modelo.put("exito", "La consulta fue creada con exito");
             return "redirect:/profesional/citasProfesional";
         } catch (MiException e) {

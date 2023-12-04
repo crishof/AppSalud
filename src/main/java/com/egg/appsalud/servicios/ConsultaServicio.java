@@ -26,6 +26,9 @@ public class ConsultaServicio {
     @Autowired
     private PacienteServicio pacienteServicio;
 
+    @Autowired
+    private TurnoServicio turnoServicio;
+
 
     @Transactional
     public void crearConsulta(String motivoConsulta, Paciente paciente, Profesional profesional, String obraSocial, Long afiliado, String antecedentes, String grupoSanguineo, Double altura,
