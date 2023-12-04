@@ -51,6 +51,11 @@ public class InicioController {
     @Autowired
     ConsultaServicio consultaServicio;
 
+    @GetMapping("/registrar")
+    public String registrar(){
+        return "registro";
+    }
+
     @GetMapping("/registroPaciente")
     public String registroPaciente() {
         return "paciente_registro";

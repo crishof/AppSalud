@@ -55,9 +55,8 @@
     <table class="table">
         <thead class="thead-dark">
         <tr>
-            <th>Fecha</th>
+            <th>Día</th>
             <th>Hora</th>
-            <th>Estado</th>
             <th class="text-center"></th>
         </tr>
         </thead>
@@ -65,7 +64,7 @@
         <tr th:each="turno, iterStat : ${turnos}" id="fila-${iterStat.index}">
             <td th:if="${turno.disponibilidad}" th:text="${turno.fecha}"></td>
             <td th:if="${turno.disponibilidad}" th:text="${turno.hora}"></td>
-            <td th:if="${turno.disponibilidad}" th:text="${turno.disponibilidad} ? 'Disponible' : 'No disponible'"></td>
+<!--            <td th:if="${turno.disponibilidad}" th:text="${turno.disponibilidad} ? 'Disponible' : 'No disponible'"></td>-->
             <td th:if="${turno.disponibilidad}">
                 <form th:action="@{/turno/agendar-turno}" method="post">
                     <input type="hidden" name="turnoId" th:value="${turno.id}"/>
