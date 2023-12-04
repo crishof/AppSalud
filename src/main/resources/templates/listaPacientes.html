@@ -14,9 +14,32 @@
 <div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>
 
 
-<h1>
-    Lista Pacientes
-</h1>
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Ficha medica</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="paciente : ${pacientes}">
+        <td th:text="${paciente.nombre}"></td>
+        <td th:text="${paciente.apellido}"></td>
+        <td>
+            <form th:action="@{/historia_clinica/fichaMedicaProfesional}">
+                <input hidden th:value="${paciente.id}" name="id">
+                <button class="btn btn-primary" type="submit">Ver datos</button>
+            </form>
+        <td class="card-body">
+    </tr>
+    </tbody>
+</table>
+
+<div class="container text-center boton-volver">
+    <a th:href="@{/inicio}" class="btn btn-secondary btn-lg botones">Volver</a>
+</div>
+</div>
 
 <footer th:replace="layout/footer :: footer"></footer>
 <script

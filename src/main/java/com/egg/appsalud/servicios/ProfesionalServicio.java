@@ -5,12 +5,9 @@ import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Enumeracion.Provincias;
 import com.egg.appsalud.Enumeracion.Rol;
 import com.egg.appsalud.Exception.MiException;
-import com.egg.appsalud.entidades.Consulta;
+import com.egg.appsalud.entidades.*;
 
 
-import com.egg.appsalud.entidades.Imagen;
-import com.egg.appsalud.entidades.Profesional;
-import com.egg.appsalud.entidades.Usuario;
 import com.egg.appsalud.repositorios.ConsultaRepositorio;
 import com.egg.appsalud.repositorios.ProfesionalRepositorio;
 import com.egg.appsalud.repositorios.UsuarioRepositorio;
@@ -309,4 +306,8 @@ public class ProfesionalServicio implements UserDetailsService {
 
     }
 
+    public List<Paciente> listarPacientesDelProfesional(Profesional profesional) {
+
+        return usuarioRepositorio.findPacientesByProfesional(profesional);
+    }
 }

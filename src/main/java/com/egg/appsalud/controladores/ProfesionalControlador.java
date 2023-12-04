@@ -2,6 +2,7 @@ package com.egg.appsalud.controladores;
 
 import com.egg.appsalud.Exception.MiException;
 
+import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.Enumeracion.Especialidad;
 import com.egg.appsalud.Enumeracion.Provincias;
@@ -130,7 +131,26 @@ public class ProfesionalControlador {
     }
 
     @GetMapping("/listaPacientes")
-    public String listarPacientes() {
+    public String listarPacientes(ModelMap modelMap, HttpSession session) {
+
+        Profesional profesional = (Profesional) session.getAttribute("usuariosession");
+        if ( profesional == null){
+            return "redirect:/portal/login";
+        }
+
+        System.out.println("profesional" + profesional.getId());
+
+        List<Paciente> misPacientes = profesionalServicio.listarPacientesDelProfesional(profesional);
+
+        for (Paciente paciente:misPacientes
+             ) {
+            System.out.println("paciente.getNombre() = " + paciente.getNombre());
+            System.out.println("paciente = " + paciente.getApellido());
+        }
+
+        modelMap.addAttribute("pacientes",misPacientes);
+
+
         return "listaPacientes";
     }
 

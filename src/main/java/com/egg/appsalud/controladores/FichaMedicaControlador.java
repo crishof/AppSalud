@@ -21,7 +21,7 @@ public class FichaMedicaControlador {
 
 
     @GetMapping("/ficha_medica")
-    public String verFichaMedica( HttpSession session, ModelMap model){
+    public String verFichaMedica(HttpSession session, ModelMap model) {
 
         Paciente pacienteActualizado = (Paciente) session.getAttribute("pacienteActualizado");
         session.removeAttribute("pacienteActualizado");
@@ -31,5 +31,16 @@ public class FichaMedicaControlador {
         return "paciente_fichaMedica";
 
     }
-    
+
+    @GetMapping("/fichaMedicaProfesional")
+    public String verFichaMedicaProfesional(@RequestParam String id, ModelMap model) {
+
+        Paciente paciente = pacienteServicio.getOne(id);
+
+        model.addAttribute("paciente", paciente);
+
+        return "profesional_fichaMedica";
+    }
+
+
 }

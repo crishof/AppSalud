@@ -1,5 +1,7 @@
 package com.egg.appsalud.repositorios;
 
+import com.egg.appsalud.entidades.Paciente;
+import com.egg.appsalud.entidades.Profesional;
 import com.egg.appsalud.entidades.Usuario;
 
 import java.util.List;
@@ -26,4 +28,7 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
 
     @Query("SELECT u FROM Usuario u WHERE u.nombre LIKE ?1%")
     List<Usuario> buscarUsuarioPorNombre(String palabra);
+
+    @Query("SELECT DISTINCT t.paciente FROM Turno t WHERE t.profesional = :profesional")
+    List<Paciente> findPacientesByProfesional(@Param("profesional") Profesional profesional);
 }
