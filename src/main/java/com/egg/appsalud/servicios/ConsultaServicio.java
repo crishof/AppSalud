@@ -46,6 +46,7 @@ public class ConsultaServicio {
         consulta.setDiagnostico(diagnostico);
         consulta.setTratamiento(tratamiento);
         consulta.setObservaciones(observaciones);
+        consulta.setAtendido(true);
 
         fichaMedicaServicio.modificarFichaMedica(paciente, antecedentes, obraSocial, afiliado, grupoSanguineo, altura, peso);
         consultaRepositorio.save(consulta);

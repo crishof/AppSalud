@@ -15,7 +15,7 @@
 
 <div class="container">
     <h1 class="my-4 text-center">Mis Turnos</h1>
-<!--    <div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>-->
+    <!--    <div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>-->
 
     <table class="table">
         <thead class="thead-dark">
@@ -31,8 +31,10 @@
         <tr th:each="turno : ${misTurnosProfesional}">
             <td th:if="${pacientes.contains(turno.paciente) and !turno.atendido}" th:text="${turno.fecha}"></td>
             <td th:if="${pacientes.contains(turno.paciente) and !turno.atendido}" th:text="${turno.hora}"></td>
-            <td th:if="${pacientes.contains(turno.paciente)and !turno.atendido }" th:text="${turno.profesional.nombre} + ' ' + ${turno.profesional.apellido}"></td>
-            <td th:if="${pacientes.contains(turno.paciente) and !turno.atendido}" th:text="${turno.paciente.nombre}"></td>
+            <td th:if="${pacientes.contains(turno.paciente)and !turno.atendido }"
+                th:text="${turno.profesional.nombre} + ' ' + ${turno.profesional.apellido}"></td>
+            <td th:if="${pacientes.contains(turno.paciente) and !turno.atendido}"
+                th:text="${turno.paciente.nombre}"></td>
 
             <td th:if="${pacientes.contains(turno.paciente) and !turno.atendido}">
                 <form th:action="@{/consulta/crear/__${turno.paciente.id}__}" method="GET">

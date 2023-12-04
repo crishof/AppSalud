@@ -29,49 +29,43 @@ public class TurnoServicio {
         LocalTime horaActual = profesional.getHorarioEntrada();
 
         for (DiaSemana dia : profesional.getDiasDisponibles()) {
-            String nombreDia = dia.getNombreEnCastellano(); // Obtener el nombre en castellano
+            String nombreDia = dia.getNombreEnCastellano();
 
             while (horaActual.isBefore(profesional.getHorarioSalida())) {
                 Turno turno = new Turno();
                 turno.setProfesional(profesional);
                 turno.setDisponibilidad(true);
-                turno.setFecha(nombreDia); // Puedes ajustar el formato de fecha
+                turno.setFecha(nombreDia);
                 turno.setHora(horaActual.toString());
 
                 turnos.add(turno);
-
-                horaActual = horaActual.plus(30, ChronoUnit.MINUTES);
+                horaActual = horaActual.plusMinutes(30);
             }
-
             horaActual = profesional.getHorarioEntrada();
         }
-        // Guardar los turnos en el repositorio si es necesario
+
         turnoRepositorio.saveAll(turnos);
         return turnos;
     }
 
     @Transactional
     public void asignarTurnoAPaciente(String turnoId, Paciente paciente) {
-        // Buscar el turno por su ID
+
         Optional<Turno> turnoOptional = turnoRepositorio.findById(turnoId);
 
         if (turnoOptional.isPresent()) {
             Turno turno = turnoOptional.get();
 
-            // Verificar si el turno está disponible
             if (turno.isDisponibilidad()) {
-                // Asignar el paciente al turno
                 turno.setPaciente(paciente);
-                turno.setDisponibilidad(false); // Marcar el turno como no disponible
+                turno.setDisponibilidad(false);
 
-                // Guardar el cambio en el repositorio
                 turnoRepositorio.save(turno);
             } else {
-                // El turno no está disponible, maneja la lógica adecuada aquí
                 throw new RuntimeException("El turno seleccionado ya no está disponible.");
             }
+
         } else {
-            // El turno no se encontró, maneja la lógica adecuada aquí
             throw new RuntimeException("El turno seleccionado no existe.");
         }
     }
@@ -85,12 +79,10 @@ public class TurnoServicio {
     }
 
     public List<Turno> obtenerTodosLosTurnos() {
-        // Utiliza el repositorio para obtener todos los turnos almacenados
         return turnoRepositorio.findAll();
     }
 
     public List<Turno> obtenerTurnosDeProfesionalOrdenados(Profesional profesional) {
-        // Utiliza el repositorio para obtener los turnos del profesional ordenados
         return turnoRepositorio.findByProfesionalOrderByFechaAscHoraAsc(profesional);
     }
 

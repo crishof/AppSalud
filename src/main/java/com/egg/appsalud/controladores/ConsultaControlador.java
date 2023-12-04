@@ -40,16 +40,13 @@ public class ConsultaControlador {
     @Autowired
     FichaMedicaServicio fichaMedicaServicio;
     @Autowired
+    ConsultaServicio consultaServicio;
+    @Autowired
+    TurnoServicio turnoServicio;
+    @Autowired
     private ConsultaServicio cs;
     @Autowired
     private ConsultaRepositorio cr;
-
-    @Autowired
-    ConsultaServicio consultaServicio;
-
-    @Autowired
-    TurnoServicio turnoServicio;
-
 
     @GetMapping("/crear/{id}")
     public String crearConsulta(@PathVariable String id, String idTurno, ModelMap modelo) throws MiException {
@@ -58,9 +55,9 @@ public class ConsultaControlador {
         Paciente paciente = pacienteServicio.getOne(id);
         FichaMedica fichaMedica = fichaMedicaServicio.buscarPorIdPaciente(id);
 
-        modelo.put("turno",turno);
+        modelo.put("turno", turno);
 
-        modelo.put("fichaMedica",fichaMedica);
+        modelo.put("fichaMedica", fichaMedica);
 
         modelo.put("paciente", paciente);
 
@@ -87,7 +84,7 @@ public class ConsultaControlador {
         LocalTime horario = LocalTime.now();
 
         try {
-            cs.crearConsulta(motivoConsulta,paciente, profesional, obraSocial, afiliado, antecedentes, grupoSanguineo, altura, peso,
+            cs.crearConsulta(motivoConsulta, paciente, profesional, obraSocial, afiliado, antecedentes, grupoSanguineo, altura, peso,
                     observaciones, diagnostico, tratamiento, fecha, horario);
             turnoServicio.atenderTurno(turno);
             modelo.put("exito", "La consulta fue creada con exito");
@@ -116,11 +113,11 @@ public class ConsultaControlador {
     }
 
     @PostMapping("/motivo")
-    public String crearMotivo(@RequestParam String motivoConsulta, HttpSession session,ModelMap modelMap){
+    public String crearMotivo(@RequestParam String motivoConsulta, HttpSession session, ModelMap modelMap) {
 
-        consultaServicio.crearConsulta(motivoConsulta,session.getId());
+        consultaServicio.crearConsulta(motivoConsulta, session.getId());
 
-        modelMap.addAttribute("consulta",cr.findByPacienteId(session.getId()));
+        modelMap.addAttribute("consulta", cr.findByPacienteId(session.getId()));
 
         return "redirect:/listaProfesionales";
     }

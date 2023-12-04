@@ -3,50 +3,34 @@ package com.egg.appsalud.servicios;
 import com.egg.appsalud.entidades.FichaMedica;
 import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.repositorios.FichaMedicaRepositorio;
+import com.egg.appsalud.repositorios.PacienteRepositorio;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class FichaMedicaServicio {
 
-    final
+    @Autowired
     FichaMedicaRepositorio fichaMedicaRepositorio;
+    @Autowired
+    PacienteRepositorio pacienteRepositorio;
 
-    public FichaMedicaServicio(FichaMedicaRepositorio fichaMedicaRepositorio) {
-        this.fichaMedicaRepositorio = fichaMedicaRepositorio;
-    }
+    public void crearFichaMedica(Paciente paciente) {
 
-    public void crearFichaMedica(Paciente paciente){
+        FichaMedica ficha = fichaMedicaRepositorio.buscarIdPaciente(paciente.getId());
 
-//        FichaMedica f = new FichaMedica();
-//        f.setPaciente(paciente);
-//        fichaMedicaRepositorio.save(f);
+        if (ficha == null) {
+            FichaMedica fichaMedica = new FichaMedica();
+            fichaMedica.setPaciente(paciente);
+            fichaMedicaRepositorio.save(fichaMedica);
 
-        FichaMedica fichaMedica = fichaMedicaRepositorio.buscarIdPaciente(paciente.getId());
-//
-        if ( fichaMedica == null){
-        FichaMedica ficha = new FichaMedica();
-        ficha.setPaciente(paciente);
-        fichaMedicaRepositorio.save(ficha);
+            paciente.setFichaMedica(fichaMedica);
+            pacienteRepositorio.save(paciente);
         }
-
-
-        /*
-            FichaMedica fichaMedica = buscarPorIdPaciente(paciente.getId());
-
-            if(fichaMedica != null){
-                return fichaMedica;
-            }else {
-                FichaMedica fichaMedica1 = new FichaMedica();
-                fichaMedica1.setPaciente(paciente);
-                fichaMedicaRepositorio.save(fichaMedica1);
-                return fichaMedica1;
-            }
-
-         */
     }
+
     public void modificarFichaMedica(Paciente paciente, String antecedentes, String obraSocial, Long afiliado,
-                                 String grupoSanguineo, double altura, double peso) {
+                                     String grupoSanguineo, double altura, double peso) {
 
         FichaMedica ficha = buscarPorIdPaciente(paciente.getId());
         ficha.setAntecedentes(antecedentes);
@@ -58,12 +42,8 @@ public class FichaMedicaServicio {
         fichaMedicaRepositorio.save(ficha);
     }
 
-    public FichaMedica buscarPorIdPaciente(String id){
+    public FichaMedica buscarPorIdPaciente(String id) {
 
-        FichaMedica fichaMedica= fichaMedicaRepositorio.buscarIdPaciente(id);
-
-//        System.out.println("FICHA: " + fichaMedica.getPaciente().getNombre());
-
-        return fichaMedica;
+        return fichaMedicaRepositorio.buscarIdPaciente(id);
     }
 }

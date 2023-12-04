@@ -92,13 +92,12 @@ public class UtilController {
             diasDisponibles.add(diaAleatorio);
         }
 
-        // Array de LocalTime para los horarios de entrada (de 8:00 a 16:00 cada media hora)
+
         LocalTime[] horariosEntrada = new LocalTime[17];
         for (int i = 0; i < 17; i++) {
             horariosEntrada[i] = LocalTime.of(8 + i / 2, (i % 2) * 30);
         }
 
-        // Array de LocalTime para los horarios de salida (de 12:00 a 20:00 cada media hora)
         LocalTime[] horariosSalida = new LocalTime[17];
         for (int i = 0; i < 17; i++) {
             horariosSalida[i] = LocalTime.of(12 + i / 2, (i % 2) * 30);
@@ -107,10 +106,8 @@ public class UtilController {
         LocalTime horarioEntrada = horariosEntrada[random.nextInt(horariosEntrada.length)];
         LocalTime horarioSalida = horariosSalida[random.nextInt(horariosSalida.length)];
 
-
         int valorAleatorio = random.nextInt(36) + 15;
         int precioConsulta = Math.round(valorAleatorio * 100.0f / 100) * 100;
-
 
         profesionalServicio.crearProfesional(null, nombreUsuario, password, password, nombre, apellido, email, fechaNacimiento, dni, especialidad, provincias, localidad, direccion, matricula, diasDisponibles, horarioEntrada, horarioSalida, precioConsulta);
 
@@ -166,8 +163,7 @@ public class UtilController {
         String direccion = direcciones[random.nextInt(direcciones.length)];
         System.out.println("direccion = " + direccion);
 
-
-        pacienteServicio.crearPaciente(null,nombreUsuario,nombre,apellido,dni,fechaNacimiento,email,password,password2);
+        pacienteServicio.crearPaciente(null, nombreUsuario, nombre, apellido, dni, fechaNacimiento, email, password, password2);
 
         return "redirect:../listaProfesionales";
     }
