@@ -31,6 +31,7 @@
             <input hidden th:value="${session.usuariosession.id}" name="id">
             <div class="col-md-6">
                 <label for="nombre">Nombre</label>
+<<<<<<< HEAD
                 <input th:value="${profesional != null ? profesional.nombre : session.usuariosession.nombre}"
                        type="text" id="nombre" class="form-control" name="nombre">
             </div>
@@ -48,12 +49,31 @@
                 <label>Fecha de Nacimiento</label><br>
                 <input type="date" class="form-control" name="fechaDeNacimiento"
                        th:value="${profesional != null ? #dates.format(profesional.fechaDeNacimiento, 'yyyy-MM-dd') : #dates.format(session.usuariosession.fechaDeNacimiento, 'yyyy-MM-dd')}">
+=======
+                <input readonly th:value="${profesional != null ? profesional.nombre : session.usuariosession.nombre}" type="text" id="nombre" class="form-control read-only" name="nombre">
+            </div>
+            <div class="col-md-6">
+                <label for="apellido">Apellido</label><br>
+                <input readonly th:value="${profesional != null ? profesional.apellido : session.usuariosession.apellido}" type="text" id="apellido" class="form-control read-only" name="apellido">
+            </div>
+            <div class="col-md-6">
+                <label for="dni">Número de DNI</label><br>
+                <input readonly  type="text" class="form-control read-only" id="dni" name="DNI" th:value="${profesional != null ? profesional.DNI : session.usuariosession.DNI}">
+            </div>
+            <div class="col-md-6">
+                <label>Fecha de Nacimiento</label><br>
+                    <input  type readonly="date" class="form-control read-only" name="fechaDeNacimiento" th:value="${profesional != null ? #dates.format(profesional.fechaDeNacimiento, 'yyyy-MM-dd') : #dates.format(session.usuariosession.fechaDeNacimiento, 'yyyy-MM-dd')}">
+>>>>>>> rama
             </div>
             <div class="col-md-6">
                 <label>Correo electrónico</label>
                 <div>
+<<<<<<< HEAD
                     <input type="email" class="form-control" name="email"
                            th:value="${profesional != null ? profesional.email : session.usuariosession.email}">
+=======
+                    <input  type="email" class="form-control read-only" name="email" th:value="${profesional != null ? profesional.email : session.usuariosession.email}">
+>>>>>>> rama
                 </div>
             </div>
             <div class="col-md-6">
@@ -78,8 +98,12 @@
             </div>
             <div class="col-md-6">
                 <label for="matricula">Matrícula</label><br>
+<<<<<<< HEAD
                 <input type="text" id="matricula" class="form-control" name="matricula"
                        th:value="${profesional != null ? profesional.matricula : session.usuariosession.matricula}">
+=======
+                <input  type readonly="text" id="matricula" class="form-control read-only" name="matricula" th:value="${profesional != null ? profesional.matricula : session.usuariosession.matricula}">
+>>>>>>> rama
             </div>
 
 
@@ -123,7 +147,7 @@
             <div class="col-md-6">
 
                 <label for="especialidad">Especialidad médica:</label><br>
-                <select name="especialidad" id="especialidad" required>
+                <select name="especialidad" id="especialidad" class="form-control read-only"required>
                     <option
                             th:selected="${profesional != null ? profesional.especialidad : session.usuariosession.especialidad}"
                             th:text="${profesional != null ? profesional.especialidad : session.usuariosession.especialidad}"
@@ -136,9 +160,13 @@
 
             </div>
 
+<<<<<<< HEAD
             <div class="col-md-6">
 <<<<<<< HEAD
 =======
+=======
+  <div class="col-md-6">
+>>>>>>> rama
                 <label for="imagen">Foto de Perfil: </label>
                 <input type="file" id="imagen" name="archivo" class="form-control">
             </div>
