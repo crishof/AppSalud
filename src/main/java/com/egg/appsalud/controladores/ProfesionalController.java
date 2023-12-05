@@ -21,6 +21,7 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/profesional")
@@ -45,7 +46,11 @@ public class ProfesionalController {
     }
 
     @PostMapping("/editar/{id}")
+<<<<<<< HEAD
     public String editarProfesional(@PathVariable String id, MultipartFile archivo, @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
+=======
+    public String editarProfesional(@PathVariable String id, @RequestParam MultipartFile archivo, @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
+>>>>>>> botonModificarAdmin
                                     @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password,
                                     @RequestParam String password2, @RequestParam Especialidad especialidad, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion,
                                     @RequestParam int precioConsulta, @RequestParam Long matricula, ModelMap modelo, HttpSession session) {
@@ -62,7 +67,11 @@ public class ProfesionalController {
 
         try {
 
+<<<<<<< HEAD
             profesionalServicio.modificarProfesional(id, archivo, nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, provincias, localidad, direccion, matricula, precioConsulta);
+=======
+            profesionalServicio.modificarProfesional(id, archivo, nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, provincias, localidad, direccion, matricula, /*horariosAtencion,*/ precioConsulta);
+>>>>>>> botonModificarAdmin
             modelo.put("exito", "Profesional modificado con exito");
 
             Profesional profesionalActualizado = profesionalServicio.getOne(id);

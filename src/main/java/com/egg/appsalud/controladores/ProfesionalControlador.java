@@ -31,8 +31,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+<<<<<<< HEAD
 
 import javax.servlet.http.HttpSession;
+=======
+>>>>>>> botonModificarAdmin
 
 @Controller
 @RequestMapping("/profesional")
@@ -64,7 +67,11 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/modificar/{id}")
+<<<<<<< HEAD
     public String modificarProfesional(@PathVariable String id, MultipartFile archivo, @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
+=======
+    public String modificarProfesional(@PathVariable String id, @RequestParam MultipartFile archivo, @RequestParam String nombreUsuario, @RequestParam String nombre, @RequestParam String apellido,
+>>>>>>> botonModificarAdmin
                                        @RequestParam(required = false) Long DNI, @RequestParam("fechaDeNacimiento") String fechaDeNacimientoStr, @RequestParam String email, @RequestParam String password, @RequestParam String password2,
                                        @RequestParam Especialidad especialidad, @RequestParam Provincias provincias, @RequestParam String localidad, @RequestParam String direccion, @RequestParam int precioConsulta, @RequestParam Long matricula, ModelMap modelo) {
 
@@ -81,7 +88,11 @@ public class ProfesionalControlador {
 
         try {
 
+<<<<<<< HEAD
             profesionalServicio.modificarProfesional(id, archivo, nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, provincias, localidad, direccion, matricula, precioConsulta);
+=======
+            profesionalServicio.modificarProfesional(id, archivo, nombreUsuario, nombre, apellido, DNI, fechaDeNacimiento, email, password, password2, true, especialidad, provincias, localidad, direccion, matricula, /*horariosAtencion,*/ precioConsulta);
+>>>>>>> botonModificarAdmin
             modelo.put("exito", "Profesional modificado con exito");
 
         } catch (MiException ex) {

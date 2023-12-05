@@ -7,8 +7,14 @@ import com.egg.appsalud.Exception.MiException;
 import com.egg.appsalud.entidades.Consulta;
 import com.egg.appsalud.entidades.Paciente;
 import com.egg.appsalud.entidades.Profesional;
+<<<<<<< HEAD
 import com.egg.appsalud.repositorios.ProfesionalRepositorio;
 import com.egg.appsalud.servicios.*;
+=======
+import com.egg.appsalud.servicios.PacienteServicio;
+import com.egg.appsalud.servicios.ProfesionalServicio;
+import com.egg.appsalud.servicios.UsuarioServicio;
+>>>>>>> botonModificarAdmin
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -35,6 +41,9 @@ public class InicioController {
 
     @Autowired
     UsuarioServicio usuarioServicio;
+    
+    @Autowired
+    PacienteServicio pacienteServicio;
 
     @Autowired
     PacienteServicio pacienteServicio;
@@ -75,6 +84,10 @@ public class InicioController {
 
         try {
 
+<<<<<<< HEAD
+=======
+            System.out.println("EJECUTANDO TRY POST REGISTRAR");
+>>>>>>> botonModificarAdmin
             pacienteServicio.crearPaciente(archivo, nombreUsuario, nombre, apellido, dni, fechaDeNacimiento, email, password, password2);
 
             modelo.addAttribute("exito", null);
