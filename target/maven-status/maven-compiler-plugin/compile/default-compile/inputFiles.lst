@@ -1,7 +1,10 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\FichaMedicaRepositorio.java
 C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\ImagenControlador.java
 C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Usuario.java
@@ -132,10 +135,13 @@ C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\cont
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\ProfesionalRepositorio.java
 >>>>>>> botonModificarAdmin
 =======
+<<<<<<< Updated upstream
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Consulta.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\ProfesionalRepositorio.java
 >>>>>>> alejandrod
 =======
+=======
+>>>>>>> Stashed changes
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\ProfesionalController.java
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\PacienteServicio.java
 C:\Users\gonza\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Consulta.java
