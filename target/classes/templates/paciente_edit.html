@@ -30,17 +30,17 @@
             <input hidden th:value="${session.usuariosession.id}" name="id">
             <div class="col-md-6">
                 <label for="nombre">Nombre</label>
-                <input readonly th:value="${paciente != null ? paciente.nombre : session.usuariosession.nombre}" type="text"
-                       id="nombre" class="form-control read-only" name="nombre">
+                <input th:value="${paciente != null ? paciente.nombre : session.usuariosession.nombre}" type="text"
+                       id="nombre" class="form-control" name="nombre">
             </div>
             <div class="col-md-6">
                 <label for="apellido">Apellido</label><br>
-                <input readonly th:value="${paciente != null ? paciente.apellido : session.usuariosession.apellido}" type="text"
-                       id="apellido" class="form-control read-only" name="apellido">
+                <input th:value="${paciente != null ? paciente.apellido : session.usuariosession.apellido}" type="text"
+                       id="apellido" class="form-control" name="apellido">
             </div>
             <div class="col-md-6">
                 <label for="dni">Número de DNI</label><br>
-                <input readonly type="text" class="form-control read-only"id="dni" name="DNI"
+                <input type="text" class="form-control" id="dni" name="DNI"
                        th:value="${paciente != null ? paciente.DNI : session.usuariosession.DNI}">
             </div>
             <div class="col-md-6">
@@ -48,26 +48,21 @@
                 <div>
                     <!-- <input type="date" name="fechaDeNacimiento" class="form-control"
                            placeholder="Ingrese su fecha de nacimiento"> -->
-                    <input readonly type="date" class="form-control read-only" name="fechaDeNacimiento" 
+                    <input type="date" class="form-control" name="fechaDeNacimiento"
                            th:value="${paciente != null ? #dates.format(paciente.fechaDeNacimiento, 'yyyy-MM-dd') : #dates.format(session.usuariosession.fechaDeNacimiento, 'yyyy-MM-dd')}">
                 </div>
             </div>
             <div class="col-md-6">
                 <label>Correo electrónico</label><br>
                 <div>
-                    <input type="email" class="form-control read-only" name="email"
+                    <input type="email" class="form-control" name="email"
                            th:value="${paciente != null ? paciente.email : session.usuariosession.email}">
                 </div>
             </div>
             <div class="col-md-6">
                 <label>Nombre de usuario</label>
-<<<<<<< HEAD
                 <input type="text" class="form-control" name="nombreUsuario"
                        th:value="${paciente != null ? paciente.nombreUsuario : session.usuariosession.nombreUsuario}">
-=======
-                    <input type="text" class=class="form-control" name="nombreUsuario"
-                           th:value="${paciente != null ? paciente.nombreUsuario : session.usuariosession.nombreUsuario}">
->>>>>>> rama
             </div>
             <div class="col-md-6">
                 <label>Contraseña</label>
@@ -78,12 +73,8 @@
                 <input type="password" name="password2" class="form-control"
                        placeholder="Ingrese nuevamente su contraseña">
             </div>
-                  <div class="col-md-6">
-                <label for="imagen">Carnet Digital (Opcional)</label>
 
-<<<<<<< HEAD
             <div class="col-md-6">
-<<<<<<< HEAD
 
                 <img th:if="${session.usuariosession.imagen != null}"
                      style="height: 100px;width: 100px; border-radius: 10px; object-fit:cover"
@@ -94,25 +85,11 @@
                      class="logo" th:src="@{/images/noImage.webp}">
 
                 <label for="imagen">Foto de perfil</label>
-=======
-                <label for="imagen">Carnet Digital (Opcional)</label>
->>>>>>> botonModificarAdmin
 
                 <input type="file" id="imagen" name="archivo" class="form-control">
 
             </div>
-<<<<<<< HEAD
             <button type="submit" class="btn btn-primary">Actualizar</button>
-=======
-
-=======
-                <input type="file" id="imagen" name="archivo" class="form-control">
-
-            </div>
-                
->>>>>>> rama
-                <button type="submit" class="btn btn-primary">Actualizar</button>
->>>>>>> botonModificarAdmin
         </form>
     </div>
 </div>

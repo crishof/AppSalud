@@ -90,30 +90,19 @@ public class ProfesionalServicio implements UserDetailsService {
     }
 
     @Transactional
-<<<<<<< HEAD
     public void modificarProfesional(String id, MultipartFile archivo, String nombreUsuario, String nombre, String apellido,
-=======
-    public void modificarProfesional(String id, MultipartFile archivo,  String nombreUsuario, String nombre, String apellido,
->>>>>>> botonModificarAdmin
                                      Long DNI, Date fechaDeNacimiento, String email, String password, String password2,
                                      boolean activo, Especialidad especialidad, Provincias provincias, String localidad, String direccion,
                                      Long matricula, int precioConsulta) throws MiException {
 
-        //validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
-        //validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
+        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email);
 
-<<<<<<< HEAD
 
         validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email, matricula, especialidad, provincias, localidad, direccion);
 
-=======
-        
-        validar(nombreUsuario, password, password2, nombre, apellido, fechaDeNacimiento, DNI, email, matricula, especialidad);
-        
->>>>>>> alejandrod
         Optional<Profesional> respuesta = profesionalRepositorio.findById(id);
         if (respuesta.isPresent()) {
-            
             Profesional profesional = respuesta.get();
             profesional.setNombre(nombre);
             profesional.setPassword(new BCryptPasswordEncoder().encode(password));
@@ -132,21 +121,10 @@ public class ProfesionalServicio implements UserDetailsService {
             profesional.setDireccion(direccion);
 
             profesional.setPrecioConsulta(precioConsulta);
-<<<<<<< HEAD
 
             Imagen imagen = imagenServicio.guardar(archivo);
 
             profesional.setImagen(imagen);
-=======
-            
-            String idImagen = null;
-            
-            if(profesional.getImagen() != null){
-                idImagen = profesional.getImagen().getId();
-            }
-            
-            Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
->>>>>>> botonModificarAdmin
 
             profesionalRepositorio.save(profesional);
 
@@ -228,8 +206,8 @@ public class ProfesionalServicio implements UserDetailsService {
         }
     }
 
-     @Transactional
-    public void eliminarProfesional(String id, String nombreUsuario, String nombre, String apellido, Long DNI, Date fechaDeNacimiento, String email, String password, String password2, boolean par, Especialidad especialidad, Long matricula) {
+    @Transactional
+    public void eliminarProfesional(String id) {
         profesionalRepositorio.deleteById(id);
     }
 
@@ -328,33 +306,8 @@ public class ProfesionalServicio implements UserDetailsService {
 
     }
 
-<<<<<<< HEAD
     public List<Paciente> listarPacientesDelProfesional(Profesional profesional) {
 
         return usuarioRepositorio.findPacientesByProfesional(profesional);
     }
 }
-=======
-//    public List<Profesional> listarProfesional() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-    
-    public List<Profesional> listarProfesional() {
-
-        List<Profesional> profesional = new ArrayList();
-        profesional = profesionalRepositorio.findAll();
-
-        return profesional;
-    }
-
-    public List<Profesional> listarProfesionalesPorEspecialidad(String especialidad) {
-    if (especialidad != null && !especialidad.isEmpty()) {
-        return profesionalRepositorio.buscarProfesionalPorEspecialidad(especialidad);
-    } else {
-        // Puedes manejar el caso de especialidad vacía o nula si es necesario
-        return new ArrayList<>(); // O retornar un mensaje de error o la lista completa, según tu lógica de negocio
-    }
-}
-
-}
->>>>>>> alejandrod
