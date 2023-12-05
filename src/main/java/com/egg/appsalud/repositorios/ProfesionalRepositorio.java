@@ -29,6 +29,13 @@ public interface ProfesionalRepositorio extends JpaRepository<Profesional, Strin
 
     @Query("SELECT p FROM Profesional p WHERE p.especialidad LIKE ?1% ORDER BY p.apellido ASC")
     List<Profesional> buscarProfesionalPorEspecialidad(String especialidad);
+<<<<<<< HEAD
+=======
+    
+    @Query("SELECT DISTINCT p.especialidad FROM Profesional p")
+    List<String> obtenerEspecialidades();
+}
+>>>>>>> alejandrod
 
    
     

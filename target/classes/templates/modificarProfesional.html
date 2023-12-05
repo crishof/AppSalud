@@ -11,135 +11,27 @@
 <!--<header th:replace="layout/header :: header"></header>-->
 <nav th:replace="layout/navbar :: navbar"></nav>
 
-<<<<<<< HEAD
-<div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>
+<h1>
+    Modificar profesional
+</h1>
 
-<div class="container mt-5">
-
-    <div class="card shadow p-5">
-        <div class="card-header">
-            <h2 class="brand">Tus datos</h2>
-        </div>
-        <div class="card-body">
-            <form th:action="@{/}" method="POST" enctype="multipart/form-data" class="row g-3">
-                <div class="col-md-6">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingresa tu nombre">
-                </div>
-                <div class="col-md-6">
-                    <label for="apellido">Apellido</label><br>
-                    <input type="text" id="apellido" name="apellido" class="form-control"
-                           placeholder="Ingrese su apellido">
-                </div>
-                <div class="col-md-6">
-                    <label for="dni">Número de DNI</label><br>
-                    <input type="text" id="dni" name="dni" class="form-control"
-                           placeholder="Ingrese su número de DNI" disabled>
-                </div>
-                <div class="col-md-6">
-                    <label>Fecha de Nacimiento</label><br>
-                    <div>
-                        <input type="date" name="fechaDeNacimiento" class="form-control"
-                               placeholder="Ingrese su fecha de nacimiento">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label>Correo electrónico</label><br>
-                    <div>
-                        <input type="email" name="email" class="form-control" placeholder="Ingrese su e-mail">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label>Nombre de usuario</label><br>
-                    <div>
-                        <input type="text" name="nombreUsuario" class="form-control" placeholder="Ingrese su usuario">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label>Contraseña</label><br>
-                    <div>
-                        <input type="password" name="password" class="form-control" placeholder="Ingrese su contraseña">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label>Contraseña</label><br>
-                    <div>
-                        <input type="password" name="password2" class="form-control"
-                               placeholder="Ingrese nuevamente su contraseña">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label for="matricula">Matrícula</label><br>
-                    <input type="text" id="matricula" name="matricula" class="form-control"
-                           placeholder="Ingrese su número de matrícula" disabled>
-                </div>
-                <div class="col-md-6">
-
-                    <label for="especialidad">Especialidad médica:</label><br>
-                    <select name="especialidad" id="especialidad" required>
-                        <option th:each="especialidad : ${especialidades}"
-                                th:value="${especialidad}"
-                                th:text="${especialidad}">
-                        </option>
-                    </select>
-
-                </div>
-                <div class="col-md-6 form-check">
-
-                    <label>Obras Sociales</label><br>
-                    <div>
-                        <input class="form-check-input" type="checkbox" name="obrasocial" value="particular"
-                               id="checkpart"
-                               checked>
-                        <label class="form-check-label" for="checkpart">
-                            Particular
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="obrasocial" value="medicus"
-                               id="checkmedicus">
-                        <label class="form-check-label" for="checkmedicus">
-                            Medicus
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="obrasocial" value="swiss" id="checkswiss">
-                        <label class="form-check-label" for="checkswiss">
-                            Swiss Medical
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="obrasocial" value="pami" id="checkpami">
-                        <label class="form-check-label" for="checkpami">
-                            PAMI
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="obrasocial" value="osde" id="checkosde">
-                        <label class="form-check-label" for="checkosde">
-                            OSDE
-                        </label>
-                    </div>
-
-                </div>
-                <div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                </div>
-            </form>
-        </div>
+<div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
+    <div class="card-body">
+        <h5 class="card-title">Error!</h5>
+        <p class="card-text" th:text="${error}"></p>
     </div>
 </div>
-=======
-<h1>
-    Modificar usuario
-</h1>
->>>>>>> alejandrod
-
+<div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito" >
+    <div class="card-body">
+        <h5 class="card-title">Exito!</h5>
+        <p class="card-text" th:text="${exito}"></p>
+    </div>
+</div>
 
 <div class="card">
     
         <div class="card-body">
-            <form th:action="@{/paciente/modificar/__${profesional.id}__}" method="POST" enctype="multipart/form-data" class="row g-3">
+            <form th:action="@{/profesional/modificar/__${profesional.id}__}" method="POST" enctype="multipart/form-data" class="row g-3">
                 <input hidden th:value="${profesional.id}" name="id">
                 <div class="col-md-6">
                     <label for="nombre">Nombre</label>
@@ -180,7 +72,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label>Contraseña</label><br>
+                    <label>Reingresar contraseña</label><br>
                     <div>
                         <input type="password" name="password2" class="form-control"
                                placeholder="Ingrese nuevamente su contraseña">

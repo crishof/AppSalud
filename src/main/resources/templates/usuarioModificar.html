@@ -11,6 +11,7 @@
 <!--<header th:replace="layout/header :: header"></header>-->
 <nav th:replace="layout/navbar :: navbar"></nav>
 
+<<<<<<< HEAD
 <div th:replace="/layout/msg_error_exito :: mensajeFragment(${exito}, ${error})"></div>
 
 <div class="container mt-5">
@@ -128,6 +129,125 @@
         </div>
     </div>
 </div>
+=======
+<h1>
+    Modificar usuario
+</h1>
+>>>>>>> alejandrod
+
+
+<div class="card">
+    
+        <div class="card-body">
+            <form th:action="@{/paciente/modificar/__${profesional.id}__}" method="POST" enctype="multipart/form-data" class="row g-3">
+                <input hidden th:value="${profesional.id}" name="id">
+                <div class="col-md-6">
+                    <label for="nombre">Nombre</label>
+                    <input th:value="${profesional.nombre}" type="text" class="form-control" name="nombre">
+                </div>
+                <div class="col-md-6">
+                    <label for="apellido">Apellido</label><br>
+                    <input th:value="${profesional.apellido}" type="text" class="form-control" name="apellido">
+                </div>
+                <div class="col-md-6">
+                    <label for="dni">Número de DNI</label><br>
+                    <input th:value="${profesional.DNI}" type="text" class="form-control" name="DNI">
+                </div>
+                <div class="col-md-6">
+                    <label>Fecha de Nacimiento</label><br>
+                    <div>
+                        <!-- <input type="date" name="fechaDeNacimiento" class="form-control"
+                               placeholder="Ingrese su fecha de nacimiento"> -->
+                    <input th:value="${profesional.fechaDeNacimiento}" type="text" class="form-control" name="fechaDeNacimiento">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label>Correo electrónico</label><br>
+                    <div>
+                        <input th:value="${profesional.email}" type="text" class="form-control" name="email">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label>Nombre de usuario</label><br>
+                    <div>
+                        <input th:value="${profesional.nombreUsuario}" type="text" class="form-control" name="nombreUsuario">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label>Contraseña</label><br>
+                    <div>
+                        <input type="password" name="password" class="form-control" placeholder="Ingrese su contraseña">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label>Contraseña</label><br>
+                    <div>
+                        <input type="password" name="password2" class="form-control"
+                               placeholder="Ingrese nuevamente su contraseña">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="matricula">Matrícula</label><br>
+                    <input th:value="${profesional.matricula}" type="text" class="form-control" name="matricula">
+                </div>
+               
+                <div class="col-md-6">
+    
+                    <label for="especialidad">Especialidad médica:</label><br>
+                    <select name="especialidad" id="especialidad" required>
+                        <option th:each="especialidad : ${especialidades}"
+                                th:value="${especialidad}"
+                                th:text="${especialidad}">
+                        </option>
+                    </select>
+                    
+                    
+                </div>
+    
+                <div class="col-md-6 form-check">
+    
+                    <label>Obras Sociales</label><br>
+                    <div>
+                        <input class="form-check-input" type="checkbox" name="obrasocial" value="particular" id="checkpart"
+                               checked>
+                        <label class="form-check-label" for="checkpart">
+                            Particular
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="obrasocial" value="medicus" id="checkmedicus">
+                        <label class="form-check-label" for="checkmedicus">
+                            Medicus
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="obrasocial" value="swiss" id="checkswiss">
+                        <label class="form-check-label" for="checkswiss">
+                            Swiss Medical
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="obrasocial" value="pami" id="checkpami">
+                        <label class="form-check-label" for="checkpami">
+                            PAMI
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="obrasocial" value="osde" id="checkosde">
+                        <label class="form-check-label" for="checkosde">
+                            OSDE
+                        </label>
+                    </div>
+    
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+                <p class="text-muted"> Ya estás registrado? <a class="text-active" th:href="@{/portal/login}">inicia
+                    Sesión</a></p>
+            </form>
+        </div>
+    </div>
 
 <footer th:replace="layout/footer :: footer"></footer>
 <script

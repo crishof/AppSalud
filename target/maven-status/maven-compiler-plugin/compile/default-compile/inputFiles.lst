@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\FichaMedicaRepositorio.java
 C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\ImagenControlador.java
 C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Usuario.java
@@ -41,12 +42,15 @@ C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalu
 C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\Enumeracion\Provincias.java
 C:\Users\tata9\Documents\NetBeansProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\PacienteController.java
 =======
+=======
+>>>>>>> alejandrod
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\ErroresControlador.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\ImagenRepositorio.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\UsuarioServicio.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Establecimiento.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\Enumeracion\Rol.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Imagen.java
+<<<<<<< HEAD
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\EspecialidadRepositorio.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\SeguridadWeb.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\Enumeracion\Especialidad.java
@@ -65,20 +69,28 @@ C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\repo
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\AdminController.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\FichaMedicaControlador.java
 >>>>>>> botonModificarAdmin
+=======
+C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\SeguridadWeb.java
+C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\Enumeracion\Especialidad.java
+>>>>>>> alejandrod
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\ObraSocial.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\PacienteServicio.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\ProfesionalServicio.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Paciente.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Profesional.java
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\UtilController.java
 >>>>>>> botonModificarAdmin
+=======
+>>>>>>> alejandrod
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\PortalControlador.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\FichaMedica.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Administrador.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Usuario.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\ImagenServicio.java
+<<<<<<< HEAD
 <<<<<<< HEAD
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\EspecialidadServicio.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\ProfesionalControlador.java
@@ -100,13 +112,25 @@ C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\repo
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\PacienteRepositorio.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\UsuarioRepositorio.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\Enumeracion\Provincias.java
+=======
+C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\ProfesionalControlador.java
+C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\servicios\ConsultaServicio.java
+C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\ConsultaRepositorio.java
+C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\PacienteRepositorio.java
+C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\UsuarioRepositorio.java
+>>>>>>> alejandrod
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\AppSaludApplication.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\AdminControlador.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\Exception\MiException.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\ConsultaControlador.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\PacienteControlador.java
+<<<<<<< HEAD
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\PacienteController.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Consulta.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\controladores\InicioController.java
 C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\ProfesionalRepositorio.java
 >>>>>>> botonModificarAdmin
+=======
+C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\entidades\Consulta.java
+C:\Users\agoos\Documents\NBProjects\AppSalud\src\main\java\com\egg\appsalud\repositorios\ProfesionalRepositorio.java
+>>>>>>> alejandrod
